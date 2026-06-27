@@ -7,6 +7,14 @@ export const seedProjects = mutation({
 
     const projects = [
       {
+        titleAr: "نَفَحات — صحبة القرآن",
+        descriptionAr: "منصة رقمية لصحبة دائمة مع القرآن الكريم، تقدم تجربة تفاعلية يومية تجمع المستخدم بكلام الله.",
+        category: "تطبيقات",
+        result: "تجربة روحية يومية",
+        tags: ["React", "TypeScript", "PWA"],
+        sortOrder: 0,
+      },
+      {
         titleAr: "Adrenaline — مطعم",
         descriptionAr: "موقع مطعم عصري متكامل بقائمة طعام تفاعلية، نظام حجز طاولات، وعروض ترويجية ديناميكية.",
         category: "مواقع",

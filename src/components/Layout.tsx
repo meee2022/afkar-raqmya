@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSettings } from "../hooks/useSettings";
+import ConsultationPopup from "./ConsultationPopup";
 
 // ── Scroll progress hook ───────────────────────────────────────────────────────
 function useScrollProgress() {
@@ -265,13 +266,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </footer>
 
-      {/* WhatsApp FAB */}
-      <motion.a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer"
-        aria-label="واتساب" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full flex items-center justify-center"
-        style={{ background: "#25D366", boxShadow: "0 4px 24px rgba(37,211,102,0.5)" }}>
-        {WA_ICON}
-      </motion.a>
+      {/* WhatsApp FAB — with pulse + label */}
+      <div className="fixed bottom-6 left-6 z-40 group">
+        {/* Pulsing rings */}
+        <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" style={{ animationDuration: "2.5s" }} />
+        {/* Hover label */}
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-2 rounded-xl text-sm font-bold text-white opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none"
+          style={{ background: "rgba(5,10,7,0.95)", border: "1px solid rgba(37,211,102,0.3)", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}>
+          تواصل معنا الآن 👋
+        </span>
+        <motion.a
+          href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("مرحباً، شاهدت موقعكم وأريد استشارة بخصوص مشروعي 🙌")}`}
+          target="_blank" rel="noopener noreferrer"
+          aria-label="واتساب" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}
+          className="relative w-14 h-14 rounded-full flex items-center justify-center"
+          style={{ background: "#25D366", boxShadow: "0 4px 24px rgba(37,211,102,0.5)" }}>
+          {WA_ICON}
+        </motion.a>
+      </div>
+
+      {/* Smart consultation popup */}
+      <ConsultationPopup />
     </div>
   );
 }

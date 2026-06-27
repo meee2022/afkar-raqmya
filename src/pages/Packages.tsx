@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import Seo from "../components/Seo";
 
 const up = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -53,6 +54,8 @@ export default function Packages() {
 
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/packages" title="الباقات والأسعار"
+        description="باقات أفكار رقمية المرنة — من الخدمة المفردة إلى الإطلاق الرقمي الكامل. أسعار واضحة تناسب كل مشروع في قطر والخليج." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}

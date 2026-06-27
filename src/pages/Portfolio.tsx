@@ -2,10 +2,16 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import Seo from "../components/Seo";
 
 const CATS = ["الكل", "مواقع", "تطبيقات", "هوية", "نظم"];
 
 const STATIC_PROJECTS = [
+  { _id: "s0", titleAr: "نَفَحات — صحبة القرآن", descriptionAr: "منصة رقمية لصحبة دائمة مع القرآن الكريم، تقدم تجربة تفاعلية يومية تجمع المستخدم بكلام الله.", category: "تطبيقات", result: "تجربة روحية يومية", imageUrl: null, videoUrl: "/nafafat.mp4", color: "from-emerald-800 to-teal-950", accent: "#2dd4bf",
+    challenge: "إيجاد طريقة تجعل القارئ على صلة يومية بالقرآن الكريم بأسلوب عصري وجذاب بعيداً عن التطبيقات التقليدية.",
+    solution: "تصميم تجربة تفاعلية تشمل تصفّح المصحف، آية اليوم، التلاوات الصوتية، والأدوات والمكتبة — بواجهة عربية أنيقة وسلسة.",
+    outcome: "تطبيق متكامل يوفّر صحبة قرآنية يومية بتجربة مستخدم راقية على الجوال.",
+    liveUrl: "https://nafahat.vercel.app/" },
   { _id: "s1", titleAr: "Adrenaline — مطعم", descriptionAr: "موقع مطعم عصري متكامل بقائمة طعام تفاعلية، نظام حجز طاولات، وعروض ترويجية ديناميكية.", category: "مواقع", result: "تجربة مستخدم فاخرة", imageUrl: null, videoUrl: null, color: "from-orange-600 to-red-900", accent: "#f97316" },
   { _id: "s2", titleAr: "DarkFit — نادي رياضي", descriptionAr: "موقع نادي لياقة بدنية بتصميم داكن وقوي، يشمل برامج التدريب والاشتراكات وحجز الجلسات.", category: "مواقع", result: "↑ 55% اشتراكات جديدة", imageUrl: null, videoUrl: null, color: "from-zinc-700 to-black", accent: "#a3e635" },
   { _id: "s3", titleAr: "Smart Arena — منصة رياضية", descriptionAr: "منصة إدارة رياضية متكاملة تشمل جداول المباريات، ترتيب الفرق، وإحصائيات اللاعبين.", category: "تطبيقات", result: "إدارة شاملة للدوري", imageUrl: null, videoUrl: null, color: "from-green-700 to-emerald-900", accent: "#4ade80" },
@@ -36,6 +42,10 @@ interface LightboxProject {
   imageUrl: string | null;
   accent: string;
   result?: string | null;
+  challenge?: string | null;
+  solution?: string | null;
+  outcome?: string | null;
+  liveUrl?: string | null;
 }
 
 function VideoLightbox({
@@ -74,7 +84,7 @@ function VideoLightbox({
 
       {/* Panel */}
       <motion.div
-        className="relative z-10 w-full max-w-5xl rounded-3xl overflow-hidden"
+        className="relative z-10 w-full max-w-5xl rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto"
         initial={{ scale: 0.88, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.88, opacity: 0, y: 40 }}
@@ -143,14 +153,44 @@ function VideoLightbox({
             <h2 className="text-xl font-black text-white">{project.titleAr}</h2>
             <p className="text-white/45 text-sm mt-1 leading-relaxed">{project.descriptionAr}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 flex-shrink-0"
-            style={{ background: project.accent + "20", color: project.accent, border: `1px solid ${project.accent}40` }}
-          >
-            إغلاق
-          </button>
+          <div className="flex gap-2.5 flex-shrink-0">
+            {project.liveUrl && (
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-full text-sm font-black transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 text-[#003527]"
+                style={{ background: `linear-gradient(135deg,${project.accent},${project.accent}cc)` }}>
+                زيارة المشروع
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" /></svg>
+              </a>
+            )}
+            <button
+              onClick={onClose}
+              className="px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95"
+              style={{ background: project.accent + "20", color: project.accent, border: `1px solid ${project.accent}40` }}
+            >
+              إغلاق
+            </button>
+          </div>
         </div>
+
+        {/* Case study — shows only when fields are provided */}
+        {(project.challenge || project.solution || project.outcome) && (
+          <div className="px-6 pb-6 grid sm:grid-cols-3 gap-4 border-t border-white/[0.06] pt-5">
+            {[
+              { label: "التحدي", value: project.challenge, icon: "M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "الحل", value: project.solution, icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
+              { label: "النتيجة", value: project.outcome, icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
+            ].filter(b => b.value).map(b => (
+              <div key={b.label} className="rounded-2xl p-4 border border-white/[0.06]"
+                style={{ background: "rgba(255,255,255,0.02)" }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <svg className="w-4 h-4 flex-shrink-0" style={{ color: project.accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d={b.icon} /></svg>
+                  <span className="text-xs font-black" style={{ color: project.accent }}>{b.label}</span>
+                </div>
+                <p className="text-white/55 text-sm leading-relaxed">{b.value}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Top glow bar */}
         <div className="absolute top-0 inset-x-0 h-px"
@@ -185,17 +225,19 @@ function ProjectCard({
   const accent = (p as any).accent ?? ACCENT_COLORS[p.category] ?? "#fed65b";
   const color = (p as any).color ?? "from-[#003527] to-[#050a07]";
 
-  // Autoplay muted preview on hover
+  // Autoplay muted preview on hover (or always if no image)
   useEffect(() => {
     const vid = videoPreviewRef.current;
     if (!vid) return;
-    if (isHovering) {
+    if (!p.imageUrl) {
+      vid.play().catch(() => {});
+    } else if (isHovering) {
       vid.currentTime = 0;
       vid.play().catch(() => {});
     } else {
       vid.pause();
     }
-  }, [isHovering]);
+  }, [isHovering, p.imageUrl]);
 
   const handleCardClick = () => {
     onOpenLightbox({ ...p, accent } as LightboxProject);
@@ -218,93 +260,165 @@ function ProjectCard({
         style={{ background: `radial-gradient(ellipse at 30% 30%,${accent}12 0%,transparent 60%)` }} />
 
       {/* Media area */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
-        {/* Muted video preview on hover (if videoUrl) */}
-        {p.videoUrl && (
-          <video
-            ref={videoPreviewRef}
-            src={p.videoUrl}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovering ? "opacity-100" : "opacity-0"}`}
-            muted
-            playsInline
-            loop
-          />
-        )}
+      {p.category === "تطبيقات" ? (
+        /* ── Phone mockup for apps ── */
+        <div className="relative overflow-hidden flex items-center justify-center py-6 px-4" style={{
+          minHeight: 220,
+          background: `radial-gradient(ellipse at 50% 60%, ${accent}18 0%, transparent 70%), linear-gradient(135deg, ${accent}08, transparent)`,
+        }}>
+          {/* Glow blob */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 50%, ${accent}20 0%, transparent 65%)` }} />
 
-        {p.imageUrl ? (
-          <>
-            <div className="absolute top-0 inset-x-0 z-10 flex items-center gap-1.5 px-3 py-2 bg-[#151515]/90 backdrop-blur-sm border-b border-white/[0.05]">
-              <div className="w-2 h-2 rounded-full bg-[#ff5f57]"/>
-              <div className="w-2 h-2 rounded-full bg-[#febc2e]"/>
-              <div className="w-2 h-2 rounded-full bg-[#28c840]"/>
-              <div className="flex-1 mx-2 h-4 rounded bg-white/[0.06] flex items-center px-2">
-                <div className="w-1.5 h-1.5 rounded-full mr-1" style={{ background: accent }}/>
-                <div className="h-1 w-16 rounded bg-white/15"/>
-              </div>
+          {/* Phone frame SVG */}
+          <div className="relative z-10" style={{ width: 120, height: 210 }}>
+            {/* Phone body */}
+            <div className="absolute inset-0 rounded-[22px] border-2 border-white/20"
+              style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)", boxShadow: `0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.1)` }} />
+            {/* Notch */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-12 h-4 rounded-full z-20"
+              style={{ background: "#0a0a0a", boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)" }}>
+              <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/10" />
             </div>
-            <img src={p.imageUrl} alt={p.titleAr}
-              className={`w-full h-full object-cover object-top transition-opacity duration-500 ${p.videoUrl && isHovering ? "opacity-0" : "opacity-100"}`} />
-          </>
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center relative ${p.videoUrl && isHovering ? "opacity-0" : "opacity-100"} transition-opacity duration-500`}>
-            <div className="absolute inset-0 p-5 flex flex-col justify-between">
-              <div className="flex items-center gap-1.5 bg-[#151515]/80 rounded-lg px-3 py-1.5 w-fit">
+            {/* Screen */}
+            <div className="absolute rounded-[18px] overflow-hidden" style={{ inset: 3 }}>
+              {p.videoUrl ? (
+                <video
+                  ref={videoPreviewRef}
+                  src={p.videoUrl}
+                  className="w-full h-full object-cover"
+                  muted autoPlay playsInline loop preload="metadata"
+                />
+              ) : p.imageUrl ? (
+                <img src={p.imageUrl} alt={`مشروع ${p.titleAr}`} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${accent}30, ${accent}10)` }}>
+                  <svg className="w-8 h-8 opacity-30" style={{ color: accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/>
+                  </svg>
+                </div>
+              )}
+              {/* Screen overlay on hover */}
+              <div className={`absolute inset-0 transition-opacity duration-300 ${isHovering ? "opacity-100" : "opacity-0"}`}
+                style={{ background: "rgba(0,0,0,0.3)" }} />
+            </div>
+            {/* Home indicator */}
+            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-white/20 z-20" />
+            {/* Side buttons */}
+            <div className="absolute -right-0.5 top-14 w-0.5 h-6 rounded-l-sm" style={{ background: "#333" }} />
+            <div className="absolute -left-0.5 top-12 w-0.5 h-5 rounded-r-sm" style={{ background: "#333" }} />
+            <div className="absolute -left-0.5 top-20 w-0.5 h-5 rounded-r-sm" style={{ background: "#333" }} />
+          </div>
+
+          {/* Play button on hover */}
+          {p.videoUrl && (
+            <motion.div
+              className="absolute z-20 w-10 h-10 rounded-full flex items-center justify-center"
+              initial={false}
+              animate={isHovering ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
+              transition={{ type: "spring", damping: 15, stiffness: 300 }}
+              style={{ background: accent + "40", border: `1.5px solid ${accent}80`, backdropFilter: "blur(8px)" }}>
+              <svg className="w-4 h-4 ml-0.5" style={{ color: accent }} fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </motion.div>
+          )}
+
+          {/* Category badge */}
+          <div className="absolute top-3 right-3 z-20">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
+              style={{ background: accent + "25", color: accent, border: `1px solid ${accent}40` }}>
+              {p.category}
+            </span>
+          </div>
+          {p.videoUrl && (
+            <div className="absolute top-3 left-3 z-20">
+              <span className="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
+                style={{ background: "rgba(0,0,0,0.5)", color: "white", border: "1px solid rgba(255,255,255,0.15)" }}>
+                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                فيديو
+              </span>
+            </div>
+          )}
+        </div>
+      ) : (
+        /* ── Browser mockup for websites & others ── */
+        <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+          {/* Video on hover */}
+          {p.videoUrl && (
+            <video
+              ref={videoPreviewRef}
+              src={p.videoUrl}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovering ? "opacity-100" : "opacity-0"}`}
+              muted playsInline loop preload="none"
+            />
+          )}
+
+          {p.imageUrl ? (
+            <>
+              <div className="absolute top-0 inset-x-0 z-10 flex items-center gap-1.5 px-3 py-2 bg-[#151515]/90 backdrop-blur-sm border-b border-white/[0.05]">
                 <div className="w-2 h-2 rounded-full bg-[#ff5f57]"/>
                 <div className="w-2 h-2 rounded-full bg-[#febc2e]"/>
                 <div className="w-2 h-2 rounded-full bg-[#28c840]"/>
+                <div className="flex-1 mx-2 h-4 rounded bg-white/[0.06] flex items-center px-2">
+                  <div className="w-1.5 h-1.5 rounded-full mr-1" style={{ background: accent }}/>
+                  <div className="h-1 w-16 rounded bg-white/15"/>
+                </div>
               </div>
-              <div className="flex items-end gap-1.5">
-                {[60,85,50,90,70,80].map((h, j) => (
-                  <div key={j} className="flex-1 rounded-sm" style={{
-                    height: `${h * 0.4}px`,
-                    background: j%3===0 ? `${accent}dd` : j%3===1 ? `${accent}88` : `${accent}44`
-                  }}/>
-                ))}
+              <img src={p.imageUrl} alt={`مشروع ${p.titleAr}`} loading="lazy" decoding="async"
+                className={`w-full h-full object-cover object-top transition-opacity duration-500 ${p.videoUrl && isHovering ? "opacity-0" : "opacity-100"}`} />
+            </>
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center relative`}>
+              <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                <div className="flex items-center gap-1.5 bg-[#151515]/80 rounded-lg px-3 py-1.5 w-fit">
+                  <div className="w-2 h-2 rounded-full bg-[#ff5f57]"/>
+                  <div className="w-2 h-2 rounded-full bg-[#febc2e]"/>
+                  <div className="w-2 h-2 rounded-full bg-[#28c840]"/>
+                </div>
+                <div className="flex items-end gap-1.5">
+                  {[60,85,50,90,70,80].map((h, j) => (
+                    <div key={j} className="flex-1 rounded-sm" style={{
+                      height: `${h * 0.4}px`,
+                      background: j%3===0 ? `${accent}dd` : j%3===1 ? `${accent}88` : `${accent}44`
+                    }}/>
+                  ))}
+                </div>
               </div>
+              <span className="text-white/20 text-xs font-bold relative z-10">لم تُضف صورة بعد</span>
             </div>
-            <span className="text-white/20 text-xs font-bold relative z-10">لم تُضف صورة بعد</span>
+          )}
+
+          {/* Play overlay on hover */}
+          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isHovering ? "opacity-100" : "opacity-0"}`}
+            style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }}>
+            <motion.div
+              initial={false}
+              animate={isHovering ? { scale: 1, opacity: 1 } : { scale: 0.6, opacity: 0 }}
+              transition={{ type: "spring", damping: 16, stiffness: 300 }}
+              className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ background: accent + "30", border: `2px solid ${accent}60`, boxShadow: `0 0 30px ${accent}40`, backdropFilter: "blur(8px)" }}>
+              <svg className="w-7 h-7 ml-0.5" style={{ color: accent }} fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </motion.div>
           </div>
-        )}
 
-        {/* Play overlay — always shows on hover */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isHovering ? "opacity-100" : "opacity-0"}`}
-          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }}>
-          <motion.div
-            initial={false}
-            animate={isHovering ? { scale: 1, opacity: 1 } : { scale: 0.6, opacity: 0 }}
-            transition={{ type: "spring", damping: 16, stiffness: 300 }}
-            className="w-16 h-16 rounded-full flex items-center justify-center"
-            style={{
-              background: accent + "30",
-              border: `2px solid ${accent}60`,
-              boxShadow: `0 0 30px ${accent}40`,
-              backdropFilter: "blur(8px)",
-            }}>
-            <svg className="w-7 h-7 ml-0.5" style={{ color: accent }} fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </motion.div>
-        </div>
-
-        {/* Category badge */}
-        <div className="absolute top-3 right-3 z-20">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
-            style={{ background: accent + "25", color: accent, border: `1px solid ${accent}40` }}>
-            {p.category}
-          </span>
-        </div>
-
-        {/* Video badge */}
-        {p.videoUrl && (
-          <div className="absolute top-3 left-3 z-20">
-            <span className="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
-              style={{ background: "rgba(0,0,0,0.5)", color: "white", border: "1px solid rgba(255,255,255,0.15)" }}>
-              <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              فيديو
+          {/* Category badge */}
+          <div className="absolute top-3 right-3 z-20">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
+              style={{ background: accent + "25", color: accent, border: `1px solid ${accent}40` }}>
+              {p.category}
             </span>
           </div>
-        )}
-      </div>
+          {p.videoUrl && (
+            <div className="absolute top-3 left-3 z-20">
+              <span className="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm"
+                style={{ background: "rgba(0,0,0,0.5)", color: "white", border: "1px solid rgba(255,255,255,0.15)" }}>
+                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                فيديو
+              </span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Info */}
       <div className="relative z-10 p-5 flex-1 flex flex-col">
@@ -343,6 +457,8 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/portfolio" title="أعمالنا"
+        description="مشاريع نفخر بها — مواقع وتطبيقات وهويات بصرية أنجزتها أفكار رقمية لعملاء في قطر والخليج. شاهد أعمالنا ونتائجها." />
 
       {/* Video Lightbox */}
       <AnimatePresence>

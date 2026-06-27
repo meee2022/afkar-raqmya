@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import Seo from "../components/Seo";
 
 const SERVICES = [
   { num: "01", title: "تصميم وتطوير المواقع", color: "#4ade80",
@@ -38,6 +39,8 @@ const up = (delay = 0) => ({
 export default function Services() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/services" title="خدماتنا"
+        description="خدمات أفكار رقمية: تصميم وتطوير المواقع، تطبيقات الجوال، الهوية البصرية، العروض التقديمية، الفيديو والموشن جرافيك، والدعوات الرقمية." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         <motion.div {...up()} className="text-center mb-16">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import Seo from "../components/Seo";
 
 const LINKS = [
   { to: "/", label: "الرئيسية" },
@@ -22,6 +23,8 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-20"
       style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/404" title="الصفحة غير موجودة"
+        description="الصفحة التي تبحث عنها غير موجودة." />
 
       <div className="text-center max-w-xl w-full">
 

@@ -1,5 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useCountUp } from "../hooks/useCountUp";
+import Seo from "../components/Seo";
+
+function StatNumber({ n, color }: { n: string; color: string }) {
+  const { ref, display } = useCountUp(n);
+  return (
+    <div ref={ref} className="text-4xl font-black mb-2 relative z-10" dir="ltr"
+      style={{ background: `linear-gradient(135deg,${color},${color}bb)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+      {display}
+    </div>
+  );
+}
 
 const up = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -35,6 +47,15 @@ const VALUES = [
   },
 ];
 
+const WHY_US = [
+  { title: "تسليم في الموعد", desc: "نلتزم بالمواعيد المتفق عليها دون تأخير — وقتك يهمنا." },
+  { title: "دعم بعد التسليم", desc: "علاقتنا لا تنتهي بالتسليم — نتابع معك ونساندك بعد الإطلاق." },
+  { title: "تصميم عربي أصيل", desc: "نفهم السوق المحلي ونصمم بواجهات عربية أولاً بمعايير عالمية." },
+  { title: "أسعار واضحة", desc: "باقات شفافة بلا تكاليف خفية — تعرف بالضبط ما تدفع مقابله." },
+  { title: "تواصل مباشر", desc: "تتواصل مع الفريق المنفّذ مباشرة بلا وسطاء ولا روتين." },
+  { title: "جودة لا تساوم", desc: "كل مشروع يمرّ بمراجعات دقيقة قبل أن يصل إليك." },
+];
+
 const TEAM = [
   { name: "محمد كامل", role: "مؤسس ومدير إبداعي", color: "#fed65b", initial: "م" },
   { name: "فريق التصميم", role: "UI/UX & Brand", color: "#f472b6", initial: "ت" },
@@ -45,6 +66,8 @@ const TEAM = [
 export default function About() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/about" title="من نحن"
+        description="أفكار رقمية وكالة رقمية في قطر تجمع بين الإبداع والتقنية. تعرّف على قيمنا وفريقنا ولماذا يثق بنا عملاؤنا." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}
@@ -114,10 +137,7 @@ export default function About() {
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: `radial-gradient(ellipse at 50% 50%,${s.color}08 0%,transparent 70%)` }} />
-              <div className="text-4xl font-black mb-2 relative z-10" dir="ltr"
-                style={{ background: `linear-gradient(135deg,${s.color},${s.color}bb)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-                {s.n}
-              </div>
+              <StatNumber n={s.n} color={s.color} />
               <div className="text-sm text-white/50 relative z-10">{s.l}</div>
             </motion.div>
           ))}
@@ -140,6 +160,27 @@ export default function About() {
               </div>
               <h3 className="relative z-10 font-black text-white mb-1 text-sm">{m.name}</h3>
               <p className="relative z-10 text-xs text-white/40">{m.role}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Why choose us */}
+        <motion.div {...up(0.28)} className="mb-5">
+          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">لماذا تختارنا</span>
+        </motion.div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+          {WHY_US.map((w, i) => (
+            <motion.div key={w.title} {...up(0.3 + i * 0.05)}
+              className="group flex gap-4 p-5 rounded-2xl border border-white/[0.07] hover:border-[#fed65b]/25 transition-all duration-300"
+              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
+                style={{ background: "rgba(254,214,91,0.15)", border: "1px solid rgba(254,214,91,0.3)" }}>
+                <svg className="w-4 h-4 text-[#fed65b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <div>
+                <h3 className="font-black text-white mb-1 text-sm">{w.title}</h3>
+                <p className="text-white/45 text-xs leading-relaxed">{w.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

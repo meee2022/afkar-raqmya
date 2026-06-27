@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useSettings } from "../hooks/useSettings";
+import Seo from "../components/Seo";
 
 const SERVICES = [
   "تصميم وتطوير المواقع", "تطبيقات الجوال", "العروض التقديمية",
@@ -22,10 +23,22 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; phone?: string; message?: string }>({});
+
+  const validate = () => {
+    const e: typeof errors = {};
+    if (form.name.trim().length < 2) e.name = "من فضلك اكتب اسمك";
+    // يقبل أرقام دولية مع + و مسافات (8 أرقام على الأقل)
+    const digits = form.phone.replace(/\D/g, "");
+    if (digits.length < 8) e.phone = "رقم جوال غير صحيح";
+    if (form.message.trim().length < 10) e.message = "اكتب تفاصيل أكثر (10 أحرف على الأقل)";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.message) return;
+    if (!validate()) return;
     setLoading(true);
     try {
       await submitContact({
@@ -35,6 +48,8 @@ export default function Contact() {
         message: form.message,
       });
       setSent(true);
+    } catch {
+      setErrors({ message: "حدث خطأ أثناء الإرسال. جرّب واتساب أو حاول مرة أخرى." });
     } finally {
       setLoading(false);
     }
@@ -42,6 +57,8 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
+      <Seo path="/contact" title="تواصل معنا"
+        description="ابدأ مشروعك مع أفكار رقمية. تواصل معنا عبر واتساب أو النموذج ونرد خلال 24 ساعة. الدوحة، قطر." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}
@@ -162,11 +179,20 @@ export default function Contact() {
                   <svg className="w-10 h-10 text-[#4ade80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7"/></svg>
                 </motion.div>
                 <h3 className="text-2xl font-black text-white mb-2">تم إرسال رسالتك! ✦</h3>
-                <p className="text-white/50 mb-8">سنتواصل معك خلال 24 ساعة.</p>
-                <button onClick={() => { setSent(false); setForm({ name:"", phone:"", service:"", message:"" }); }}
-                  className="text-sm font-bold px-6 py-2.5 rounded-full border border-[#fed65b]/30 text-[#fed65b] hover:bg-[#fed65b]/10 transition-all">
-                  إرسال رسالة أخرى
-                </button>
+                <p className="text-white/50 mb-8">سنتواصل معك خلال 24 ساعة — أو راسلنا الآن على واتساب لرد أسرع.</p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                  <a href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(`مرحباً، أنا ${form.name || ""} وأرسلت لكم عبر الموقع بخصوص: ${form.service || "مشروعي"}`)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-black px-6 py-3 rounded-full text-white hover:scale-105 transition-all"
+                    style={{ background: "#25D366", boxShadow: "0 0 24px rgba(37,211,102,0.35)" }}>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+                    تواصل عبر واتساب
+                  </a>
+                  <button onClick={() => { setSent(false); setForm({ name:"", phone:"", service:"", message:"" }); }}
+                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#fed65b]/30 text-[#fed65b] hover:bg-[#fed65b]/10 transition-all">
+                    إرسال رسالة أخرى
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="relative z-10">
@@ -184,15 +210,16 @@ export default function Contact() {
                         </label>
                         <input id={f.id} type={f.type} required={f.req} placeholder={f.ph}
                           value={(form as any)[f.id]}
-                          onChange={e => setForm({...form, [f.id]: e.target.value})}
+                          onChange={e => { setForm({...form, [f.id]: e.target.value}); if ((errors as any)[f.id]) setErrors({ ...errors, [f.id]: undefined }); }}
                           className="w-full px-4 py-3.5 rounded-xl text-sm text-white placeholder:text-white/20 transition-all outline-none"
                           style={{
                             background: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.08)",
+                            border: `1px solid ${(errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                           }}
                           onFocus={e => { e.currentTarget.style.borderColor = "rgba(254,214,91,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(254,214,91,0.06)"; }}
-                          onBlur={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
+                          onBlur={e => { e.currentTarget.style.borderColor = (errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                         />
+                        {(errors as any)[f.id] && <p className="text-[#f87171] text-xs mt-1.5">{(errors as any)[f.id]}</p>}
                       </div>
                     ))}
                   </div>
@@ -218,15 +245,16 @@ export default function Contact() {
                     </label>
                     <textarea id="message" required rows={5}
                       placeholder="اكتب لنا فكرتك أو ما تحتاجه بالتفصيل..."
-                      value={form.message} onChange={e => setForm({...form, message: e.target.value})}
+                      value={form.message} onChange={e => { setForm({...form, message: e.target.value}); if (errors.message) setErrors({ ...errors, message: undefined }); }}
                       className="w-full px-4 py-3.5 rounded-xl text-sm text-white placeholder:text-white/20 transition-all outline-none resize-none"
                       style={{
                         background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        border: `1px solid ${errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                       }}
                       onFocus={e => { e.currentTarget.style.borderColor = "rgba(254,214,91,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(254,214,91,0.06)"; }}
-                      onBlur={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
+                      onBlur={e => { e.currentTarget.style.borderColor = errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                     />
+                    {errors.message && <p className="text-[#f87171] text-xs mt-1.5">{errors.message}</p>}
                   </div>
 
                   {/* Submit */}

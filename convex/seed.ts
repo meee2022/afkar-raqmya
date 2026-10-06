@@ -1,93 +1,169 @@
 import { mutation } from "./_generated/server";
 
+// مشاريع حقيقية — الأسماء والأوصاف مستخرجة من المشاريع الفعلية في فولدر projects
+const PROJECTS = [
+  {
+    titleAr: "نَفَحات — صحبة القرآن",
+    descriptionAr: "منصة رقمية لصحبة دائمة مع القرآن الكريم، تجمع تصفّح المصحف وآية اليوم والتلاوات في تجربة عربية سلسة.",
+    category: "تطبيقات",
+    result: "تطبيق قرآن تفاعلي",
+    liveUrl: "https://nafahat.vercel.app/",
+    tags: ["React", "TypeScript", "PWA"],
+  },
+  {
+    titleAr: "Adrenaline — وجبات صحية",
+    descriptionAr: "موقع وجبات صحية ولذيذة مصممة لتحقيق الأهداف الغذائية، مع قائمة تفاعلية وتوصيل يومي في كل أنحاء قطر.",
+    category: "مواقع",
+    result: "توصيل صحي يومي",
+    tags: ["React", "Tailwind", "Convex"],
+  },
+  {
+    titleAr: "Adrenaline Gym — نادي رياضي",
+    descriptionAr: "موقع نادي أدرينالين جم في لوسيل يعرض خدمات التدريب والقوة والاستشفاء وحجز الزيارات.",
+    category: "مواقع",
+    result: "حضور رقمي قوي",
+    tags: ["React", "Tailwind"],
+  },
+  {
+    titleAr: "DarkFit — نادي لياقة",
+    descriptionAr: "موقع نادي لياقة بدنية بتصميم داكن وقوي يشمل برامج التدريب والاشتراكات وحجز الجلسات.",
+    category: "مواقع",
+    result: "تصميم رياضي جريء",
+    tags: ["React", "Vite", "Tailwind"],
+  },
+  {
+    titleAr: "المصك — وجبات دايت ولياقة",
+    descriptionAr: "موقع وجبات دايت ولياقة تُحضَّر يومياً بإشراف أخصائيي تغذية، مع باقات تنشيف ولياقة وتوصيل صحي في قطر.",
+    category: "مواقع",
+    result: "باقات تغذية متكاملة",
+    tags: ["React", "Tailwind"],
+  },
+  {
+    titleAr: "Nada Makeup — خبيرة تجميل",
+    descriptionAr: "موقع وهوية لخبيرة مكياج العرائس والمناسبات في قطر ومصر، مع عرض الأعمال ونظام حجز للجلسات المنزلية.",
+    category: "هوية",
+    result: "هوية أنيقة + حجز",
+    tags: ["Branding", "React", "Tailwind"],
+  },
+  {
+    titleAr: "دار ابن الجزري",
+    descriptionAr: "منصة متكاملة لتحفيظ القرآن الكريم وتعليم علومه، ببرامج متنوعة ومتخصصة لجميع الأعمار والمستويات.",
+    category: "مواقع",
+    result: "منصة تعليم قرآني",
+    tags: ["React", "Tailwind"],
+  },
+  {
+    titleAr: "ردّة — تراث الغوص على اللؤلؤ",
+    descriptionAr: "منصة تعليمية تفاعلية عن تراث الغوص على اللؤلؤ في قطر والخليج، تشمل رحلة غوص افتراضية والسفن والأدوات.",
+    category: "مواقع",
+    result: "تجربة تعليمية غامرة",
+    tags: ["React", "Three.js", "Tailwind"],
+  },
+  {
+    titleAr: "saifx — تعلّم الفيزياء",
+    descriptionAr: "مساحة منظمة لتعلم الفيزياء: الدروس والكتب والتدريبات لصفوف المرحلة الثانوية.",
+    category: "مواقع",
+    result: "منصة تعليمية متخصصة",
+    tags: ["React", "Tailwind"],
+  },
+  {
+    titleAr: "مساحة التعلّم التفاعلي — قطر",
+    descriptionAr: "منصة ألعاب وأسئلة تفاعلية وأوراق عمل لكل المواد، تتيح للمعلم إنشاء أنشطته ومشاركتها مع طلابه.",
+    category: "تطبيقات",
+    result: "أدوات تعليمية تفاعلية",
+    tags: ["React", "TypeScript", "Convex"],
+  },
+  {
+    titleAr: "صلاتي قرة عيني",
+    descriptionAr: "رحلة تفاعلية لتعليم الأطفال الأذان والوضوء والصلاة مع شخصيتي حمد وهدى، مستوحاة من كتاب صلاتي قرة عيني.",
+    category: "تطبيقات",
+    result: "تعليم أطفال ممتع",
+    tags: ["React", "Animation"],
+  },
+  {
+    titleAr: "ruqi — منصة دورات",
+    descriptionAr: "منصة دورات تعليمية إلكترونية متكاملة لإدارة الكورسات والطلاب والمحتوى.",
+    category: "تطبيقات",
+    result: "منصة تعلّم إلكتروني",
+    tags: ["React", "TypeScript", "Convex"],
+  },
+  {
+    titleAr: "مطابخ الجنوب — نقاط بيع",
+    descriptionAr: "نظام نقاط بيع وفواتير إلكترونية لمطاعم المأكولات الشعبية — إدارة الطلبات والفواتير بسهولة.",
+    category: "نظم",
+    result: "POS وفواتير إلكترونية",
+    tags: ["React", "TypeScript", "POS"],
+  },
+  {
+    titleAr: "مدم مي للتجارة",
+    descriptionAr: "منصة إدارة تجارة جملة الخضروات والفواكه في الدوحة — متابعة البضائع والطلبات والحسابات.",
+    category: "نظم",
+    result: "إدارة تجارة جملة",
+    tags: ["React", "TypeScript", "Convex"],
+  },
+  {
+    titleAr: "ابن تيمية — النظام الإلكتروني",
+    descriptionAr: "النظام الإلكتروني الموحد للحضور والإشراف الصفي والتقارير والاستبانات لمدرسة ابن تيمية الثانوية للبنين.",
+    category: "نظم",
+    result: "نظام مدرسي متكامل",
+    tags: ["React", "TypeScript", "Convex"],
+  },
+  {
+    titleAr: "نورة الدوسري — تنسيق أكاديمي",
+    descriptionAr: "منصة التنسيق الأكاديمي لمدرسة ابتدائية: الرسالة الأسبوعية والخطة السنوية ومتابعة المهام.",
+    category: "نظم",
+    result: "إدارة أكاديمية منظمة",
+    tags: ["React", "Tailwind"],
+  },
+  {
+    titleAr: "إشراف التربية البدنية",
+    descriptionAr: "نظام إشراف ومتابعة لمعلمي التربية البدنية، يشمل الزيارات الصفية والتقارير والبحث الإجرائي في قطر.",
+    category: "نظم",
+    result: "نظام إشراف تربوي",
+    tags: ["React", "TypeScript"],
+  },
+  {
+    titleAr: "نظام ERP متكامل",
+    descriptionAr: "نظام إدارة موارد مؤسسية شامل يغطي المخزون والفواتير والموارد البشرية والتقارير التحليلية.",
+    category: "نظم",
+    result: "إدارة مؤسسية شاملة",
+    tags: ["React", "TypeScript", "Convex"],
+  },
+];
+
 export const seedProjects = mutation({
   handler: async (ctx) => {
     const existing = await ctx.db.query("agencyProjects").collect();
     if (existing.length > 0) return { skipped: true, count: existing.length };
 
-    const projects = [
-      {
-        titleAr: "نَفَحات — صحبة القرآن",
-        descriptionAr: "منصة رقمية لصحبة دائمة مع القرآن الكريم، تقدم تجربة تفاعلية يومية تجمع المستخدم بكلام الله.",
-        category: "تطبيقات",
-        result: "تجربة روحية يومية",
-        tags: ["React", "TypeScript", "PWA"],
-        sortOrder: 0,
-      },
-      {
-        titleAr: "Adrenaline — مطعم",
-        descriptionAr: "موقع مطعم عصري متكامل بقائمة طعام تفاعلية، نظام حجز طاولات، وعروض ترويجية ديناميكية.",
-        category: "مواقع",
-        result: "تجربة مستخدم فاخرة",
-        tags: ["React", "Tailwind", "Convex"],
-        sortOrder: 1,
-      },
-      {
-        titleAr: "DarkFit — نادي رياضي",
-        descriptionAr: "موقع نادي لياقة بدنية بتصميم داكن وقوي، يشمل برامج التدريب والاشتراكات وحجز الجلسات.",
-        category: "مواقع",
-        result: "↑ 55% اشتراكات جديدة",
-        tags: ["React", "Vite", "Tailwind"],
-        sortOrder: 2,
-      },
-      {
-        titleAr: "Smart Arena — منصة رياضية",
-        descriptionAr: "منصة إدارة رياضية متكاملة تشمل جداول المباريات، ترتيب الفرق، وإحصائيات اللاعبين.",
-        category: "تطبيقات",
-        result: "إدارة شاملة للدوري",
-        tags: ["React", "TypeScript", "Convex"],
-        sortOrder: 3,
-      },
-      {
-        titleAr: "ابن تيمية — أكاديمية",
-        descriptionAr: "موقع أكاديمية إسلامية متخصص يعرض المناهج والمحاضرات والتسجيل في الدورات التعليمية.",
-        category: "مواقع",
-        result: "↑ 70% تسجيلات",
-        tags: ["React", "Tailwind"],
-        sortOrder: 4,
-      },
-      {
-        titleAr: "Arirang Bakery — مخبز",
-        descriptionAr: "موقع مخبز كوري-عربي فاخر بعرض المنتجات، الطلبات المسبقة، وهوية بصرية مميزة.",
-        category: "هوية",
-        result: "هوية بصرية متكاملة",
-        tags: ["Figma", "React", "Tailwind"],
-        sortOrder: 5,
-      },
-      {
-        titleAr: "العلاهي — مؤسسة أكاديمية",
-        descriptionAr: "موقع مؤسسة تعليمية يضم المناهج والكوادر الأكاديمية وبوابة التسجيل الإلكتروني.",
-        category: "مواقع",
-        result: "بوابة رقمية متكاملة",
-        tags: ["React", "Tailwind"],
-        sortOrder: 6,
-      },
-      {
-        titleAr: "دار ابن الجزري",
-        descriptionAr: "موقع دار علمية إسلامية متخصص في تعليم علوم القرآن والتجويد، بتصميم راقٍ وهوية أصيلة.",
-        category: "مواقع",
-        result: "↑ 3× عدد الطلاب",
-        tags: ["React", "Tailwind"],
-        sortOrder: 7,
-      },
-      {
-        titleAr: "نظام ERP متكامل",
-        descriptionAr: "نظام إدارة موارد مؤسسية شامل يغطي المخزون، الفواتير، الموارد البشرية، والتقارير التحليلية.",
-        category: "نظم",
-        result: "↑ 80% كفاءة تشغيلية",
-        tags: ["React", "TypeScript", "Convex"],
-        sortOrder: 8,
-      },
-    ];
-
-    for (const p of projects) {
+    let order = 0;
+    for (const p of PROJECTS) {
       await ctx.db.insert("agencyProjects", {
         ...p,
+        sortOrder: order++,
         isActive: true,
         createdAt: Date.now(),
       });
     }
+    return { seeded: true, count: PROJECTS.length };
+  },
+});
 
-    return { seeded: true, count: projects.length };
+// لإعادة التعبئة من الصفر: يمسح كل المشاريع ثم يضيف القائمة الحقيقية
+export const reseedProjects = mutation({
+  handler: async (ctx) => {
+    const existing = await ctx.db.query("agencyProjects").collect();
+    for (const row of existing) await ctx.db.delete(row._id);
+
+    let order = 0;
+    for (const p of PROJECTS) {
+      await ctx.db.insert("agencyProjects", {
+        ...p,
+        sortOrder: order++,
+        isActive: true,
+        createdAt: Date.now(),
+      });
+    }
+    return { reseeded: true, deleted: existing.length, count: PROJECTS.length };
   },
 });

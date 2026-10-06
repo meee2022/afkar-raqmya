@@ -1,17 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useCountUp } from "../hooks/useCountUp";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import Seo from "../components/Seo";
-
-function StatNumber({ n, color }: { n: string; color: string }) {
-  const { ref, display } = useCountUp(n);
-  return (
-    <div ref={ref} className="text-4xl font-black mb-2 relative z-10" dir="ltr"
-      style={{ background: `linear-gradient(135deg,${color},${color}bb)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-      {display}
-    </div>
-  );
-}
 
 const up = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -56,14 +47,16 @@ const WHY_US = [
   { title: "جودة لا تساوم", desc: "كل مشروع يمرّ بمراجعات دقيقة قبل أن يصل إليك." },
 ];
 
-const TEAM = [
-  { name: "محمد كامل", role: "مؤسس ومدير إبداعي", color: "#fed65b", initial: "م" },
-  { name: "فريق التصميم", role: "UI/UX & Brand", color: "#f472b6", initial: "ت" },
-  { name: "فريق التطوير", role: "Frontend & Backend", color: "#4ade80", initial: "ط" },
-  { name: "فريق المحتوى", role: "Motion & Video", color: "#60a5fa", initial: "م" },
+const DELIVERY_AREAS = [
+  { name: "إدارة المشروع", role: "تخطيط واضح وتواصل مباشر", color: "#fed65b", initial: "إ" },
+  { name: "التصميم", role: "UI/UX & Brand", color: "#f472b6", initial: "ت" },
+  { name: "التطوير", role: "Frontend & Backend", color: "#4ade80", initial: "ط" },
+  { name: "المحتوى المرئي", role: "Motion & Video", color: "#60a5fa", initial: "م" },
 ];
 
 export default function About() {
+  const projects = useQuery(api.projects.list) ?? [];
+  const categories = new Set(projects.map(project => project.category)).size;
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/about" title="من نحن"
@@ -127,9 +120,9 @@ export default function About() {
         </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           {[
-            { n: "+50", l: "مشروع منجز", color: "#fed65b" },
-            { n: "+30", l: "عميل سعيد", color: "#4ade80" },
-            { n: "٣+", l: "سنوات خبرة", color: "#60a5fa" },
+            { n: String(projects.length), l: "مشروع منشور", color: "#fed65b" },
+            { n: String(categories), l: "مجالات عمل", color: "#4ade80" },
+            { n: String(projects.filter(project => project.videoUrl).length), l: "معاينات فيديو", color: "#60a5fa" },
             { n: "٦", l: "خدمات متخصصة", color: "#a78bfa" },
           ].map((s, i) => (
             <motion.div key={s.l} {...up(0.22 + i * 0.06)}
@@ -137,18 +130,18 @@ export default function About() {
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: `radial-gradient(ellipse at 50% 50%,${s.color}08 0%,transparent 70%)` }} />
-              <StatNumber n={s.n} color={s.color} />
+              <div className="text-4xl font-black mb-2 relative z-10" dir="ltr" style={{ color: s.color }}>{s.n}</div>
               <div className="text-sm text-white/50 relative z-10">{s.l}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* Team */}
+        {/* Delivery areas */}
         <motion.div {...up(0.25)} className="mb-5">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">فريقنا</span>
+          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">كيف ننفذ مشروعك</span>
         </motion.div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {TEAM.map((m, i) => (
+          {DELIVERY_AREAS.map((m, i) => (
             <motion.div key={m.name} {...up(0.27 + i * 0.06)}
               className="group p-6 rounded-2xl border border-white/[0.07] hover:border-white/20 hover:-translate-y-1.5 text-center transition-all duration-500 relative overflow-hidden"
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>

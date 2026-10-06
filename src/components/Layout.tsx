@@ -132,20 +132,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 )}
               </NavLink>
             ))}
-            <NavLink to="/admin"
-              className={({ isActive }) =>
-                `flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-bold transition-all mr-2 border ${
-                  isActive
-                    ? "bg-[#003527] text-[#fed65b] border-[#fed65b]/30"
-                    : "border-white/10 text-white/50 hover:border-[#fed65b]/30 hover:text-[#fed65b] hover:bg-[#003527]/30"
-                }`
-              }>
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-              </svg>
-              لوحة التحكم
-            </NavLink>
           </nav>
 
           {/* CTA + Hamburger */}
@@ -185,14 +171,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       }`
                     }>{l.label}</NavLink>
                 ))}
-                <NavLink to="/admin"
-                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold text-white/50 border border-white/10 mt-1 hover:border-[#fed65b]/30 hover:text-[#fed65b] transition-all">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-                  </svg>
-                  لوحة التحكم
-                </NavLink>
                 <NavLink to="/contact"
                   className="mt-2 flex justify-center py-3.5 rounded-full font-black text-sm text-[#003527]"
                   style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)" }}>
@@ -248,7 +226,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   icon: <><rect x="2" y="2" width="20" height="20" rx="5" strokeWidth={1.5}/><circle cx="12" cy="12" r="4" strokeWidth={1.5}/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></>, fill: false },
                 { label: "تويتر", href: settings.twitterUrl || "#", color: "#1DA1F2",
                   icon: <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>, fill: true },
-              ].map(s => (
+              ].filter(s => s.href !== "#").map(s => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all hover:scale-110"
                   style={{ background: "rgba(255,255,255,0.04)" }}>

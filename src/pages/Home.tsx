@@ -1,9 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Sparkles, TrendingUp, Users, Award } from "lucide-react";
-import { useCountUp } from "../hooks/useCountUp";
-import Testimonials from "../components/Testimonials";
+import { ArrowLeft, ExternalLink, Play, Sparkles } from "lucide-react";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import Seo from "../components/Seo";
 
 // ── Animated text ─────────────────────────────────────────────────────────────
@@ -16,6 +16,7 @@ interface AnimatedTextProps {
   staggerDelay?: number;
   initialY?: number;
   initialOpacity?: number;
+  as?: "h1" | "div";
 }
 
 function AnimatedText({
@@ -27,6 +28,7 @@ function AnimatedText({
   staggerDelay = 0.05,
   initialY = 10,
   initialOpacity = 0,
+  as = "div",
 }: AnimatedTextProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,8 +39,9 @@ function AnimatedText({
     visible: { y: 0, opacity: 1, transition: { duration, ease: "easeOut" as const } },
   };
 
+  const MotionTag = as === "h1" ? motion.h1 : motion.div;
   return (
-    <motion.div className={className} variants={containerVariants} initial="hidden" animate="visible">
+    <MotionTag className={className} variants={containerVariants} initial="hidden" animate="visible">
       {animationType === "letters"
         ? text.split("").map((char, i) => (
             <motion.span key={i} variants={itemVariants} className="inline-block"
@@ -47,33 +50,7 @@ function AnimatedText({
         : text.split(" ").map((word, i) => (
             <motion.span key={i} variants={itemVariants} className="ml-2 inline-block">{word}</motion.span>
           ))}
-    </motion.div>
-  );
-}
-
-// ── Stat card ─────────────────────────────────────────────────────────────────
-function StatCard({ value, label, icon: Icon, delay = 0.8 }: { value: string; label: string; icon: any; delay?: number }) {
-  const { ref, display } = useCountUp(value);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-      className="relative overflow-hidden rounded-2xl border border-[#003527]/30 bg-[#003527]/10 p-6 backdrop-blur-xl"
-      style={{ boxShadow: "0 0 30px rgba(0,53,39,0.3), inset 0 0 20px rgba(254,214,91,0.05)" }}
-    >
-      <div className="absolute top-0 left-0 -ml-8 -mt-8 h-32 w-32 rounded-full bg-[#fed65b]/10 blur-3xl pointer-events-none" />
-      <div className="relative z-10 flex items-center gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#fed65b]/20 ring-1 ring-[#fed65b]/30 flex-shrink-0">
-          <Icon className="h-6 w-6 text-[#fed65b]" />
-        </div>
-        <div className="text-right">
-          <div ref={ref} className="text-3xl font-bold tracking-tight text-[#fed65b]" dir="ltr"
-            style={{ textShadow: "0 0 20px rgba(254,214,91,0.5)" }}>{display}</div>
-          <div className="text-sm text-zinc-400">{label}</div>
-        </div>
-      </div>
-    </motion.div>
+    </MotionTag>
   );
 }
 
@@ -133,6 +110,30 @@ const makeParticles = (n: number) => Array.from({ length: n }, (_, i) => ({
 export default function Home() {
   const [typedText, setTypedText] = useState("");
   const fullText = "نحول أفكارك الرقمية إلى واقع مبهر";
+  const queriedProjects = useQuery(api.projects.list) ?? [];
+  const projects = queriedProjects.map(project => {
+    if (project.titleAr.includes("Adrenaline")) return {
+      ...project,
+      titleAr: "Adrenaline — وجبات صحية",
+      descriptionAr: "منصة متكاملة للوجبات الصحية والخطط الغذائية الذكية والاشتراكات والتوصيل داخل قطر.",
+      imageUrl: project.imageUrl ?? "/adrenaline-preview.png",
+      liveUrl: project.liveUrl ?? "https://adrenalinehealthy.com/",
+    };
+    if (project.titleAr.includes("DarkFit")) return {
+      ...project,
+      titleAr: "DarkFit — منصة اللياقة",
+      descriptionAr: "تطبيق لياقة وصحة شامل يجمع التمارين والتغذية والمدربين والحاسبات الصحية.",
+      category: "تطبيقات",
+      result: "منظومة لياقة متكاملة",
+      imageUrl: project.imageUrl ?? "/darkfit-preview.png",
+      liveUrl: project.liveUrl ?? "https://darkfit.netlify.app/",
+    };
+    return project;
+  });
+  const featuredProjects = [...projects]
+    .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || Number(Boolean(b.videoUrl || b.imageUrl)) - Number(Boolean(a.videoUrl || a.imageUrl)))
+    .slice(0, 3);
+  const categoryCount = new Set(projects.map(project => project.category)).size;
 
   // Fewer particles on mobile for smoother performance
   const particles = useMemo(() => {
@@ -186,6 +187,7 @@ export default function Home() {
             <style>{`.hero-title .inline-block { background: linear-gradient(135deg,#ffffff 0%,#fed65b 50%,#ffffff 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(254,214,91,0.3)); }`}</style>
             <div className="hero-title">
               <AnimatedText
+                as="h1"
                 text="ابتكار رقمي بلا حدود"
                 animationType="words"
                 staggerDelay={0.15}
@@ -228,7 +230,7 @@ export default function Home() {
 
           {/* Service pills */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
-            className="flex flex-wrap justify-center gap-2.5 pt-2">
+            className="flex flex-wrap justify-center gap-2.5 pt-2 pb-14 sm:pb-0">
             {SERVICES_LIST.map(s => (
               <span key={s.label}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white/60 border border-white/[0.08] hover:border-[#fed65b]/30 hover:text-white/90 transition-all cursor-default"
@@ -240,13 +242,65 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4 mb-10">
-          <StatCard value="+50"  label="مشروع منجز"    icon={Award}      delay={0.8}  />
-          <StatCard value="98%"  label="رضا العملاء"   icon={TrendingUp}  delay={0.9}  />
-          <StatCard value="+30"  label="عميل سعيد"     icon={Users}       delay={1.0}  />
-          <StatCard value="٣+"   label="سنوات خبرة"    icon={Sparkles}    delay={1.1}  />
-        </div>
+        {/* Selected work — proof before promises */}
+        <section className="mt-8 mb-20" aria-labelledby="selected-work-title">
+          <motion.div {...inView()} className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 text-right">
+            <div>
+              <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] block mb-3">أعمال مختارة</span>
+              <h2 id="selected-work-title" className="text-3xl md:text-5xl font-black text-white">الشغل يتكلم عنّا</h2>
+              <p className="text-white/45 mt-3 max-w-xl">معاينات حقيقية لمواقع وتطبيقات صممناها وطورناها، وليست مجرد قوالب عرض.</p>
+            </div>
+            <NavLink to="/portfolio" className="inline-flex items-center gap-2 text-[#fed65b] font-bold hover:text-white transition-colors">
+              شاهد كل المشاريع <ArrowLeft className="w-4 h-4" />
+            </NavLink>
+          </motion.div>
+
+          {featuredProjects.length > 0 ? (
+            <div className="grid lg:grid-cols-12 gap-5">
+              {featuredProjects.map((project, index) => (
+                <motion.article key={project._id} {...inView(index * 0.08)}
+                  className={`${index === 0 ? "lg:col-span-7 lg:row-span-2" : "lg:col-span-5"} group relative overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-[#07110c]`}>
+                  <div className={`${index === 0 ? "min-h-[420px]" : "min-h-[240px]"} relative overflow-hidden`}>
+                    {project.videoUrl ? (
+                      <div className="absolute inset-0 bg-black">
+                        <video src={project.videoUrl} muted loop autoPlay playsInline preload="metadata"
+                          className={`w-full h-full ${project.category === "تطبيقات" ? "object-contain" : "object-cover"}`} />
+                        {project.category === "تطبيقات" && <div className="absolute inset-0 -z-10 bg-[#003527]" />}
+                      </div>
+                    ) : project.imageUrl ? (
+                      <img src={project.imageUrl} alt={`معاينة مشروع ${project.titleAr}`} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-top" />
+                    ) : (
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(254,214,91,0.13),transparent_36%),linear-gradient(145deg,#0a2118,#050a07)] flex items-center justify-center">
+                        <span className="text-7xl font-black text-white/[0.04]">{String(index + 1).padStart(2, "0")}</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030705] via-[#030705]/35 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-right">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs text-white/70">{project.category}</span>
+                        {project.videoUrl && <span className="inline-flex items-center gap-1 text-xs text-[#fed65b]"><Play className="w-3 h-3 fill-current" /> معاينة فيديو</span>}
+                      </div>
+                      <h3 className={`${index === 0 ? "text-3xl md:text-4xl" : "text-2xl"} font-black text-white`}>{project.titleAr}</h3>
+                      <p className="mt-2 text-sm text-white/55 line-clamp-2 max-w-xl">{project.descriptionAr}</p>
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        <NavLink to="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#fed65b] px-5 py-2 text-sm font-black text-[#052017]">عرض التفاصيل <ArrowLeft className="w-4 h-4" /></NavLink>
+                        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/20 px-5 py-2 text-sm font-bold text-white">زيارة المشروع <ExternalLink className="w-4 h-4" /></a>}
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-3xl border border-white/[0.08] bg-white/[0.025] p-10 text-center text-white/45">سيظهر هنا أحدث الأعمال المضافة من لوحة الإدارة.</div>
+          )}
+
+          <div className="mt-5 grid grid-cols-3 divide-x divide-x-reverse divide-white/10 rounded-2xl border border-white/[0.08] bg-white/[0.025] py-5 text-center">
+            <div><strong className="block text-2xl text-[#fed65b]">{projects.length}</strong><span className="text-xs text-white/45">مشروع منشور</span></div>
+            <div><strong className="block text-2xl text-[#fed65b]">{categoryCount}</strong><span className="text-xs text-white/45">مجالات عمل</span></div>
+            <div><strong className="block text-2xl text-[#fed65b]">٦</strong><span className="text-xs text-white/45">خدمات متخصصة</span></div>
+          </div>
+        </section>
 
         {/* Clients marquee */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.2 }}
@@ -346,9 +400,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-
-        {/* ── Testimonials ───────────────────────────────────────────────────── */}
-        <Testimonials />
 
         {/* ── Final CTA ──────────────────────────────────────────────────────── */}
         <motion.div {...inView()}

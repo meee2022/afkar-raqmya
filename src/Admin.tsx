@@ -2,13 +2,6 @@ import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 
-const MOCK_ACTIVITY = [
-  { icon: "edit", text: 'تم تعديل مشروع "منصة تواصل"', user: "أحمد", time: "منذ دقيقة" },
-  { icon: "plus", text: 'إضافة خدمة "التحول الرقمي"', user: "سارة", time: "منذ ساعة" },
-  { icon: "mail", text: "رسالة جديدة من فيصل القحطاني", user: "النظام", time: "منذ ٣ ساعات" },
-  { icon: "settings", text: "تحديث بيانات الاتصال", user: "النظام", time: "أمس" },
-];
-
 const STATUS_MAP = {
   new:       { label: "جديد",        cls: "bg-[#fed65b]/15 text-[#fed65b] border border-[#fed65b]/30" },
   contacted: { label: "تم التواصل", cls: "bg-[#4ade80]/15 text-[#4ade80] border border-[#4ade80]/30" },
@@ -71,7 +64,7 @@ function focusOut(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | H
 }
 
 // ─── Settings Panel ───────────────────────────────────────────────────────────
-function SettingsPanel() {
+function SettingsPanel({ token }: { token: string }) {
   const saved = useQuery(api.settings.get);
   const upsert = useMutation(api.settings.upsert);
   const [form, setForm] = useState({ whatsapp:"", phone:"", email:"", instagramUrl:"", twitterUrl:"" });
@@ -84,7 +77,7 @@ function SettingsPanel() {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault(); setSaving(true);
-    await upsert({ ...form, email:form.email||undefined, instagramUrl:form.instagramUrl||undefined, twitterUrl:form.twitterUrl||undefined });
+    await upsert({ token, ...form, email:form.email||undefined, instagramUrl:form.instagramUrl||undefined, twitterUrl:form.twitterUrl||undefined });
     setSaving(false); setSuccess(true); setTimeout(()=>setSuccess(false),3000);
   }
 
@@ -167,7 +160,7 @@ function SettingsPanel() {
 // ─── Projects Panel ───────────────────────────────────────────────────────────
 const CATS_AR = ["مواقع","تطبيقات","هوية","نظم"];
 
-function ProjectsPanel() {
+function ProjectsPanel({ token }: { token: string }) {
   const projects = useQuery(api.projects.list);
   const createProject  = useMutation(api.projects.create);
   const updateProject  = useMutation(api.projects.update);
@@ -177,19 +170,20 @@ function ProjectsPanel() {
   const [showForm, setShowForm]   = useState(false);
   const [editId, setEditId]       = useState<string|null>(null);
   const [uploading, setUploading] = useState<"image"|"video"|null>(null);
-  const [form, setForm] = useState({ titleAr:"", descriptionAr:"", category:"مواقع", result:"", tags:"", imageStorageId:"", videoStorageId:"" });
+  const emptyProject = { titleAr:"", descriptionAr:"", category:"مواقع", result:"", tags:"", imageStorageId:"", videoStorageId:"", liveUrl:"", challenge:"", solution:"", outcome:"", role:"", duration:"", featured:false };
+  const [form, setForm] = useState(emptyProject);
 
-  function resetForm() { setForm({ titleAr:"",descriptionAr:"",category:"مواقع",result:"",tags:"",imageStorageId:"",videoStorageId:"" }); setEditId(null); setShowForm(false); }
+  function resetForm() { setForm(emptyProject); setEditId(null); setShowForm(false); }
 
   function startEdit(p: NonNullable<typeof projects>[0]) {
-    setForm({ titleAr:p.titleAr,descriptionAr:p.descriptionAr,category:p.category,result:p.result??"",tags:p.tags.join("، "),imageStorageId:(p.imageStorageId as string)??"",videoStorageId:(p.videoStorageId as string)??"" });
+    setForm({ titleAr:p.titleAr,descriptionAr:p.descriptionAr,category:p.category,result:p.result??"",tags:p.tags.join("، "),imageStorageId:(p.imageStorageId as string)??"",videoStorageId:(p.videoStorageId as string)??"",liveUrl:p.liveUrl??"",challenge:p.challenge??"",solution:p.solution??"",outcome:p.outcome??"",role:p.role??"",duration:p.duration??"",featured:p.featured??false });
     setEditId(p._id); setShowForm(true);
   }
 
   async function uploadFile(file: File, type: "image"|"video") {
     setUploading(type);
     try {
-      const url = await generateUploadUrl();
+      const url = await generateUploadUrl({ token });
       const res = await fetch(url, { method:"POST", headers:{"Content-Type":file.type}, body:file });
       const { storageId } = await res.json();
       setForm(f => ({ ...f, [type==="image"?"imageStorageId":"videoStorageId"]: storageId }));
@@ -198,9 +192,9 @@ function ProjectsPanel() {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
-    const data = { titleAr:form.titleAr, descriptionAr:form.descriptionAr, category:form.category, result:form.result||undefined, tags:form.tags?form.tags.split(/[,،]/).map(t=>t.trim()).filter(Boolean):[], imageStorageId:(form.imageStorageId as any)||undefined, videoStorageId:(form.videoStorageId as any)||undefined };
-    if (editId) { await updateProject({id:editId as any,...data}); }
-    else { await createProject({...data, sortOrder:(projects?.length??0)+1}); }
+    const data = { titleAr:form.titleAr, descriptionAr:form.descriptionAr, category:form.category, result:form.result||undefined, tags:form.tags?form.tags.split(/[,،]/).map(t=>t.trim()).filter(Boolean):[], imageStorageId:(form.imageStorageId as any)||undefined, videoStorageId:(form.videoStorageId as any)||undefined, liveUrl:form.liveUrl||undefined, challenge:form.challenge||undefined, solution:form.solution||undefined, outcome:form.outcome||undefined, role:form.role||undefined, duration:form.duration||undefined, featured:form.featured };
+    if (editId) { await updateProject({token,id:editId as any,...data}); }
+    else { await createProject({token,...data, sortOrder:(projects?.length??0)+1}); }
     resetForm();
   }
 
@@ -239,6 +233,36 @@ function ProjectsPanel() {
                 </select>
               </div>
             </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-white/50 mb-1.5">رابط المشروع</label>
+                <input type="url" value={form.liveUrl} onChange={e=>setForm(f=>({...f,liveUrl:e.target.value}))} placeholder="https://example.com" dir="ltr"
+                  className={inputCls} style={inputStyle} onFocus={focusIn} onBlur={focusOut} />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/50 mb-1.5">دورنا في المشروع</label>
+                <input value={form.role} onChange={e=>setForm(f=>({...f,role:e.target.value}))} placeholder="تصميم وتطوير كامل"
+                  className={inputCls} style={inputStyle} onFocus={focusIn} onBlur={focusOut} />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/50 mb-1.5">مدة التنفيذ</label>
+                <input value={form.duration} onChange={e=>setForm(f=>({...f,duration:e.target.value}))} placeholder="3 أسابيع"
+                  className={inputCls} style={inputStyle} onFocus={focusIn} onBlur={focusOut} />
+              </div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[{key:"challenge",label:"التحدي",ph:"ما المشكلة التي واجهها العميل؟"},{key:"solution",label:"الحل",ph:"كيف حللناها؟"},{key:"outcome",label:"النتيجة",ph:"ما الأثر بعد التنفيذ؟"}].map(item=>(
+                <div key={item.key}>
+                  <label className="block text-xs font-bold text-white/50 mb-1.5">{item.label}</label>
+                  <textarea rows={3} value={(form as any)[item.key]} onChange={e=>setForm(f=>({...f,[item.key]:e.target.value}))} placeholder={item.ph}
+                    className={inputCls+" resize-none"} style={inputStyle} onFocus={focusIn} onBlur={focusOut} />
+                </div>
+              ))}
+            </div>
+            <label className="inline-flex min-h-11 items-center gap-3 cursor-pointer text-sm text-white/65">
+              <input type="checkbox" checked={form.featured} onChange={e=>setForm(f=>({...f,featured:e.target.checked}))} className="w-5 h-5 accent-[#fed65b]" />
+              عرض المشروع ضمن الأعمال المختارة في الرئيسية
+            </label>
             <div>
               <label className="block text-xs font-bold text-white/50 mb-1.5">وصف قصير *</label>
               <textarea required rows={2} value={form.descriptionAr} onChange={e=>setForm(f=>({...f,descriptionAr:e.target.value}))} placeholder="وصف قصير عن المشروع..."
@@ -328,7 +352,7 @@ function ProjectsPanel() {
                   className="flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1 border border-white/10 text-white/50 hover:border-[#fed65b]/40 hover:text-[#fed65b] transition-all">
                   {Icons.edit} تعديل
                 </button>
-                <button onClick={()=>removeProject({id:p._id})}
+                          <button onClick={()=>removeProject({token,id:p._id})}
                   className="py-2 px-3 rounded-lg text-xs font-bold border border-white/10 text-white/30 hover:border-red-500/40 hover:text-red-400 transition-all">
                   {Icons.trash}
                 </button>
@@ -347,15 +371,86 @@ function ProjectsPanel() {
   );
 }
 
+function AdminLogin({ onSuccess }: { onSuccess: (token: string) => void }) {
+  const login = useMutation((api as any).adminAuth.login);
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const result = await login({ password });
+      localStorage.setItem("afkar_admin_token", result.token);
+      onSuccess(result.token);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "تعذّر تسجيل الدخول");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <main className="min-h-screen bg-[#050a07] text-white flex items-center justify-center px-5" dir="rtl">
+      <div className="fixed inset-0 pointer-events-none" style={{ background:"radial-gradient(circle at 50% 20%,rgba(0,85,62,.4),transparent 50%)" }}/>
+      <section className="relative w-full max-w-md rounded-3xl border border-white/10 bg-[#08130e] p-7 sm:p-9 shadow-2xl">
+        <div className="w-12 h-12 rounded-2xl bg-[#fed65b] text-[#003527] flex items-center justify-center mb-6" aria-hidden="true">
+          <svg viewBox="0 0 20 20" className="w-6 h-6" fill="currentColor"><path d="M10 2L3 7v11h5v-5h4v5h5V7L10 2z"/></svg>
+        </div>
+        <p className="text-[#fed65b] text-xs font-bold mb-2">منطقة خاصة</p>
+        <h1 className="text-3xl font-black mb-2">تسجيل دخول الإدارة</h1>
+        <p className="text-white/45 text-sm leading-7 mb-7">أدخل كلمة المرور لإدارة المشاريع والرسائل وإعدادات الموقع.</p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="admin-password" className="block text-sm font-bold text-white/70 mb-2">كلمة المرور</label>
+            <input id="admin-password" type="password" required minLength={8} autoComplete="current-password"
+              value={password} onChange={(e)=>setPassword(e.target.value)}
+              className="w-full min-h-12 rounded-xl border border-white/10 bg-white/[0.04] px-4 outline-none focus:border-[#fed65b]/60 focus:ring-4 focus:ring-[#fed65b]/10"
+              placeholder="••••••••" />
+          </div>
+          {error && <p role="alert" className="rounded-xl border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm text-red-300">{error}</p>}
+          <button disabled={loading} className="w-full min-h-12 rounded-xl bg-[#fed65b] text-[#003527] font-black disabled:opacity-50">
+            {loading ? "جارٍ التحقق..." : "دخول لوحة التحكم"}
+          </button>
+        </form>
+        <a href="/" className="mt-5 inline-flex min-h-11 items-center text-sm text-white/45 hover:text-white">العودة إلى الموقع</a>
+      </section>
+    </main>
+  );
+}
+
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
 export default function Admin() {
+  const [adminToken, setAdminToken] = useState(() => localStorage.getItem("afkar_admin_token") || "");
+  const sessionValid = useQuery((api as any).adminAuth.validate, adminToken ? { token: adminToken } : "skip");
+  const logoutMutation = useMutation((api as any).adminAuth.logout);
   const [activeNav, setActiveNav]         = useState("dashboard");
   const [sidebarOpen, setSidebarOpen]     = useState(true);
   const [selectedInquiry, setSelectedInquiry] = useState<any>(null);
+  const [notifOpen, setNotifOpen]         = useState(false);
 
-  const inquiries = useQuery(api.contact.list) ?? [];
+  const inquiries = useQuery(api.contact.list, adminToken && sessionValid ? { token: adminToken } : "skip") ?? [];
   const updateStatusMutation = useMutation(api.contact.updateStatus);
   const newCount = inquiries.filter((i: any) => i.status === "new").length;
+
+  // وقت نسبي بالعربي (منذ دقيقة / منذ 3 ساعات / أمس ...)
+  const timeAgo = (ts: number) => {
+    const diff = Date.now() - ts;
+    const m = Math.floor(diff / 60000), h = Math.floor(diff / 3600000), d = Math.floor(diff / 86400000);
+    if (m < 1) return "الآن";
+    if (m < 60) return `منذ ${m} دقيقة`;
+    if (h < 24) return `منذ ${h} ساعة`;
+    if (d === 1) return "أمس";
+    return `منذ ${d} يوم`;
+  };
+
+  // النشاط الأخير الحقيقي — مبني على آخر الاستفسارات الواردة
+  const recentActivity = [...inquiries]
+    .sort((a: any, b: any) => b.createdAt - a.createdAt)
+    .slice(0, 5)
+    .map((i: any) => ({ icon: "mail", text: `رسالة جديدة من ${i.name}`, user: i.service || "استفسار", time: timeAgo(i.createdAt) }));
 
   const navItems = [
     { id:"dashboard", label:"لوحة التحكم", icon:Icons.dashboard },
@@ -365,9 +460,25 @@ export default function Admin() {
   ];
 
   async function updateStatus(id: string, status: "new"|"contacted"|"closed") {
-    await updateStatusMutation({ id:id as any, status });
+    await updateStatusMutation({ token: adminToken, id:id as any, status });
     if (selectedInquiry?._id===id) setSelectedInquiry((prev:any)=>prev?{...prev,status}:null);
   }
+
+  async function handleLogout() {
+    try { await logoutMutation({ token: adminToken }); } catch {}
+    localStorage.removeItem("afkar_admin_token");
+    setAdminToken("");
+  }
+
+  useEffect(() => {
+    if (adminToken && sessionValid === false) {
+      localStorage.removeItem("afkar_admin_token");
+      setAdminToken("");
+    }
+  }, [adminToken, sessionValid]);
+
+  if (!adminToken || sessionValid === false) return <AdminLogin onSuccess={setAdminToken} />;
+  if (sessionValid === undefined) return <div className="min-h-screen bg-[#050a07] text-white flex items-center justify-center">جارٍ التحقق...</div>;
 
   return (
     <div className="min-h-screen flex" dir="rtl" style={{ fontFamily:"'Tajawal','Cairo',sans-serif" }}>
@@ -436,7 +547,7 @@ export default function Admin() {
             <span className="flex-shrink-0">{Icons.website}</span>
             {sidebarOpen && <span>عرض الموقع</span>}
           </a>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-400/60 hover:text-red-400 hover:bg-red-500/[0.06] transition-all">
+          <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-400/60 hover:text-red-400 hover:bg-red-500/[0.06] transition-all">
             <span className="flex-shrink-0">{Icons.logout}</span>
             {sidebarOpen && <span>تسجيل الخروج</span>}
           </button>
@@ -460,10 +571,43 @@ export default function Admin() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <button className="relative w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.06] transition-all">
-              {Icons.bell}
-              {newCount>0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 border border-[#050a07]"/>}
-            </button>
+            <div className="relative">
+              <button onClick={()=>setNotifOpen(v=>!v)}
+                className="relative w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.06] transition-all">
+                {Icons.bell}
+                {newCount>0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 border border-[#050a07]"/>}
+              </button>
+              {notifOpen && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={()=>setNotifOpen(false)}/>
+                  <div className="absolute left-0 mt-2 w-80 max-h-96 overflow-y-auto rounded-2xl border border-white/10 shadow-2xl z-50"
+                    style={{ background:"rgba(10,18,8,0.98)", backdropFilter:"blur(20px)" }}>
+                    <div className="px-4 py-3 border-b border-white/[0.07] flex items-center justify-between">
+                      <span className="font-black text-white text-sm">التنبيهات</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#fed65b]/15 text-[#fed65b]">{newCount} جديد</span>
+                    </div>
+                    {newCount===0 ? (
+                      <div className="py-10 text-center text-white/25 text-xs">لا توجد تنبيهات جديدة</div>
+                    ) : (
+                      inquiries.filter((i:any)=>i.status==="new")
+                        .sort((a:any,b:any)=>b.createdAt-a.createdAt)
+                        .map((i:any)=>(
+                          <button key={i._id}
+                            onClick={()=>{ setSelectedInquiry(i); setActiveNav("messages"); setNotifOpen(false); }}
+                            className="w-full text-right flex gap-3 px-4 py-3 hover:bg-white/[0.04] transition-colors border-b border-white/[0.04]">
+                            <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-[#f87171]"
+                              style={{ background:"rgba(248,113,113,0.12)" }}>{Icons.messages}</div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-white/80 font-semibold truncate">رسالة جديدة من {i.name}</p>
+                              <p className="text-[10px] text-white/30 mt-0.5">{i.service || "استفسار"} · {timeAgo(i.createdAt)}</p>
+                            </div>
+                          </button>
+                        ))
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
             <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl border border-white/[0.07]"
               style={{ background:"rgba(255,255,255,0.04)" }}>
               <div className="w-7 h-7 rounded-full flex items-center justify-center font-black text-xs text-[#003527]"
@@ -476,8 +620,8 @@ export default function Admin() {
         {/* Content */}
         <main className="flex-1 p-6">
 
-          {activeNav==="settings" && <SettingsPanel />}
-          {activeNav==="projects" && <ProjectsPanel />}
+          {activeNav==="settings" && <SettingsPanel token={adminToken} />}
+          {activeNav==="projects" && <ProjectsPanel token={adminToken} />}
 
           {(activeNav==="dashboard"||activeNav==="messages") && <>
 
@@ -614,7 +758,10 @@ export default function Admin() {
                 style={{ background:"rgba(255,255,255,0.03)", backdropFilter:"blur(10px)" }}>
                 <h2 className="font-black text-white text-sm mb-4">النشاط الأخير</h2>
                 <div className="space-y-4">
-                  {MOCK_ACTIVITY.map((a,i)=>(
+                  {recentActivity.length===0 && (
+                    <p className="text-xs text-white/25 py-6 text-center">لا يوجد نشاط بعد — ستظهر الاستفسارات الجديدة هنا</p>
+                  )}
+                  {recentActivity.map((a,i)=>(
                     <div key={i} className="flex gap-3">
                       <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-[#fed65b]"
                         style={{ background:"rgba(254,214,91,0.1)" }}>

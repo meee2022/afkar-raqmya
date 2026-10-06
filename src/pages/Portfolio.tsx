@@ -12,8 +12,16 @@ const STATIC_PROJECTS = [
     solution: "تصميم تجربة تفاعلية تشمل تصفّح المصحف، آية اليوم، التلاوات الصوتية، والأدوات والمكتبة — بواجهة عربية أنيقة وسلسة.",
     outcome: "تطبيق متكامل يوفّر صحبة قرآنية يومية بتجربة مستخدم راقية على الجوال.",
     liveUrl: "https://nafahat.vercel.app/" },
-  { _id: "s1", titleAr: "Adrenaline — مطعم", descriptionAr: "موقع مطعم عصري متكامل بقائمة طعام تفاعلية، نظام حجز طاولات، وعروض ترويجية ديناميكية.", category: "مواقع", result: "تجربة مستخدم فاخرة", imageUrl: null, videoUrl: null, color: "from-orange-600 to-red-900", accent: "#f97316" },
-  { _id: "s2", titleAr: "DarkFit — نادي رياضي", descriptionAr: "موقع نادي لياقة بدنية بتصميم داكن وقوي، يشمل برامج التدريب والاشتراكات وحجز الجلسات.", category: "مواقع", result: "↑ 55% اشتراكات جديدة", imageUrl: null, videoUrl: null, color: "from-zinc-700 to-black", accent: "#a3e635" },
+  { _id: "s1", titleAr: "Adrenaline — وجبات صحية", descriptionAr: "منصة متكاملة للوجبات الصحية والخطط الغذائية الذكية، تشمل قائمة الوجبات وحاسبة السعرات والاشتراكات والتوصيل داخل قطر.", category: "مواقع", result: "منصة طلب واشتراك متكاملة", imageUrl: "/adrenaline-preview.png", videoUrl: null, color: "from-sky-700 to-slate-950", accent: "#3cc4f0",
+    challenge: "تحويل خدمة الوجبات الصحية إلى تجربة رقمية توضّح الخطط والوجبات وتساعد العميل على اختيار الاشتراك المناسب بسهولة.",
+    solution: "تصميم وتطوير منصة عربية متجاوبة تجمع قائمة الوجبات، حاسبة السعرات، الخطط الذكية، الاشتراكات، وإدارة الطلبات في تجربة واحدة.",
+    outcome: "حضور رقمي متكامل يقدّم الخدمة بوضوح ويتيح للعميل اكتشاف الوجبات والاشتراك والوصول إلى لوحة التحكم.",
+    liveUrl: "https://adrenalinehealthy.com/" },
+  { _id: "s2", titleAr: "DarkFit — منصة اللياقة", descriptionAr: "تطبيق لياقة وصحة شامل يجمع التمارين ومولّد الخطط والتغذية والمكملات والمدربين والحاسبات الصحية في تجربة واحدة.", category: "تطبيقات", result: "منظومة لياقة متكاملة", imageUrl: "/darkfit-preview.png", videoUrl: null, color: "from-lime-900 to-black", accent: "#63ff19",
+    challenge: "جمع أدوات اللياقة والتغذية والصحة المتفرقة في منصة عربية واحدة سهلة الاستخدام وتحافظ على شعور قوي ومحفّز.",
+    solution: "تصميم وتطوير لوحة شخصية تشمل التمارين، مولّد التمارين، التغذية، المكملات، المدربين، مؤشرات الصحة، الحاسبات والخطط.",
+    outcome: "تجربة رقمية موحّدة تساعد المستخدم على متابعة رحلة لياقته والوصول إلى الأدوات الأساسية من واجهة واحدة.",
+    liveUrl: "https://darkfit.netlify.app/" },
   { _id: "s3", titleAr: "Smart Arena — منصة رياضية", descriptionAr: "منصة إدارة رياضية متكاملة تشمل جداول المباريات، ترتيب الفرق، وإحصائيات اللاعبين.", category: "تطبيقات", result: "إدارة شاملة للدوري", imageUrl: null, videoUrl: null, color: "from-green-700 to-emerald-900", accent: "#4ade80" },
   { _id: "s4", titleAr: "ابن تيمية — أكاديمية", descriptionAr: "موقع أكاديمية إسلامية متخصص يعرض المناهج والمحاضرات والتسجيل في الدورات التعليمية.", category: "مواقع", result: "↑ 70% تسجيلات", imageUrl: null, videoUrl: null, color: "from-amber-700 to-yellow-900", accent: "#fbbf24" },
   { _id: "s5", titleAr: "Arirang Bakery — مخبز", descriptionAr: "موقع مخبز كوري-عربي فاخر بعرض المنتجات، الطلبات المسبقة، وهوية بصرية مميزة.", category: "هوية", result: "هوية بصرية متكاملة", imageUrl: null, videoUrl: null, color: "from-pink-600 to-rose-900", accent: "#f472b6" },
@@ -56,12 +64,25 @@ function VideoLightbox({
   onClose: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape key
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const previousFocus = document.activeElement as HTMLElement | null;
+    panelRef.current?.focus();
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab" && panelRef.current) {
+        const focusable = panelRef.current.querySelectorAll<HTMLElement>('button, a[href], video[controls], [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
     document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+    return () => { document.removeEventListener("keydown", handler); previousFocus?.focus(); };
   }, [onClose]);
 
   // Lock body scroll
@@ -72,6 +93,9 @@ function VideoLightbox({
 
   return (
     <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-dialog-title"
       className="fixed inset-0 z-[999] flex items-center justify-center p-4 md:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -84,6 +108,8 @@ function VideoLightbox({
 
       {/* Panel */}
       <motion.div
+        ref={panelRef}
+        tabIndex={-1}
         className="relative z-10 w-full max-w-5xl rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto"
         initial={{ scale: 0.88, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -98,6 +124,8 @@ function VideoLightbox({
       >
         {/* Close button */}
         <button
+          type="button"
+          aria-label="إغلاق تفاصيل المشروع"
           onClick={onClose}
           className="absolute top-4 left-4 z-50 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
           style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
@@ -108,16 +136,14 @@ function VideoLightbox({
         </button>
 
         {/* Video / Image */}
-        <div className="relative" style={{ aspectRatio: "16/9" }}>
+        <div className="relative bg-black overflow-hidden" style={{ aspectRatio: "16/9" }}>
           {project.videoUrl ? (
-            <video
-              ref={videoRef}
-              src={project.videoUrl}
-              className="w-full h-full object-cover"
-              autoPlay
-              controls
-              playsInline
-            />
+            <>
+              {project.category === "تطبيقات" && <video src={project.videoUrl} muted autoPlay loop playsInline aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-25 blur-2xl scale-110" />}
+              <video ref={videoRef} src={project.videoUrl}
+                className={`relative z-10 w-full h-full ${project.category === "تطبيقات" ? "object-contain" : "object-cover"}`}
+                autoPlay controls playsInline />
+            </>
           ) : project.imageUrl ? (
             <img src={project.imageUrl} alt={project.titleAr} className="w-full h-full object-cover" />
           ) : (
@@ -130,7 +156,7 @@ function VideoLightbox({
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
-              <p className="text-white/40 text-sm">لم يُضف فيديو بعد — يمكنك إضافة رابط الفيديو من لوحة التحكم</p>
+              <p className="text-white/45 text-sm">تفاصيل المشروع والنتائج موضحة بالأسفل</p>
             </div>
           )}
           {/* Gradient overlay at bottom */}
@@ -150,7 +176,7 @@ function VideoLightbox({
                 <span className="text-xs font-black" style={{ color: project.accent }}>{project.result}</span>
               )}
             </div>
-            <h2 className="text-xl font-black text-white">{project.titleAr}</h2>
+            <h2 id="project-dialog-title" className="text-xl font-black text-white">{project.titleAr}</h2>
             <p className="text-white/45 text-sm mt-1 leading-relaxed">{project.descriptionAr}</p>
           </div>
           <div className="flex gap-2.5 flex-shrink-0">
@@ -244,12 +270,14 @@ function ProjectCard({
   };
 
   return (
-    <motion.article
+    <motion.button
+      type="button"
+      aria-label={`عرض تفاصيل مشروع ${p.titleAr}`}
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ duration: 0.4, delay: index * 0.06, ease: "easeOut" as const }}
-      className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 hover:-translate-y-2 transition-all duration-500 flex flex-col cursor-pointer"
+      className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fed65b] transition-all duration-500 flex flex-col cursor-pointer text-right w-full"
       style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -382,7 +410,7 @@ function ProjectCard({
                   ))}
                 </div>
               </div>
-              <span className="text-white/20 text-xs font-bold relative z-10">لم تُضف صورة بعد</span>
+              <span className="text-white/[0.07] text-5xl font-black relative z-10">{p.titleAr.slice(0, 1)}</span>
             </div>
           )}
 
@@ -439,7 +467,7 @@ function ProjectCard({
       {/* Bottom glow */}
       <div className="absolute bottom-0 inset-x-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{ background: `linear-gradient(90deg,transparent,${accent}60,transparent)` }} />
-    </motion.article>
+    </motion.button>
   );
 }
 
@@ -449,9 +477,44 @@ export default function Portfolio() {
   const [lightboxProject, setLightboxProject] = useState<LightboxProject | null>(null);
   const convexProjects = useQuery(api.projects.list);
 
-  const projects = convexProjects && convexProjects.length > 0
-    ? convexProjects.map(p => ({ ...p, color: undefined }))
-    : STATIC_PROJECTS;
+  const projects = (convexProjects && convexProjects.length > 0
+    ? convexProjects.map(p => {
+        if (p.titleAr.includes("نَفَحات")) return {
+          ...p, color: undefined,
+          liveUrl: p.liveUrl ?? "https://nafahat.vercel.app/",
+          challenge: p.challenge ?? STATIC_PROJECTS[0].challenge,
+          solution: p.solution ?? STATIC_PROJECTS[0].solution,
+          outcome: p.outcome ?? STATIC_PROJECTS[0].outcome,
+        };
+        if (p.titleAr.includes("Adrenaline")) return {
+          ...p,
+          titleAr: "Adrenaline — وجبات صحية",
+          descriptionAr: "منصة متكاملة للوجبات الصحية والخطط الغذائية الذكية، تشمل قائمة الوجبات وحاسبة السعرات والاشتراكات والتوصيل داخل قطر.",
+          result: "منصة طلب واشتراك متكاملة",
+          imageUrl: p.imageUrl ?? "/adrenaline-preview.png",
+          liveUrl: p.liveUrl ?? "https://adrenalinehealthy.com/",
+          challenge: p.challenge ?? STATIC_PROJECTS[1].challenge,
+          solution: p.solution ?? STATIC_PROJECTS[1].solution,
+          outcome: p.outcome ?? STATIC_PROJECTS[1].outcome,
+          color: undefined,
+        };
+        if (p.titleAr.includes("DarkFit")) return {
+          ...p,
+          titleAr: "DarkFit — منصة اللياقة",
+          descriptionAr: "تطبيق لياقة وصحة شامل يجمع التمارين ومولّد الخطط والتغذية والمكملات والمدربين والحاسبات الصحية في تجربة واحدة.",
+          category: "تطبيقات",
+          result: "منظومة لياقة متكاملة",
+          imageUrl: p.imageUrl ?? "/darkfit-preview.png",
+          liveUrl: p.liveUrl ?? "https://darkfit.netlify.app/",
+          challenge: p.challenge ?? STATIC_PROJECTS[2].challenge,
+          solution: p.solution ?? STATIC_PROJECTS[2].solution,
+          outcome: p.outcome ?? STATIC_PROJECTS[2].outcome,
+          color: undefined,
+        };
+        return { ...p, color: undefined };
+      })
+    : STATIC_PROJECTS)
+    .sort((a, b) => Number(Boolean((b as any).featured)) - Number(Boolean((a as any).featured)) || Number(Boolean(b.videoUrl || b.imageUrl)) - Number(Boolean(a.videoUrl || a.imageUrl)));
 
   const filtered = filter === "الكل" ? projects : projects.filter(p => p.category === filter);
 
@@ -503,7 +566,7 @@ export default function Portfolio() {
         {/* Hint */}
         <motion.p {...up(0.15)} className="text-white/25 text-xs mb-6 flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          انقر على أي مشروع لمعاينته — المشاريع التي تحتوي على فيديو تعرض معاينة عند التحويم
+          افتح أي مشروع لمشاهدة التفاصيل والمعاينة الكاملة — الفيديوهات الطولية تظهر بدون قص
         </motion.p>
 
         {/* Grid */}
@@ -529,13 +592,13 @@ export default function Portfolio() {
           </div>
         )}
 
-        {/* Stats strip */}
+        {/* Portfolio facts sourced from the projects currently shown */}
         <motion.div {...up(0.2)} className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { n: "+50", l: "مشروع منجز" },
-            { n: "+30", l: "عميل سعيد" },
-            { n: "٦", l: "خدمات متخصصة" },
-            { n: "٣+", l: "سنوات خبرة" },
+            { n: String(projects.length), l: "مشروع منشور" },
+            { n: String(new Set(projects.map(p => p.category)).size), l: "مجالات عمل" },
+            { n: String(projects.filter(p => p.videoUrl).length), l: "معاينات فيديو" },
+            { n: String(projects.filter(p => p.liveUrl).length), l: "مشاريع قابلة للزيارة" },
           ].map((s, i) => (
             <motion.div key={s.l} {...up(0.25 + i * 0.07)}
               className="p-6 rounded-2xl text-center border border-white/[0.07] hover:border-[#fed65b]/20 transition-all"

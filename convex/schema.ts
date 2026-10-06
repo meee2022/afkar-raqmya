@@ -20,6 +20,13 @@ export default defineSchema({
     imageStorageId: v.optional(v.id("_storage")),
     videoStorageId: v.optional(v.id("_storage")),
     result: v.optional(v.string()),
+    liveUrl: v.optional(v.string()),
+    challenge: v.optional(v.string()),
+    solution: v.optional(v.string()),
+    outcome: v.optional(v.string()),
+    role: v.optional(v.string()),
+    duration: v.optional(v.string()),
+    featured: v.optional(v.boolean()),
     tags: v.array(v.string()),
     sortOrder: v.number(),
     isActive: v.boolean(),
@@ -76,4 +83,10 @@ export default defineSchema({
     twitterUrl: v.optional(v.string()),
     updatedAt: v.number(),
   }),
+
+  agencyAdminSessions: defineTable({
+    tokenHash: v.string(),
+    expiresAt: v.number(),
+    createdAt: v.number(),
+  }).index("by_tokenHash", ["tokenHash"]),
 });

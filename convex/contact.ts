@@ -1,5 +1,6 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin } from "./adminAuth";
 
 export const submit = mutation({
   args: {
@@ -19,7 +20,9 @@ export const submit = mutation({
 });
 
 export const list = query({
-  handler: async (ctx) => {
+  args: { token: v.string() },
+  handler: async (ctx, { token }) => {
+    await requireAdmin(ctx, token);
     return await ctx.db
       .query("agencyContactRequests")
       .withIndex("by_createdAt")
@@ -30,10 +33,12 @@ export const list = query({
 
 export const updateStatus = mutation({
   args: {
+    token: v.string(),
     id: v.id("agencyContactRequests"),
     status: v.union(v.literal("new"), v.literal("contacted"), v.literal("closed")),
   },
-  handler: async (ctx, { id, status }) => {
+  handler: async (ctx, { token, id, status }) => {
+    await requireAdmin(ctx, token);
     await ctx.db.patch(id, { status });
   },
 });

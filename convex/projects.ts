@@ -13,7 +13,7 @@ export const list = query({
     return Promise.all(
       projects.filter((p) => p.isActive).map(async (p) => ({
         ...p,
-        imageUrl: p.imageStorageId ? await ctx.storage.getUrl(p.imageStorageId) : null,
+        imageUrl: p.previewImage ?? (p.imageStorageId ? await ctx.storage.getUrl(p.imageStorageId) : null),
         videoUrl: p.videoStorageId ? await ctx.storage.getUrl(p.videoStorageId) : null,
       }))
     );

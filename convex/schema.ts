@@ -19,6 +19,7 @@ export default defineSchema({
     category: v.string(),
     imageStorageId: v.optional(v.id("_storage")),
     videoStorageId: v.optional(v.id("_storage")),
+    previewImage: v.optional(v.string()),
     result: v.optional(v.string()),
     liveUrl: v.optional(v.string()),
     challenge: v.optional(v.string()),

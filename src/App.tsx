@@ -12,7 +12,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Admin = lazy(() => import("./Admin"));
 
 function PageLoader() {
-  return <div className="min-h-screen bg-[#050a07] text-[#fed65b] flex items-center justify-center font-bold">جارٍ التحميل...</div>;
+  return <div className="min-h-screen bg-[#14050b] text-[#EBDDC6] flex items-center justify-center font-bold">جارٍ التحميل...</div>;
 }
 
 export default function App() {

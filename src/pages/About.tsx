@@ -13,7 +13,7 @@ const up = (delay = 0) => ({
 
 const VALUES = [
   {
-    color: "#fed65b",
+    color: "#EBDDC6",
     title: "تصميم إبداعي",
     desc: "هوية بصرية فريدة لكل مشروع تعكس روحه الحقيقية",
     icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
@@ -48,7 +48,7 @@ const WHY_US = [
 ];
 
 const DELIVERY_AREAS = [
-  { name: "إدارة المشروع", role: "تخطيط واضح وتواصل مباشر", color: "#fed65b", initial: "إ" },
+  { name: "إدارة المشروع", role: "تخطيط واضح وتواصل مباشر", color: "#EBDDC6", initial: "إ" },
   { name: "التصميم", role: "UI/UX & Brand", color: "#f472b6", initial: "ت" },
   { name: "التطوير", role: "Frontend & Backend", color: "#4ade80", initial: "ط" },
   { name: "المحتوى المرئي", role: "Motion & Video", color: "#60a5fa", initial: "م" },
@@ -60,31 +60,31 @@ export default function About() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/about" title="من نحن"
-        description="أفكار رقمية وكالة رقمية في قطر تجمع بين الإبداع والتقنية. تعرّف على قيمنا وفريقنا ولماذا يثق بنا عملاؤنا." />
+        description="فكرة وكالة رقمية في قطر تجمع بين الإبداع والتقنية. تعرّف على قيمنا وفريقنا ولماذا يثق بنا عملاؤنا." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}
         <motion.div {...up()} className="mb-16 max-w-3xl">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">من نحن</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">من نحن</span>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
             وكالة رقمية{" "}
-            <span style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               بأسلوب مختلف
             </span>
           </h1>
           <p className="text-white/55 text-xl leading-relaxed">
-            أفكار رقمية وكالة متخصصة في تقديم حلول رقمية إبداعية للأعمال والأفراد. نجمع بين الفهم العميق للسوق المحلي والمعايير العالمية للتصميم.
+            فكرة وكالة متخصصة في تقديم حلول رقمية إبداعية للأعمال والأفراد. نجمع بين الفهم العميق للسوق المحلي والمعايير العالمية للتصميم.
           </p>
         </motion.div>
 
         {/* Mission banner */}
         <motion.div {...up(0.1)}
-          className="relative rounded-3xl p-10 mb-12 overflow-hidden border border-[#fed65b]/15"
-          style={{ background: "linear-gradient(135deg,rgba(0,53,39,0.7),rgba(5,10,7,0.6))" }}>
+          className="relative rounded-3xl p-10 mb-12 overflow-hidden border border-[#EBDDC6]/15"
+          style={{ background: "linear-gradient(135deg,rgba(122,22,48,0.7),rgba(20,5,11,0.6))" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(254,214,91,0.07) 0%,transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(235,221,198,0.07) 0%,transparent 60%)" }} />
           <div className="relative z-10">
-            <div className="text-[#fed65b]/60 text-xs font-black tracking-widest uppercase mb-4">مهمتنا</div>
+            <div className="text-[#EBDDC6]/60 text-xs font-black tracking-widest uppercase mb-4">مهمتنا</div>
             <p className="text-white text-2xl md:text-3xl font-bold leading-relaxed max-w-3xl">
               "تمكين كل صاحب فكرة من امتلاك حضور رقمي مميز يعكس قيمته الحقيقية — بتصميم يُبهر وتقنية تدوم."
             </p>
@@ -93,7 +93,7 @@ export default function About() {
 
         {/* Values */}
         <motion.div {...up(0.15)} className="mb-5">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">قيمنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-8">قيمنا</span>
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {VALUES.map((v, i) => (
@@ -116,11 +116,11 @@ export default function About() {
 
         {/* Stats */}
         <motion.div {...up(0.2)} className="mb-5">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">أرقامنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-8">أرقامنا</span>
         </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           {[
-            { n: String(projects.length), l: "مشروع منشور", color: "#fed65b" },
+            { n: String(projects.length), l: "مشروع منشور", color: "#EBDDC6" },
             { n: String(categories), l: "مجالات عمل", color: "#4ade80" },
             { n: String(projects.filter(project => project.videoUrl).length), l: "معاينات فيديو", color: "#60a5fa" },
             { n: "٦", l: "خدمات متخصصة", color: "#a78bfa" },
@@ -138,7 +138,7 @@ export default function About() {
 
         {/* Delivery areas */}
         <motion.div {...up(0.25)} className="mb-5">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">كيف ننفذ مشروعك</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-8">كيف ننفذ مشروعك</span>
         </motion.div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           {DELIVERY_AREAS.map((m, i) => (
@@ -159,16 +159,16 @@ export default function About() {
 
         {/* Why choose us */}
         <motion.div {...up(0.28)} className="mb-5">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-8">لماذا تختارنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-8">لماذا تختارنا</span>
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {WHY_US.map((w, i) => (
             <motion.div key={w.title} {...up(0.3 + i * 0.05)}
-              className="group flex gap-4 p-5 rounded-2xl border border-white/[0.07] hover:border-[#fed65b]/25 transition-all duration-300"
+              className="group flex gap-4 p-5 rounded-2xl border border-white/[0.07] hover:border-[#EBDDC6]/25 transition-all duration-300"
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
-                style={{ background: "rgba(254,214,91,0.15)", border: "1px solid rgba(254,214,91,0.3)" }}>
-                <svg className="w-4 h-4 text-[#fed65b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7" /></svg>
+                style={{ background: "rgba(235,221,198,0.15)", border: "1px solid rgba(235,221,198,0.3)" }}>
+                <svg className="w-4 h-4 text-[#EBDDC6]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7" /></svg>
               </div>
               <div>
                 <h3 className="font-black text-white mb-1 text-sm">{w.title}</h3>
@@ -182,12 +182,12 @@ export default function About() {
         <motion.div {...up(0.3)}
           className="relative rounded-3xl p-10 mb-12 overflow-hidden border border-white/[0.07]"
           style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
-          <div className="absolute top-0 right-0 text-[200px] font-black opacity-[0.03] leading-none select-none" style={{ color: "#fed65b" }}>أفكار</div>
+          <div className="absolute top-0 right-0 text-[200px] font-black opacity-[0.03] leading-none select-none" style={{ color: "#EBDDC6" }}>أفكار</div>
           <div className="relative z-10 max-w-2xl">
-            <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">قصتنا</span>
+            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">قصتنا</span>
             <h2 className="text-2xl md:text-3xl font-black text-white mb-5">من فكرة إلى وكالة رقمية</h2>
             <p className="text-white/50 leading-relaxed mb-4">
-              بدأت أفكار رقمية من شغف حقيقي بالتصميم والتقنية وإيمان بأن كل فكرة تستحق أن تُرى بأفضل صورة ممكنة.
+              بدأت فكرة من شغف حقيقي بالتصميم والتقنية وإيمان بأن كل فكرة تستحق أن تُرى بأفضل صورة ممكنة.
             </p>
             <p className="text-white/50 leading-relaxed">
               اليوم نخدم عملاء من قطر والخليج، ونفخر بكل مشروع أنجزناه لأنه يعكس التزامنا بالجودة والإبداع — من الفكرة الأولى حتى الإطلاق وما بعده.
@@ -197,15 +197,15 @@ export default function About() {
 
         {/* CTA */}
         <motion.div {...up(0.35)}
-          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#fed65b]/15"
-          style={{ background: "linear-gradient(135deg,rgba(0,53,39,0.6),rgba(5,10,7,0.8))" }}>
+          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#EBDDC6]/15"
+          style={{ background: "linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(254,214,91,0.08) 0%,transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
           <h2 className="text-2xl md:text-3xl font-black text-white mb-3 relative z-10">هل أنت مستعد للبدء؟</h2>
           <p className="text-white/50 mb-7 relative z-10">تواصل معنا اليوم وابدأ رحلتك الرقمية.</p>
           <NavLink to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#003527] relative z-10 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 40px rgba(254,214,91,0.3)" }}>
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
+            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.3)" }}>
             تحدث معنا
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </NavLink>

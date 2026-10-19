@@ -4,7 +4,7 @@ import { api } from "../../convex/_generated/api";
 const DEFAULTS = {
   whatsapp: "97433000000",
   phone: "+974 33 000 000",
-  email: "hello@afkarraqmeya.com",
+  email: "hello@fikratechdesign.com",
   instagramUrl: "",
   twitterUrl: "",
 };

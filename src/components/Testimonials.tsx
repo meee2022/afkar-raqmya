@@ -32,7 +32,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "سارة المنصوري",
     role: "مديرة تسويق",
     project: "DarkFit",
-    quote: "تعاملت مع شركات كتير قبل كده، لكن أفكار رقمية مختلفين. التزام بالمواعيد، جودة عالية، ومتابعة حتى بعد التسليم.",
+    quote: "تعاملت مع شركات كتير قبل كده، لكن فكرة مختلفين. التزام بالمواعيد، جودة عالية، ومتابعة حتى بعد التسليم.",
     rating: 5,
     color: "#a3e635",
     initial: "س",
@@ -64,7 +64,7 @@ export default function Testimonials() {
   return (
     <div className="mt-24">
       <motion.div {...inView()} className="text-center mb-12">
-        <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">آراء عملائنا</span>
+        <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">آراء عملائنا</span>
         <h2 className="text-3xl md:text-4xl font-black text-white">ماذا يقول من وثقوا بنا</h2>
       </motion.div>
 

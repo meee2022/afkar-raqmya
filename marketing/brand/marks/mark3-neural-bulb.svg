@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <g stroke="#E8D6BA" stroke-width="3.5" stroke-linecap="round" opacity=".85">
+    <line x1="100" y1="34" x2="62" y2="60"/><line x1="100" y1="34" x2="138" y2="60"/>
+    <line x1="62" y1="60" x2="54" y2="100"/><line x1="138" y1="60" x2="146" y2="100"/>
+    <line x1="54" y1="100" x2="78" y2="132"/><line x1="146" y1="100" x2="122" y2="132"/>
+    <line x1="100" y1="34" x2="100" y2="86"/><line x1="62" y1="60" x2="100" y2="86"/><line x1="138" y1="60" x2="100" y2="86"/>
+    <line x1="54" y1="100" x2="100" y2="86"/><line x1="146" y1="100" x2="100" y2="86"/>
+    <line x1="78" y1="132" x2="100" y2="86"/><line x1="122" y1="132" x2="100" y2="86"/>
+  </g>
+  <g fill="#E8D6BA">
+    <circle cx="100" cy="34" r="8"/><circle cx="62" cy="60" r="7"/><circle cx="138" cy="60" r="7"/>
+    <circle cx="54" cy="100" r="7"/><circle cx="146" cy="100" r="7"/><circle cx="78" cy="132" r="7"/><circle cx="122" cy="132" r="7"/>
+    <circle cx="100" cy="86" r="12"/>
+  </g>
+  <rect x="80" y="146" width="40" height="9" rx="4.5" fill="#E8D6BA"/>
+  <rect x="86" y="161" width="28" height="9" rx="4.5" fill="#E8D6BA"/>
+</svg>

@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@800;900&family=Lexend:wght@600;700&family=Sora:wght@600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;width:100%;height:100%}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg)}
+.w{font:700 var(--fs) Lexend;color:var(--fg);letter-spacing:-.02em;line-height:1;position:relative;font-variant-ligatures:none;font-feature-settings:'liga' 0}.w span{display:inline-block}
+.i{position:relative;margin-left:.04em}
+.w svg{position:absolute;left:50%;top:-.02em;transform:translateX(-50%);width:.34em}
+.s{font:600 calc(var(--fs)*.16) Lexend;letter-spacing:.45em;color:var(--sub);margin-top:calc(var(--fs)*.14);padding-left:.45em}
+.a{font:900 calc(var(--fs)*.33) Tajawal;color:var(--fg);margin-top:calc(var(--fs)*.06)}
+</style></head><body>
+<div class="w"><span>f</span><span class="i">ı<svg viewBox="0 0 40 40"><path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="currentColor"/></svg></span><span>kra</span></div>
+<div class="s">TECH &amp; DESIGN</div>
+<div class="a" id="ar">فكرة للتقنية والتصميم</div>
+<script>
+const q=new URLSearchParams(location.search);
+const r=document.documentElement.style;
+r.setProperty('--bg',q.get('bg')||'transparent');r.setProperty('--fg',q.get('fg'));r.setProperty('--sub',q.get('sub'));r.setProperty('--fs',(q.get('fs')||'200')+'px');
+if(q.get('ar')==='0')document.getElementById('ar').remove();
+</script></body></html>

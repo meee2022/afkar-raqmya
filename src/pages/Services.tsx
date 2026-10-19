@@ -40,14 +40,14 @@ export default function Services() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/services" title="خدماتنا"
-        description="خدمات أفكار رقمية: تصميم وتطوير المواقع، تطبيقات الجوال، الهوية البصرية، العروض التقديمية، الفيديو والموشن جرافيك، والدعوات الرقمية." />
+        description="خدمات فكرة: تصميم وتطوير المواقع، تطبيقات الجوال، الهوية البصرية، العروض التقديمية، الفيديو والموشن جرافيك، والدعوات الرقمية." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         <motion.div {...up()} className="text-center mb-16">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
             كل ما تحتاجه{" "}
-            <span style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               في مكان واحد
             </span>
           </h1>
@@ -81,7 +81,7 @@ export default function Services() {
 
         <motion.div {...up(0.1)} className="mb-16">
           <div className="text-center mb-10">
-            <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
+            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
             <h2 className="text-3xl font-black text-white">عملية بسيطة ونتائج استثنائية</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-4">
@@ -92,9 +92,9 @@ export default function Services() {
               { step:"04", title:"التسليم", desc:"نسلم ونتابع معك بعد الإطلاق" },
             ].map((p, i) => (
               <motion.div key={p.step} {...up(i * 0.08)}
-                className="relative p-6 rounded-2xl border border-white/[0.07] text-center group hover:border-[#fed65b]/20 transition-all"
+                className="relative p-6 rounded-2xl border border-white/[0.07] text-center group hover:border-[#EBDDC6]/20 transition-all"
                 style={{ background:"rgba(255,255,255,0.03)" }}>
-                <div className="text-4xl font-black text-[#fed65b]/15 mb-3 group-hover:text-[#fed65b]/35 transition-colors">{p.step}</div>
+                <div className="text-4xl font-black text-[#EBDDC6]/15 mb-3 group-hover:text-[#EBDDC6]/35 transition-colors">{p.step}</div>
                 <h3 className="font-black text-white mb-2">{p.title}</h3>
                 <p className="text-white/40 text-sm">{p.desc}</p>
               </motion.div>
@@ -103,15 +103,15 @@ export default function Services() {
         </motion.div>
 
         <motion.div {...up(0.2)}
-          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#fed65b]/15"
-          style={{ background:"linear-gradient(135deg,rgba(0,53,39,0.6),rgba(5,10,7,0.8))" }}>
+          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#EBDDC6]/15"
+          style={{ background:"linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(254,214,91,0.08) 0%,transparent 60%)" }} />
+            style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
           <h2 className="text-2xl md:text-3xl font-black text-white mb-3 relative z-10">جاهز تبدأ مشروعك؟</h2>
           <p className="text-white/50 mb-7 relative z-10">تواصل معنا اليوم ونحدد احتياجاتك مجاناً</p>
           <NavLink to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#003527] relative z-10 hover:scale-105 transition-transform"
-            style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", boxShadow:"0 0 40px rgba(254,214,91,0.3)" }}>
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
+            style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow:"0 0 40px rgba(235,221,198,0.3)" }}>
             احجز استشارة مجانية
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </NavLink>

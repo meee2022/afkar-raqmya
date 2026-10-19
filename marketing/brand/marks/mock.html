@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lexend:wght@600;700&family=Space+Grotesk:wght@600;700&family=Sora:wght@600;700&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--m:#7A1630;--md:#4A0E1E;--b:#EBDDC6;--g:#C9A97A}
+*{box-sizing:border-box}
+body{margin:0;background:#16050b;padding:22px;font-family:Tajawal;color:#fff}
+.row{display:grid;grid-template-columns:150px 1fr 1fr 1.5fr;gap:18px;align-items:center;margin-bottom:22px}
+.lbl{font:700 22px Sora;color:var(--g);text-align:center}
+.lbl small{display:block;font:600 13px Sora;color:#fff;opacity:.6;margin-top:4px}
+.w{color:var(--b);line-height:1;font-variant-ligatures:none;font-feature-settings:"liga" 0;letter-spacing:-.02em;white-space:nowrap}
+.w span{display:inline-block}.i{position:relative;margin-left:.04em}
+.w svg{position:absolute;left:50%;top:-.02em;transform:translateX(-50%);width:.34em}
+/* instagram */
+.ig{background:#fff;border-radius:14px;padding:16px;color:#111;display:flex;gap:14px;align-items:center;height:150px}
+.av{width:96px;height:96px;border-radius:50%;background:var(--m);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 3px #fff,0 0 0 5px #e1306c}
+.av .w{font-size:30px}
+.ig b{font:700 15px Sora}.ig p{margin:4px 0;font-size:13px;color:#555}
+/* card */
+.card{background:var(--m);border-radius:12px;height:150px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.card .w{font-size:42px}.card .t{font:600 9px Sora;letter-spacing:4px;color:var(--g);margin-top:6px}
+.card .c{font-size:11px;color:var(--b);opacity:.8;text-align:right}
+/* header */
+.hd{background:#fff7ec;border-radius:12px;height:150px;overflow:hidden;color:#2a0a14}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--m)}
+.nav .w{font-size:28px}.nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;font:700 12px Tajawal;color:var(--b)}
+.hero{padding:16px 20px;font:900 24px Tajawal;color:var(--m)}.hero small{display:block;font:500 12px Tajawal;color:#7a5a40;margin-top:4px}
+</style></head><body>
+<script>
+const F=[["Poppins",700,"Poppins"],["Lexend",700,"Lexend"],["Space Grotesk",700,"Space Grotesk"],["Sora",700,"Sora"]];
+const star='<svg viewBox="0 0 40 40"><path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="#EBDDC6"/></svg>';
+const wm=(f,w)=>`<div class="w" style="font-family:'${f}';font-weight:${w}"><span>f</span><span class="i">ı${star}</span><span>kra</span></div>`;
+F.forEach(([f,w,n],k)=>document.write(`<div class="row">
+<div class="lbl">${k+1}<small>${n}</small></div>
+<div class="ig"><div class="av">${wm(f,w)}</div><div><b>fikratechdesign</b><p>Fikra — فكرة للتقنية والتصميم</p><p>مواقع · تطبيقات · هوية · AI</p></div></div>
+<div class="card">${wm(f,w)}<div class="t">TECH &amp; DESIGN</div><div class="c">hello@fikratechdesign.com<br>Doha · Qatar</div></div>
+<div class="hd"><div class="nav">${wm(f,w)}<ul><li>الرئيسية</li><li>أعمالنا</li><li>خدماتنا</li><li>تواصل</li></ul></div><div class="hero">نحوّل فكرتك لمنتج رقمي<small>مواقع وتطبيقات وهويات بلمسة ذكاء اصطناعي</small></div></div>
+</div>`));
+</script></body></html>

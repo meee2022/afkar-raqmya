@@ -36,18 +36,18 @@ export default function NotFound() {
           className="relative inline-block mb-6">
           <span className="text-[160px] md:text-[200px] font-black leading-none select-none"
             style={{
-              background: "linear-gradient(135deg,#fed65b 0%,#ffa726 40%,#4ade80 100%)",
+              background: "linear-gradient(135deg,#EBDDC6 0%,#C9A97A 40%,#4ade80 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              filter: "drop-shadow(0 0 40px rgba(254,214,91,0.4))",
+              filter: "drop-shadow(0 0 40px rgba(235,221,198,0.4))",
             }}>
             404
           </span>
           {/* Orbiting dot */}
           <motion.div
             className="absolute w-4 h-4 rounded-full"
-            style={{ top: "20%", right: "-8px", background: "#fed65b", boxShadow: "0 0 16px rgba(254,214,91,0.8)" }}
+            style={{ top: "20%", right: "-8px", background: "#EBDDC6", boxShadow: "0 0 16px rgba(235,221,198,0.8)" }}
             animate={{ rotate: 360 }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
@@ -75,7 +75,7 @@ export default function NotFound() {
           className="text-white/50 text-lg mb-8 leading-relaxed">
           يبدو أن الصفحة التي تبحث عنها انتقلت أو لم تعد موجودة.
           <br />
-          <span className="text-[#fed65b]/70 text-sm">سيتم توجيهك للرئيسية خلال <span className="font-black text-[#fed65b]">{count}</span> ثانية</span>
+          <span className="text-[#EBDDC6]/70 text-sm">سيتم توجيهك للرئيسية خلال <span className="font-black text-[#EBDDC6]">{count}</span> ثانية</span>
         </motion.p>
 
         {/* Quick links */}
@@ -90,7 +90,7 @@ export default function NotFound() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.55 + i * 0.07 }}>
               <NavLink to={l.to}
-                className="block p-4 rounded-2xl border border-white/[0.07] hover:border-[#fed65b]/30 hover:-translate-y-1 transition-all duration-300 text-white/60 hover:text-white font-bold text-sm"
+                className="block p-4 rounded-2xl border border-white/[0.07] hover:border-[#EBDDC6]/30 hover:-translate-y-1 transition-all duration-300 text-white/60 hover:text-white font-bold text-sm"
                 style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
                 {l.label}
               </NavLink>
@@ -104,8 +104,8 @@ export default function NotFound() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}>
           <NavLink to="/"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#003527] hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 40px rgba(254,214,91,0.35)" }}>
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] hover:scale-105 transition-transform"
+            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.35)" }}>
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             العودة للرئيسية
           </NavLink>
@@ -118,7 +118,7 @@ export default function NotFound() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}>
           <motion.div className="h-full rounded-full"
-            style={{ background: "linear-gradient(90deg,#fed65b,#ffa726)" }}
+            style={{ background: "linear-gradient(90deg,#EBDDC6,#C9A97A)" }}
             initial={{ width: "100%" }}
             animate={{ width: "0%" }}
             transition={{ duration: 10, ease: "linear" }} />

@@ -33,7 +33,7 @@ const STATIC_PROJECTS = [
 ];
 
 const ACCENT_COLORS: Record<string, string> = {
-  "مواقع": "#fed65b", "تطبيقات": "#4ade80", "هوية": "#f472b6", "نظم": "#a78bfa",
+  "مواقع": "#EBDDC6", "تطبيقات": "#4ade80", "هوية": "#f472b6", "نظم": "#a78bfa",
 };
 
 const up = (delay = 0) => ({
@@ -119,7 +119,7 @@ function VideoLightbox({
         transition={{ type: "spring", damping: 22, stiffness: 280 }}
         onClick={e => e.stopPropagation()}
         style={{
-          background: "rgba(5,10,7,0.95)",
+          background: "rgba(20,5,11,0.95)",
           border: `1px solid ${project.accent}30`,
           boxShadow: `0 0 80px ${project.accent}25, 0 40px 120px rgba(0,0,0,0.8)`,
         }}
@@ -151,7 +151,7 @@ function VideoLightbox({
           ) : (
             /* Cinematic placeholder when no media */
             <div className="w-full h-full flex flex-col items-center justify-center gap-6"
-              style={{ background: `linear-gradient(135deg, #050a07 0%, ${project.accent}15 50%, #050a07 100%)` }}>
+              style={{ background: `linear-gradient(135deg, #14050b 0%, ${project.accent}15 50%, #14050b 100%)` }}>
               <div className="w-24 h-24 rounded-full flex items-center justify-center"
                 style={{ background: project.accent + "20", border: `2px solid ${project.accent}40`, boxShadow: `0 0 40px ${project.accent}30` }}>
                 <svg className="w-10 h-10" style={{ color: project.accent }} fill="currentColor" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@ function VideoLightbox({
           )}
           {/* Gradient overlay at bottom */}
           <div className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
-            style={{ background: "linear-gradient(to top, rgba(5,10,7,0.9), transparent)" }} />
+            style={{ background: "linear-gradient(to top, rgba(20,5,11,0.9), transparent)" }} />
         </div>
 
         {/* Info footer */}
@@ -184,7 +184,7 @@ function VideoLightbox({
           <div className="flex gap-2.5 flex-shrink-0">
             {project.liveUrl && (
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                className="px-5 py-2.5 rounded-full text-sm font-black transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 text-[#003527]"
+                className="px-5 py-2.5 rounded-full text-sm font-black transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5 text-[#7A1630]"
                 style={{ background: `linear-gradient(135deg,${project.accent},${project.accent}cc)` }}>
                 زيارة المشروع
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" /></svg>
@@ -250,8 +250,8 @@ function ProjectCard({
 }) {
   const videoPreviewRef = useRef<HTMLVideoElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const accent = (p as any).accent ?? ACCENT_COLORS[p.category] ?? "#fed65b";
-  const color = (p as any).color ?? "from-[#003527] to-[#050a07]";
+  const accent = (p as any).accent ?? ACCENT_COLORS[p.category] ?? "#EBDDC6";
+  const color = (p as any).color ?? "from-[#7A1630] to-[#14050b]";
 
   // Autoplay muted preview on hover (or always if no image)
   useEffect(() => {
@@ -279,7 +279,7 @@ function ProjectCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ duration: 0.4, delay: index * 0.06, ease: "easeOut" as const }}
-      className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fed65b] transition-all duration-500 flex flex-col cursor-pointer text-right w-full"
+      className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EBDDC6] transition-all duration-500 flex flex-col cursor-pointer text-right w-full"
       style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -452,7 +452,7 @@ function ProjectCard({
 
       {/* Info */}
       <div className="relative z-10 p-5 flex-1 flex flex-col">
-        <h3 className="font-black text-white mb-1.5 group-hover:text-[#fed65b] transition-colors duration-300">{p.titleAr}</h3>
+        <h3 className="font-black text-white mb-1.5 group-hover:text-[#EBDDC6] transition-colors duration-300">{p.titleAr}</h3>
         <p className="text-white/45 text-sm leading-relaxed mb-4 flex-1">{p.descriptionAr}</p>
         {p.result && (
           <div className="flex items-center justify-between">
@@ -523,7 +523,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/portfolio" title="أعمالنا"
-        description="مشاريع نفخر بها — مواقع وتطبيقات وهويات بصرية أنجزتها أفكار رقمية لعملاء في قطر والخليج. شاهد أعمالنا ونتائجها." />
+        description="مشاريع نفخر بها — مواقع وتطبيقات وهويات بصرية أنجزتها فكرة لعملاء في قطر والخليج. شاهد أعمالنا ونتائجها." />
 
       {/* Video Lightbox */}
       <AnimatePresence>
@@ -540,10 +540,10 @@ export default function Portfolio() {
 
         {/* Header */}
         <motion.div {...up()} className="mb-16">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">أعمالنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">أعمالنا</span>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
             مشاريع{" "}
-            <span style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               نفخر بها
             </span>
           </h1>
@@ -556,10 +556,10 @@ export default function Portfolio() {
             <button key={c} onClick={() => setFilter(c)}
               className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                 filter === c
-                  ? "text-[#003527] shadow-lg"
+                  ? "text-[#7A1630] shadow-lg"
                   : "border border-white/[0.1] text-white/50 hover:border-white/25 hover:text-white"
               }`}
-              style={filter === c ? { background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 20px rgba(254,214,91,0.3)" } : {}}>
+              style={filter === c ? { background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 20px rgba(235,221,198,0.3)" } : {}}>
               {c}
             </button>
           ))}
@@ -603,10 +603,10 @@ export default function Portfolio() {
             { n: String(projects.filter(p => p.liveUrl).length), l: "مشاريع قابلة للزيارة" },
           ].map((s, i) => (
             <motion.div key={s.l} {...up(0.25 + i * 0.07)}
-              className="p-6 rounded-2xl text-center border border-white/[0.07] hover:border-[#fed65b]/20 transition-all"
+              className="p-6 rounded-2xl text-center border border-white/[0.07] hover:border-[#EBDDC6]/20 transition-all"
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="text-3xl font-black mb-1" dir="ltr"
-                style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
                 {s.n}
               </div>
               <div className="text-sm text-white/50">{s.l}</div>

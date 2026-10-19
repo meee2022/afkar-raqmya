@@ -25,7 +25,7 @@ const PACKAGES = [
     desc: "الأنسب للمشاريع التجارية التي تحتاج حضوراً رقمياً متكاملاً.",
     price: "1,500", currency: "ريال قطري", priceSub: "يبدأ من",
     popular: true,
-    color: "#fed65b",
+    color: "#EBDDC6",
     features: ["موقع إلكتروني احترافي", "هوية بصرية أساسية", "3 قوالب سوشيال ميديا", "دعم تقني شهر كامل", "مراجعات غير محدودة", "تسليم خلال 14 يوم"],
     notIncluded: ["تطبيق جوال"],
   },
@@ -55,15 +55,15 @@ export default function Packages() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/packages" title="الباقات والأسعار"
-        description="باقات أفكار رقمية المرنة — من الخدمة المفردة إلى الإطلاق الرقمي الكامل. أسعار واضحة تناسب كل مشروع في قطر والخليج." />
+        description="باقات فكرة المرنة — من الخدمة المفردة إلى الإطلاق الرقمي الكامل. أسعار واضحة تناسب كل مشروع في قطر والخليج." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}
         <motion.div {...up()} className="text-center mb-16">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">الباقات</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">الباقات</span>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
             اختر ما{" "}
-            <span style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               يناسبك
             </span>
           </h1>
@@ -92,7 +92,7 @@ export default function Packages() {
               {p.popular && (
                 <div className="absolute -top-4 inset-x-0 flex justify-center z-10">
                   <span className="px-5 py-1.5 rounded-full text-xs font-black shadow-lg"
-                    style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", color: "#003527", boxShadow: "0 0 20px rgba(254,214,91,0.4)" }}>
+                    style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", color: "#7A1630", boxShadow: "0 0 20px rgba(235,221,198,0.4)" }}>
                     ✦ الأكثر طلباً
                   </span>
                 </div>
@@ -133,10 +133,10 @@ export default function Packages() {
 
               <NavLink to="/contact"
                 className={`relative z-10 block text-center py-3.5 rounded-2xl text-sm font-black transition-all hover:scale-[1.02] ${
-                  p.popular ? "text-[#003527] hover:opacity-90" : "hover:opacity-80"
+                  p.popular ? "text-[#7A1630] hover:opacity-90" : "hover:opacity-80"
                 }`}
                 style={p.popular
-                  ? { background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 30px rgba(254,214,91,0.3)" }
+                  ? { background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 30px rgba(235,221,198,0.3)" }
                   : { background: p.color + "18", color: p.color, border: `1px solid ${p.color}30` }}>
                 ابدأ الآن
               </NavLink>
@@ -152,7 +152,7 @@ export default function Packages() {
         {/* FAQ */}
         <motion.div {...up(0.2)}>
           <div className="text-center mb-10">
-            <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-3">الأسئلة الشائعة</span>
+            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-3">الأسئلة الشائعة</span>
             <h2 className="text-3xl font-black text-white">كل ما تريد معرفته</h2>
           </div>
 
@@ -167,7 +167,7 @@ export default function Packages() {
                   <span className="font-bold text-white text-sm">{item.q}</span>
                   <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                     openFaq === i ? "rotate-45" : ""
-                  }`} style={{ background: openFaq === i ? "rgba(254,214,91,0.2)" : "rgba(255,255,255,0.06)", color: openFaq === i ? "#fed65b" : "rgba(255,255,255,0.4)" }}>
+                  }`} style={{ background: openFaq === i ? "rgba(235,221,198,0.2)" : "rgba(255,255,255,0.06)", color: openFaq === i ? "#EBDDC6" : "rgba(255,255,255,0.4)" }}>
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M12 5v14M5 12h14"/></svg>
                   </span>
                 </button>
@@ -191,15 +191,15 @@ export default function Packages() {
 
         {/* CTA */}
         <motion.div {...up(0.3)}
-          className="relative mt-16 rounded-3xl p-10 text-center overflow-hidden border border-[#fed65b]/15"
-          style={{ background: "linear-gradient(135deg,rgba(0,53,39,0.6),rgba(5,10,7,0.8))" }}>
+          className="relative mt-16 rounded-3xl p-10 text-center overflow-hidden border border-[#EBDDC6]/15"
+          style={{ background: "linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(254,214,91,0.08) 0%,transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
           <h2 className="text-2xl md:text-3xl font-black text-white mb-3 relative z-10">ما زلت غير متأكد؟</h2>
           <p className="text-white/50 mb-7 relative z-10">تحدث معنا مجاناً ونساعدك تختار الأنسب لمشروعك</p>
           <NavLink to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#003527] relative z-10 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 40px rgba(254,214,91,0.3)" }}>
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
+            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.3)" }}>
             استشارة مجانية
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </NavLink>

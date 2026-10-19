@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--m:#7A1630;--md:#4A0E1E;--b:#EBDDC6;--b2:#C9A97A}
+body{margin:0;background:#1d070e;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px;font-family:Tajawal}
+.c{border-radius:26px;height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.dark{background:radial-gradient(circle at 50% 35%,#8d2442,var(--md) 72%)}
+.light{background:var(--b)}
+.lab{position:absolute;bottom:14px;font:800 14px Tajawal;color:var(--b2)}
+.light .lab{color:var(--m)}
+/* 1: English wordmark with sparkle i-dot */
+.w1{font:800 92px Sora;color:var(--b);letter-spacing:-3px;position:relative;line-height:1}
+.w1 .i{position:relative}
+.w1 svg{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:34px}
+.sub1{font:600 15px Sora;letter-spacing:7px;color:var(--b2);margin-top:12px}
+.ar1{font:900 30px Tajawal;color:var(--b);margin-top:8px}
+/* 2: monogram */
+.mono{width:150px;height:150px;border-radius:40px;background:var(--m);display:flex;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(74,14,30,.35)}
+.w2{font:800 34px Sora;color:var(--m);margin-top:18px;letter-spacing:-1px}
+.sub2{font:700 12px Sora;letter-spacing:6px;color:var(--b2);margin-top:4px}
+/* 3: arabic wordmark */
+.w3{font:900 120px Tajawal;color:var(--b);line-height:1;position:relative}
+.w3 svg{position:absolute;right:-30px;top:6px;width:38px}
+.sub3{font:600 14px Sora;letter-spacing:8px;color:#fff;opacity:.85;margin-top:10px}
+</style></head><body>
+
+<div class="c dark">
+  <div class="w1">f<span class="i">ı<svg viewBox="0 0 40 40"><path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="#EBDDC6"/></svg></span>kra</div>
+  <div class="sub1">TECH &amp; DESIGN</div>
+  <div class="ar1">فكرة للتقنية والتصميم</div>
+  <div class="lab">أ — Wordmark: نقطة الـ i نجمة AI</div>
+</div>
+
+<div class="c light">
+  <div class="mono"><svg viewBox="0 0 100 100" width="96"><path d="M34 84V40a20 20 0 0 1 20-20h14" fill="none" stroke="#EBDDC6" stroke-width="13" stroke-linecap="round"/><path d="M34 54h26" stroke="#EBDDC6" stroke-width="13" stroke-linecap="round"/><path d="M76 8C77 17 80 20 89 21C80 22 77 25 76 34C75 25 72 22 63 21C72 20 75 17 76 8Z" fill="#EBDDC6"/></svg></div>
+  <div class="w2">Fikra</div><div class="sub2">TECH &amp; DESIGN</div>
+  <div class="lab">ب — مونوجرام f + شرارة AI</div>
+</div>
+
+<div class="c dark">
+  <div class="w3">فكرة<svg viewBox="0 0 40 40"><path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="#EBDDC6"/></svg></div>
+  <div class="sub3">TECH &amp; DESIGN</div>
+  <div class="lab">ج — Wordmark عربي + شرارة</div>
+</div>
+</body></html>

@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 
 const STATUS_MAP = {
-  new:       { label: "جديد",        cls: "bg-[#fed65b]/15 text-[#fed65b] border border-[#fed65b]/30" },
+  new:       { label: "جديد",        cls: "bg-[#EBDDC6]/15 text-[#EBDDC6] border border-[#EBDDC6]/30" },
   contacted: { label: "تم التواصل", cls: "bg-[#4ade80]/15 text-[#4ade80] border border-[#4ade80]/30" },
   closed:    { label: "مغلق",        cls: "bg-white/[0.06] text-white/40 border border-white/10" },
 };
@@ -55,8 +55,8 @@ function StatCard({ label, value, sub, icon, accent }: {
 const inputCls = "w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-white/20 outline-none transition-all"
 const inputStyle = { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }
 function focusIn(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-  e.currentTarget.style.borderColor = "rgba(254,214,91,0.4)";
-  e.currentTarget.style.boxShadow  = "0 0 0 3px rgba(254,214,91,0.06)";
+  e.currentTarget.style.borderColor = "rgba(235,221,198,0.4)";
+  e.currentTarget.style.boxShadow  = "0 0 0 3px rgba(235,221,198,0.06)";
 }
 function focusOut(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
@@ -110,8 +110,8 @@ function SettingsPanel({ token }: { token: string }) {
         ))}
         <div className="flex items-center gap-3 pt-2">
           <button type="submit" disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-black text-sm text-[#003527] disabled:opacity-60 transition-all hover:scale-[1.02]"
-            style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", boxShadow:"0 0 20px rgba(254,214,91,0.3)" }}>
+            className="flex items-center gap-2 px-6 py-3 rounded-xl font-black text-sm text-[#7A1630] disabled:opacity-60 transition-all hover:scale-[1.02]"
+            style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow:"0 0 20px rgba(235,221,198,0.3)" }}>
             {saving
               ? <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
               : <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7"/></svg>}
@@ -206,8 +206,8 @@ function ProjectsPanel({ token }: { token: string }) {
           <p className="text-sm text-white/40">{projects?.length??0} مشروع في الأعمال</p>
         </div>
         <button onClick={()=>setShowForm(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-sm text-[#003527] hover:scale-[1.02] transition-all"
-          style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", boxShadow:"0 0 15px rgba(254,214,91,0.25)" }}>
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-sm text-[#7A1630] hover:scale-[1.02] transition-all"
+          style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow:"0 0 15px rgba(235,221,198,0.25)" }}>
           {Icons.plus} إضافة مشروع
         </button>
       </div>
@@ -260,7 +260,7 @@ function ProjectsPanel({ token }: { token: string }) {
               ))}
             </div>
             <label className="inline-flex min-h-11 items-center gap-3 cursor-pointer text-sm text-white/65">
-              <input type="checkbox" checked={form.featured} onChange={e=>setForm(f=>({...f,featured:e.target.checked}))} className="w-5 h-5 accent-[#fed65b]" />
+              <input type="checkbox" checked={form.featured} onChange={e=>setForm(f=>({...f,featured:e.target.checked}))} className="w-5 h-5 accent-[#EBDDC6]" />
               عرض المشروع ضمن الأعمال المختارة في الرئيسية
             </label>
             <div>
@@ -292,12 +292,12 @@ function ProjectsPanel({ token }: { token: string }) {
                       {type==="image" ? "صورة المشروع (screenshot)" : "فيديو المشروع (اختياري)"}
                     </label>
                     <label className={`flex items-center gap-2 px-3 py-3 rounded-xl border-2 border-dashed cursor-pointer transition-all ${
-                      stored ? "border-[#4ade80]/50" : "border-white/10 hover:border-[#fed65b]/40"
+                      stored ? "border-[#4ade80]/50" : "border-white/10 hover:border-[#EBDDC6]/40"
                     }`} style={{ background: stored ? "rgba(74,222,128,0.06)" : "rgba(255,255,255,0.02)" }}>
                       <input type="file" accept={type==="image"?"image/*":"video/*"} className="hidden"
                         onChange={e=>e.target.files?.[0]&&uploadFile(e.target.files[0],type)} />
                       {isUploading ? (
-                        <><svg className="w-4 h-4 animate-spin text-[#fed65b]" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span className="text-xs text-white/50">جاري الرفع...</span></>
+                        <><svg className="w-4 h-4 animate-spin text-[#EBDDC6]" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span className="text-xs text-white/50">جاري الرفع...</span></>
                       ) : stored ? (
                         <><svg className="w-4 h-4 text-[#4ade80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7"/></svg><span className="text-xs text-[#4ade80] font-bold">تم الرفع ✓</span></>
                       ) : (
@@ -311,8 +311,8 @@ function ProjectsPanel({ token }: { token: string }) {
 
             <div className="flex gap-3 pt-1">
               <button type="submit"
-                className="px-5 py-2.5 rounded-xl font-black text-sm text-[#003527] hover:scale-[1.02] transition-all"
-                style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)" }}>
+                className="px-5 py-2.5 rounded-xl font-black text-sm text-[#7A1630] hover:scale-[1.02] transition-all"
+                style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)" }}>
                 {editId?"حفظ التعديلات":"إضافة المشروع"}
               </button>
               <button type="button" onClick={resetForm}
@@ -335,7 +335,7 @@ function ProjectsPanel({ token }: { token: string }) {
                 : <div className="w-full h-full flex items-center justify-center text-white/20 text-xs">لا توجد صورة</div>
               }
               <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold"
-                style={{ background:"rgba(254,214,91,0.2)", color:"#fed65b", border:"1px solid rgba(254,214,91,0.3)" }}>
+                style={{ background:"rgba(235,221,198,0.2)", color:"#EBDDC6", border:"1px solid rgba(235,221,198,0.3)" }}>
                 {p.category}
               </span>
               {p.videoUrl && (
@@ -349,7 +349,7 @@ function ProjectsPanel({ token }: { token: string }) {
               <p className="text-xs text-white/35 line-clamp-2 mb-3">{p.descriptionAr}</p>
               <div className="flex gap-2">
                 <button onClick={()=>startEdit(p)}
-                  className="flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1 border border-white/10 text-white/50 hover:border-[#fed65b]/40 hover:text-[#fed65b] transition-all">
+                  className="flex-1 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1 border border-white/10 text-white/50 hover:border-[#EBDDC6]/40 hover:text-[#EBDDC6] transition-all">
                   {Icons.edit} تعديل
                 </button>
                           <button onClick={()=>removeProject({token,id:p._id})}
@@ -393,13 +393,13 @@ function AdminLogin({ onSuccess }: { onSuccess: (token: string) => void }) {
   }
 
   return (
-    <main className="min-h-screen bg-[#050a07] text-white flex items-center justify-center px-5" dir="rtl">
+    <main className="min-h-screen bg-[#14050b] text-white flex items-center justify-center px-5" dir="rtl">
       <div className="fixed inset-0 pointer-events-none" style={{ background:"radial-gradient(circle at 50% 20%,rgba(0,85,62,.4),transparent 50%)" }}/>
       <section className="relative w-full max-w-md rounded-3xl border border-white/10 bg-[#08130e] p-7 sm:p-9 shadow-2xl">
-        <div className="w-12 h-12 rounded-2xl bg-[#fed65b] text-[#003527] flex items-center justify-center mb-6" aria-hidden="true">
+        <div className="w-12 h-12 rounded-2xl bg-[#EBDDC6] text-[#7A1630] flex items-center justify-center mb-6" aria-hidden="true">
           <svg viewBox="0 0 20 20" className="w-6 h-6" fill="currentColor"><path d="M10 2L3 7v11h5v-5h4v5h5V7L10 2z"/></svg>
         </div>
-        <p className="text-[#fed65b] text-xs font-bold mb-2">منطقة خاصة</p>
+        <p className="text-[#EBDDC6] text-xs font-bold mb-2">منطقة خاصة</p>
         <h1 className="text-3xl font-black mb-2">تسجيل دخول الإدارة</h1>
         <p className="text-white/45 text-sm leading-7 mb-7">أدخل كلمة المرور لإدارة المشاريع والرسائل وإعدادات الموقع.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -407,11 +407,11 @@ function AdminLogin({ onSuccess }: { onSuccess: (token: string) => void }) {
             <label htmlFor="admin-password" className="block text-sm font-bold text-white/70 mb-2">كلمة المرور</label>
             <input id="admin-password" type="password" required minLength={8} autoComplete="current-password"
               value={password} onChange={(e)=>setPassword(e.target.value)}
-              className="w-full min-h-12 rounded-xl border border-white/10 bg-white/[0.04] px-4 outline-none focus:border-[#fed65b]/60 focus:ring-4 focus:ring-[#fed65b]/10"
+              className="w-full min-h-12 rounded-xl border border-white/10 bg-white/[0.04] px-4 outline-none focus:border-[#EBDDC6]/60 focus:ring-4 focus:ring-[#EBDDC6]/10"
               placeholder="••••••••" />
           </div>
           {error && <p role="alert" className="rounded-xl border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm text-red-300">{error}</p>}
-          <button disabled={loading} className="w-full min-h-12 rounded-xl bg-[#fed65b] text-[#003527] font-black disabled:opacity-50">
+          <button disabled={loading} className="w-full min-h-12 rounded-xl bg-[#EBDDC6] text-[#7A1630] font-black disabled:opacity-50">
             {loading ? "جارٍ التحقق..." : "دخول لوحة التحكم"}
           </button>
         </form>
@@ -478,7 +478,7 @@ export default function Admin() {
   }, [adminToken, sessionValid]);
 
   if (!adminToken || sessionValid === false) return <AdminLogin onSuccess={setAdminToken} />;
-  if (sessionValid === undefined) return <div className="min-h-screen bg-[#050a07] text-white flex items-center justify-center">جارٍ التحقق...</div>;
+  if (sessionValid === undefined) return <div className="min-h-screen bg-[#14050b] text-white flex items-center justify-center">جارٍ التحقق...</div>;
 
   return (
     <div className="min-h-screen flex" dir="rtl" style={{ fontFamily:"'Tajawal','Cairo',sans-serif" }}>
@@ -489,32 +489,27 @@ export default function Admin() {
         .admin-bg { background-size:200% 200%; animation:adminBg 8s ease infinite; }
       `}</style>
       <div className="fixed inset-0 z-0 pointer-events-none admin-bg"
-        style={{ background:"linear-gradient(135deg,#050a07 0%,#003527 30%,#001a14 60%,#050a07 100%)" }} />
+        style={{ background:"linear-gradient(135deg,#14050b 0%,#7A1630 30%,#2a0913 60%,#14050b 100%)" }} />
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]"
         style={{ backgroundImage:"linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)", backgroundSize:"60px 60px" }} />
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
-          style={{ background:"radial-gradient(circle,rgba(254,214,91,0.1) 0%,transparent 70%)", animation:"adminBg 4s ease-in-out infinite" }} />
+          style={{ background:"radial-gradient(circle,rgba(235,221,198,0.1) 0%,transparent 70%)", animation:"adminBg 4s ease-in-out infinite" }} />
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
-          style={{ background:"radial-gradient(circle,rgba(0,53,39,0.35) 0%,transparent 70%)" }} />
+          style={{ background:"radial-gradient(circle,rgba(122,22,48,0.35) 0%,transparent 70%)" }} />
       </div>
 
       {/* ── SIDEBAR ─────────────────────────────────────────────────────────── */}
       <aside className={`${sidebarOpen?"w-64":"w-20"} flex-shrink-0 flex flex-col transition-all duration-300 fixed inset-y-0 right-0 z-30 border-l border-white/[0.07]`}
-        style={{ background:"rgba(5,10,7,0.85)", backdropFilter:"blur(20px)" }}>
+        style={{ background:"rgba(20,5,11,0.85)", backdropFilter:"blur(20px)" }}>
 
         {/* Logo */}
         <div className="h-16 flex items-center px-5 border-b border-white/[0.07]">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", boxShadow:"0 0 15px rgba(254,214,91,0.3)" }}>
-              <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-                <path d="M10 2L3 7v11h5v-5h4v5h5V7L10 2z" fill="#003527"/>
-              </svg>
-            </div>
+            <img src="/favicon.png" alt="Fikra" className="w-9 h-9 rounded-xl flex-shrink-0" />
             {sidebarOpen && (
               <div>
-                <div className="font-black text-white text-sm leading-tight">أفكار رقمية</div>
+                <div className="font-black text-white text-sm leading-tight" style={{fontFamily:"Lexend"}}>Fikra</div>
                 <div className="text-[10px] text-white/30">لوحة الإدارة</div>
               </div>
             )}
@@ -526,10 +521,10 @@ export default function Admin() {
           {navItems.map(item => (
             <button key={item.id} onClick={()=>setActiveNav(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all group relative ${
-                activeNav===item.id ? "text-[#003527]" : "text-white/40 hover:text-white hover:bg-white/[0.05]"
+                activeNav===item.id ? "text-[#7A1630]" : "text-white/40 hover:text-white hover:bg-white/[0.05]"
               }`}
-              style={activeNav===item.id ? { background:"linear-gradient(135deg,#fed65b,#ffa726)", boxShadow:"0 0 15px rgba(254,214,91,0.25)" } : {}}>
-              <span className={`flex-shrink-0 ${activeNav===item.id?"text-[#003527]":""}`}>{item.icon}</span>
+              style={activeNav===item.id ? { background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow:"0 0 15px rgba(235,221,198,0.25)" } : {}}>
+              <span className={`flex-shrink-0 ${activeNav===item.id?"text-[#7A1630]":""}`}>{item.icon}</span>
               {sidebarOpen && <span className="flex-1 text-right">{item.label}</span>}
               {sidebarOpen && item.badge ? (
                 <span className="w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-black flex items-center justify-center">
@@ -559,7 +554,7 @@ export default function Admin() {
 
         {/* Header */}
         <header className="h-16 flex items-center justify-between px-6 sticky top-0 z-20 border-b border-white/[0.07]"
-          style={{ background:"rgba(5,10,7,0.85)", backdropFilter:"blur(20px)" }}>
+          style={{ background:"rgba(20,5,11,0.85)", backdropFilter:"blur(20px)" }}>
           <div className="flex items-center gap-3">
             <button onClick={()=>setSidebarOpen(!sidebarOpen)}
               className="w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.06] transition-all">
@@ -567,7 +562,7 @@ export default function Admin() {
             </button>
             <div>
               <h1 className="font-black text-white text-sm">لوحة التحكم</h1>
-              <p className="text-xs text-white/30">أفكار رقمية — الإدارة</p>
+              <p className="text-xs text-white/30">Fikra — الإدارة</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -575,7 +570,7 @@ export default function Admin() {
               <button onClick={()=>setNotifOpen(v=>!v)}
                 className="relative w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.06] transition-all">
                 {Icons.bell}
-                {newCount>0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 border border-[#050a07]"/>}
+                {newCount>0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 border border-[#14050b]"/>}
               </button>
               {notifOpen && (
                 <>
@@ -584,7 +579,7 @@ export default function Admin() {
                     style={{ background:"rgba(10,18,8,0.98)", backdropFilter:"blur(20px)" }}>
                     <div className="px-4 py-3 border-b border-white/[0.07] flex items-center justify-between">
                       <span className="font-black text-white text-sm">التنبيهات</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#fed65b]/15 text-[#fed65b]">{newCount} جديد</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EBDDC6]/15 text-[#EBDDC6]">{newCount} جديد</span>
                     </div>
                     {newCount===0 ? (
                       <div className="py-10 text-center text-white/25 text-xs">لا توجد تنبيهات جديدة</div>
@@ -610,8 +605,8 @@ export default function Admin() {
             </div>
             <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl border border-white/[0.07]"
               style={{ background:"rgba(255,255,255,0.04)" }}>
-              <div className="w-7 h-7 rounded-full flex items-center justify-center font-black text-xs text-[#003527]"
-                style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)" }}>أ</div>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center font-black text-xs text-[#7A1630]"
+                style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)" }}>أ</div>
               <span className="text-sm font-semibold text-white/80">أحمد</span>
             </div>
           </div>
@@ -667,8 +662,8 @@ export default function Admin() {
                           onClick={()=>setSelectedInquiry(selectedInquiry?._id===inq._id?null:inq)}>
                           <td className="px-5 py-3.5">
                             <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-full flex items-center justify-center font-black text-xs flex-shrink-0 text-[#003527]"
-                                style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)" }}>
+                              <div className="w-8 h-8 rounded-full flex items-center justify-center font-black text-xs flex-shrink-0 text-[#7A1630]"
+                                style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)" }}>
                                 {inq.name.charAt(0)}
                               </div>
                               <span className="font-semibold text-white/80 text-xs">{inq.name}</span>
@@ -738,8 +733,8 @@ export default function Admin() {
                 <h2 className="font-black text-white text-sm mb-4">إجراءات سريعة</h2>
                 <div className="space-y-2">
                   <button onClick={()=>setActiveNav("projects")}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-[#003527] hover:scale-[1.01] transition-all"
-                    style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)" }}>
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm text-[#7A1630] hover:scale-[1.01] transition-all"
+                    style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)" }}>
                     {Icons.plus} إضافة مشروع جديد
                   </button>
                   <button onClick={()=>setActiveNav("settings")}
@@ -763,8 +758,8 @@ export default function Admin() {
                   )}
                   {recentActivity.map((a,i)=>(
                     <div key={i} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-[#fed65b]"
-                        style={{ background:"rgba(254,214,91,0.1)" }}>
+                      <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-[#EBDDC6]"
+                        style={{ background:"rgba(235,221,198,0.1)" }}>
                         {a.icon==="edit"?Icons.edit:a.icon==="plus"?Icons.plus:a.icon==="mail"?Icons.messages:Icons.settings}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -777,17 +772,17 @@ export default function Admin() {
               </div>
 
               {/* Chart */}
-              <div className="rounded-2xl border border-[#fed65b]/15 p-5 relative overflow-hidden"
-                style={{ background:"linear-gradient(135deg,rgba(0,53,39,0.6),rgba(5,10,7,0.8))" }}>
+              <div className="rounded-2xl border border-[#EBDDC6]/15 p-5 relative overflow-hidden"
+                style={{ background:"linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
                 <div className="absolute inset-0 pointer-events-none"
-                  style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(254,214,91,0.08) 0%,transparent 60%)" }} />
+                  style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
                 <div className="relative z-10">
                   <div className="text-xs font-bold text-white/40 mb-1">الاستفسارات هذا الأسبوع</div>
                   <div className="text-3xl font-black text-white mb-4">{inquiries.length}</div>
                   <div className="flex items-end gap-1.5 h-12">
                     {[4,7,3,9,5,8,6].map((h,i)=>(
                       <div key={i} className="flex-1 rounded-sm transition-colors"
-                        style={{ height:`${h*10}%`, background:`rgba(254,214,91,${0.15+i*0.04})` }}/>
+                        style={{ height:`${h*10}%`, background:`rgba(235,221,198,${0.15+i*0.04})` }}/>
                     ))}
                   </div>
                   <div className="flex justify-between mt-2 text-[10px] text-white/25">

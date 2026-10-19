@@ -58,15 +58,15 @@ export default function Contact() {
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/contact" title="تواصل معنا"
-        description="ابدأ مشروعك مع أفكار رقمية. تواصل معنا عبر واتساب أو النموذج ونرد خلال 24 ساعة. الدوحة، قطر." />
+        description="ابدأ مشروعك مع فكرة. تواصل معنا عبر واتساب أو النموذج ونرد خلال 24 ساعة. الدوحة، قطر." />
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         {/* Header */}
         <motion.div {...up()} className="mb-16 max-w-2xl">
-          <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">تواصل معنا</span>
+          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">تواصل معنا</span>
           <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
             ابدأ مشروعك{" "}
-            <span style={{ background:"linear-gradient(135deg,#fed65b,#ffa726)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               اليوم
             </span>
           </h1>
@@ -123,7 +123,7 @@ export default function Contact() {
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(254,214,91,0.15)", color: "#fed65b" }}>
+                  style={{ background: "rgba(235,221,198,0.15)", color: "#EBDDC6" }}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 </div>
                 <span className="text-xs font-black text-white/40 uppercase tracking-widest">ساعات العمل</span>
@@ -151,7 +151,7 @@ export default function Contact() {
               className="p-6 rounded-2xl border border-white/[0.07] flex items-center gap-4"
               style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(254,214,91,0.12)", color: "#fed65b", border: "1px solid rgba(254,214,91,0.2)" }}>
+                style={{ background: "rgba(235,221,198,0.12)", color: "#EBDDC6", border: "1px solid rgba(235,221,198,0.2)" }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
               </div>
               <div>
@@ -166,7 +166,7 @@ export default function Contact() {
             className="rounded-3xl border border-white/[0.07] p-8 relative overflow-hidden"
             style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(20px)" }}>
             <div className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at 80% 20%,rgba(254,214,91,0.04) 0%,transparent 60%)" }} />
+              style={{ background: "radial-gradient(ellipse at 80% 20%,rgba(235,221,198,0.04) 0%,transparent 60%)" }} />
 
             {sent ? (
               <div className="relative z-10 text-center py-16">
@@ -189,7 +189,7 @@ export default function Contact() {
                     تواصل عبر واتساب
                   </a>
                   <button onClick={() => { setSent(false); setForm({ name:"", phone:"", service:"", message:"" }); }}
-                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#fed65b]/30 text-[#fed65b] hover:bg-[#fed65b]/10 transition-all">
+                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#EBDDC6]/30 text-[#EBDDC6] hover:bg-[#EBDDC6]/10 transition-all">
                     إرسال رسالة أخرى
                   </button>
                 </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                     ].map(f => (
                       <div key={f.id}>
                         <label htmlFor={f.id} className="block text-xs font-bold text-white/50 mb-2">
-                          {f.label} {f.req && <span className="text-[#fed65b]">*</span>}
+                          {f.label} {f.req && <span className="text-[#EBDDC6]">*</span>}
                         </label>
                         <input id={f.id} type={f.type} required={f.req} placeholder={f.ph}
                           value={(form as any)[f.id]}
@@ -216,7 +216,7 @@ export default function Contact() {
                             background: "rgba(255,255,255,0.05)",
                             border: `1px solid ${(errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                           }}
-                          onFocus={e => { e.currentTarget.style.borderColor = "rgba(254,214,91,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(254,214,91,0.06)"; }}
+                          onFocus={e => { e.currentTarget.style.borderColor = "rgba(235,221,198,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(235,221,198,0.06)"; }}
                           onBlur={e => { e.currentTarget.style.borderColor = (errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                         />
                         {(errors as any)[f.id] && <p className="text-[#f87171] text-xs mt-1.5">{(errors as any)[f.id]}</p>}
@@ -233,15 +233,15 @@ export default function Contact() {
                         background: "rgba(255,255,255,0.05)",
                         border: "1px solid rgba(255,255,255,0.08)",
                       }}>
-                      <option value="" className="bg-[#0a1208]">اختر الخدمة...</option>
-                      {SERVICES.map(s => <option key={s} value={s} className="bg-[#0a1208]">{s}</option>)}
+                      <option value="" className="bg-[#1c0710]">اختر الخدمة...</option>
+                      {SERVICES.map(s => <option key={s} value={s} className="bg-[#1c0710]">{s}</option>)}
                     </select>
                   </div>
 
                   {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-xs font-bold text-white/50 mb-2">
-                      رسالتك <span className="text-[#fed65b]">*</span>
+                      رسالتك <span className="text-[#EBDDC6]">*</span>
                     </label>
                     <textarea id="message" required rows={5}
                       placeholder="اكتب لنا فكرتك أو ما تحتاجه بالتفصيل..."
@@ -251,7 +251,7 @@ export default function Contact() {
                         background: "rgba(255,255,255,0.05)",
                         border: `1px solid ${errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                       }}
-                      onFocus={e => { e.currentTarget.style.borderColor = "rgba(254,214,91,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(254,214,91,0.06)"; }}
+                      onFocus={e => { e.currentTarget.style.borderColor = "rgba(235,221,198,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(235,221,198,0.06)"; }}
                       onBlur={e => { e.currentTarget.style.borderColor = errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.message && <p className="text-[#f87171] text-xs mt-1.5">{errors.message}</p>}
@@ -260,7 +260,7 @@ export default function Contact() {
                   {/* Submit */}
                   <button type="submit" disabled={loading}
                     className="w-full py-4 rounded-2xl font-black text-sm disabled:opacity-60 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", color: "#003527", boxShadow: "0 0 30px rgba(254,214,91,0.3)" }}>
+                    style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", color: "#7A1630", boxShadow: "0 0 30px rgba(235,221,198,0.3)" }}>
                     {loading ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">

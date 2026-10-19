@@ -9,7 +9,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Tajawal', 'Cairo', sans-serif;
-    background-color: #050a07;
+    background-color: #14050b;
     color: #ffffff;
     direction: rtl;
   }
@@ -22,23 +22,23 @@
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.6);
     border-radius: 1.5rem;
-    box-shadow: 0 8px 40px rgba(0,53,39,0.07);
+    box-shadow: 0 8px 40px rgba(122,22,48,0.07);
   }
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#003527] text-white font-semibold text-sm hover:bg-[#064e3b] transition-all shadow-soft active:scale-95;
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#7A1630] text-white font-semibold text-sm hover:bg-[#064e3b] transition-all shadow-soft active:scale-95;
   }
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#003527]/30 text-[#003527] font-semibold text-sm hover:bg-[#003527]/5 transition-all active:scale-95;
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#7A1630]/30 text-[#7A1630] font-semibold text-sm hover:bg-[#7A1630]/5 transition-all active:scale-95;
   }
   .section-label {
     @apply inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium mb-4;
-    background: rgba(0,53,39,0.08);
-    color: #003527;
+    background: rgba(122,22,48,0.08);
+    color: #7A1630;
   }
   .chip {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-    background: rgba(0,53,39,0.08);
-    color: #003527;
+    background: rgba(122,22,48,0.08);
+    color: #7A1630;
   }
 }
 
@@ -57,15 +57,15 @@ select option {
 
 /* ── Custom scrollbar ───────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #050a07; }
+::-webkit-scrollbar-track { background: #14050b; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,#fed65b,#003527);
+  background: linear-gradient(180deg,#EBDDC6,#7A1630);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: #fed65b; }
+::-webkit-scrollbar-thumb:hover { background: #EBDDC6; }
 
 /* ── Text selection color ───────────────────────────────────────────── */
 ::selection {
-  background: rgba(254,214,91,0.25);
-  color: #fed65b;
+  background: rgba(235,221,198,0.25);
+  color: #EBDDC6;
 }

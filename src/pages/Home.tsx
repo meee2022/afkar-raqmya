@@ -153,7 +153,7 @@ export default function Home() {
   return (
     <div className="relative w-full min-h-screen text-white overflow-hidden" dir="rtl"
       style={{ fontFamily: "'Tajawal', 'Cairo', sans-serif" }}>
-      <Seo path="/" title="أفكار رقمية"
+      <Seo path="/" title="Fikra"
         description="وكالة رقمية في قطر متخصصة في تصميم وتطوير المواقع والتطبيقات والهوية البصرية والفيديو. نحوّل أفكارك إلى حضور رقمي يحقق نتائج حقيقية." />
 
       {/* Stable particles — unique to home, no re-randomising */}
@@ -162,8 +162,8 @@ export default function Home() {
           style={{
             width: p.w + "px", height: p.w + "px",
             top: p.top + "%", left: p.left + "%",
-            background: p.gold ? "#fed65b" : "#00b478",
-            boxShadow: p.gold ? "0 0 12px rgba(254,214,91,0.8)" : "0 0 12px rgba(0,180,120,0.6)",
+            background: p.gold ? "#EBDDC6" : "#b5536f",
+            boxShadow: p.gold ? "0 0 12px rgba(235,221,198,0.8)" : "0 0 12px rgba(181,83,111,0.6)",
           }}
           animate={{ y: [0, -30, 0], x: [0, p.dx, 0], opacity: [0.2, 0.8, 0.2] }}
           transition={{ duration: p.dur, repeat: Infinity, delay: p.delay }}
@@ -176,15 +176,15 @@ export default function Home() {
 
           {/* Badge */}
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#fed65b]/30 bg-[#fed65b]/10 px-4 py-2 backdrop-blur-md"
-            style={{ boxShadow: "0 0 20px rgba(254,214,91,0.2)" }}>
-            <Sparkles className="w-4 h-4 text-[#fed65b]" />
-            <span className="text-sm font-semibold text-[#fed65b]">وكالة رقمية متميزة — قطر</span>
+            className="inline-flex items-center gap-2 rounded-full border border-[#EBDDC6]/30 bg-[#EBDDC6]/10 px-4 py-2 backdrop-blur-md"
+            style={{ boxShadow: "0 0 20px rgba(235,221,198,0.2)" }}>
+            <Sparkles className="w-4 h-4 text-[#EBDDC6]" />
+            <span className="text-sm font-semibold text-[#EBDDC6]">وكالة رقمية متميزة — قطر</span>
           </motion.div>
 
           {/* Headline */}
           <div className="space-y-4">
-            <style>{`.hero-title .inline-block { background: linear-gradient(135deg,#ffffff 0%,#fed65b 50%,#ffffff 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(254,214,91,0.3)); }`}</style>
+            <style>{`.hero-title .inline-block { background: linear-gradient(135deg,#ffffff 0%,#EBDDC6 50%,#ffffff 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(235,221,198,0.3)); }`}</style>
             <div className="hero-title">
               <AnimatedText
                 as="h1"
@@ -198,8 +198,8 @@ export default function Home() {
 
             {/* Typed subtitle */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-              className="text-2xl sm:text-3xl font-semibold text-[#fed65b] typing-cursor min-h-[3rem]"
-              style={{ textShadow: "0 0 30px rgba(254,214,91,0.5)" }}>
+              className="text-2xl sm:text-3xl font-semibold text-[#EBDDC6] typing-cursor min-h-[3rem]"
+              style={{ textShadow: "0 0 30px rgba(235,221,198,0.5)" }}>
               {typedText}
             </motion.div>
           </div>
@@ -214,16 +214,16 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <NavLink to="/contact"
-              className="group relative inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-base font-black text-[#050a07] overflow-hidden transition-all hover:scale-105 active:scale-95"
-              style={{ background: "#fed65b", boxShadow: "0 0 40px rgba(254,214,91,0.5), inset 0 0 20px rgba(255,255,255,0.2)" }}>
+              className="group relative inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-base font-black text-[#14050b] overflow-hidden transition-all hover:scale-105 active:scale-95"
+              style={{ background: "#EBDDC6", boxShadow: "0 0 40px rgba(235,221,198,0.5), inset 0 0 20px rgba(255,255,255,0.2)" }}>
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <span className="relative">ابدأ مشروعك الآن</span>
               <ArrowLeft className="w-5 h-5 relative transition-transform group-hover:-translate-x-1" />
             </NavLink>
 
             <NavLink to="/portfolio"
-              className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-[#003527] bg-[#003527]/20 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-[#003527]/40 hover:border-[#fed65b]/50 hover:scale-105"
-              style={{ boxShadow: "0 0 20px rgba(0,53,39,0.4)" }}>
+              className="inline-flex items-center justify-center gap-3 rounded-full border-2 border-[#7A1630] bg-[#7A1630]/20 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-[#7A1630]/40 hover:border-[#EBDDC6]/50 hover:scale-105"
+              style={{ boxShadow: "0 0 20px rgba(122,22,48,0.4)" }}>
               استكشف أعمالنا
             </NavLink>
           </motion.div>
@@ -233,7 +233,7 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-2.5 pt-2 pb-14 sm:pb-0">
             {SERVICES_LIST.map(s => (
               <span key={s.label}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white/60 border border-white/[0.08] hover:border-[#fed65b]/30 hover:text-white/90 transition-all cursor-default"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white/60 border border-white/[0.08] hover:border-[#EBDDC6]/30 hover:text-white/90 transition-all cursor-default"
                 style={{ background: "rgba(255,255,255,0.03)" }}>
                 <span style={{ color: s.color }}>{s.icon}</span>
                 {s.label}
@@ -246,11 +246,11 @@ export default function Home() {
         <section className="mt-8 mb-20" aria-labelledby="selected-work-title">
           <motion.div {...inView()} className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 text-right">
             <div>
-              <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] block mb-3">أعمال مختارة</span>
+              <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] block mb-3">أعمال مختارة</span>
               <h2 id="selected-work-title" className="text-3xl md:text-5xl font-black text-white">الشغل يتكلم عنّا</h2>
               <p className="text-white/45 mt-3 max-w-xl">معاينات حقيقية لمواقع وتطبيقات صممناها وطورناها، وليست مجرد قوالب عرض.</p>
             </div>
-            <NavLink to="/portfolio" className="inline-flex items-center gap-2 text-[#fed65b] font-bold hover:text-white transition-colors">
+            <NavLink to="/portfolio" className="inline-flex items-center gap-2 text-[#EBDDC6] font-bold hover:text-white transition-colors">
               شاهد كل المشاريع <ArrowLeft className="w-4 h-4" />
             </NavLink>
           </motion.div>
@@ -265,12 +265,12 @@ export default function Home() {
                       <div className="absolute inset-0 bg-black">
                         <video src={project.videoUrl} muted loop autoPlay playsInline preload="metadata"
                           className={`w-full h-full ${project.category === "تطبيقات" ? "object-contain" : "object-cover"}`} />
-                        {project.category === "تطبيقات" && <div className="absolute inset-0 -z-10 bg-[#003527]" />}
+                        {project.category === "تطبيقات" && <div className="absolute inset-0 -z-10 bg-[#7A1630]" />}
                       </div>
                     ) : project.imageUrl ? (
                       <img src={project.imageUrl} alt={`معاينة مشروع ${project.titleAr}`} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-top" />
                     ) : (
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(254,214,91,0.13),transparent_36%),linear-gradient(145deg,#0a2118,#050a07)] flex items-center justify-center">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(235,221,198,0.13),transparent_36%),linear-gradient(145deg,#0a2118,#14050b)] flex items-center justify-center">
                         <span className="text-7xl font-black text-white/[0.04]">{String(index + 1).padStart(2, "0")}</span>
                       </div>
                     )}
@@ -278,12 +278,12 @@ export default function Home() {
                     <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-right">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs text-white/70">{project.category}</span>
-                        {project.videoUrl && <span className="inline-flex items-center gap-1 text-xs text-[#fed65b]"><Play className="w-3 h-3 fill-current" /> معاينة فيديو</span>}
+                        {project.videoUrl && <span className="inline-flex items-center gap-1 text-xs text-[#EBDDC6]"><Play className="w-3 h-3 fill-current" /> معاينة فيديو</span>}
                       </div>
                       <h3 className={`${index === 0 ? "text-3xl md:text-4xl" : "text-2xl"} font-black text-white`}>{project.titleAr}</h3>
                       <p className="mt-2 text-sm text-white/55 line-clamp-2 max-w-xl">{project.descriptionAr}</p>
                       <div className="mt-5 flex flex-wrap gap-3">
-                        <NavLink to="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#fed65b] px-5 py-2 text-sm font-black text-[#052017]">عرض التفاصيل <ArrowLeft className="w-4 h-4" /></NavLink>
+                        <NavLink to="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#EBDDC6] px-5 py-2 text-sm font-black text-[#052017]">عرض التفاصيل <ArrowLeft className="w-4 h-4" /></NavLink>
                         {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/20 px-5 py-2 text-sm font-bold text-white">زيارة المشروع <ExternalLink className="w-4 h-4" /></a>}
                       </div>
                     </div>
@@ -296,24 +296,24 @@ export default function Home() {
           )}
 
           <div className="mt-5 grid grid-cols-3 divide-x divide-x-reverse divide-white/10 rounded-2xl border border-white/[0.08] bg-white/[0.025] py-5 text-center">
-            <div><strong className="block text-2xl text-[#fed65b]">{projects.length}</strong><span className="text-xs text-white/45">مشروع منشور</span></div>
-            <div><strong className="block text-2xl text-[#fed65b]">{categoryCount}</strong><span className="text-xs text-white/45">مجالات عمل</span></div>
-            <div><strong className="block text-2xl text-[#fed65b]">٦</strong><span className="text-xs text-white/45">خدمات متخصصة</span></div>
+            <div><strong className="block text-2xl text-[#EBDDC6]">{projects.length}</strong><span className="text-xs text-white/45">مشروع منشور</span></div>
+            <div><strong className="block text-2xl text-[#EBDDC6]">{categoryCount}</strong><span className="text-xs text-white/45">مجالات عمل</span></div>
+            <div><strong className="block text-2xl text-[#EBDDC6]">٦</strong><span className="text-xs text-white/45">خدمات متخصصة</span></div>
           </div>
         </section>
 
         {/* Clients marquee */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.2 }}
-          className="relative overflow-hidden rounded-3xl border border-[#003527]/30 bg-[#003527]/10 py-8 backdrop-blur-xl"
-          style={{ boxShadow: "0 0 40px rgba(0,53,39,0.3), inset 0 0 30px rgba(254,214,91,0.04)" }}>
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-[#fed65b]/8 blur-3xl pointer-events-none" />
+          className="relative overflow-hidden rounded-3xl border border-[#7A1630]/30 bg-[#7A1630]/10 py-8 backdrop-blur-xl"
+          style={{ boxShadow: "0 0 40px rgba(122,22,48,0.3), inset 0 0 30px rgba(235,221,198,0.04)" }}>
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-[#EBDDC6]/8 blur-3xl pointer-events-none" />
           <style>{`
             @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(50%)} }
             .marquee-track { animation: marquee 28s linear infinite; }
             .marquee-mask:hover .marquee-track { animation-play-state: paused; }
           `}</style>
           <div className="relative z-10 text-center space-y-2 mb-6 px-8">
-            <h3 className="text-xl font-black text-[#fed65b]" style={{ textShadow: "0 0 20px rgba(254,214,91,0.4)" }}>
+            <h3 className="text-xl font-black text-[#EBDDC6]" style={{ textShadow: "0 0 20px rgba(235,221,198,0.4)" }}>
               موضع ثقة عملائنا
             </h3>
             <p className="text-zinc-400 text-sm">نفخر بثقة عملائنا وشركائنا في رحلة التحول الرقمي</p>
@@ -325,9 +325,9 @@ export default function Home() {
               {[...Array(2)].flatMap((_, dup) =>
                 ["Adrenaline", "DarkFit", "Smart Arena", "ابن تيمية", "Arirang Bakery", "نَفَحات", "دار ابن الجزري", "ERP"].map((name, i) => (
                   <div key={`${dup}-${i}`}
-                    className="px-6 py-3 rounded-2xl border border-[#003527]/30 bg-[#003527]/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 hover:border-[#fed65b]/40 transition-colors"
-                    style={{ boxShadow: "0 0 20px rgba(0,53,39,0.2)" }}>
-                    <span className="text-[#fed65b]/70 font-bold text-sm whitespace-nowrap">{name}</span>
+                    className="px-6 py-3 rounded-2xl border border-[#7A1630]/30 bg-[#7A1630]/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 hover:border-[#EBDDC6]/40 transition-colors"
+                    style={{ boxShadow: "0 0 20px rgba(122,22,48,0.2)" }}>
+                    <span className="text-[#EBDDC6]/70 font-bold text-sm whitespace-nowrap">{name}</span>
                   </div>
                 ))
               )}
@@ -345,7 +345,7 @@ export default function Home() {
         {/* ── Services showcase ──────────────────────────────────────────────── */}
         <div className="mt-24">
           <motion.div {...inView()} className="text-center mb-12">
-            <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
+            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
             <h2 className="text-3xl md:text-4xl font-black text-white">كل ما يحتاجه مشروعك في مكان واحد</h2>
           </motion.div>
 
@@ -370,7 +370,7 @@ export default function Home() {
 
           <motion.div {...inView(0.2)} className="text-center mt-8">
             <NavLink to="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#fed65b]/80 hover:text-[#fed65b] transition-colors">
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#EBDDC6]/80 hover:text-[#EBDDC6] transition-colors">
               استكشف كل الخدمات
               <ArrowLeft className="w-4 h-4" />
             </NavLink>
@@ -380,7 +380,7 @@ export default function Home() {
         {/* ── Process ────────────────────────────────────────────────────────── */}
         <div className="mt-24">
           <motion.div {...inView()} className="text-center mb-10">
-            <span className="text-[#fed65b] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
+            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
             <h2 className="text-3xl font-black text-white">عملية بسيطة ونتائج استثنائية</h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -391,9 +391,9 @@ export default function Home() {
               { step: "04", title: "التسليم", desc: "نسلم ونتابع معك بعد الإطلاق" },
             ].map((p, i) => (
               <motion.div key={p.step} {...inView(i * 0.08)}
-                className="relative p-6 rounded-2xl border border-white/[0.07] text-center group hover:border-[#fed65b]/20 transition-all"
+                className="relative p-6 rounded-2xl border border-white/[0.07] text-center group hover:border-[#EBDDC6]/20 transition-all"
                 style={{ background: "rgba(255,255,255,0.03)" }}>
-                <div className="text-4xl font-black text-[#fed65b]/15 mb-3 group-hover:text-[#fed65b]/35 transition-colors">{p.step}</div>
+                <div className="text-4xl font-black text-[#EBDDC6]/15 mb-3 group-hover:text-[#EBDDC6]/35 transition-colors">{p.step}</div>
                 <h3 className="font-black text-white mb-2">{p.title}</h3>
                 <p className="text-white/40 text-sm">{p.desc}</p>
               </motion.div>
@@ -403,15 +403,15 @@ export default function Home() {
 
         {/* ── Final CTA ──────────────────────────────────────────────────────── */}
         <motion.div {...inView()}
-          className="relative mt-24 rounded-3xl p-10 md:p-14 text-center overflow-hidden border border-[#fed65b]/15"
-          style={{ background: "linear-gradient(135deg,rgba(0,53,39,0.6),rgba(5,10,7,0.8))" }}>
+          className="relative mt-24 rounded-3xl p-10 md:p-14 text-center overflow-hidden border border-[#EBDDC6]/15"
+          style={{ background: "linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(254,214,91,0.08) 0%,transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
           <h2 className="text-2xl md:text-4xl font-black text-white mb-3 relative z-10">عندك فكرة؟ خلينا نحولها لواقع.</h2>
           <p className="text-white/50 mb-8 relative z-10 max-w-xl mx-auto">استشارة أولى مجانية — نسمع فكرتك ونقترح أفضل طريق لتنفيذها.</p>
           <NavLink to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#003527] relative z-10 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 40px rgba(254,214,91,0.3)" }}>
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
+            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.3)" }}>
             احجز استشارتك المجانية
             <ArrowLeft className="w-5 h-5" />
           </NavLink>

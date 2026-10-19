@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSettings } from "../hooks/useSettings";
 import ConsultationPopup from "./ConsultationPopup";
+import Logo from "./Logo";
 
 // ── Scroll progress hook ───────────────────────────────────────────────────────
 function useScrollProgress() {
@@ -52,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const headerBg = scrolled || !isHome;
 
   return (
-    <div className="relative min-h-screen bg-[#050a07] text-white overflow-x-hidden" dir="rtl"
+    <div className="relative min-h-screen bg-[#14050b] text-white overflow-x-hidden" dir="rtl"
       style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
 
       {/* ── Shared animated background (all pages) ────────────────────────── */}
@@ -62,12 +63,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0} }
         .layout-bg  { background-size:200% 200%; animation:bgShift 8s ease infinite; }
         .layout-orb { animation:orbPulse 3s ease-in-out infinite; }
-        .typing-cursor::after { content:'|'; animation:blink 1s step-end infinite; color:#fed65b; }
+        .typing-cursor::after { content:'|'; animation:blink 1s step-end infinite; color:#EBDDC6; }
       `}</style>
 
       {/* Animated gradient */}
       <div className="fixed inset-0 z-0 pointer-events-none layout-bg"
-        style={{ background: "linear-gradient(135deg,#050a07 0%,#003527 30%,#001a14 60%,#050a07 100%)" }} />
+        style={{ background: "linear-gradient(135deg,#14050b 0%,#7A1630 30%,#2a0913 60%,#14050b 100%)" }} />
 
       {/* Grid overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]"
@@ -76,36 +77,30 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Glow orbs */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl layout-orb"
-          style={{ background:"radial-gradient(circle,rgba(254,214,91,0.15) 0%,transparent 70%)" }} />
+          style={{ background:"radial-gradient(circle,rgba(235,221,198,0.15) 0%,transparent 70%)" }} />
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl layout-orb"
-          style={{ background:"radial-gradient(circle,rgba(0,53,39,0.5) 0%,transparent 70%)", animationDelay:"1.5s" }} />
+          style={{ background:"radial-gradient(circle,rgba(122,22,48,0.5) 0%,transparent 70%)", animationDelay:"1.5s" }} />
       </div>
 
       {/* ── Header ────────────────────────────────────────────────────────── */}
       <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         headerBg ? "border-b border-white/[0.07]" : ""
       }`}
-        style={headerBg ? { background: "rgba(5,10,7,0.85)", backdropFilter: "blur(20px)" } : {}}>
+        style={headerBg ? { background: "rgba(20,5,11,0.85)", backdropFilter: "blur(20px)" } : {}}>
 
         {/* ── Scroll progress bar ── */}
         <div className="absolute bottom-0 left-0 h-[2px] transition-all duration-75 rounded-full"
           style={{
             width: `${scrollProgress}%`,
-            background: "linear-gradient(90deg,#fed65b,#ffa726,#4ade80)",
-            boxShadow: "0 0 8px rgba(254,214,91,0.7)",
+            background: "linear-gradient(90deg,#EBDDC6,#C9A97A,#4ade80)",
+            boxShadow: "0 0 8px rgba(235,221,198,0.7)",
             opacity: scrollProgress > 1 ? 1 : 0,
           }} />
 
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
-              style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 20px rgba(254,214,91,0.3)" }}>
-              <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-                <path d="M10 2L3 7v11h5v-5h4v5h5V7L10 2z" fill="#003527"/>
-              </svg>
-            </div>
-            <span className="font-black text-white text-lg tracking-tight">أفكار رقمية</span>
+          <NavLink to="/" className="flex items-center gap-3 group transition-transform hover:scale-105" aria-label="Fikra — الرئيسية">
+            <Logo size={30} />
           </NavLink>
 
           {/* Desktop nav */}
@@ -115,7 +110,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className={({ isActive }) =>
                   `relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                     isActive
-                      ? "text-[#fed65b]"
+                      ? "text-[#EBDDC6]"
                       : "text-white/50 hover:text-white"
                   }`
                 }>
@@ -124,7 +119,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {isActive && (
                       <motion.div layoutId="nav-pill"
                         className="absolute inset-0 rounded-xl"
-                        style={{ background: "rgba(254,214,91,0.1)", border: "1px solid rgba(254,214,91,0.2)" }}
+                        style={{ background: "rgba(235,221,198,0.1)", border: "1px solid rgba(235,221,198,0.2)" }}
                         transition={{ type: "spring", bounce: 0.2, duration: 0.4 }} />
                     )}
                     <span className="relative z-10">{l.label}</span>
@@ -137,8 +132,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* CTA + Hamburger */}
           <div className="flex items-center gap-3">
             <NavLink to="/contact"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-black text-sm text-[#003527] hover:scale-105 transition-all"
-              style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)", boxShadow: "0 0 20px rgba(254,214,91,0.3)" }}>
+              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-black text-sm text-[#7A1630] hover:scale-105 transition-all"
+              style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 20px rgba(235,221,198,0.3)" }}>
               ابدأ مشروعك
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -159,21 +154,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
               className="md:hidden overflow-hidden border-t border-white/[0.06]"
-              style={{ background: "rgba(5,10,7,0.97)", backdropFilter: "blur(20px)" }}>
+              style={{ background: "rgba(20,5,11,0.97)", backdropFilter: "blur(20px)" }}>
               <nav className="px-6 py-5 flex flex-col gap-1">
                 {NAV.map(l => (
                   <NavLink key={l.to} to={l.to}
                     className={({ isActive }) =>
                       `px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                         isActive
-                          ? "bg-[#fed65b]/10 text-[#fed65b] border border-[#fed65b]/20"
+                          ? "bg-[#EBDDC6]/10 text-[#EBDDC6] border border-[#EBDDC6]/20"
                           : "text-white/60 hover:text-white"
                       }`
                     }>{l.label}</NavLink>
                 ))}
                 <NavLink to="/contact"
-                  className="mt-2 flex justify-center py-3.5 rounded-full font-black text-sm text-[#003527]"
-                  style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)" }}>
+                  className="mt-2 flex justify-center py-3.5 rounded-full font-black text-sm text-[#7A1630]"
+                  style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)" }}>
                   ابدأ مشروعك
                 </NavLink>
               </nav>
@@ -197,23 +192,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="relative border-t border-white/[0.06] py-12"
         style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(20px)" }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(0,53,39,0.2) 0%, transparent 60%)" }} />
+          style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(122,22,48,0.2) 0%, transparent 60%)" }} />
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-            <NavLink to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-all group-hover:scale-110"
-                style={{ background: "linear-gradient(135deg,#fed65b,#ffa726)" }}>
-                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-                  <path d="M10 2L3 7v11h5v-5h4v5h5V7L10 2z" fill="#003527"/>
-                </svg>
-              </div>
-              <span className="font-black text-white">أفكار رقمية</span>
+            <NavLink to="/" className="flex flex-col items-center md:items-start gap-1.5" aria-label="Fikra — الرئيسية">
+              <Logo size={26} />
+              <span className="text-[11px] text-white/40 font-semibold">فكرة للتقنية والتصميم</span>
             </NavLink>
 
             <div className="flex flex-wrap justify-center items-center gap-5">
               {NAV.map(l => (
                 <NavLink key={l.to} to={l.to}
-                  className="text-xs text-white/30 hover:text-[#fed65b] transition-colors font-medium">{l.label}</NavLink>
+                  className="text-xs text-white/30 hover:text-[#EBDDC6] transition-colors font-medium">{l.label}</NavLink>
               ))}
             </div>
 
@@ -238,7 +228,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="border-t border-white/[0.05] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-white/20 text-xs">© {new Date().getFullYear()} أفكار رقمية — جميع الحقوق محفوظة</p>
+            <p className="text-white/20 text-xs">© {new Date().getFullYear()} Fikra Tech & Design — فكرة للتقنية والتصميم. جميع الحقوق محفوظة</p>
             <p className="text-white/15 text-xs">صُنع بـ ♥ في قطر</p>
           </div>
         </div>
@@ -250,7 +240,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" style={{ animationDuration: "2.5s" }} />
         {/* Hover label */}
         <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap px-3 py-2 rounded-xl text-sm font-bold text-white opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none"
-          style={{ background: "rgba(5,10,7,0.95)", border: "1px solid rgba(37,211,102,0.3)", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}>
+          style={{ background: "rgba(20,5,11,0.95)", border: "1px solid rgba(37,211,102,0.3)", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}>
           تواصل معنا الآن 👋
         </span>
         <motion.a

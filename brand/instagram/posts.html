@@ -115,6 +115,50 @@ const POSTS = {
      <div style="margin-top:50px"><span class="cta">واتساب <span class="en" style="direction:ltr">+974 6648 8228</span></span></div>
    </div>
    <div style="height:90px"></div>${BOT("09")}`,
+ 10: () => project({tag:"Case Study", cat:"موقع نادٍ رياضي", title:"Adrenaline <span class='gold'>Gym</span>", desc:"حضور رقمي قوي لنادي أدرينالين في لوسيل: الخدمات والتدريب وحجز الزيارات.", img:"adrenaline-gym.png", pg:"10"}),
+ 11: () => `${TOP("Systems")}
+   <div style="margin:auto 0;position:relative;z-index:2">
+     <h2>أنظمة ومنصات<br><span class="gold">تدير أعمالًا حقيقية</span></h2>
+     <div style="margin-top:36px">
+       <div class="svc"><i>✦</i>دار ابن الجزري — منصة تحفيظ القرآن</div>
+       <div class="svc"><i>✦</i>مدرسة ابن تيمية — الحضور والإشراف</div>
+       <div class="svc"><i>✦</i>التنسيق الأكاديمي — الخطط والمهام</div>
+       <div class="svc"><i>✦</i>مدام مي — إدارة تجارة الجملة</div>
+       <div class="svc" style="border:0"><i>✦</i>مطابخ الجنوب — نقاط البيع</div>
+     </div>
+   </div>${SP(120,190,80,.7)}${BOT("11")}`,
+ 12: () => project({tag:"Branding + Web", cat:"هوية وموقع علامة حلويات", title:"Dopamin", desc:"هوية دافئة وموقع يعرض المنتجات بتجربة بصرية شهية.", img:"dopamin.png", pg:"12"}),
+ 13: () => project({tag:"Kids App", cat:"تطبيق تعليمي للأطفال", title:"صلاتي <span class='gold'>قرة عيني</span>", desc:"رحلة تفاعلية لتعليم الأطفال الأذان والوضوء والصلاة.", img:"slaty.png", phone:true, pw:330, pg:"13"}),
+ 14: () => `${TOP("Why Fikra")}
+   <div style="margin:auto 0;position:relative;z-index:2">
+     <h2>لماذا تختار<br><span class="gold">فكرة</span>؟</h2>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px">
+       <div class="stat"><span style="font-size:34px;color:var(--b)">تصميم عربي أصيل</span><p class="lead" style="font-size:24px;margin-top:8px">واجهات تُبنى للعربية أولًا</p></div>
+       <div class="stat"><span style="font-size:34px;color:var(--b)">التزام بالمواعيد</span><p class="lead" style="font-size:24px;margin-top:8px">جدول واضح من البداية</p></div>
+       <div class="stat"><span style="font-size:34px;color:var(--b)">تواصل مباشر</span><p class="lead" style="font-size:24px;margin-top:8px">مع الفريق المنفّذ نفسه</p></div>
+       <div class="stat"><span style="font-size:34px;color:var(--b)">دعم بعد التسليم</span><p class="lead" style="font-size:24px;margin-top:8px">لا تنتهي علاقتنا بالإطلاق</p></div>
+     </div>
+   </div>${SP(110,200,80,.7)}${BOT("14")}`,
+ 15: () => project({tag:"EdTech", cat:"منصة تعليمية متخصصة", title:"saifx — <span class='gold'>الفيزياء</span>", desc:"مساحة منظمة لتعلّم الفيزياء: دروس وكتب وتدريبات لطلاب المرحلة الثانوية.", img:"saifx.png", pg:"15"}),
+ 16: () => `${TOP("Process")}
+   <div style="margin:auto 0;position:relative;z-index:2">
+     <h2>كيف نحوّل<br><span class="gold">فكرتك</span> إلى منتج؟</h2>
+     <div style="margin-top:36px">
+       <div class="svc"><i>01</i>نستمع إلى فكرتك ونحدد الأهداف</div>
+       <div class="svc"><i>02</i>نصمّم تجربة تعكس هويتك</div>
+       <div class="svc"><i>03</i>نطوّر بأعلى معايير الجودة</div>
+       <div class="svc" style="border:0"><i>04</i>نطلق ونتابع معك بعد التسليم</div>
+     </div>
+   </div>${SP(120,190,80,.7)}${BOT("16")}`,
+ 17: () => project({tag:"App", cat:"منصة أنشطة تفاعلية", title:"مساحة التعلّم <span class='gold'>التفاعلي</span>", desc:"ألعاب وأسئلة وأوراق عمل يُنشئها المعلم ويشاركها مع طلابه.", img:"games.png", phone:true, pw:330, pg:"17"}),
+ 18: () => `${TOP("Let's Talk")}
+   ${SP(160,240,110,.85)}${SP(860,960,60,.4)}
+   <div style="margin-top:auto;position:relative;z-index:2;text-align:center">
+     <h1 style="font-size:92px">مشروعك القادم<br>يبدأ <span class="gold">من هنا</span></h1>
+     <p class="lead" style="margin-top:28px">مواقع · تطبيقات · أنظمة · هويات بصرية</p>
+     <div style="margin-top:50px"><span class="cta">واتساب <span class="en" style="direction:ltr">+974 6648 8228</span></span></div>
+   </div>
+   <div style="height:90px"></div>${BOT("18")}`,
 };
 const n = new URLSearchParams(location.search).get("n") || "1";
 document.getElementById("f").innerHTML = POSTS[n]();

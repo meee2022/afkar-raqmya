@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --m:#7A1630; --md:#4A0E1E; --dk:#2a0811; --b:#EBDDC6; --b2:#F6EFE3; --g:#C9A97A; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body { font-family: Tajawal, sans-serif; color: var(--b); position: relative;
+    background:
+      radial-gradient(900px 700px at 85% 8%, rgba(160,42,78,.55), transparent 60%),
+      radial-gradient(800px 800px at 10% 100%, rgba(20,4,10,.7), transparent 60%),
+      linear-gradient(160deg, #861a37 0%, #5c1027 55%, #3a0a18 100%); }
+  /* subtle dot grid unifies the feed */
+  body::before { content:""; position:absolute; inset:0;
+    background-image: radial-gradient(rgba(235,221,198,.07) 1.4px, transparent 1.4px); background-size: 34px 34px; }
+  .frame { position: absolute; inset: 64px; display: flex; flex-direction: column; }
+  .top, .bot { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .bot { margin-top: auto; }
+  .en { font-family: Lexend, sans-serif; }
+  .wm { font: 700 40px Lexend; letter-spacing: -.02em; line-height: 1; display: inline-flex; align-items: flex-end; direction: ltr; color: var(--b); font-variant-ligatures: none; }
+  .wm .i { position: relative; margin-left: .04em; }
+  .wm svg { position: absolute; left: 50%; top: -.02em; transform: translateX(-50%); width: .34em; }
+  .tag { font: 600 20px Lexend; letter-spacing: 6px; color: var(--g); text-transform: uppercase; }
+  .handle { font: 400 22px Lexend; color: var(--b); opacity: .75; direction: ltr; }
+  .pg { font: 600 22px Lexend; color: var(--g); direction: ltr; }
+  .spark { position: absolute; z-index: 1; }
+  h1 { font: 900 96px/1.08 Tajawal; }
+  h2 { font: 900 72px/1.12 Tajawal; }
+  .lead { font: 500 34px/1.6 Tajawal; color: rgba(235,221,198,.85); }
+  .gold { color: var(--g); }
+  .chip { display:inline-block; border:2px solid rgba(235,221,198,.35); border-radius: 999px; padding: 10px 26px; font: 700 26px Tajawal; color: var(--b); }
+
+  /* devices */
+  .laptop { position: relative; width: 860px; margin: 0 auto; filter: drop-shadow(0 50px 60px rgba(0,0,0,.45)); }
+  .laptop .scr { background:#0d0d0f; border-radius: 26px 26px 0 0; padding: 20px 20px 26px; border: 3px solid #3a3a40; border-bottom: 0; }
+  .laptop .scr img { width:100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; border-radius: 6px; display:block; }
+  .laptop .base { height: 30px; background: linear-gradient(#d9d4cc,#a8a29a); border-radius: 0 0 26px 26px; width: 108%; margin-left: -4%; position: relative; }
+  .laptop .base::after { content:""; position:absolute; left:42%; right:42%; top:0; height:10px; background:#8f8981; border-radius: 0 0 12px 12px; }
+  .phone { position: relative; width: 380px; background:#0d0d0f; border-radius: 58px; padding: 16px; border: 3px solid #3a3a40; filter: drop-shadow(0 50px 60px rgba(0,0,0,.5)); }
+  .phone img { width:100%; aspect-ratio: 9/19.3; object-fit: cover; object-position: top; border-radius: 44px; display:block; }
+  .phone::before { content:""; position:absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 110px; height: 30px; background:#0d0d0f; border-radius: 20px; z-index: 2; }
+
+  .meta-row { display:flex; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
+  .stat { background: rgba(235,221,198,.08); border: 2px solid rgba(235,221,198,.16); border-radius: 30px; padding: 30px 34px; }
+  .stat b { display:block; font: 700 82px Lexend; color: var(--b); line-height: 1; }
+  .stat span { font: 700 28px Tajawal; color: var(--g); }
+  .svc { display:flex; align-items:center; gap: 22px; padding: 26px 0; border-bottom: 2px solid rgba(235,221,198,.14); font: 800 44px Tajawal; }
+  .svc i { font: 600 24px Lexend; color: var(--g); font-style: normal; width: 60px; }
+  .cta { background: var(--b); color: var(--m); border-radius: 999px; padding: 26px 48px; font: 900 40px Tajawal; display:inline-flex; gap: 18px; align-items:center; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><path id="sp" d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z"/></defs></svg>
+<div class="frame" id="f"></div>
+<script>
+const WM = (s=40) => `<span class="wm" style="font-size:${s}px"><span>f</span><span class="i">ı<svg viewBox="0 0 40 40"><use href="#sp" fill="currentColor"/></svg></span><span>kra</span></span>`;
+const SP = (x,y,w,o=1) => `<svg class="spark" viewBox="0 0 40 40" style="left:${x}px;top:${y}px;width:${w}px;opacity:${o}"><use href="#sp" fill="#EBDDC6"/></svg>`;
+const TOP = (tag) => `<div class="top">${WM(38)}<span class="tag">${tag}</span></div>`;
+const BOT = (pg) => `<div class="bot"><span class="handle">@fikratechdesign</span><span class="pg">${pg}</span></div>`;
+const project = (o) => `${TOP(o.tag)}
+  <div style="margin-top:46px;position:relative;z-index:2">
+    <div class="chip">${o.cat}</div>
+    <h2 style="margin-top:22px">${o.title}</h2>
+    <p class="lead" style="margin-top:10px;max-width:860px">${o.desc}</p>
+  </div>
+  <div style="margin-top:${o.phone?20:44}px;position:relative;z-index:2;display:flex;justify-content:center">
+    ${o.phone ? `<div class="phone" style="width:${o.pw||360}px"><img src="${o.img}"></div>` : `<div class="laptop"><div class="scr"><img src="${o.img}"></div><div class="base"></div></div>`}
+  </div>
+  ${BOT(o.pg)}`;
+
+const POSTS = {
+ 1: () => `${TOP("Tech & Design")}
+   ${SP(140,200,120,.9)}${SP(300,360,44,.45)}${SP(860,880,60,.3)}
+   <div style="margin-top:auto;position:relative;z-index:2">
+     <div style="margin-bottom:40px">${WM(190)}</div>
+     <h1>كل مشروع عظيم<br>يبدأ بـ<span class="gold">فكرة</span></h1>
+     <p class="lead" style="margin-top:26px">مواقع · تطبيقات · أنظمة · هوية بصرية — بلمسة ذكاء اصطناعي</p>
+   </div>
+   <div style="height:70px"></div>${BOT("01")}`,
+ 2: () => project({tag:"Case Study", cat:"موقع + منصة اشتراكات", title:"Adrenaline<br><span class='gold'>وجبات صحية</span>", desc:"منصة طلب واشتراك بخطط غذائية ذكية وحاسبة سعرات وتوصيل يومي في قطر.", img:"adrenaline-food.png", pg:"02"}),
+ 3: () => project({tag:"App", cat:"تطبيق ويب", title:"نَفَحات", desc:"صحبة يومية مع القرآن الكريم بتجربة عربية هادئة.", img:"nafahat.png", phone:true, pw:330, pg:"03"}),
+ 4: () => `${TOP("Services")}
+   <div style="margin:auto 0;position:relative;z-index:2">
+     <h2>من الفكرة<br>إلى <span class="gold">المنتج</span></h2>
+     <div style="margin-top:40px">
+       <div class="svc"><i>01</i>تصميم وتطوير المواقع</div>
+       <div class="svc"><i>02</i>تطبيقات الجوال والويب</div>
+       <div class="svc"><i>03</i>أنظمة إدارة ونقاط بيع</div>
+       <div class="svc"><i>04</i>هوية بصرية وشعارات</div>
+       <div class="svc" style="border:0"><i>05</i>حلول الذكاء الاصطناعي</div>
+     </div>
+   </div>
+   ${SP(120,200,90,.7)}${BOT("04")}`,
+ 5: () => project({tag:"Case Study", cat:"منصة تعليمية تفاعلية", title:"ردّة — <span class='gold'>تراث الغوص</span>", desc:"رحلة رقمية غامرة في تاريخ الغوص على اللؤلؤ في قطر والخليج.", img:"diving.png", pg:"05"}),
+ 6: () => project({tag:"App", cat:"منصة لياقة", title:"DarkFit", desc:"تمارين وتغذية ومدربين وحاسبات صحية في تطبيق واحد.", img:"darkfit.png", phone:true, pw:330, pg:"06"}),
+ 7: () => `${TOP("Why Fikra")}
+   <div style="margin:auto 0;position:relative;z-index:2">
+     <h2>أرقام تتحدث<br><span class="gold">عن أعمالنا</span></h2>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px">
+       <div class="stat"><b>+20</b><span>مشروع منجز</span></div>
+       <div class="stat"><b>5</b><span>مجالات تقنية</span></div>
+       <div class="stat"><b>100%</b><span>تصميم مخصص</span></div>
+       <div class="stat"><b>24h</b><span>للرد على استفساراتك</span></div>
+     </div>
+   </div>
+   ${SP(120,180,80,.7)}${BOT("07")}`,
+ 8: () => project({tag:"System", cat:"نظام نقاط بيع وفواتير", title:"مطابخ الجنوب", desc:"نظام كاشير وفواتير ومتابعة مبيعات لمطاعم المأكولات الشعبية.", img:"elwakra.png", pg:"08"}),
+ 9: () => `${TOP("Let's Talk")}
+   ${SP(160,240,110,.85)}${SP(80,420,40,.45)}${SP(880,980,60,.4)}
+   <div style="margin-top:auto;position:relative;z-index:2;text-align:center">
+     <h1 style="font-size:96px">لديك <span class="gold">فكرة</span>؟<br>دعنا نحوّلها إلى واقع</h1>
+     <p class="lead" style="margin-top:28px">استشارة أولى مجانية — بدون أي التزام</p>
+     <div style="margin-top:50px"><span class="cta">واتساب <span class="en" style="direction:ltr">+974 6648 8228</span></span></div>
+   </div>
+   <div style="height:90px"></div>${BOT("09")}`,
+};
+const n = new URLSearchParams(location.search).get("n") || "1";
+document.getElementById("f").innerHTML = POSTS[n]();
+</script>
+</body>
+</html>

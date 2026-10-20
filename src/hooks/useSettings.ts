@@ -2,8 +2,8 @@ import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 const DEFAULTS = {
-  whatsapp: "97433000000",
-  phone: "+974 33 000 000",
+  whatsapp: "97466488228",
+  phone: "+974 6648 8228",
   email: "hello@fikratechdesign.com",
   instagramUrl: "",
   twitterUrl: "",

@@ -70,6 +70,30 @@ const project = (o) => `${TOP(o.tag)}
   </div>
   ${BOT(o.pg)}`;
 
+
+const trio = (o) => `${TOP(o.tag)}
+  <div style="margin-top:40px;position:relative;z-index:2;text-align:center">
+    <div class="chip">${o.cat}</div>
+    <h2 style="margin-top:20px">${o.title}</h2>
+    <p class="lead" style="margin-top:8px">${o.desc}</p>
+  </div>
+  <div style="position:relative;z-index:2;height:720px;margin-top:30px">
+    <div class="phone" style="position:absolute;width:290px;left:70px;top:90px;transform:rotate(-9deg);opacity:.92"><img src="${o.imgs[0]}"></div>
+    <div class="phone" style="position:absolute;width:290px;right:70px;top:90px;transform:rotate(9deg);opacity:.92"><img src="${o.imgs[2]}"></div>
+    <div class="phone" style="position:absolute;width:330px;left:50%;top:10px;transform:translateX(-50%);z-index:3"><img src="${o.imgs[1]}"></div>
+  </div>
+  ${BOT(o.pg)}`;
+const bleed = (o) => `${TOP(o.tag)}
+  <div style="margin-top:46px;position:relative;z-index:2;max-width:640px">
+    <div class="chip">${o.cat}</div>
+    <h2 style="margin-top:22px">${o.title}</h2>
+    <p class="lead" style="margin-top:10px">${o.desc}</p>
+  </div>
+  <div style="position:absolute;z-index:2;left:-40px;bottom:120px;width:1060px;transform:rotate(-4deg)">
+    <div class="laptop" style="width:1000px"><div class="scr"><img src="${o.img}"></div><div class="base"></div></div>
+  </div>
+  ${BOT(o.pg)}`;
+
 const POSTS = {
  1: () => `${TOP("Tech & Design")}
    ${SP(140,200,120,.9)}${SP(300,360,44,.45)}${SP(860,880,60,.3)}
@@ -139,7 +163,7 @@ const POSTS = {
        <div class="svc" style="border:0"><i>✦</i>مطابخ الجنوب — نقاط البيع</div>
      </div>
    </div>${SP(120,190,80,.7)}${BOT("11")}`,
- 12: () => project({tag:"Branding + Web", cat:"هوية وموقع علامة حلويات", title:"Dopamin", desc:"هوية دافئة وموقع يعرض المنتجات بتجربة بصرية شهية.", img:"dopamin.png", pg:"12"}),
+ 12: () => bleed({tag:"Branding + Web", cat:"هوية وموقع علامة حلويات", title:"Dopamin", desc:"هوية دافئة وموقع يعرض المنتجات بتجربة بصرية شهية.", img:"dopamin.png", pg:"12"}),
  13: () => project({tag:"Kids App", cat:"تطبيق تعليمي للأطفال", title:"صلاتي <span class='gold'>قرة عيني</span>", desc:"رحلة تفاعلية لتعليم الأطفال الأذان والوضوء والصلاة.", img:"slaty.png", phone:true, pw:330, pg:"13"}),
  14: () => `${TOP("Why Fikra")}
    <div style="margin:auto 0;position:relative;z-index:2">
@@ -151,7 +175,7 @@ const POSTS = {
        <div class="stat"><span style="font-size:34px;color:var(--b)">دعم بعد التسليم</span><p class="lead" style="font-size:24px;margin-top:8px">لا تنتهي علاقتنا بالإطلاق</p></div>
      </div>
    </div>${SP(110,200,80,.7)}${BOT("14")}`,
- 15: () => project({tag:"EdTech", cat:"منصة تعليمية متخصصة", title:"saifx — <span class='gold'>الفيزياء</span>", desc:"مساحة منظمة لتعلّم الفيزياء: دروس وكتب وتدريبات لطلاب المرحلة الثانوية.", img:"saifx.png", pg:"15"}),
+ 15: () => bleed({tag:"EdTech", cat:"منصة تعليمية متخصصة", title:"saifx — <span class='gold'>الفيزياء</span>", desc:"مساحة منظمة لتعلّم الفيزياء: دروس وكتب وتدريبات لطلاب المرحلة الثانوية.", img:"saifx.png", pg:"15"}),
  16: () => `${TOP("Process")}
    <div style="margin:auto 0;position:relative;z-index:2">
      <h2>كيف نحوّل<br><span class="gold">فكرتك</span> إلى منتج؟</h2>
@@ -172,6 +196,7 @@ const POSTS = {
    </div>
    <div style="height:90px"></div>${BOT("18")}`,
 };
+POSTS[19] = () => trio({tag:"App", cat:"تطبيق القرآن الكريم", title:"نَفَحات", desc:"المصحف · أوقات الصلاة · القبلة — صحبة يومية مع القرآن", imgs:["naf-home.png","naf-mushaf.png","naf-qibla.png"], pg:"19"});
 const n = new URLSearchParams(location.search).get("n") || "1";
 document.getElementById("f").innerHTML = POSTS[n]();
 </script>

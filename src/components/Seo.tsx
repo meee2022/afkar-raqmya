@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE = "فكرة للتقنية والتصميم";
+const SITE = "أثر للتقنية والتصميم";
 const BASE_URL = "https://fikratechdesign.com"; // ← غيّره لدومينك الحقيقي عند النشر
 
 interface SeoProps {
@@ -33,7 +33,7 @@ function setCanonical(href: string) {
 /** Per-page SEO: title, description, Open Graph, Twitter, canonical. */
 export default function Seo({ title, description, path = "/", image = "/og-image.png" }: SeoProps) {
   useEffect(() => {
-    const fullTitle = path === "/" ? `Fikra | ${SITE}` : `${title} | ${SITE}`;
+    const fullTitle = path === "/" ? `ATHR | ${SITE}` : `${title} | ${SITE}`;
     const url = BASE_URL + path;
     const img = image.startsWith("http") ? image : BASE_URL + image;
 

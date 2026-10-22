@@ -9,8 +9,8 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Tajawal', 'Cairo', sans-serif;
-    background-color: #14050b;
-    color: #ffffff;
+    background-color: #F6F0E6;
+    color: #2A0913;
     direction: rtl;
   }
 }
@@ -25,7 +25,7 @@
     box-shadow: 0 8px 40px rgba(122,22,48,0.07);
   }
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#7A1630] text-white font-semibold text-sm hover:bg-[#064e3b] transition-all shadow-soft active:scale-95;
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#7A1630] text-white font-semibold text-sm hover:bg-[#4A0E1E] transition-all shadow-soft active:scale-95;
   }
   .btn-outline {
     @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#7A1630]/30 text-[#7A1630] font-semibold text-sm hover:bg-[#7A1630]/5 transition-all active:scale-95;
@@ -49,23 +49,23 @@
   }
 }
 
-/* ── Dark select dropdown fix ──────────────────────────────────────── */
+/* ── Select dropdown colors ──────────────────────────────────────── */
 select option {
-  background-color: #0d1a0f;
-  color: #ffffff;
+  background-color: #F6F0E6;
+  color: #2A0913;
 }
 
 /* ── Custom scrollbar ───────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #14050b; }
+::-webkit-scrollbar-track { background: #F6F0E6; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,#EBDDC6,#7A1630);
+  background: linear-gradient(180deg,#C9A35F,#7A1630);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: #EBDDC6; }
+::-webkit-scrollbar-thumb:hover { background: #7A1630; }
 
 /* ── Text selection color ───────────────────────────────────────────── */
 ::selection {
-  background: rgba(235,221,198,0.25);
-  color: #EBDDC6;
+  background: rgba(122,22,48,0.15);
+  color: #4A0E1E;
 }

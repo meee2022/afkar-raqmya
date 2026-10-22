@@ -43,3 +43,9 @@ skills-lock.json
 
 # Vite cache
 .vite/
+
+# Private business documents (partner details, client invoices) — never publish
+brand/business-plan/
+invoices/
+WhatsApp*.mp4
+brand/videos/

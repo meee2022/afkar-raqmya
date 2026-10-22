@@ -1,18 +1,13 @@
-// Fikra wordmark: "fıkra" in Lexend with an AI sparkle as the i-dot.
-export default function Logo({ size = 28, color = "#EBDDC6" }: { size?: number; color?: string }) {
+// ATHR logo: calligraphic «أثر» mark + bilingual name.
+export default function Logo({ size = 28, sub = false }: { size?: number; sub?: boolean }) {
   return (
-    <span dir="ltr" aria-label="Fikra" style={{
-      font: `700 ${size}px Lexend, sans-serif`, color, lineHeight: 1, letterSpacing: "-0.02em",
-      fontVariantLigatures: "none", display: "inline-flex", alignItems: "flex-end",
-    }}>
-      <span>f</span>
-      <span style={{ position: "relative", marginLeft: "0.04em" }}>
-        ı
-        <svg viewBox="0 0 40 40" aria-hidden style={{ position: "absolute", left: "50%", top: "-0.02em", transform: "translateX(-50%)", width: "0.34em" }}>
-          <path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="currentColor" />
-        </svg>
+    <span dir="rtl" aria-label="أثر للتقنية والتصميم — ATHR" style={{ display: "inline-flex", alignItems: "center", gap: size * 0.35 }}>
+      <img src="/athr-mark.svg" alt="" style={{ height: size * 1.6, width: "auto" }} />
+      <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
+        <span style={{ font: `800 ${size * 0.8}px Tajawal, sans-serif`, color: "#4A0E1E" }}>أثر</span>
+        <span dir="ltr" style={{ font: `600 ${size * 0.38}px Lexend, sans-serif`, letterSpacing: "0.32em", color: "#8F6A2F", textAlign: "right" }}>ATHR</span>
+        {sub && <span style={{ font: `500 ${size * 0.36}px Tajawal, sans-serif`, color: "#4A0E1E", opacity: .7, marginTop: 4 }}>للتقنية والتصميم</span>}
       </span>
-      <span>kra</span>
     </span>
   );
 }

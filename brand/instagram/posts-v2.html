@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --m:#7A1630; --md:#4A0E1E; --ink:#2A0913; --gl:#F3E2B6; --g:#C9A35F; --gd:#8F6A2F; --beige:#EBDDC6; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body { position: relative; font-family: 'IBM Plex Sans Arabic', sans-serif; }
+
+  /* side columns: project posts on beige */
+  body.light { color: var(--ink);
+    background: radial-gradient(900px 700px at 80% 0%, rgba(233,210,157,.55), transparent 60%),
+                linear-gradient(170deg, #FBF7F0 0%, #F3E8D6 60%, #EBDDC6 100%); }
+  /* middle column: statement posts on maroon */
+  body.dark { color: var(--gl);
+    background: radial-gradient(900px 800px at 85% 0%, rgba(201,163,95,.22), transparent 60%),
+                radial-gradient(700px 700px at 0% 100%, rgba(20,5,11,.55), transparent 60%),
+                linear-gradient(165deg, #7A1630 0%, #5A0F22 55%, #3A0A17 100%); }
+
+  .frame { position: absolute; inset: 70px; display: flex; flex-direction: column; z-index: 2; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .bot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+  .logo { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
+  .logo img { height: 96px; }
+  .logo span { font: 700 22px Lexend; letter-spacing: .4em; text-indent: .4em; direction: ltr; }
+  .light .logo span { color: var(--md); }
+  .dark .logo span { color: var(--gl); }
+  .kicker { font: 600 18px Lexend; letter-spacing: .32em; text-transform: uppercase; direction: ltr; }
+  .light .kicker { color: var(--gd); }
+  .dark .kicker { color: var(--g); }
+  .handle { font: 400 22px Lexend; direction: ltr; opacity: .7; }
+
+  h1, h2, h3 { font-family: Alexandria, sans-serif; letter-spacing: -.01em; }
+  h1 { font-weight: 900; font-size: 112px; line-height: 1.38; }
+  h2 { font-weight: 800; font-size: 84px; line-height: 1.32; }
+  h3 { font-weight: 800; font-size: 60px; line-height: 1.3; }
+  .gold { background: linear-gradient(135deg,#F3E2B6,#C9A35F 60%,#B08A4A); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .light .gold { background: linear-gradient(135deg,#C9A35F,#8F6A2F); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font: 500 32px/1.65 'IBM Plex Sans Arabic'; }
+  .light .lead { color: rgba(42,9,19,.68); }
+  .dark .lead { color: rgba(243,226,182,.8); }
+  .chip { display: inline-block; border-radius: 999px; padding: 10px 26px; font: 600 24px 'IBM Plex Sans Arabic'; }
+  .light .chip { background: rgba(122,22,48,.08); color: var(--m); }
+  .rule { width: 90px; height: 3px; background: var(--g); border-radius: 2px; }
+
+  /* devices */
+  .laptop { position: relative; width: 900px; margin: 0 auto; filter: drop-shadow(0 50px 50px rgba(74,14,30,.28)); }
+  .laptop .scr { background: #111; border-radius: 26px 26px 0 0; padding: 18px 18px 24px; border: 3px solid #2c2c30; border-bottom: 0; }
+  .laptop .scr img { width: 100%; aspect-ratio: 1366/850; object-fit: cover; object-position: top; border-radius: 6px; display: block; }
+  .laptop .base { height: 30px; background: linear-gradient(#ddd8d0,#a9a39b); border-radius: 0 0 26px 26px; width: 110%; margin-left: -5%; position: relative; }
+  .laptop .base::after { content: ""; position: absolute; left: 42%; right: 42%; top: 0; height: 10px; background: #8f8981; border-radius: 0 0 12px 12px; }
+  .phone { position: relative; background: #111; border-radius: 60px; padding: 14px; border: 3px solid #2c2c30; filter: drop-shadow(0 45px 45px rgba(74,14,30,.32)); }
+  .phone img { width: 100%; display: block; border-radius: 47px; aspect-ratio: 1082/2202; object-fit: cover; object-position: top; }
+  .phone.tall img { aspect-ratio: 432/848; }
+  .phone::before { content: ""; position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #111; border-radius: 20px; z-index: 2; }
+
+  .list { margin-top: 44px; }
+  .list div { display: flex; align-items: center; gap: 26px; padding: 26px 0; border-bottom: 2px solid rgba(243,226,182,.14); font: 700 42px Alexandria; }
+  .list div:last-child { border: 0; }
+  .list i { font: 600 22px Lexend; color: var(--g); font-style: normal; width: 50px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 48px; }
+  .card { border: 2px solid rgba(243,226,182,.16); background: rgba(243,226,182,.06); border-radius: 30px; padding: 34px; }
+  .card b { display: block; font: 800 88px Lexend; line-height: 1; color: var(--gl); }
+  .card span { font: 700 30px Alexandria; color: var(--g); }
+  .card h4 { font: 800 36px Alexandria; color: var(--gl); }
+  .card p { font: 500 24px/1.5 'IBM Plex Sans Arabic'; color: rgba(243,226,182,.7); margin-top: 8px; }
+  .cta { display: inline-flex; align-items: center; gap: 18px; background: linear-gradient(135deg,#F3E2B6,#C9A35F); color: var(--md); border-radius: 999px; padding: 26px 52px; font: 800 38px Alexandria; }
+  .glow { position: absolute; z-index: 1; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="frame" id="f"></div>
+<script>
+const n = +(new URLSearchParams(location.search).get("n") || 1);
+const LOGO = (dark) => `<span class="logo"><img src="${dark ? 'athr-mark-ondark.svg' : 'athr-mark.svg'}"><span>ATHR</span></span>`;
+const TOP = (k, dark) => `<div class="top">${LOGO(dark)}<span class="kicker">${k}</span></div>`;
+const BOT = (pg) => `<div class="bot"><span class="handle">@athartechdesign</span><span class="kicker">${String(pg).padStart(2,"0")}</span></div>`;
+
+/* side-column project posts: device first, minimal text */
+const laptop = (o) => `${TOP(o.k)}
+  <div style="margin-top:40px"><span class="chip">${o.cat}</span><h3 style="margin-top:20px">${o.title}</h3></div>
+  <div style="margin-top:60px">${`<div class="laptop"><div class="scr"><img src="${o.img}"></div><div class="base"></div></div>`}</div>
+  ${BOT(o.pg)}`;
+const phone = (o) => `${TOP(o.k)}
+  <div style="display:flex;gap:40px;align-items:center;margin-top:30px;flex:1">
+    <div style="flex:1"><span class="chip">${o.cat}</span><h3 style="margin-top:22px">${o.title}</h3><p class="lead" style="margin-top:16px">${o.desc}</p></div>
+    <div class="phone ${o.tall?'tall':''}" style="width:400px;flex:none">${`<img src="${o.img}">`}</div>
+  </div>
+  ${BOT(o.pg)}`;
+const duo = (o) => `${TOP(o.k)}
+  <div style="margin-top:40px;text-align:center"><span class="chip">${o.cat}</span><h3 style="margin-top:20px">${o.title}</h3></div>
+  <div style="position:relative;height:820px;margin-top:20px">
+    <div class="phone ${o.tall?'tall':''}" style="position:absolute;width:330px;right:150px;top:40px;transform:rotate(5deg)"><img src="${o.imgs[0]}"></div>
+    <div class="phone ${o.tall?'tall':''}" style="position:absolute;width:330px;left:150px;top:90px;transform:rotate(-5deg)"><img src="${o.imgs[1]}"></div>
+  </div>
+  ${BOT(o.pg)}`;
+const trio = (o) => `${TOP(o.k)}
+  <div style="margin-top:40px;text-align:center"><span class="chip">${o.cat}</span><h3 style="margin-top:20px">${o.title}</h3></div>
+  <div style="position:relative;height:820px;margin-top:20px">
+    <div class="phone tall" style="position:absolute;width:280px;right:40px;top:110px;transform:rotate(8deg)"><img src="${o.imgs[0]}"></div>
+    <div class="phone tall" style="position:absolute;width:280px;left:40px;top:110px;transform:rotate(-8deg)"><img src="${o.imgs[2]}"></div>
+    <div class="phone tall" style="position:absolute;width:320px;left:50%;top:30px;transform:translateX(-50%);z-index:3"><img src="${o.imgs[1]}"></div>
+  </div>
+  ${BOT(o.pg)}`;
+const collage = (o) => `${TOP(o.k)}
+  <div style="margin-top:40px"><span class="chip">من أعمالنا</span><h3 style="margin-top:20px">مواقع وتطبيقات <span class="gold">تعمل اليوم</span></h3></div>
+  <div style="margin-top:40px;display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:300px 300px;gap:18px">
+    <img src="adrenaline-food.png" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:24px">
+    <img src="naf-mushaf.png" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:24px;grid-row:span 2">
+    <img src="diving.png" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:24px">
+  </div>
+  ${BOT(o.pg)}`;
+
+/* middle-column statement posts */
+const D = (k, body, pg) => `${TOP(k, true)}${body}${BOT(pg)}`;
+
+/* Instagram grid is newest-first: post numbers 2,5,8,11,14,17 sit in the middle column. */
+const POSTS = {
+  1: () => laptop({k:"Case Study", cat:"موقع ومنصة اشتراكات", title:"Adrenaline <span class='gold'>وجبات صحية</span>", img:"adrenaline-food.png", pg:1}),
+  2: () => D("Technology & Design", `
+        <div style="margin:auto 0">
+          <img src="athr-mark-ondark.svg" style="height:380px">
+          <h1 style="margin-top:50px">نبتكر<br>لنترك <span class="gold">أثرًا</span></h1>
+          <div class="rule" style="margin:34px 0 26px"></div>
+          <p class="kicker" style="font-size:22px">Innovate to make an impact</p>
+        </div>`, 2),
+  3: () => phone({k:"App", cat:"منصة لياقة", title:"DarkFit", desc:"تمارين وتغذية وحاسبات صحية في تطبيق واحد.", img:"darkfit-m.png", pg:3}),
+  4: () => laptop({k:"Edutainment", cat:"منصة تعليمية تفاعلية", title:"ردّة <span class='gold'>تراث الغوص</span>", img:"diving.png", pg:4}),
+  5: () => D("Services", `
+        <div style="margin:auto 0">
+          <h2>كل ما يحتاجه<br><span class="gold">مشروعك الرقمي</span></h2>
+          <div class="list">
+            <div><i>01</i>مواقع إلكترونية</div>
+            <div><i>02</i>تطبيقات الجوال والويب</div>
+            <div><i>03</i>أنظمة إدارة ونقاط بيع</div>
+            <div><i>04</i>هوية بصرية وشعارات</div>
+          </div>
+        </div>`, 5),
+  6: () => trio({k:"App", cat:"تطبيق القرآن الكريم", title:"نَفَحات", imgs:["naf-home.png","naf-mushaf.png","naf-qibla.png"], pg:6}),
+  7: () => laptop({k:"Branding + Web", cat:"هوية وموقع", title:"Dopamin <span class='gold'>حلويات صحية</span>", img:"dopamin.png", pg:7}),
+  8: () => D("Process", `
+        <div style="margin:auto 0">
+          <h2>من الفكرة<br>إلى <span class="gold">الإطلاق</span></h2>
+          <div class="list">
+            <div><i>01</i>نفهم فكرتك وأهدافك</div>
+            <div><i>02</i>نصمّم تجربة تشبهك</div>
+            <div><i>03</i>نطوّر بأعلى جودة</div>
+            <div><i>04</i>نطلق ونبقى معك</div>
+          </div>
+        </div>`, 8),
+  9: () => phone({k:"Kids App", cat:"تطبيق تعليمي للأطفال", title:"صلاتي <span class='gold'>قرة عيني</span>", desc:"رحلة تفاعلية لتعليم الأطفال الوضوء والصلاة.", img:"slaty.png", pg:9}),
+  10: () => laptop({k:"EdTech", cat:"منصة تعليمية", title:"saifx <span class='gold'>الفيزياء</span>", img:"saifx.png", pg:10}),
+  11: () => D("In Numbers", `
+        <div style="margin:auto 0">
+          <h2>أرقام<br><span class="gold">تتحدث عنّا</span></h2>
+          <div class="grid2">
+            <div class="card"><b style="direction:ltr;text-align:right">+70</b><span>مشروعًا منجزًا</span></div>
+            <div class="card"><b>5</b><span>مجالات تقنية</span></div>
+            <div class="card"><b>100%</b><span>تصميم مخصص</span></div>
+            <div class="card"><b>24h</b><span>للرد عليك</span></div>
+          </div>
+        </div>`, 11),
+  12: () => phone({k:"Mobile", cat:"تجربة الجوال", title:"Adrenaline <span class='gold'>على الجوال</span>", desc:"طلب الوجبات والاشتراك بخطوات قليلة من الهاتف.", img:"adrenaline-m.png", pg:12}),
+  13: () => duo({k:"App", cat:"نَفَحات", title:"التسبيح <span class='gold'>والقبلة</span>", imgs:["naf-tasbeeh.png","naf-qibla.png"], tall:true, pg:13}),
+  14: () => D("Why ATHR", `
+        <div style="margin:auto 0">
+          <h2>لماذا<br><span class="gold">أثر</span>؟</h2>
+          <div class="grid2">
+            <div class="card"><h4>تصميم عربي أصيل</h4><p>واجهات تُبنى للعربية أولًا</p></div>
+            <div class="card"><h4>التزام بالمواعيد</h4><p>جدول واضح منذ البداية</p></div>
+            <div class="card"><h4>تواصل مباشر</h4><p>مع الفريق المنفّذ نفسه</p></div>
+            <div class="card"><h4>دعم بعد التسليم</h4><p>علاقتنا لا تنتهي بالإطلاق</p></div>
+          </div>
+        </div>`, 14),
+  15: () => collage({k:"Our Work", pg:15}),
+  16: () => `${TOP("System")}
+        <div style="margin-top:40px"><span class="chip">نظام نقاط بيع وفواتير</span><h3 style="margin-top:20px">مطابخ <span class="gold">الجنوب</span></h3>
+        <p class="lead" style="margin-top:14px">كاشير وفواتير ومتابعة مبيعات للمطاعم.</p></div>
+        <div style="margin-top:90px;display:flex;justify-content:center"><img src="elwakra-pos.jpg" style="width:940px;border-radius:22px;box-shadow:0 40px 60px rgba(74,14,30,.25);border:2px solid rgba(122,22,48,.12)"></div>
+        ${BOT(16)}`,
+  17: () => D("Systems", `
+        <div style="margin:auto 0">
+          <h2>أنظمة تدير<br><span class="gold">أعمالًا حقيقية</span></h2>
+          <div class="list">
+            <div><i>✦</i>نقاط بيع وفواتير للمطاعم</div>
+            <div><i>✦</i>أنظمة حضور وإشراف مدرسي</div>
+            <div><i>✦</i>إدارة تجارة الجملة</div>
+            <div><i>✦</i>تخطيط موارد المؤسسات ERP</div>
+          </div>
+        </div>`, 17),
+  18: () => laptop({k:"Beauty Brand", cat:"موقع وحجز", title:"Nada <span class='gold'>Makeup</span>", img:"nada-new.png", pg:18}),
+  19: () => laptop({k:"EdTech", cat:"منصة ألعاب تعليمية", title:"دَرْب <span class='gold'>التعلّم التفاعلي</span>", img:"games-new.png", pg:19}),
+  20: () => D("Industries", `
+        <div style="margin:auto 0">
+          <h2>قطاعات<br><span class="gold">نخدمها</span></h2>
+          <div class="grid2">
+            <div class="card"><h4>التعليم</h4><p>منصات ومدارس ومراكز تحفيظ</p></div>
+            <div class="card"><h4>الصحة واللياقة</h4><p>أندية ووجبات صحية</p></div>
+            <div class="card"><h4>المطاعم والتجارة</h4><p>متاجر ونقاط بيع</p></div>
+            <div class="card"><h4>السياحة والجمال</h4><p>رحلات بحرية وخبيرات تجميل</p></div>
+          </div>
+        </div>`, 20),
+  21: () => laptop({k:"Quran Platform", cat:"منصة تحفيظ القرآن", title:"دار <span class='gold'>ابن الجزري</span>", img:"ibn-jazry-new.png", pg:21}),
+  22: () => laptop({k:"Luxury Marine", cat:"موقع رحلات بحرية فاخرة", title:"Marasi <span class='gold'>Boats</span>", img:"marasi.png", pg:22}),
+  23: () => D("Let's Talk", `
+        <div style="margin:auto 0;text-align:center">
+          <h1 style="font-size:104px">لديك <span class="gold">فكرة</span>؟<br>لنحوّلها إلى أثر</h1>
+          <p class="lead" style="margin-top:30px">استشارة أولى مجانية — بلا أي التزام</p>
+          <div style="margin-top:54px"><span class="cta">واتساب <span style="font-family:Lexend;direction:ltr">+974 6648 8228</span></span></div>
+        </div>`, 23),
+  24: () => duo({k:"Fitness", cat:"لياقة وتغذية", title:"تطبيقات <span class='gold'>تُستخدم يوميًا</span>", imgs:["darkfit-m.png","adrenaline-m.png"], pg:24}),
+};
+
+const dark = [2,5,8,11,14,17,20,23].includes(n);
+document.body.className = dark ? "dark" : "light";
+document.getElementById("f").innerHTML = POSTS[n]();
+</script>
+</body>
+</html>

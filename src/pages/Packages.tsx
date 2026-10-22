@@ -25,7 +25,7 @@ const PACKAGES = [
     desc: "الأنسب للمشاريع التجارية التي تحتاج حضوراً رقمياً متكاملاً.",
     price: "1,500", currency: "ريال قطري", priceSub: "يبدأ من",
     popular: true,
-    color: "#EBDDC6",
+    color: "#7A1630",
     features: ["موقع إلكتروني احترافي", "هوية بصرية أساسية", "3 قوالب سوشيال ميديا", "دعم تقني شهر كامل", "مراجعات غير محدودة", "تسليم خلال 14 يوم"],
     notIncluded: ["تطبيق جوال"],
   },
@@ -60,14 +60,14 @@ export default function Packages() {
 
         {/* Header */}
         <motion.div {...up()} className="text-center mb-16">
-          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">الباقات</span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
+          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">الباقات</span>
+          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-5">
             اختر ما{" "}
-            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               يناسبك
             </span>
           </h1>
-          <p className="text-white/50 text-xl max-w-xl mx-auto">باقات مرنة لكل نوع من المشاريع — من الخدمة المفردة إلى الإطلاق الكامل.</p>
+          <p className="text-[#2A0913]/65 text-xl max-w-xl mx-auto">باقات مرنة لكل نوع من المشاريع — من الخدمة المفردة إلى الإطلاق الكامل.</p>
         </motion.div>
 
         {/* Pricing cards */}
@@ -77,11 +77,11 @@ export default function Packages() {
               className={`relative rounded-3xl p-8 flex flex-col transition-all duration-500 ${
                 p.popular
                   ? "border-2 hover:-translate-y-2"
-                  : "border border-white/[0.07] hover:border-white/20 hover:-translate-y-1.5"
+                  : "border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1.5"
               }`}
               style={p.popular
-                ? { background: "rgba(255,255,255,0.05)", backdropFilter: "blur(20px)", borderColor: p.color + "60", boxShadow: `0 0 60px ${p.color}15` }
-                : { background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+                ? { background: "rgba(255,255,255,0.75)", backdropFilter: "blur(20px)", borderColor: p.color + "60", boxShadow: `0 0 60px ${p.color}15` }
+                : { background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
 
               {/* Hover bg glow */}
               {p.popular && (
@@ -92,7 +92,7 @@ export default function Packages() {
               {p.popular && (
                 <div className="absolute -top-4 inset-x-0 flex justify-center z-10">
                   <span className="px-5 py-1.5 rounded-full text-xs font-black shadow-lg"
-                    style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", color: "#7A1630", boxShadow: "0 0 20px rgba(235,221,198,0.4)" }}>
+                    style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", color: "#7A1630", boxShadow: "0 0 20px rgba(122,22,48,0.4)" }}>
                     ✦ الأكثر طلباً
                   </span>
                 </div>
@@ -104,8 +104,8 @@ export default function Packages() {
                   style={{ background: `linear-gradient(135deg,${p.color},${p.color}cc)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
                   {p.price} <span className="text-lg">{p.currency}</span>
                 </div>
-                <h2 className="text-xl font-black text-white mt-4 mb-2">{p.title}</h2>
-                <p className="text-sm leading-relaxed text-white/45">{p.desc}</p>
+                <h2 className="text-xl font-black text-[#2A0913] mt-4 mb-2">{p.title}</h2>
+                <p className="text-sm leading-relaxed text-[#2A0913]/65">{p.desc}</p>
               </div>
 
               {/* Divider */}
@@ -113,7 +113,7 @@ export default function Packages() {
 
               <ul className="relative z-10 space-y-3 mb-8 flex-1">
                 {p.features.map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-sm text-white/75">
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-[#2A0913]/85">
                     <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ background: p.color + "20" }}>
                       <svg className="w-2.5 h-2.5" style={{ color: p.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path d="M5 13l4 4L19 7"/></svg>
@@ -122,8 +122,8 @@ export default function Packages() {
                   </li>
                 ))}
                 {p.notIncluded.map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-sm text-white/20 line-through">
-                    <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 bg-white/5 flex-shrink-0">
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-[#2A0913]/45 line-through">
+                    <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 bg-white/10 flex-shrink-0">
                       <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M6 18L18 6M6 6l12 12"/></svg>
                     </span>
                     {f}
@@ -136,7 +136,7 @@ export default function Packages() {
                   p.popular ? "text-[#7A1630] hover:opacity-90" : "hover:opacity-80"
                 }`}
                 style={p.popular
-                  ? { background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 30px rgba(235,221,198,0.3)" }
+                  ? { background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 30px rgba(122,22,48,0.3)" }
                   : { background: p.color + "18", color: p.color, border: `1px solid ${p.color}30` }}>
                 ابدأ الآن
               </NavLink>
@@ -146,28 +146,28 @@ export default function Packages() {
 
         {/* Comparison note */}
         <motion.div {...up(0.15)} className="text-center mb-20">
-          <p className="text-white/30 text-sm">جميع الأسعار بالريال القطري — نقبل الدفع عبر NAPS، Ooredoo Money، أو تحويل بنكي</p>
+          <p className="text-[#2A0913]/55 text-sm">جميع الأسعار بالريال القطري — نقبل الدفع عبر NAPS، Ooredoo Money، أو تحويل بنكي</p>
         </motion.div>
 
         {/* FAQ */}
         <motion.div {...up(0.2)}>
           <div className="text-center mb-10">
-            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-3">الأسئلة الشائعة</span>
-            <h2 className="text-3xl font-black text-white">كل ما تريد معرفته</h2>
+            <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-3">الأسئلة الشائعة</span>
+            <h2 className="text-3xl font-black text-[#2A0913]">كل ما تريد معرفته</h2>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-3">
             {FAQS.map((item, i) => (
               <motion.div key={item.q} {...up(0.25 + i * 0.04)}
-                className="rounded-2xl border border-white/[0.07] overflow-hidden transition-all duration-300"
-                style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+                className="rounded-2xl border border-[#4A0E1E]/15 overflow-hidden transition-all duration-300"
+                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-right gap-4 hover:bg-white/[0.02] transition-colors">
-                  <span className="font-bold text-white text-sm">{item.q}</span>
+                  className="w-full flex items-center justify-between p-5 text-right gap-4 hover:bg-white/60 transition-colors">
+                  <span className="font-bold text-[#2A0913] text-sm">{item.q}</span>
                   <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                     openFaq === i ? "rotate-45" : ""
-                  }`} style={{ background: openFaq === i ? "rgba(235,221,198,0.2)" : "rgba(255,255,255,0.06)", color: openFaq === i ? "#EBDDC6" : "rgba(255,255,255,0.4)" }}>
+                  }`} style={{ background: openFaq === i ? "rgba(122,22,48,0.2)" : "rgba(74,14,30,0.06)", color: openFaq === i ? "#7A1630" : "rgba(42,9,19,0.5)" }}>
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M12 5v14M5 12h14"/></svg>
                   </span>
                 </button>
@@ -178,7 +178,7 @@ export default function Packages() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25 }}>
-                      <div className="px-5 pb-5 text-sm text-white/50 leading-relaxed border-t border-white/[0.05] pt-4">
+                      <div className="px-5 pb-5 text-sm text-[#2A0913]/65 leading-relaxed border-t border-[#4A0E1E]/15 pt-4">
                         {item.a}
                       </div>
                     </motion.div>
@@ -191,15 +191,15 @@ export default function Packages() {
 
         {/* CTA */}
         <motion.div {...up(0.3)}
-          className="relative mt-16 rounded-3xl p-10 text-center overflow-hidden border border-[#EBDDC6]/15"
-          style={{ background: "linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
+          className="relative mt-16 rounded-3xl p-10 text-center overflow-hidden border border-[#7A1630]/15"
+          style={{ background: "linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-3 relative z-10">ما زلت غير متأكد؟</h2>
-          <p className="text-white/50 mb-7 relative z-10">تحدث معنا مجاناً ونساعدك تختار الأنسب لمشروعك</p>
+            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(122,22,48,0.08) 0%,transparent 60%)" }} />
+          <h2 className="text-2xl md:text-3xl font-black text-[#F3E2B6] mb-3 relative z-10">ما زلت غير متأكد؟</h2>
+          <p className="text-white/65 mb-7 relative z-10">تحدث معنا مجاناً ونساعدك تختار الأنسب لمشروعك</p>
           <NavLink to="/contact"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.3)" }}>
+            style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 40px rgba(122,22,48,0.3)" }}>
             استشارة مجانية
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </NavLink>

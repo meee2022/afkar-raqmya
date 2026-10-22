@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
+import DocumentsPanel from "./admin/DocumentsPanel";
 
 const STATUS_MAP = {
   new:       { label: "جديد",        cls: "bg-[#EBDDC6]/15 text-[#EBDDC6] border border-[#EBDDC6]/30" },
@@ -456,6 +457,7 @@ export default function Admin() {
     { id:"dashboard", label:"لوحة التحكم", icon:Icons.dashboard },
     { id:"projects",  label:"المشاريع",    icon:Icons.projects },
     { id:"messages",  label:"الرسائل",     icon:Icons.messages, badge:newCount||undefined },
+    { id:"documents", label:"الفواتير وعروض الأسعار", icon:Icons.content },
     { id:"settings",  label:"الإعدادات",   icon:Icons.settings },
   ];
 
@@ -506,10 +508,10 @@ export default function Admin() {
         {/* Logo */}
         <div className="h-16 flex items-center px-5 border-b border-white/[0.07]">
           <div className="flex items-center gap-3 overflow-hidden">
-            <img src="/favicon.png" alt="Fikra" className="w-9 h-9 rounded-xl flex-shrink-0" />
+            <img src="/athr-mark-ondark.svg" alt="ATHR" className="w-9 h-9 object-contain flex-shrink-0" />
             {sidebarOpen && (
               <div>
-                <div className="font-black text-white text-sm leading-tight" style={{fontFamily:"Lexend"}}>Fikra</div>
+                <div className="font-black text-white text-sm leading-tight" style={{fontFamily:"Lexend"}}>ATHR</div>
                 <div className="text-[10px] text-white/30">لوحة الإدارة</div>
               </div>
             )}
@@ -617,6 +619,7 @@ export default function Admin() {
 
           {activeNav==="settings" && <SettingsPanel token={adminToken} />}
           {activeNav==="projects" && <ProjectsPanel token={adminToken} />}
+          {activeNav==="documents" && <DocumentsPanel token={adminToken} />}
 
           {(activeNav==="dashboard"||activeNav==="messages") && <>
 

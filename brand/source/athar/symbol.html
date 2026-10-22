@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Lexend:wght@400&family=Tajawal:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C9A35F;--light:#F3E2B6;--dark:#8F6A2F;--maroon:#4A0E1E;--night:#14050B;--beige:#EBDDC6}
+  body{margin:0;background:#222;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;width:1208px}
+  .c{position:relative;width:600px;height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .n{position:absolute;top:8px;left:12px;color:#fff;font:700 40px sans-serif;text-shadow:0 0 6px #000}
+  .latin{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.45em;font-size:54px;text-indent:.45em;margin-top:26px}
+  .tag{font-family:Lexend;font-size:12px;letter-spacing:.4em;text-indent:.4em;margin-top:8px}
+  .ar{font-family:Tajawal;font-size:22px;margin-top:6px}
+  .row{display:flex;align-items:center;gap:34px}
+  .row .latin{margin:0}
+</style>
+</head>
+<body>
+<script>
+/*
+  The ATHR symbol: "the trace".
+  Three dots of ث become three rising squares (pixels = idea),
+  growing in size along a diagonal, ending in a four-point spark (impact).
+  A single tapered blade underneath = the stroke of أثر / the path left behind.
+*/
+function symbol(id, a, b, size=260){
+  return `<svg width="${size}" height="${size}" viewBox="0 0 200 200">
+    <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+    <g fill="url(#${id})">
+      <!-- the trace: tapered blade rising from lower-left -->
+      <path d="M18 176 C 70 168, 118 140, 150 98 L 156 104 C 126 150, 76 180, 18 176 Z"/>
+      <!-- three rising pixels (dots of tha) -->
+      <rect x="56" y="118" width="12" height="12" transform="rotate(45 62 124)"/>
+      <rect x="82" y="88"  width="17" height="17" transform="rotate(45 90.5 96.5)"/>
+      <rect x="114" y="54" width="23" height="23" transform="rotate(45 125.5 65.5)"/>
+      <!-- the spark: impact -->
+      <path d="M164 14 C 166 34, 170 38, 190 40 C 170 42, 166 46, 164 66 C 162 46, 158 42, 138 40 C 158 38, 162 34, 164 14 Z"/>
+    </g>
+  </svg>`;
+}
+const G = ['#8F6A2F','#F3E2B6'];
+document.body.innerHTML = `
+  <div class="c" style="background:var(--maroon)"><b class="n">1</b>
+    ${symbol('s1',...G)}
+    <div class="latin" style="color:var(--light)">ATHR</div>
+    <div class="tag" style="color:var(--gold)">FROM IDEA TO IMPACT</div>
+  </div>
+  <div class="c" style="background:var(--night)"><b class="n">2</b>
+    <div class="row">${symbol('s2',...G,150)}<div><div class="latin" style="color:var(--light)">ATHR</div>
+    <div class="ar" style="color:var(--gold);text-align:center" dir="rtl">أثر للتقنية والتصميم</div></div></div>
+  </div>
+  <div class="c" style="background:var(--beige)"><b class="n">3</b>
+    ${symbol('s3','#4A0E1E','#7A1630')}
+    <div class="latin" style="color:var(--maroon)">ATHR</div>
+    <div class="tag" style="color:var(--dark)">FROM IDEA TO IMPACT</div>
+  </div>
+  <div class="c" style="background:var(--night)"><b class="n">4</b>
+    <div style="width:360px;height:360px;border-radius:50%;background:var(--maroon);display:flex;align-items:center;justify-content:center">${symbol('s4',...G,240)}</div>
+    <div class="tag" style="color:var(--gold);margin-top:22px">INSTAGRAM AVATAR</div>
+  </div>`;
+</script>
+</body></html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Cormorant+Garamond:wght@500;600&family=Lexend:wght@300;400&family=Tajawal:wght@700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#222;display:grid;grid-template-columns:1fr;gap:8px;padding:8px;width:1208px}
+  .c{position:relative;height:420px;display:flex;align-items:center;justify-content:center;gap:40px}
+  .n{position:absolute;top:8px;left:12px;color:#fff;font:700 36px sans-serif;text-shadow:0 0 6px #000}
+  .tag{font-family:Lexend;font-weight:300;font-size:15px;letter-spacing:.42em;text-indent:.42em;margin-top:4px}
+</style>
+</head>
+<body>
+<script>
+/* Wordmark: "THR" in Cinzel + a custom swash A: the left leg of the A becomes a long
+   flourish that sweeps under the word, echoing the trace stroke of the symbol. */
+const sym = (id,a,b,s) => `<svg width="${s}" height="${s}" viewBox="0 0 200 200">
+  <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+  <g fill="url(#${id})">
+    <path d="M18 176 C 70 168, 118 140, 150 98 L 156 104 C 126 150, 76 180, 18 176 Z"/>
+    <rect x="56" y="118" width="12" height="12" transform="rotate(45 62 124)"/>
+    <rect x="82" y="88" width="17" height="17" transform="rotate(45 90.5 96.5)"/>
+    <rect x="114" y="54" width="23" height="23" transform="rotate(45 125.5 65.5)"/>
+    <path d="M164 14 C 166 34, 170 38, 190 40 C 170 42, 166 46, 164 66 C 162 46, 158 42, 138 40 C 158 38, 162 34, 164 14 Z"/>
+  </g></svg>`;
+
+const word = (id,a,b,tagColor,tag='TECH &amp; DIGITAL SOLUTIONS') => `<div>
+  <svg width="560" height="170" viewBox="0 0 560 170">
+    <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+    <g fill="url(#${id})">
+      <!-- swash A: thin right leg, apex, and a sweeping left leg that curls into a long tail -->
+      <path d="M92 18 L 100 18 L 146 128 L 132 128 Z"/>
+      <path d="M92 18 C 80 60, 62 100, 40 124 C 26 140, 8 146, -8 142 C 10 144, 26 134, 38 118 C 60 88, 78 50, 90 18 Z"/>
+      <path d="M72 88 L 124 88 L 126 94 L 70 94 Z"/>
+      <text x="160" y="128" font-family="Cinzel" font-weight="500" font-size="132" letter-spacing="10">THR</text>
+      <!-- tail continues under the word -->
+      <path d="M-8 142 C 120 156, 330 150, 470 138 C 330 154, 120 162, -8 142 Z" opacity=".9"/>
+    </g>
+  </svg>
+  <div class="tag" style="color:${tagColor}">${tag}</div>
+</div>`;
+
+const G=['#8F6A2F','#F3E2B6'];
+document.body.innerHTML = `
+  <div class="c" style="background:radial-gradient(circle at 50% 30%,#5a1226,#3a0a17)"><b class="n">1</b>${word('w1',...G,'#EBDDC6')}</div>
+  <div class="c" style="background:#4A0E1E"><b class="n">2</b>${sym('s2',...G,190)}${word('w2',...G,'#C9A35F','FROM IDEA TO IMPACT')}</div>
+  <div class="c" style="background:#EBDDC6"><b class="n">3</b>${sym('s3','#4A0E1E','#7A1630',190)}${word('w3','#4A0E1E','#7A1630','#8F6A2F','FROM IDEA TO IMPACT')}</div>`;
+</script>
+</body></html>

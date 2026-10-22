@@ -7,33 +7,26 @@ import Seo from "../components/Seo";
 const CATS = ["الكل", "مواقع", "تطبيقات", "هوية", "نظم"];
 
 const STATIC_PROJECTS = [
-  { _id: "s0", titleAr: "نَفَحات — صحبة القرآن", descriptionAr: "منصة رقمية لصحبة دائمة مع القرآن الكريم، تقدم تجربة تفاعلية يومية تجمع المستخدم بكلام الله.", category: "تطبيقات", result: "تجربة روحية يومية", imageUrl: null, videoUrl: "/nafafat.mp4", color: "from-emerald-800 to-teal-950", accent: "#2dd4bf",
+  { _id: "s0", titleAr: "Marasi Boats — رحلات بحرية فاخرة", descriptionAr: "موقع فاخر لرحلات اليخت الخاص في الدوحة: الباقات والمناسبات والمعرض والحجز.", category: "مواقع", result: "تجربة حجز فاخرة", imageUrl: "/previews/marasi.jpg", videoUrl: "/videos/marasi.mp4", color: "", accent: "#3B5BDB", liveUrl: "https://marasi-boats.pages.dev/" },
+  { _id: "s1", titleAr: "Adrenaline — وجبات صحية", descriptionAr: "منصة وجبات صحية بخطط غذائية ذكية وحاسبة سعرات واشتراكات وتوصيل يومي داخل قطر.", category: "مواقع", result: "منصة طلب واشتراك", imageUrl: "/previews/adrenaline-food.png", videoUrl: "/videos/adrenaline.mp4", color: "", accent: "#3cc4f0", liveUrl: "https://adrenalinehealthy.com/" },
+  { _id: "s2", titleAr: "نَفَحات — صحبة القرآن", descriptionAr: "تطبيق للمصحف وأوقات الصلاة والقبلة والتسبيح، بتجربة عربية هادئة.", category: "تطبيقات", phone: true, result: "تجربة روحية يومية", imageUrl: "/previews/naf-home.jpg", videoUrl: "/nafafat.mp4", color: "", accent: "#2dd4bf",
     challenge: "إيجاد طريقة تجعل القارئ على صلة يومية بالقرآن الكريم بأسلوب عصري وجذاب بعيداً عن التطبيقات التقليدية.",
     solution: "تصميم تجربة تفاعلية تشمل تصفّح المصحف، آية اليوم، التلاوات الصوتية، والأدوات والمكتبة — بواجهة عربية أنيقة وسلسة.",
     outcome: "تطبيق متكامل يوفّر صحبة قرآنية يومية بتجربة مستخدم راقية على الجوال.",
     liveUrl: "https://nafahat.vercel.app/" },
-  { _id: "s1", titleAr: "Adrenaline — وجبات صحية", descriptionAr: "منصة وجبات صحية بخطط غذائية ذكية وحاسبة سعرات واشتراكات وتوصيل يومي داخل قطر.", category: "مواقع", result: "منصة طلب واشتراك", imageUrl: "/previews/adrenaline-food.png", videoUrl: null, color: "from-sky-700 to-slate-950", accent: "#3cc4f0", liveUrl: "https://adrenalinehealthy.com/" },
-  { _id: "s2", titleAr: "Adrenaline Gym — نادي رياضي", descriptionAr: "موقع نادي أدرينالين جم في لوسيل يعرض خدمات التدريب والقوة والاستشفاء وحجز الزيارات.", category: "مواقع", result: "حضور رقمي قوي", imageUrl: "/previews/adrenaline-gym.png", videoUrl: null, color: "from-zinc-800 to-black", accent: "#ef4444" },
-  { _id: "s3", titleAr: "ردّة — تراث الغوص على اللؤلؤ", descriptionAr: "منصة تعليمية تفاعلية عن تراث الغوص على اللؤلؤ في قطر والخليج، تشمل رحلة غوص افتراضية والسفن والأدوات.", category: "مواقع", result: "تجربة تعليمية غامرة", imageUrl: "/previews/diving.png", videoUrl: null, color: "from-cyan-800 to-slate-950", accent: "#38bdf8" },
-  { _id: "s4", titleAr: "Dopamin — حلويات", descriptionAr: "موقع علامة حلويات عصري بهوية دافئة، يعرض المنتجات والطلبات بتجربة بصرية شهية.", category: "مواقع", result: "هوية علامة شهية", imageUrl: "/previews/dopamin.png", videoUrl: null, color: "from-rose-700 to-amber-900", accent: "#e879a6" },
-  { _id: "s5", titleAr: "دار ابن الجزري", descriptionAr: "منصة متكاملة لتحفيظ القرآن الكريم وتعليم علومه، ببرامج متنوعة لجميع الأعمار والمستويات.", category: "مواقع", result: "منصة تعليم قرآني", imageUrl: "/previews/ibn-jazry.png", videoUrl: null, color: "from-teal-700 to-emerald-950", accent: "#2dd4bf" },
-  { _id: "s6", titleAr: "saifx — تعلّم الفيزياء", descriptionAr: "مساحة منظمة لتعلم الفيزياء: الدروس والكتب والتدريبات لصفوف المرحلة الثانوية.", category: "مواقع", result: "منصة تعليمية متخصصة", imageUrl: "/previews/saifx.png", videoUrl: null, color: "from-blue-700 to-indigo-950", accent: "#60a5fa" },
-  { _id: "s7", titleAr: "المصك — وجبات دايت ولياقة", descriptionAr: "موقع وجبات دايت ولياقة تُحضَّر يومياً بإشراف أخصائيي تغذية، مع باقات تنشيف ولياقة وتوصيل صحي في قطر.", category: "مواقع", result: "باقات تغذية متكاملة", imageUrl: null, videoUrl: null, color: "from-emerald-700 to-green-950", accent: "#4ade80" },
-  { _id: "s8", titleAr: "DarkFit — منصة لياقة", descriptionAr: "منصة لياقة وصحة شاملة: تمارين ومولّد خطط وتغذية ومكملات ومدربين وحاسبات صحية في تجربة واحدة.", category: "تطبيقات", result: "منظومة لياقة متكاملة", imageUrl: "/previews/darkfit.png", videoUrl: null, color: "from-lime-900 to-black", accent: "#63ff19", liveUrl: "https://darkfit.netlify.app/" },
-  { _id: "s9", titleAr: "مساحة التعلّم التفاعلي — قطر", descriptionAr: "منصة ألعاب وأسئلة تفاعلية وأوراق عمل لكل المواد، تتيح للمعلم إنشاء أنشطته ومشاركتها مع طلابه.", category: "تطبيقات", result: "أدوات تعليمية تفاعلية", imageUrl: "/previews/games.png", videoUrl: null, color: "from-amber-600 to-orange-900", accent: "#fbbf24" },
-  { _id: "s10", titleAr: "صلاتي قرة عيني", descriptionAr: "رحلة تفاعلية لتعليم الأطفال الأذان والوضوء والصلاة مع شخصيتي حمد وهدى.", category: "تطبيقات", result: "تعليم أطفال ممتع", imageUrl: "/previews/slaty.png", videoUrl: null, color: "from-green-600 to-emerald-900", accent: "#34d399" },
-  { _id: "s11", titleAr: "ruqi — منصة دورات", descriptionAr: "منصة دورات تعليمية إلكترونية متكاملة لإدارة الكورسات والطلاب والمحتوى.", category: "تطبيقات", result: "منصة تعلّم إلكتروني", imageUrl: null, videoUrl: null, color: "from-violet-700 to-purple-950", accent: "#a78bfa" },
-  { _id: "s12", titleAr: "Nada Makeup — خبيرة تجميل", descriptionAr: "موقع وهوية لخبيرة مكياج العرائس والمناسبات في قطر ومصر، مع عرض الأعمال ونظام حجز.", category: "هوية", result: "هوية أنيقة + حجز", imageUrl: null, videoUrl: null, color: "from-pink-600 to-rose-900", accent: "#f472b6" },
-  { _id: "s13", titleAr: "مطابخ الجنوب — نقاط بيع", descriptionAr: "نظام نقاط بيع وفواتير إلكترونية لمطاعم المأكولات الشعبية — إدارة الطلبات والفواتير بسهولة.", category: "نظم", result: "POS وفواتير", imageUrl: "/previews/elwakra.png", videoUrl: null, color: "from-orange-700 to-red-950", accent: "#f97316", liveUrl: "https://elwakra-kitchen.vercel.app/" },
-  { _id: "s14", titleAr: "مدم مي للتجارة", descriptionAr: "منصة إدارة تجارة جملة الخضروات والفواكه في الدوحة — متابعة البضائع والطلبات والحسابات.", category: "نظم", result: "إدارة تجارة جملة", imageUrl: "/previews/madam-mai.png", videoUrl: null, color: "from-rose-800 to-slate-950", accent: "#fb7185" },
-  { _id: "s15", titleAr: "ابن تيمية — النظام الإلكتروني", descriptionAr: "نظام موحّد للحضور والإشراف الصفي والتقارير والاستبانات لمدرسة ابن تيمية الثانوية للبنين.", category: "نظم", result: "نظام مدرسي متكامل", imageUrl: "/previews/ibn-taymia.png", videoUrl: null, color: "from-amber-700 to-yellow-900", accent: "#fbbf24" },
-  { _id: "s16", titleAr: "نورة الدوسري — تنسيق أكاديمي", descriptionAr: "منصة التنسيق الأكاديمي لمدرسة ابتدائية: الرسالة الأسبوعية والخطة السنوية ومتابعة المهام.", category: "نظم", result: "إدارة أكاديمية منظمة", imageUrl: "/previews/nora-work.png", videoUrl: null, color: "from-fuchsia-800 to-slate-950", accent: "#f472b6", liveUrl: "https://nora-work.pages.dev/" },
-  { _id: "s17", titleAr: "إشراف التربية البدنية", descriptionAr: "نظام إشراف ومتابعة لمعلمي التربية البدنية، يشمل الزيارات الصفية والتقارير والبحث الإجرائي في قطر.", category: "نظم", result: "نظام إشراف تربوي", imageUrl: null, videoUrl: null, color: "from-blue-700 to-slate-950", accent: "#60a5fa" },
-  { _id: "s18", titleAr: "نظام ERP متكامل", descriptionAr: "نظام إدارة موارد مؤسسية شامل يغطي المخزون والفواتير والموارد البشرية والتقارير التحليلية.", category: "نظم", result: "إدارة مؤسسية شاملة", imageUrl: null, videoUrl: null, color: "from-violet-700 to-purple-900", accent: "#a78bfa" },
+  { _id: "s3", titleAr: "Nada Makeup — خبيرة تجميل", descriptionAr: "موقع أنيق لخبيرة مكياج العرائس في قطر ومصر، مع معرض الأعمال ونظام الحجز.", category: "هوية", result: "هوية أنيقة + حجز", imageUrl: "/previews/nada-new.jpg", videoUrl: "/videos/nada.mp4", color: "", accent: "#C0806A", liveUrl: "https://nada-makeup-9yu.pages.dev/" },
+  { _id: "s4", titleAr: "ردّة — تراث الغوص على اللؤلؤ", descriptionAr: "منصة تعليمية تفاعلية عن تراث الغوص على اللؤلؤ في قطر والخليج، برحلة غوص افتراضية.", category: "مواقع", result: "تجربة تعليمية غامرة", imageUrl: "/previews/diving.png", videoUrl: null, color: "", accent: "#38bdf8" },
+  { _id: "s5", titleAr: "DarkFit — منصة لياقة", descriptionAr: "تمارين ومولّد خطط وتغذية ومدربين وحاسبات صحية في تطبيق واحد.", category: "تطبيقات", phone: true, result: "منظومة لياقة متكاملة", imageUrl: "/previews/darkfit-m.jpg", videoUrl: "/videos/darkfit.mp4", color: "", accent: "#4CA31A", liveUrl: "https://darkfit.netlify.app/" },
+  { _id: "s6", titleAr: "Dopamin — حلويات صحية", descriptionAr: "هوية دافئة وموقع لعلامة حلويات صحية يعرض المنتجات بتجربة بصرية شهية.", category: "هوية", result: "هوية علامة شهية", imageUrl: "/previews/dopamin.png", videoUrl: "/videos/dopamin.mp4", color: "", accent: "#C2577E", liveUrl: "https://dopamin-bj1.pages.dev/" },
+  { _id: "s7", titleAr: "دَرْب — التعلّم التفاعلي", descriptionAr: "منصة ألعاب وأنشطة تعليمية لكل المواد، يُنشئ فيها المعلم أنشطته ويشاركها مع طلابه.", category: "تطبيقات", result: "أدوات تعليمية تفاعلية", imageUrl: "/previews/games-new.jpg", videoUrl: "/videos/darb.mp4", color: "", accent: "#7A1630", liveUrl: "https://activities-dmc.pages.dev/" },
+  { _id: "s8", titleAr: "دار ابن الجزري", descriptionAr: "منصة متكاملة لتحفيظ القرآن الكريم وتعليم أحكام التجويد لجميع الأعمار.", category: "مواقع", result: "منصة تعليم قرآني", imageUrl: "/previews/ibn-jazry-new.jpg", videoUrl: "/videos/ibn-jazry.mp4", color: "", accent: "#1F8A5B", liveUrl: "https://dar-ibn-jazri.vercel.app/" },
+  { _id: "s9", titleAr: "صلاتي قرة عيني", descriptionAr: "رحلة تفاعلية تعلّم الأطفال الأذان والوضوء والصلاة مع شخصيتي حمد وهدى.", category: "تطبيقات", phone: true, result: "تعليم أطفال ممتع", imageUrl: "/previews/slaty.png", videoUrl: "/videos/slaty.mp4", color: "", accent: "#34A06B", liveUrl: "https://noora-edu.com/" },
+  { _id: "s10", titleAr: "زينة وخزينة — الذهب", descriptionAr: "تطبيق لبيع وشراء الذهب ومتابعة الأسعار والمعاملات بسهولة.", category: "تطبيقات", result: "تداول ذهب مبسّط", imageUrl: "/previews/gold.jpg", videoUrl: null, color: "", accent: "#C9A35F", liveUrl: "https://goldqatar1.netlify.app/" },
+  { _id: "s11", titleAr: "مطابخ الجنوب — نقاط بيع", descriptionAr: "نظام كاشير وفواتير إلكترونية ومتابعة مبيعات لمطاعم المأكولات الشعبية.", category: "نظم", result: "POS وفواتير", imageUrl: "/previews/elwakra-pos.jpg", videoUrl: null, color: "", accent: "#B4472A", liveUrl: "https://stdk.vercel.app/" },
 ];
 
 const ACCENT_COLORS: Record<string, string> = {
-  "مواقع": "#EBDDC6", "تطبيقات": "#4ade80", "هوية": "#f472b6", "نظم": "#a78bfa",
+  "مواقع": "#7A1630", "تطبيقات": "#4ade80", "هوية": "#f472b6", "نظم": "#a78bfa",
 };
 
 const up = (delay = 0) => ({
@@ -119,9 +112,9 @@ function VideoLightbox({
         transition={{ type: "spring", damping: 22, stiffness: 280 }}
         onClick={e => e.stopPropagation()}
         style={{
-          background: "rgba(20,5,11,0.95)",
+          background: "#F6F0E6",
           border: `1px solid ${project.accent}30`,
-          boxShadow: `0 0 80px ${project.accent}25, 0 40px 120px rgba(0,0,0,0.8)`,
+          boxShadow: `0 0 80px ${project.accent}25, 0 40px 120px rgba(74,14,30,0.35)`,
         }}
       >
         {/* Close button */}
@@ -130,9 +123,9 @@ function VideoLightbox({
           aria-label="إغلاق تفاصيل المشروع"
           onClick={onClose}
           className="absolute top-4 left-4 z-50 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
-          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
+          style={{ background: "rgba(74,14,30,0.08)", border: "1px solid rgba(74,14,30,0.15)" }}
         >
-          <svg className="w-4 h-4 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg className="w-4 h-4 text-[#2A0913]/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -158,12 +151,12 @@ function VideoLightbox({
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
-              <p className="text-white/45 text-sm">تفاصيل المشروع والنتائج موضحة بالأسفل</p>
+              <p className="text-[#2A0913]/65 text-sm">تفاصيل المشروع والنتائج موضحة بالأسفل</p>
             </div>
           )}
           {/* Gradient overlay at bottom */}
           <div className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
-            style={{ background: "linear-gradient(to top, rgba(20,5,11,0.9), transparent)" }} />
+            style={{ background: "linear-gradient(to top, rgba(246,240,230,0.9), transparent)" }} />
         </div>
 
         {/* Info footer */}
@@ -178,8 +171,8 @@ function VideoLightbox({
                 <span className="text-xs font-black" style={{ color: project.accent }}>{project.result}</span>
               )}
             </div>
-            <h2 id="project-dialog-title" className="text-xl font-black text-white">{project.titleAr}</h2>
-            <p className="text-white/45 text-sm mt-1 leading-relaxed">{project.descriptionAr}</p>
+            <h2 id="project-dialog-title" className="text-xl font-black text-[#2A0913]">{project.titleAr}</h2>
+            <p className="text-[#2A0913]/65 text-sm mt-1 leading-relaxed">{project.descriptionAr}</p>
           </div>
           <div className="flex gap-2.5 flex-shrink-0">
             {project.liveUrl && (
@@ -202,19 +195,19 @@ function VideoLightbox({
 
         {/* Case study — shows only when fields are provided */}
         {(project.challenge || project.solution || project.outcome) && (
-          <div className="px-6 pb-6 grid sm:grid-cols-3 gap-4 border-t border-white/[0.06] pt-5">
+          <div className="px-6 pb-6 grid sm:grid-cols-3 gap-4 border-t border-[#4A0E1E]/15 pt-5">
             {[
               { label: "التحدي", value: project.challenge, icon: "M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
               { label: "الحل", value: project.solution, icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
               { label: "النتيجة", value: project.outcome, icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
             ].filter(b => b.value).map(b => (
-              <div key={b.label} className="rounded-2xl p-4 border border-white/[0.06]"
+              <div key={b.label} className="rounded-2xl p-4 border border-[#4A0E1E]/15"
                 style={{ background: "rgba(255,255,255,0.02)" }}>
                 <div className="flex items-center gap-2 mb-2">
                   <svg className="w-4 h-4 flex-shrink-0" style={{ color: project.accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d={b.icon} /></svg>
                   <span className="text-xs font-black" style={{ color: project.accent }}>{b.label}</span>
                 </div>
-                <p className="text-white/55 text-sm leading-relaxed">{b.value}</p>
+                <p className="text-[#2A0913]/70 text-sm leading-relaxed">{b.value}</p>
               </div>
             ))}
           </div>
@@ -227,7 +220,7 @@ function VideoLightbox({
 
       {/* ESC hint */}
       <motion.div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/25 text-xs"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[#2A0913]/50 text-xs"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -250,7 +243,7 @@ function ProjectCard({
 }) {
   const videoPreviewRef = useRef<HTMLVideoElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const accent = (p as any).accent ?? ACCENT_COLORS[p.category] ?? "#EBDDC6";
+  const accent = (p as any).accent ?? ACCENT_COLORS[p.category] ?? "#7A1630";
   const color = (p as any).color ?? "from-[#7A1630] to-[#14050b]";
 
   // Autoplay muted preview on hover (or always if no image)
@@ -279,8 +272,8 @@ function ProjectCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.97 }}
       transition={{ duration: 0.4, delay: index * 0.06, ease: "easeOut" as const }}
-      className="group relative rounded-2xl overflow-hidden border border-white/[0.07] hover:border-white/20 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EBDDC6] transition-all duration-500 flex flex-col cursor-pointer text-right w-full"
-      style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}
+      className="group relative rounded-2xl overflow-hidden border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1630] transition-all duration-500 flex flex-col cursor-pointer text-right w-full"
+      style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onClick={handleCardClick}
@@ -290,19 +283,19 @@ function ProjectCard({
         style={{ background: `radial-gradient(ellipse at 30% 30%,${accent}12 0%,transparent 60%)` }} />
 
       {/* Media area */}
-      {p.category === "تطبيقات" ? (
-        /* ── Phone mockup for apps ── */
-        <div className="relative overflow-hidden flex items-center justify-center py-6 px-4" style={{
-          minHeight: 220,
+      {(p as any).phone ? (
+        /* ── Phone mockup for mobile screenshots ── */
+        <div className="relative overflow-hidden flex items-center justify-center" style={{
+          height: 300,
           background: `radial-gradient(ellipse at 50% 60%, ${accent}18 0%, transparent 70%), linear-gradient(135deg, ${accent}08, transparent)`,
         }}>
           {/* Glow blob */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 50%, ${accent}20 0%, transparent 65%)` }} />
 
           {/* Phone frame SVG */}
-          <div className="relative z-10" style={{ width: 120, height: 210 }}>
+          <div className="relative z-10 transition-transform duration-500 group-hover:scale-[1.04]" style={{ width: 132, height: 270 }}>
             {/* Phone body */}
-            <div className="absolute inset-0 rounded-[22px] border-2 border-white/20"
+            <div className="absolute inset-0 rounded-[22px] border-2 border-[#4A0E1E]/20"
               style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)", boxShadow: `0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.1)` }} />
             {/* Notch */}
             <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-12 h-4 rounded-full z-20"
@@ -311,15 +304,19 @@ function ProjectCard({
             </div>
             {/* Screen */}
             <div className="absolute rounded-[18px] overflow-hidden" style={{ inset: 3 }}>
-              {p.videoUrl ? (
+              {p.imageUrl ? (
+                <>
+                  <img src={p.imageUrl} alt={`مشروع ${p.titleAr}`} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                  {p.videoUrl && <video ref={videoPreviewRef} src={p.videoUrl} muted playsInline loop preload="none"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovering ? "opacity-100" : "opacity-0"}`} />}
+                </>
+              ) : p.videoUrl ? (
                 <video
                   ref={videoPreviewRef}
                   src={p.videoUrl}
                   className="w-full h-full object-cover"
                   muted autoPlay playsInline loop preload="metadata"
                 />
-              ) : p.imageUrl ? (
-                <img src={p.imageUrl} alt={`مشروع ${p.titleAr}`} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${accent}30, ${accent}10)` }}>
                   <svg className="w-8 h-8 opacity-30" style={{ color: accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -332,7 +329,7 @@ function ProjectCard({
                 style={{ background: "rgba(0,0,0,0.3)" }} />
             </div>
             {/* Home indicator */}
-            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-white/20 z-20" />
+            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-white/10 z-20" />
             {/* Side buttons */}
             <div className="absolute -right-0.5 top-14 w-0.5 h-6 rounded-l-sm" style={{ background: "#333" }} />
             <div className="absolute -left-0.5 top-12 w-0.5 h-5 rounded-r-sm" style={{ background: "#333" }} />
@@ -370,30 +367,33 @@ function ProjectCard({
         </div>
       ) : (
         /* ── Browser mockup for websites & others ── */
-        <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+        <div className="relative overflow-hidden" style={{ height: 300 }}>
           {/* Video on hover */}
           {p.videoUrl && (
             <video
               ref={videoPreviewRef}
               src={p.videoUrl}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovering ? "opacity-100" : "opacity-0"}`}
+              className={`absolute inset-x-0 bottom-0 z-[5] w-full object-contain transition-opacity duration-500 ${isHovering ? "opacity-100" : "opacity-0"}`}
+              style={{ top: 30, height: "calc(100% - 30px)" }}
               muted playsInline loop preload="none"
             />
           )}
 
           {p.imageUrl ? (
             <>
-              <div className="absolute top-0 inset-x-0 z-10 flex items-center gap-1.5 px-3 py-2 bg-[#151515]/90 backdrop-blur-sm border-b border-white/[0.05]">
+              {/* Blurred copy fills the frame so the real screenshot can show uncropped (object-contain) */}
+              <img src={p.imageUrl} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-60" />
+              <div className="absolute top-0 inset-x-0 z-10 flex items-center gap-1.5 px-3 py-2 bg-[#151515]/90 backdrop-blur-sm border-b border-[#4A0E1E]/15">
                 <div className="w-2 h-2 rounded-full bg-[#ff5f57]"/>
                 <div className="w-2 h-2 rounded-full bg-[#febc2e]"/>
                 <div className="w-2 h-2 rounded-full bg-[#28c840]"/>
-                <div className="flex-1 mx-2 h-4 rounded bg-white/[0.06] flex items-center px-2">
+                <div className="flex-1 mx-2 h-4 rounded bg-white/60 flex items-center px-2">
                   <div className="w-1.5 h-1.5 rounded-full mr-1" style={{ background: accent }}/>
-                  <div className="h-1 w-16 rounded bg-white/15"/>
+                  <div className="h-1 w-16 rounded bg-white/10"/>
                 </div>
               </div>
               <img src={p.imageUrl} alt={`مشروع ${p.titleAr}`} loading="lazy" decoding="async"
-                className={`w-full h-full object-cover object-top transition-opacity duration-500 ${p.videoUrl && isHovering ? "opacity-0" : "opacity-100"}`} />
+                className={`absolute inset-x-0 bottom-0 w-full object-contain transition-all duration-700 group-hover:scale-[1.03] ${p.videoUrl && isHovering ? "opacity-0" : "opacity-100"}`} style={{ top: 30, height: "calc(100% - 30px)" }} />
             </>
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${color} flex items-center justify-center relative`}>
@@ -452,8 +452,8 @@ function ProjectCard({
 
       {/* Info */}
       <div className="relative z-10 p-5 flex-1 flex flex-col">
-        <h3 className="font-black text-white mb-1.5 group-hover:text-[#EBDDC6] transition-colors duration-300">{p.titleAr}</h3>
-        <p className="text-white/45 text-sm leading-relaxed mb-4 flex-1">{p.descriptionAr}</p>
+        <h3 className="font-black text-[#2A0913] mb-1.5 group-hover:text-[#7A1630] transition-colors duration-300">{p.titleAr}</h3>
+        <p className="text-[#2A0913]/65 text-sm leading-relaxed mb-4 flex-1">{p.descriptionAr}</p>
         {p.result && (
           <div className="flex items-center justify-between">
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl"
@@ -461,7 +461,7 @@ function ProjectCard({
               <svg className="w-3.5 h-3.5 flex-shrink-0" style={{ color: accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
               <span className="text-xs font-black" style={{ color: accent }}>{p.result}</span>
             </div>
-            <span className="text-white/25 text-xs opacity-0 group-hover:opacity-100 transition-opacity">انقر للمعاينة ←</span>
+            <span className="text-[#2A0913]/50 text-xs opacity-0 group-hover:opacity-100 transition-opacity">انقر للمعاينة ←</span>
           </div>
         )}
       </div>
@@ -479,51 +479,19 @@ export default function Portfolio() {
   const [lightboxProject, setLightboxProject] = useState<LightboxProject | null>(null);
   const convexProjects = useQuery(api.projects.list);
 
-  const projects = (convexProjects && convexProjects.length > 0
-    ? convexProjects.map(p => {
-        if (p.titleAr.includes("نَفَحات")) return {
-          ...p, color: undefined,
-          liveUrl: p.liveUrl ?? "https://nafahat.vercel.app/",
-          challenge: p.challenge ?? STATIC_PROJECTS[0].challenge,
-          solution: p.solution ?? STATIC_PROJECTS[0].solution,
-          outcome: p.outcome ?? STATIC_PROJECTS[0].outcome,
-        };
-        if (p.titleAr.includes("Adrenaline")) return {
-          ...p,
-          titleAr: "Adrenaline — وجبات صحية",
-          descriptionAr: "منصة متكاملة للوجبات الصحية والخطط الغذائية الذكية، تشمل قائمة الوجبات وحاسبة السعرات والاشتراكات والتوصيل داخل قطر.",
-          result: "منصة طلب واشتراك متكاملة",
-          imageUrl: p.imageUrl ?? "/adrenaline-preview.png",
-          liveUrl: p.liveUrl ?? "https://adrenalinehealthy.com/",
-          challenge: p.challenge ?? STATIC_PROJECTS[1].challenge,
-          solution: p.solution ?? STATIC_PROJECTS[1].solution,
-          outcome: p.outcome ?? STATIC_PROJECTS[1].outcome,
-          color: undefined,
-        };
-        if (p.titleAr.includes("DarkFit")) return {
-          ...p,
-          titleAr: "DarkFit — منصة اللياقة",
-          descriptionAr: "تطبيق لياقة وصحة شامل يجمع التمارين ومولّد الخطط والتغذية والمكملات والمدربين والحاسبات الصحية في تجربة واحدة.",
-          category: "تطبيقات",
-          result: "منظومة لياقة متكاملة",
-          imageUrl: p.imageUrl ?? "/darkfit-preview.png",
-          liveUrl: p.liveUrl ?? "https://darkfit.netlify.app/",
-          challenge: p.challenge ?? STATIC_PROJECTS[2].challenge,
-          solution: p.solution ?? STATIC_PROJECTS[2].solution,
-          outcome: p.outcome ?? STATIC_PROJECTS[2].outcome,
-          color: undefined,
-        };
-        return { ...p, color: undefined };
-      })
-    : STATIC_PROJECTS)
-    .sort((a, b) => Number(Boolean((b as any).featured)) - Number(Boolean((a as any).featured)) || Number(Boolean(b.videoUrl || b.imageUrl)) - Number(Boolean(a.videoUrl || a.imageUrl)));
+  // Curated real projects first; admin-added projects show only if they have a real image or video.
+  const staticTitles = new Set(STATIC_PROJECTS.map(p => p.titleAr.split(" — ")[0]));
+  const extra = (convexProjects ?? [])
+    .filter(p => (p.imageUrl || p.videoUrl) && !staticTitles.has(p.titleAr.split(" — ")[0]))
+    .map(p => ({ ...p, color: "", accent: ACCENT_COLORS[p.category] ?? "#7A1630", phone: false }));
+  const projects = [...STATIC_PROJECTS, ...extra];
 
   const filtered = filter === "الكل" ? projects : projects.filter(p => p.category === filter);
 
   return (
     <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
       <Seo path="/portfolio" title="أعمالنا"
-        description="مشاريع نفخر بها — مواقع وتطبيقات وهويات بصرية أنجزتها فكرة لعملاء في قطر والخليج. شاهد أعمالنا ونتائجها." />
+        description="مشاريع نفخر بها — مواقع وتطبيقات وهويات بصرية أنجزتها أثر لعملاء في قطر والخليج. شاهد أعمالنا ونتائجها." />
 
       {/* Video Lightbox */}
       <AnimatePresence>
@@ -540,14 +508,14 @@ export default function Portfolio() {
 
         {/* Header */}
         <motion.div {...up()} className="mb-16">
-          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">أعمالنا</span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
+          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">أعمالنا</span>
+          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-5">
             مشاريع{" "}
-            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               نفخر بها
             </span>
           </h1>
-          <p className="text-white/50 text-xl max-w-2xl">كل مشروع يمثل التزامنا بالجودة والإبداع والنتائج الحقيقية.</p>
+          <p className="text-[#2A0913]/65 text-xl max-w-2xl">كل مشروع يمثل التزامنا بالجودة والإبداع والنتائج الحقيقية.</p>
         </motion.div>
 
         {/* Filter tabs */}
@@ -557,16 +525,16 @@ export default function Portfolio() {
               className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                 filter === c
                   ? "text-[#7A1630] shadow-lg"
-                  : "border border-white/[0.1] text-white/50 hover:border-white/25 hover:text-white"
+                  : "border border-[#4A0E1E]/15 text-[#2A0913]/65 hover:border-[#4A0E1E]/25 hover:text-[#2A0913]"
               }`}
-              style={filter === c ? { background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 20px rgba(235,221,198,0.3)" } : {}}>
+              style={filter === c ? { background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 20px rgba(122,22,48,0.3)" } : {}}>
               {c}
             </button>
           ))}
         </motion.div>
 
         {/* Hint */}
-        <motion.p {...up(0.15)} className="text-white/25 text-xs mb-6 flex items-center gap-1.5">
+        <motion.p {...up(0.15)} className="text-[#2A0913]/50 text-xs mb-6 flex items-center gap-1.5">
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
           افتح أي مشروع لمشاهدة التفاصيل والمعاينة الكاملة — الفيديوهات الطولية تظهر بدون قص
         </motion.p>
@@ -588,7 +556,7 @@ export default function Portfolio() {
         </AnimatePresence>
 
         {filtered.length === 0 && (
-          <div className="text-center py-20 text-white/30">
+          <div className="text-center py-20 text-[#2A0913]/55">
             <div className="text-5xl mb-4">🔍</div>
             <p className="font-semibold">لا توجد مشاريع في هذا التصنيف</p>
           </div>
@@ -603,13 +571,13 @@ export default function Portfolio() {
             { n: String(projects.filter(p => p.liveUrl).length), l: "مشاريع قابلة للزيارة" },
           ].map((s, i) => (
             <motion.div key={s.l} {...up(0.25 + i * 0.07)}
-              className="p-6 rounded-2xl text-center border border-white/[0.07] hover:border-[#EBDDC6]/20 transition-all"
-              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              className="p-6 rounded-2xl text-center border border-[#4A0E1E]/15 hover:border-[#7A1630]/20 transition-all"
+              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
               <div className="text-3xl font-black mb-1" dir="ltr"
-                style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+                style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
                 {s.n}
               </div>
-              <div className="text-sm text-white/50">{s.l}</div>
+              <div className="text-sm text-[#2A0913]/65">{s.l}</div>
             </motion.div>
           ))}
         </motion.div>

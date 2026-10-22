@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Lexend:wght@400&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#222;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;width:1208px}
+  .c{position:relative;width:600px;height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .n{position:absolute;top:8px;left:12px;color:#fff;font:700 40px sans-serif;text-shadow:0 0 6px #000}
+  .latin{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;font-size:58px;margin-top:-10px;text-indent:.42em}
+  .tag{font-family:Lexend;font-size:12px;letter-spacing:.38em;margin-top:6px;text-indent:.38em}
+</style>
+</head>
+<body>
+<script>
+// Original calligraphic "أثر" mark: tapered alef blade, shallow tha bowl with three diamond dots,
+// long feather-like ra tail sweeping down-left, four-point star as the hamza.
+function mark(id, fill, spark, echo){
+  return `<svg width="380" height="360" viewBox="0 0 400 380" style="overflow:visible">
+    <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8F6A2F"/><stop offset=".45" stop-color="#F3E2B6"/><stop offset="1" stop-color="#C9A35F"/></linearGradient></defs>
+    <g fill="${fill}">
+      <!-- alef: tapered blade with a calligraphic head flick -->
+      <path d="M318 78 C 324 66, 336 62, 344 70 C 338 72, 332 78, 330 86 L 340 248 C 326 262, 304 262, 292 250 L 300 100 Z"/>
+      <!-- tha bowl: shallow cup from alef base to the left -->
+      <path d="M296 240 C 272 300, 196 318, 150 270 C 142 262, 142 254, 150 248 C 186 288, 250 278, 282 232 Z"/>
+      <!-- three dots of tha as diamonds -->
+      <path d="M196 206 l8 -10 l8 10 l-8 10z M220 192 l8 -10 l8 10 l-8 10z M244 206 l8 -10 l8 10 l-8 10z"/>
+      <!-- ra: long feather tail sweeping down-left, ends in a hairline -->
+      <path d="M150 248 C 156 290, 130 330, 40 372 C 110 322, 128 290, 138 256 Z"/>
+      ${echo ? `<path d="M158 262 C 150 300, 118 338, 60 370" stroke="${fill}" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>` : ``}
+    </g>
+    <!-- hamza as a four-point star -->
+    <path d="M${spark[0]} ${spark[1]} l5 15 l15 5 l-15 5 l-5 15 l-5 -15 l-15 -5 l15 -5z" fill="${fill}"/>
+  </svg>`;
+}
+const cells = [
+  {bg:'#4A0E1E', fill:'url(#g1)', id:'g1', latin:'#F3E2B6', tag:'#C9A35F', spark:[250,118], echo:true},
+  {bg:'#4A0E1E', fill:'#C9A35F', id:'g2', latin:'#F3E2B6', tag:'#C9A35F', spark:[250,118], echo:false},
+  {bg:'#EBDDC6', fill:'#4A0E1E', id:'g3', latin:'#4A0E1E', tag:'#8F6A2F', spark:[250,118], echo:false},
+  {bg:'#14050B', fill:'url(#g4)', id:'g4', latin:'#F3E2B6', tag:'#C9A35F', spark:[250,118], echo:true},
+];
+document.body.innerHTML = cells.map((c,i)=>`<div class="c" style="background:${c.bg}"><b class="n">${i+1}</b>${mark(c.id,c.fill,c.spark,c.echo)}
+  <div class="latin" style="color:${c.latin}">ATHR</div><div class="tag" style="color:${c.tag}">FROM IDEA TO IMPACT</div></div>`).join('');
+</script>
+</body></html>

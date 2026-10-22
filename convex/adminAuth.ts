@@ -20,7 +20,8 @@ export async function requireAdmin(ctx: any, token: string) {
     .unique();
 
   if (!session || session.expiresAt <= Date.now()) {
-    if (session) await ctx.db.delete(session._id);
+    // Queries get a read-only db, so only mutations can clean up the expired row.
+    if (session && typeof ctx.db.delete === "function") await ctx.db.delete(session._id);
     throw new Error("انتهت الجلسة، سجّل الدخول مرة أخرى");
   }
   return session;

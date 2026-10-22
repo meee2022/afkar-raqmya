@@ -63,14 +63,14 @@ export default function Contact() {
 
         {/* Header */}
         <motion.div {...up()} className="mb-16 max-w-2xl">
-          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">تواصل معنا</span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
+          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">تواصل معنا</span>
+          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-5">
             ابدأ مشروعك{" "}
-            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               اليوم
             </span>
           </h1>
-          <p className="text-white/50 text-xl leading-relaxed">هل لديك فكرة؟ شاركنا بها ونحن نتولى الباقي. نرد خلال 24 ساعة.</p>
+          <p className="text-[#2A0913]/65 text-xl leading-relaxed">هل لديك فكرة؟ شاركنا بها ونحن نتولى الباقي. نرد خلال 24 ساعة.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-10 items-start">
@@ -81,29 +81,29 @@ export default function Contact() {
             <motion.a {...up(0.1)}
               href={`https://wa.me/${settings.whatsapp}`}
               target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-5 p-6 rounded-2xl border border-white/[0.07] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              className="flex items-center gap-5 p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: "radial-gradient(ellipse at 30% 50%,rgba(37,211,102,0.08) 0%,transparent 60%)" }} />
               <div className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
                 style={{ background: "#25D366", boxShadow: "0 0 20px rgba(37,211,102,0.3)" }}>
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7 text-[#2A0913]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
                   <path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.072 1.5 5.786L0 24l6.387-1.467A11.951 11.951 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.951 9.951 0 01-5.17-1.4l-.37-.22-3.793.872.938-3.682-.24-.382A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
                 </svg>
               </div>
               <div className="relative z-10 flex-1">
-                <div className="font-black text-white mb-0.5">واتساب</div>
-                <div className="text-white/50 text-sm" dir="ltr">+{settings.whatsapp}</div>
+                <div className="font-black text-[#2A0913] mb-0.5">واتساب</div>
+                <div className="text-[#2A0913]/65 text-sm" dir="ltr">+{settings.whatsapp}</div>
               </div>
-              <svg className="relative z-10 w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <svg className="relative z-10 w-5 h-5 text-[#2A0913]/55 group-hover:text-[#2A0913]/75 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             </motion.a>
 
             {/* Email */}
             <motion.a {...up(0.15)}
               href={`mailto:${settings.email}`}
-              className="flex items-center gap-5 p-6 rounded-2xl border border-white/[0.07] hover:border-white/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              className="flex items-center gap-5 p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background: "radial-gradient(ellipse at 30% 50%,rgba(96,165,250,0.08) 0%,transparent 60%)" }} />
               <div className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -111,22 +111,22 @@ export default function Contact() {
                 <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
               <div className="relative z-10 flex-1">
-                <div className="font-black text-white mb-0.5">البريد الإلكتروني</div>
-                <div className="text-white/50 text-sm">{settings.email}</div>
+                <div className="font-black text-[#2A0913] mb-0.5">البريد الإلكتروني</div>
+                <div className="text-[#2A0913]/65 text-sm">{settings.email}</div>
               </div>
-              <svg className="relative z-10 w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <svg className="relative z-10 w-5 h-5 text-[#2A0913]/55 group-hover:text-[#2A0913]/75 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             </motion.a>
 
             {/* Hours */}
             <motion.div {...up(0.2)}
-              className="p-6 rounded-2xl border border-white/[0.07]"
-              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              className="p-6 rounded-2xl border border-[#4A0E1E]/15"
+              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(235,221,198,0.15)", color: "#EBDDC6" }}>
+                  style={{ background: "rgba(122,22,48,0.15)", color: "#7A1630" }}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 </div>
-                <span className="text-xs font-black text-white/40 uppercase tracking-widest">ساعات العمل</span>
+                <span className="text-xs font-black text-[#2A0913]/60 uppercase tracking-widest">ساعات العمل</span>
               </div>
               <div className="space-y-3 text-sm">
                 {[
@@ -135,9 +135,9 @@ export default function Contact() {
                   { days: "الجمعة", hours: "مغلق", active: false },
                 ].map(r => (
                   <div key={r.days} className="flex items-center justify-between">
-                    <span className="text-white/50">{r.days}</span>
+                    <span className="text-[#2A0913]/65">{r.days}</span>
                     <span className={`font-semibold text-xs px-2.5 py-1 rounded-full ${
-                      r.active ? "text-[#4ade80]" : "text-white/25"
+                      r.active ? "text-[#4ade80]" : "text-[#2A0913]/50"
                     }`} style={r.active ? { background: "rgba(74,222,128,0.1)" } : {}}>
                       {r.hours}
                     </span>
@@ -148,25 +148,25 @@ export default function Contact() {
 
             {/* Location */}
             <motion.div {...up(0.25)}
-              className="p-6 rounded-2xl border border-white/[0.07] flex items-center gap-4"
-              style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+              className="p-6 rounded-2xl border border-[#4A0E1E]/15 flex items-center gap-4"
+              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(235,221,198,0.12)", color: "#EBDDC6", border: "1px solid rgba(235,221,198,0.2)" }}>
+                style={{ background: "rgba(122,22,48,0.12)", color: "#7A1630", border: "1px solid rgba(122,22,48,0.2)" }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
               </div>
               <div>
-                <div className="font-black text-white mb-0.5 text-sm">الموقع</div>
-                <div className="text-white/40 text-sm">الدوحة، قطر 🇶🇦</div>
+                <div className="font-black text-[#2A0913] mb-0.5 text-sm">الموقع</div>
+                <div className="text-[#2A0913]/60 text-sm">الدوحة، قطر 🇶🇦</div>
               </div>
             </motion.div>
           </div>
 
           {/* Right: Form */}
           <motion.div {...up(0.12)}
-            className="rounded-3xl border border-white/[0.07] p-8 relative overflow-hidden"
-            style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(20px)" }}>
+            className="rounded-3xl border border-[#4A0E1E]/15 p-8 relative overflow-hidden"
+            style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px)" }}>
             <div className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at 80% 20%,rgba(235,221,198,0.04) 0%,transparent 60%)" }} />
+              style={{ background: "radial-gradient(ellipse at 80% 20%,rgba(122,22,48,0.04) 0%,transparent 60%)" }} />
 
             {sent ? (
               <div className="relative z-10 text-center py-16">
@@ -178,25 +178,25 @@ export default function Contact() {
                   style={{ background: "rgba(74,222,128,0.15)", border: "2px solid rgba(74,222,128,0.3)" }}>
                   <svg className="w-10 h-10 text-[#4ade80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7"/></svg>
                 </motion.div>
-                <h3 className="text-2xl font-black text-white mb-2">تم إرسال رسالتك! ✦</h3>
-                <p className="text-white/50 mb-8">سنتواصل معك خلال 24 ساعة — أو راسلنا الآن على واتساب لرد أسرع.</p>
+                <h3 className="text-2xl font-black text-[#2A0913] mb-2">تم إرسال رسالتك! ✦</h3>
+                <p className="text-[#2A0913]/65 mb-8">سنتواصل معك خلال 24 ساعة — أو راسلنا الآن على واتساب لرد أسرع.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                   <a href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(`مرحباً، أنا ${form.name || ""} وأرسلت لكم عبر الموقع بخصوص: ${form.service || "مشروعي"}`)}`}
                     target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black px-6 py-3 rounded-full text-white hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-2 text-sm font-black px-6 py-3 rounded-full text-[#2A0913] hover:scale-105 transition-all"
                     style={{ background: "#25D366", boxShadow: "0 0 24px rgba(37,211,102,0.35)" }}>
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
                     تواصل عبر واتساب
                   </a>
                   <button onClick={() => { setSent(false); setForm({ name:"", phone:"", service:"", message:"" }); }}
-                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#EBDDC6]/30 text-[#EBDDC6] hover:bg-[#EBDDC6]/10 transition-all">
+                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#7A1630]/30 text-[#7A1630] hover:bg-[#7A1630]/10 transition-all">
                     إرسال رسالة أخرى
                   </button>
                 </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="relative z-10">
-                <h2 className="text-xl font-black text-white mb-6">أرسل لنا رسالة</h2>
+                <h2 className="text-xl font-black text-[#2A0913] mb-6">أرسل لنا رسالة</h2>
                 <div className="space-y-4">
                   {/* Name + Phone */}
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -205,18 +205,18 @@ export default function Contact() {
                       { id:"phone", label:"رقم الجوال", type:"tel", ph:"+974 XXXX XXXX", req:true },
                     ].map(f => (
                       <div key={f.id}>
-                        <label htmlFor={f.id} className="block text-xs font-bold text-white/50 mb-2">
-                          {f.label} {f.req && <span className="text-[#EBDDC6]">*</span>}
+                        <label htmlFor={f.id} className="block text-xs font-bold text-[#2A0913]/65 mb-2">
+                          {f.label} {f.req && <span className="text-[#7A1630]">*</span>}
                         </label>
                         <input id={f.id} type={f.type} required={f.req} placeholder={f.ph}
                           value={(form as any)[f.id]}
                           onChange={e => { setForm({...form, [f.id]: e.target.value}); if ((errors as any)[f.id]) setErrors({ ...errors, [f.id]: undefined }); }}
-                          className="w-full px-4 py-3.5 rounded-xl text-sm text-white placeholder:text-white/20 transition-all outline-none"
+                          className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] placeholder:text-[#2A0913]/45 transition-all outline-none"
                           style={{
-                            background: "rgba(255,255,255,0.05)",
+                            background: "rgba(255,255,255,0.75)",
                             border: `1px solid ${(errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                           }}
-                          onFocus={e => { e.currentTarget.style.borderColor = "rgba(235,221,198,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(235,221,198,0.06)"; }}
+                          onFocus={e => { e.currentTarget.style.borderColor = "rgba(122,22,48,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(122,22,48,0.06)"; }}
                           onBlur={e => { e.currentTarget.style.borderColor = (errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                         />
                         {(errors as any)[f.id] && <p className="text-[#f87171] text-xs mt-1.5">{(errors as any)[f.id]}</p>}
@@ -226,11 +226,11 @@ export default function Contact() {
 
                   {/* Service */}
                   <div>
-                    <label htmlFor="service" className="block text-xs font-bold text-white/50 mb-2">الخدمة المطلوبة</label>
+                    <label htmlFor="service" className="block text-xs font-bold text-[#2A0913]/65 mb-2">الخدمة المطلوبة</label>
                     <select id="service" value={form.service} onChange={e => setForm({...form, service: e.target.value})}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-white transition-all outline-none"
+                      className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] transition-all outline-none"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
+                        background: "rgba(255,255,255,0.75)",
                         border: "1px solid rgba(255,255,255,0.08)",
                       }}>
                       <option value="" className="bg-[#1c0710]">اختر الخدمة...</option>
@@ -240,18 +240,18 @@ export default function Contact() {
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="block text-xs font-bold text-white/50 mb-2">
-                      رسالتك <span className="text-[#EBDDC6]">*</span>
+                    <label htmlFor="message" className="block text-xs font-bold text-[#2A0913]/65 mb-2">
+                      رسالتك <span className="text-[#7A1630]">*</span>
                     </label>
                     <textarea id="message" required rows={5}
                       placeholder="اكتب لنا فكرتك أو ما تحتاجه بالتفصيل..."
                       value={form.message} onChange={e => { setForm({...form, message: e.target.value}); if (errors.message) setErrors({ ...errors, message: undefined }); }}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-white placeholder:text-white/20 transition-all outline-none resize-none"
+                      className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] placeholder:text-[#2A0913]/45 transition-all outline-none resize-none"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
+                        background: "rgba(255,255,255,0.75)",
                         border: `1px solid ${errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
                       }}
-                      onFocus={e => { e.currentTarget.style.borderColor = "rgba(235,221,198,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(235,221,198,0.06)"; }}
+                      onFocus={e => { e.currentTarget.style.borderColor = "rgba(122,22,48,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(122,22,48,0.06)"; }}
                       onBlur={e => { e.currentTarget.style.borderColor = errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
                     />
                     {errors.message && <p className="text-[#f87171] text-xs mt-1.5">{errors.message}</p>}
@@ -260,7 +260,7 @@ export default function Contact() {
                   {/* Submit */}
                   <button type="submit" disabled={loading}
                     className="w-full py-4 rounded-2xl font-black text-sm disabled:opacity-60 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", color: "#7A1630", boxShadow: "0 0 30px rgba(235,221,198,0.3)" }}>
+                    style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", color: "#7A1630", boxShadow: "0 0 30px rgba(122,22,48,0.3)" }}>
                     {loading ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -274,7 +274,7 @@ export default function Contact() {
                     )}
                   </button>
 
-                  <p className="text-center text-xs text-white/25">نرد عادةً خلال أقل من 24 ساعة</p>
+                  <p className="text-center text-xs text-[#2A0913]/50">نرد عادةً خلال أقل من 24 ساعة</p>
                 </div>
               </form>
             )}

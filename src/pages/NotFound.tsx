@@ -36,18 +36,18 @@ export default function NotFound() {
           className="relative inline-block mb-6">
           <span className="text-[160px] md:text-[200px] font-black leading-none select-none"
             style={{
-              background: "linear-gradient(135deg,#EBDDC6 0%,#C9A97A 40%,#4ade80 100%)",
+              background: "linear-gradient(135deg,#4A0E1E 0%,#7A1630 50%,#C9A35F 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              filter: "drop-shadow(0 0 40px rgba(235,221,198,0.4))",
+              filter: "drop-shadow(0 0 40px rgba(122,22,48,0.4))",
             }}>
             404
           </span>
           {/* Orbiting dot */}
           <motion.div
             className="absolute w-4 h-4 rounded-full"
-            style={{ top: "20%", right: "-8px", background: "#EBDDC6", boxShadow: "0 0 16px rgba(235,221,198,0.8)" }}
+            style={{ top: "20%", right: "-8px", background: "#7A1630", boxShadow: "0 0 16px rgba(122,22,48,0.8)" }}
             animate={{ rotate: 360 }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
@@ -64,7 +64,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-3xl md:text-4xl font-black text-white mb-3">
+          className="text-3xl md:text-4xl font-black text-[#2A0913] mb-3">
           الصفحة غير موجودة!
         </motion.h1>
 
@@ -72,10 +72,10 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-white/50 text-lg mb-8 leading-relaxed">
+          className="text-[#2A0913]/65 text-lg mb-8 leading-relaxed">
           يبدو أن الصفحة التي تبحث عنها انتقلت أو لم تعد موجودة.
           <br />
-          <span className="text-[#EBDDC6]/70 text-sm">سيتم توجيهك للرئيسية خلال <span className="font-black text-[#EBDDC6]">{count}</span> ثانية</span>
+          <span className="text-[#7A1630]/70 text-sm">سيتم توجيهك للرئيسية خلال <span className="font-black text-[#7A1630]">{count}</span> ثانية</span>
         </motion.p>
 
         {/* Quick links */}
@@ -90,8 +90,8 @@ export default function NotFound() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.55 + i * 0.07 }}>
               <NavLink to={l.to}
-                className="block p-4 rounded-2xl border border-white/[0.07] hover:border-[#EBDDC6]/30 hover:-translate-y-1 transition-all duration-300 text-white/60 hover:text-white font-bold text-sm"
-                style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+                className="block p-4 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#7A1630]/30 hover:-translate-y-1 transition-all duration-300 text-[#2A0913]/75 hover:text-[#2A0913] font-bold text-sm"
+                style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
                 {l.label}
               </NavLink>
             </motion.div>
@@ -105,7 +105,7 @@ export default function NotFound() {
           transition={{ delay: 0.8 }}>
           <NavLink to="/"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow: "0 0 40px rgba(235,221,198,0.35)" }}>
+            style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 40px rgba(122,22,48,0.35)" }}>
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             العودة للرئيسية
           </NavLink>
@@ -113,12 +113,12 @@ export default function NotFound() {
 
         {/* Progress bar for countdown */}
         <motion.div className="mt-8 h-1 rounded-full overflow-hidden mx-auto max-w-xs"
-          style={{ background: "rgba(255,255,255,0.05)" }}
+          style={{ background: "rgba(255,255,255,0.75)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}>
           <motion.div className="h-full rounded-full"
-            style={{ background: "linear-gradient(90deg,#EBDDC6,#C9A97A)" }}
+            style={{ background: "linear-gradient(90deg,#7A1630,#C9A35F)" }}
             initial={{ width: "100%" }}
             animate={{ width: "0%" }}
             transition={{ duration: 10, ease: "linear" }} />

@@ -44,31 +44,31 @@ export default function Services() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
 
         <motion.div {...up()} className="text-center mb-16">
-          <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-5">
+          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">خدماتنا</span>
+          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-5">
             كل ما تحتاجه{" "}
-            <span style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
               في مكان واحد
             </span>
           </h1>
-          <p className="text-white/50 text-xl max-w-2xl mx-auto">نقدم خدمات رقمية متكاملة تبدأ من الفكرة وتنتهي بنتائج حقيقية.</p>
+          <p className="text-[#2A0913]/65 text-xl max-w-2xl mx-auto">نقدم خدمات رقمية متكاملة تبدأ من الفكرة وتنتهي بنتائج حقيقية.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
           {SERVICES.map((s, i) => (
             <motion.div key={s.num} {...up(i * 0.07)}
-              className="group relative rounded-2xl p-6 border border-white/[0.07] hover:border-white/20 transition-all duration-500 overflow-hidden hover:-translate-y-1.5"
-              style={{ background:"rgba(255,255,255,0.03)", backdropFilter:"blur(10px)" }}>
+              className="group relative rounded-2xl p-6 border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 transition-all duration-500 overflow-hidden hover:-translate-y-1.5"
+              style={{ background:"rgba(255,255,255,0.7)", backdropFilter:"blur(10px)" }}>
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ background:`radial-gradient(ellipse at 30% 30%,${s.color}12 0%,transparent 60%)` }} />
               <div className="absolute top-4 left-5 text-5xl font-black opacity-[0.05] select-none" style={{ color:s.color }}>{s.num}</div>
               <div className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
                 style={{ background:s.color+"18", color:s.color, border:`1px solid ${s.color}30` }}>{s.icon}</div>
-              <h3 className="relative z-10 text-lg font-black text-white mb-3">{s.title}</h3>
-              <p className="relative z-10 text-white/50 text-sm leading-relaxed mb-5">{s.desc}</p>
+              <h3 className="relative z-10 text-lg font-black text-[#2A0913] mb-3">{s.title}</h3>
+              <p className="relative z-10 text-[#2A0913]/65 text-sm leading-relaxed mb-5">{s.desc}</p>
               <ul className="relative z-10 space-y-2">
                 {s.features.map(f => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-white/40">
+                  <li key={f} className="flex items-center gap-2 text-xs text-[#2A0913]/60">
                     <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background:s.color }} />{f}
                   </li>
                 ))}
@@ -81,8 +81,8 @@ export default function Services() {
 
         <motion.div {...up(0.1)} className="mb-16">
           <div className="text-center mb-10">
-            <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
-            <h2 className="text-3xl font-black text-white">عملية بسيطة ونتائج استثنائية</h2>
+            <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-3">كيف نعمل</span>
+            <h2 className="text-3xl font-black text-[#2A0913]">عملية بسيطة ونتائج استثنائية</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-4">
             {[
@@ -92,26 +92,26 @@ export default function Services() {
               { step:"04", title:"التسليم", desc:"نسلم ونتابع معك بعد الإطلاق" },
             ].map((p, i) => (
               <motion.div key={p.step} {...up(i * 0.08)}
-                className="relative p-6 rounded-2xl border border-white/[0.07] text-center group hover:border-[#EBDDC6]/20 transition-all"
-                style={{ background:"rgba(255,255,255,0.03)" }}>
-                <div className="text-4xl font-black text-[#EBDDC6]/15 mb-3 group-hover:text-[#EBDDC6]/35 transition-colors">{p.step}</div>
-                <h3 className="font-black text-white mb-2">{p.title}</h3>
-                <p className="text-white/40 text-sm">{p.desc}</p>
+                className="relative p-6 rounded-2xl border border-[#4A0E1E]/15 text-center group hover:border-[#7A1630]/20 transition-all"
+                style={{ background:"rgba(255,255,255,0.7)" }}>
+                <div className="text-4xl font-black text-[#7A1630]/15 mb-3 group-hover:text-[#7A1630]/35 transition-colors">{p.step}</div>
+                <h3 className="font-black text-[#2A0913] mb-2">{p.title}</h3>
+                <p className="text-[#2A0913]/60 text-sm">{p.desc}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
         <motion.div {...up(0.2)}
-          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#EBDDC6]/15"
-          style={{ background:"linear-gradient(135deg,rgba(122,22,48,0.6),rgba(20,5,11,0.8))" }}>
+          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#7A1630]/15"
+          style={{ background:"linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(235,221,198,0.08) 0%,transparent 60%)" }} />
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-3 relative z-10">جاهز تبدأ مشروعك؟</h2>
-          <p className="text-white/50 mb-7 relative z-10">تواصل معنا اليوم ونحدد احتياجاتك مجاناً</p>
+            style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(122,22,48,0.08) 0%,transparent 60%)" }} />
+          <h2 className="text-2xl md:text-3xl font-black text-[#F3E2B6] mb-3 relative z-10">جاهز تبدأ مشروعك؟</h2>
+          <p className="text-white/65 mb-7 relative z-10">تواصل معنا اليوم ونحدد احتياجاتك مجاناً</p>
           <NavLink to="/contact"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
-            style={{ background:"linear-gradient(135deg,#EBDDC6,#C9A97A)", boxShadow:"0 0 40px rgba(235,221,198,0.3)" }}>
+            style={{ background:"linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow:"0 0 40px rgba(122,22,48,0.3)" }}>
             احجز استشارة مجانية
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </NavLink>

@@ -64,14 +64,14 @@ export default function Testimonials() {
   return (
     <div className="mt-24">
       <motion.div {...inView()} className="text-center mb-12">
-        <span className="text-[#EBDDC6] text-xs font-black tracking-[0.25em] uppercase block mb-4">آراء عملائنا</span>
-        <h2 className="text-3xl md:text-4xl font-black text-white">ماذا يقول من وثقوا بنا</h2>
+        <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">آراء عملائنا</span>
+        <h2 className="text-3xl md:text-4xl font-black text-[#2A0913]">ماذا يقول من وثقوا بنا</h2>
       </motion.div>
 
       {/* Featured testimonial */}
       <motion.div {...inView(0.1)} className="max-w-3xl mx-auto mb-8">
-        <div className="relative rounded-3xl p-8 md:p-10 border border-white/[0.07] overflow-hidden"
-          style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
+        <div className="relative rounded-3xl p-8 md:p-10 border border-[#4A0E1E]/15 overflow-hidden"
+          style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
           {/* Big quote mark */}
           <div className="absolute top-4 right-6 text-[120px] leading-none font-black select-none pointer-events-none"
             style={{ color: t.color, opacity: 0.08 }}>"</div>
@@ -95,7 +95,7 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-white/80 text-lg md:text-xl leading-relaxed font-medium mb-7">
+              <p className="text-[#2A0913]/85 text-lg md:text-xl leading-relaxed font-medium mb-7">
                 {t.quote}
               </p>
 
@@ -105,8 +105,8 @@ export default function Testimonials() {
                   {t.initial}
                 </div>
                 <div>
-                  <div className="font-black text-white">{t.name}</div>
-                  <div className="text-sm text-white/40">{t.role} — مشروع {t.project}</div>
+                  <div className="font-black text-[#2A0913]">{t.name}</div>
+                  <div className="text-sm text-[#2A0913]/60">{t.role} — مشروع {t.project}</div>
                 </div>
               </div>
             </motion.div>

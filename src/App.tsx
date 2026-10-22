@@ -10,9 +10,10 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Admin = lazy(() => import("./Admin"));
+const DocPrint = lazy(() => import("./pages/DocPrint"));
 
 function PageLoader() {
-  return <div className="min-h-screen bg-[#14050b] text-[#EBDDC6] flex items-center justify-center font-bold">جارٍ التحميل...</div>;
+  return <div className="min-h-screen bg-[#F6F0E6] text-[#7A1630] flex items-center justify-center font-bold">جارٍ التحميل...</div>;
 }
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/doc/:id" element={<DocPrint />} />
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/services" element={<Layout><Services /></Layout>} />
         <Route path="/portfolio" element={<Layout><Portfolio /></Layout>} />

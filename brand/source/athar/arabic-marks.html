@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Reem+Kufi:wght@700&family=Amiri:wght@700&family=Lalezar&family=Cormorant+Garamond:wght@500&family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#222;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;width:1208px}
+  .c{position:relative;width:600px;height:600px;background:#4A0E1E;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .n{position:absolute;top:8px;left:12px;color:#fff;font:700 40px sans-serif}
+  .latin{font-family:'Cormorant Garamond',serif;letter-spacing:.42em;color:#F3E2B6;font-size:58px;margin-top:10px;text-indent:.42em}
+  .tag{font-family:Lexend;font-size:12px;letter-spacing:.38em;color:#C9A35F;margin-top:8px;text-indent:.38em}
+  svg{overflow:visible}
+</style>
+</head>
+<body>
+
+<!-- 1: Diwani / Ruqaa sweep: أثر with thin rising stroke under, hamza = spark -->
+<div class="c"><b class="n">1</b>
+  <svg width="420" height="260" viewBox="0 0 420 260">
+    <defs><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8F6A2F"/><stop offset=".5" stop-color="#F3E2B6"/><stop offset="1" stop-color="#C9A35F"/></linearGradient></defs>
+    <!-- rising sweep -->
+    <path d="M40 230 C 150 230, 300 190, 400 40" stroke="url(#g)" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M60 236 C 170 236, 320 200, 405 60" stroke="url(#g)" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/>
+    <text x="210" y="175" text-anchor="middle" font-family="Aref Ruqaa" font-weight="700" font-size="150" fill="url(#g)">اثر</text>
+    <!-- spark as hamza -->
+    <path d="M300 40 l5 16 l16 5 l-16 5 l-5 16 l-5 -16 l-16 -5 l16 -5z" fill="#F3E2B6"/>
+  </svg>
+  <div class="latin">ATHR</div><div class="tag">FROM IDEA TO IMPACT</div>
+</div>
+
+<!-- 2: Geometric Kufi, three dots of ث as circuit nodes -->
+<div class="c"><b class="n">2</b>
+  <svg width="420" height="260" viewBox="0 0 420 260">
+    <text x="210" y="190" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="170" fill="#F3E2B6">اٮر</text>
+    <!-- circuit nodes replacing the three dots of ث -->
+    <g stroke="#C9A35F" stroke-width="3" fill="#4A0E1E">
+      <path d="M205 118 v-30 h-30" fill="none"/><path d="M225 118 v-45" fill="none"/><path d="M245 118 v-30 h30" fill="none"/>
+      <circle cx="175" cy="88" r="6"/><circle cx="225" cy="73" r="6"/><circle cx="275" cy="88" r="6"/>
+    </g>
+    <path d="M225 35 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 l12 -4z" fill="#C9A35F"/>
+  </svg>
+  <div class="latin">ATHR</div><div class="tag">FROM IDEA TO IMPACT</div>
+</div>
+
+<!-- 3: Amiri classic, vertical tall alef as signal line with pulse -->
+<div class="c"><b class="n">3</b>
+  <svg width="420" height="260" viewBox="0 0 420 260">
+    <defs><linearGradient id="g3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8F6A2F"/><stop offset=".5" stop-color="#F3E2B6"/><stop offset="1" stop-color="#C9A35F"/></linearGradient></defs>
+    <text x="210" y="200" text-anchor="middle" font-family="Amiri" font-weight="700" font-size="190" fill="url(#g3)">أثر</text>
+    <!-- signal pulse line above -->
+    <path d="M60 40 H200 l10 -26 l12 52 l10 -26 H360" stroke="#C9A35F" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+    <path d="M372 40 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4z" fill="#F3E2B6"/>
+  </svg>
+  <div class="latin">ATHR</div><div class="tag">FROM IDEA TO IMPACT</div>
+</div>
+
+<!-- 4: Lalezar bold display with a trail (idea -> impact) exiting into a spark -->
+<div class="c"><b class="n">4</b>
+  <svg width="420" height="260" viewBox="0 0 420 260">
+    <text x="210" y="185" text-anchor="middle" font-family="Lalezar" font-size="180" fill="#F3E2B6">أثر</text>
+    <path d="M30 150 C 120 150, 150 70, 240 70 S 380 20, 395 30" stroke="#C9A35F" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="0 9" />
+    <path d="M395 30 l5 14 l14 5 l-14 5 l-5 14 l-5 -14 l-14 -5 l14 -5z" fill="#C9A35F"/>
+  </svg>
+  <div class="latin">ATHR</div><div class="tag">FROM IDEA TO IMPACT</div>
+</div>
+
+</body></html>

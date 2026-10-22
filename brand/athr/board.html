@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--m:#7A1630;--md:#4A0E1E;--night:#14050B;--gl:#F3E2B6;--g:#C9A35F;--gd:#8F6A2F;--beige:#EBDDC6;--paper:#F6F0E6}
+  *{box-sizing:border-box}
+  body{margin:0;width:1600px;background:var(--paper);font-family:Lexend}
+  .grid{display:grid;grid-template-columns:860px 1fr;grid-template-rows:auto auto}
+  .cell{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .en{font-weight:600;letter-spacing:.32em;text-indent:.32em;line-height:1}
+  .desc{font-weight:400;letter-spacing:.34em;text-indent:.34em}
+  .ar{font-family:'IBM Plex Sans Arabic';font-weight:600}
+  .rule{width:80px;height:2px;background:var(--g);margin:18px 0}
+  .icons{display:flex;gap:34px;justify-content:center;padding:36px 0}
+  .ic{width:150px;height:150px;border-radius:34px;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 30px #4A0E1E33}
+  .pal{display:flex;justify-content:center;gap:40px;padding:34px 40px;background:#fff;border-top:1px solid #0001}
+  .sw{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:#333}
+  .sw i{width:64px;height:64px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px #0001}
+  .sw b{font:600 13px 'IBM Plex Sans Arabic'}
+  .grp{display:flex;gap:22px;align-items:center;padding-inline-start:30px;border-inline-start:1px solid #0002}
+  .grp:first-child{border:0}
+  .grp h4{margin:0 10px 0 0;font:600 18px 'IBM Plex Sans Arabic';color:var(--md)}
+</style>
+</head>
+<body>
+<script>
+// "A" with a gold triangle instead of the crossbar, then "THR"
+const word = (size, color) => `<span class="en" style="text-indent:0;font-size:${size}px;color:${color};display:inline-flex;align-items:flex-end">
+  <svg viewBox="0 0 100 100" style="width:${size*0.9}px;height:${size*0.74}px;margin-inline-end:${size*0.3}px;margin-bottom:${size*0.13}px;transform:translateY(${-size*0.0}px)">
+    <path d="M50 0 L100 100 L80 100 L50 38 L20 100 L0 100 Z" fill="${color}"/>
+    <path d="M50 64 L62 90 L38 90 Z" fill="#C9A35F"/></svg>THR</span>`;
+const AR = 'أثر للتقنية والتصميم';
+const lockup = (bg, mark, wc, dc, ac, s=1) => `
+  <div class="cell" style="background:${bg};padding:${60*s}px 0">
+    <img src="${mark}" style="height:${300*s}px">
+    <div style="margin-top:${30*s}px">${word(80*s, wc)}</div>
+    <div class="desc" style="font-size:${15*s}px;color:${dc};margin-top:${20*s}px">TECHNOLOGY &amp; DESIGN</div>
+    <div class="rule" style="${s<1?'display:none':''}"></div>
+    <div class="ar" dir="rtl" style="font-size:${30*s}px;color:${ac};margin-top:${s<1?14:0}px">${AR}</div>
+  </div>`;
+document.body.innerHTML = `
+<div class="grid">
+  <div style="grid-row:1/3">${lockup('var(--paper)','athr-logo-mark.svg','var(--md)','var(--md)','var(--md)')}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr">
+    ${lockup('linear-gradient(135deg,#5a1226,#3a0a17)','athr-logo-mark-dark.svg','var(--g)','var(--gl)','var(--gl)',.55)}
+    ${lockup('linear-gradient(135deg,#1c0a10,#0a0306)','athr-logo-mark-dark.svg','var(--g)','var(--gl)','var(--gl)',.55)}
+  </div>
+  <div>
+    <div class="icons">
+      <div class="ic" style="background:#fff"><img src="athr-logo-mark.svg" height="110"></div>
+      <div class="ic" style="background:linear-gradient(135deg,#5a1226,#3a0a17)"><img src="athr-logo-mark-dark.svg" height="110"></div>
+      <div class="ic" style="background:#0d0407"><img src="athr-logo-mark-dark.svg" height="110"></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:34px;padding:10px 0 40px">
+      <img src="athr-logo-mark.svg" height="150">
+      <div style="width:1px;height:130px;background:#4A0E1E44"></div>
+      <div>${word(52,'var(--md)')}
+        <div class="desc" style="font-size:11px;color:var(--md);margin-top:14px">TECHNOLOGY &amp; DESIGN</div>
+        <div class="ar" dir="rtl" style="font-size:20px;color:var(--md);margin-top:10px;text-align:start">${AR}</div></div>
+    </div>
+  </div>
+</div>
+<div class="pal" dir="rtl">
+  <div class="grp"><h4>الألوان الأساسية</h4>
+    <div class="sw"><i style="background:#7A1630"></i><span dir="ltr">#7A1630</span><b>عنابي</b></div>
+    <div class="sw"><i style="background:#4A0E1E"></i><span dir="ltr">#4A0E1E</span><b>عنابي داكن</b></div>
+    <div class="sw"><i style="background:#14050B"></i><span dir="ltr">#14050B</span><b>ليلي</b></div></div>
+  <div class="grp"><h4>الألوان الذهبية</h4>
+    <div class="sw"><i style="background:#F3E2B6"></i><span dir="ltr">#F3E2B6</span><b>ذهبي فاتح</b></div>
+    <div class="sw"><i style="background:#C9A35F"></i><span dir="ltr">#C9A35F</span><b>ذهبي</b></div>
+    <div class="sw"><i style="background:#8F6A2F"></i><span dir="ltr">#8F6A2F</span><b>ذهبي داكن</b></div></div>
+  <div class="grp"><h4>المحايد</h4>
+    <div class="sw"><i style="background:#EBDDC6"></i><span dir="ltr">#EBDDC6</span><b>بيج</b></div></div>
+</div>`;
+</script>
+</body></html>

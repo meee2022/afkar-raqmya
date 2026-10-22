@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700&family=Tajawal:wght@900&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;width:100%;height:100%}
+body{background:var(--bg,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.w{font:700 var(--fs) Lexend;color:var(--fg);letter-spacing:-.03em;line-height:1;position:relative;display:inline-block}
+.w svg{position:absolute;width:.3em;right:-.33em;top:-.16em}
+.s{font:600 calc(var(--fs)*.15) Lexend;letter-spacing:.5em;color:var(--sub);margin-top:calc(var(--fs)*.16);padding-left:.5em}
+.a{font:900 calc(var(--fs)*.3) Tajawal;color:var(--fg);margin-top:calc(var(--fs)*.06)}
+</style></head><body>
+<div class="w">athr<svg viewBox="0 0 40 40"><path d="M20 0C21.5 13 27 18.5 40 20C27 21.5 21.5 27 20 40C18.5 27 13 21.5 0 20C13 18.5 18.5 13 20 0Z" fill="currentColor"/></svg></div>
+<div class="s">TECH &amp; DESIGN</div><div class="a" id="ar">أثر للتقنية والتصميم</div>
+<script>const q=new URLSearchParams(location.search),r=document.documentElement.style;
+r.setProperty('--bg',q.get('bg')||'transparent');r.setProperty('--fg',q.get('fg'));r.setProperty('--sub',q.get('sub'));r.setProperty('--fs',(q.get('fs')||'200')+'px');
+if(q.get('ar')==='0')document.getElementById('ar').remove();</script></body></html>

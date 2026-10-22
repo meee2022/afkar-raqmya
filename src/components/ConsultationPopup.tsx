@@ -56,7 +56,7 @@ export default function ConsultationPopup() {
 
               <h3 className="text-xl font-black text-[#F3E2B6] mb-2">استشارة مجانية 🎁</h3>
               <p className="text-white/70 text-sm leading-relaxed mb-5">
-                عندك فكرة مشروع؟ احجز استشارتك المجانية الآن ونساعدك نختار أفضل طريق لتنفيذها — بدون أي التزام.
+                لديك فكرة مشروع؟ احجز استشارتك المجانية الآن، وسنساعدك في اختيار أفضل طريق لتنفيذها — دون أي التزام.
               </p>
 
               <div className="flex flex-col gap-2.5">

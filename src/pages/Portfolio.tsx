@@ -3,27 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Seo from "../components/Seo";
+import { STATIC_PROJECTS } from "../data/projects";
 
 const CATS = ["الكل", "مواقع", "تطبيقات", "هوية", "نظم"];
 
-const STATIC_PROJECTS = [
-  { _id: "s0", titleAr: "Marasi Boats — رحلات بحرية فاخرة", descriptionAr: "موقع فاخر لرحلات اليخت الخاص في الدوحة: الباقات والمناسبات والمعرض والحجز.", category: "مواقع", result: "تجربة حجز فاخرة", imageUrl: "/previews/marasi.jpg", videoUrl: "/videos/marasi.mp4", color: "", accent: "#3B5BDB", liveUrl: "https://marasi-boats.pages.dev/" },
-  { _id: "s1", titleAr: "Adrenaline — وجبات صحية", descriptionAr: "منصة وجبات صحية بخطط غذائية ذكية وحاسبة سعرات واشتراكات وتوصيل يومي داخل قطر.", category: "مواقع", result: "منصة طلب واشتراك", imageUrl: "/previews/adrenaline-food.png", videoUrl: "/videos/adrenaline.mp4", color: "", accent: "#3cc4f0", liveUrl: "https://adrenalinehealthy.com/" },
-  { _id: "s2", titleAr: "نَفَحات — صحبة القرآن", descriptionAr: "تطبيق للمصحف وأوقات الصلاة والقبلة والتسبيح، بتجربة عربية هادئة.", category: "تطبيقات", phone: true, result: "تجربة روحية يومية", imageUrl: "/previews/naf-home.jpg", videoUrl: "/nafafat.mp4", color: "", accent: "#2dd4bf",
-    challenge: "إيجاد طريقة تجعل القارئ على صلة يومية بالقرآن الكريم بأسلوب عصري وجذاب بعيداً عن التطبيقات التقليدية.",
-    solution: "تصميم تجربة تفاعلية تشمل تصفّح المصحف، آية اليوم، التلاوات الصوتية، والأدوات والمكتبة — بواجهة عربية أنيقة وسلسة.",
-    outcome: "تطبيق متكامل يوفّر صحبة قرآنية يومية بتجربة مستخدم راقية على الجوال.",
-    liveUrl: "https://nafahat.vercel.app/" },
-  { _id: "s3", titleAr: "Nada Makeup — خبيرة تجميل", descriptionAr: "موقع أنيق لخبيرة مكياج العرائس في قطر ومصر، مع معرض الأعمال ونظام الحجز.", category: "هوية", result: "هوية أنيقة + حجز", imageUrl: "/previews/nada-new.jpg", videoUrl: "/videos/nada.mp4", color: "", accent: "#C0806A", liveUrl: "https://nada-makeup-9yu.pages.dev/" },
-  { _id: "s4", titleAr: "ردّة — تراث الغوص على اللؤلؤ", descriptionAr: "منصة تعليمية تفاعلية عن تراث الغوص على اللؤلؤ في قطر والخليج، برحلة غوص افتراضية.", category: "مواقع", result: "تجربة تعليمية غامرة", imageUrl: "/previews/diving.png", videoUrl: null, color: "", accent: "#38bdf8" },
-  { _id: "s5", titleAr: "DarkFit — منصة لياقة", descriptionAr: "تمارين ومولّد خطط وتغذية ومدربين وحاسبات صحية في تطبيق واحد.", category: "تطبيقات", phone: true, result: "منظومة لياقة متكاملة", imageUrl: "/previews/darkfit-m.jpg", videoUrl: "/videos/darkfit.mp4", color: "", accent: "#4CA31A", liveUrl: "https://darkfit.netlify.app/" },
-  { _id: "s6", titleAr: "Dopamin — حلويات صحية", descriptionAr: "هوية دافئة وموقع لعلامة حلويات صحية يعرض المنتجات بتجربة بصرية شهية.", category: "هوية", result: "هوية علامة شهية", imageUrl: "/previews/dopamin.png", videoUrl: "/videos/dopamin.mp4", color: "", accent: "#C2577E", liveUrl: "https://dopamin-bj1.pages.dev/" },
-  { _id: "s7", titleAr: "دَرْب — التعلّم التفاعلي", descriptionAr: "منصة ألعاب وأنشطة تعليمية لكل المواد، يُنشئ فيها المعلم أنشطته ويشاركها مع طلابه.", category: "تطبيقات", result: "أدوات تعليمية تفاعلية", imageUrl: "/previews/games-new.jpg", videoUrl: "/videos/darb.mp4", color: "", accent: "#7A1630", liveUrl: "https://activities-dmc.pages.dev/" },
-  { _id: "s8", titleAr: "دار ابن الجزري", descriptionAr: "منصة متكاملة لتحفيظ القرآن الكريم وتعليم أحكام التجويد لجميع الأعمار.", category: "مواقع", result: "منصة تعليم قرآني", imageUrl: "/previews/ibn-jazry-new.jpg", videoUrl: "/videos/ibn-jazry.mp4", color: "", accent: "#1F8A5B", liveUrl: "https://dar-ibn-jazri.vercel.app/" },
-  { _id: "s9", titleAr: "صلاتي قرة عيني", descriptionAr: "رحلة تفاعلية تعلّم الأطفال الأذان والوضوء والصلاة مع شخصيتي حمد وهدى.", category: "تطبيقات", phone: true, result: "تعليم أطفال ممتع", imageUrl: "/previews/slaty.png", videoUrl: "/videos/slaty.mp4", color: "", accent: "#34A06B", liveUrl: "https://noora-edu.com/" },
-  { _id: "s10", titleAr: "زينة وخزينة — الذهب", descriptionAr: "تطبيق لبيع وشراء الذهب ومتابعة الأسعار والمعاملات بسهولة.", category: "تطبيقات", result: "تداول ذهب مبسّط", imageUrl: "/previews/gold.jpg", videoUrl: null, color: "", accent: "#C9A35F", liveUrl: "https://goldqatar1.netlify.app/" },
-  { _id: "s11", titleAr: "مطابخ الجنوب — نقاط بيع", descriptionAr: "نظام كاشير وفواتير إلكترونية ومتابعة مبيعات لمطاعم المأكولات الشعبية.", category: "نظم", result: "POS وفواتير", imageUrl: "/previews/elwakra-pos.jpg", videoUrl: null, color: "", accent: "#B4472A", liveUrl: "https://stdk.vercel.app/" },
-];
 
 const ACCENT_COLORS: Record<string, string> = {
   "مواقع": "#7A1630", "تطبيقات": "#4ade80", "هوية": "#f472b6", "نظم": "#a78bfa",

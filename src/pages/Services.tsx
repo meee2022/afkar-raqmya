@@ -107,7 +107,7 @@ export default function Services() {
           style={{ background:"linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
           <div className="absolute inset-0 pointer-events-none"
             style={{ background:"radial-gradient(ellipse at 50% 0%,rgba(122,22,48,0.08) 0%,transparent 60%)" }} />
-          <h2 className="text-2xl md:text-3xl font-black text-[#F3E2B6] mb-3 relative z-10">جاهز تبدأ مشروعك؟</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-[#F3E2B6] mb-3 relative z-10">هل أنت مستعد لبدء مشروعك؟</h2>
           <p className="text-white/65 mb-7 relative z-10">تواصل معنا اليوم ونحدد احتياجاتك مجاناً</p>
           <NavLink to="/contact"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"

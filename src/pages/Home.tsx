@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, Play, Sparkles } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Seo from "../components/Seo";
+import { STATIC_PROJECTS } from "../data/projects";
 
 // ── Animated text ─────────────────────────────────────────────────────────────
 interface AnimatedTextProps {
@@ -110,29 +111,9 @@ const makeParticles = (n: number) => Array.from({ length: n }, (_, i) => ({
 export default function Home() {
   const [typedText, setTypedText] = useState("");
   const fullText = "نحول أفكارك الرقمية إلى واقع مبهر";
-  const queriedProjects = useQuery(api.projects.list) ?? [];
-  const projects = queriedProjects.map(project => {
-    if (project.titleAr.includes("Adrenaline")) return {
-      ...project,
-      titleAr: "Adrenaline — وجبات صحية",
-      descriptionAr: "منصة متكاملة للوجبات الصحية والخطط الغذائية الذكية والاشتراكات والتوصيل داخل قطر.",
-      imageUrl: project.imageUrl ?? "/adrenaline-preview.png",
-      liveUrl: project.liveUrl ?? "https://adrenalinehealthy.com/",
-    };
-    if (project.titleAr.includes("DarkFit")) return {
-      ...project,
-      titleAr: "DarkFit — منصة اللياقة",
-      descriptionAr: "تطبيق لياقة وصحة شامل يجمع التمارين والتغذية والمدربين والحاسبات الصحية.",
-      category: "تطبيقات",
-      result: "منظومة لياقة متكاملة",
-      imageUrl: project.imageUrl ?? "/darkfit-preview.png",
-      liveUrl: project.liveUrl ?? "https://darkfit.netlify.app/",
-    };
-    return project;
-  });
-  const featuredProjects = [...projects]
-    .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || Number(Boolean(b.videoUrl || b.imageUrl)) - Number(Boolean(a.videoUrl || a.imageUrl)))
-    .slice(0, 3);
+  const projects = STATIC_PROJECTS;
+  // Home shows three strong pieces: one large (with video) and two side cards
+  const featuredProjects = ["s0", "s1", "s3"].map(id => projects.find(p => p._id === id)!).filter(Boolean);
   const categoryCount = new Set(projects.map(project => project.category)).size;
 
   // Fewer particles on mobile for smoother performance
@@ -247,7 +228,7 @@ export default function Home() {
           <motion.div {...inView()} className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 text-right">
             <div>
               <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] block mb-3">أعمال مختارة</span>
-              <h2 id="selected-work-title" className="text-3xl md:text-5xl font-black text-[#2A0913]">الشغل يتكلم عنّا</h2>
+              <h2 id="selected-work-title" className="text-3xl md:text-5xl font-black text-[#2A0913]">أعمالنا تتحدث عنّا</h2>
               <p className="text-[#2A0913]/65 mt-3 max-w-xl">معاينات حقيقية لمواقع وتطبيقات صممناها وطورناها، وليست مجرد قوالب عرض.</p>
             </div>
             <NavLink to="/portfolio" className="inline-flex items-center gap-2 text-[#7A1630] font-bold hover:text-[#2A0913] transition-colors">
@@ -255,45 +236,36 @@ export default function Home() {
             </NavLink>
           </motion.div>
 
-          {featuredProjects.length > 0 ? (
-            <div className="grid lg:grid-cols-12 gap-5">
-              {featuredProjects.map((project, index) => (
+          <div className="grid lg:grid-cols-12 gap-5">
+            {featuredProjects.map((project, index) => {
+              const big = index === 0;
+              return (
                 <motion.article key={project._id} {...inView(index * 0.08)}
-                  className={`${index === 0 ? "lg:col-span-7 lg:row-span-2" : "lg:col-span-5"} group relative overflow-hidden rounded-[1.75rem] border border-[#4A0E1E]/15 bg-[#2A0913]`}>
-                  <div className={`${index === 0 ? "min-h-[420px]" : "min-h-[240px]"} relative overflow-hidden`}>
-                    {project.videoUrl ? (
-                      <div className="absolute inset-0 bg-black">
-                        <video src={project.videoUrl} muted loop autoPlay playsInline preload="metadata"
-                          className={`w-full h-full ${project.category === "تطبيقات" ? "object-contain" : "object-cover"}`} />
-                        {project.category === "تطبيقات" && <div className="absolute inset-0 -z-10 bg-[#7A1630]" />}
-                      </div>
-                    ) : project.imageUrl ? (
-                      <img src={project.imageUrl} alt={`معاينة مشروع ${project.titleAr}`} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-top" />
+                  className={`${big ? "lg:col-span-7 lg:row-span-2" : "lg:col-span-5"} group flex flex-col overflow-hidden rounded-[1.75rem] border border-[#4A0E1E]/12 bg-white/80 shadow-[0_20px_50px_rgba(74,14,30,0.08)]`}>
+                  {/* Media: full screenshot (never cropped) over a blurred copy, video plays on the large card */}
+                  <div className={`relative overflow-hidden bg-[#EFE3CF] ${big ? "min-h-[340px] flex-1" : "h-[200px]"}`}>
+                    <img src={project.imageUrl ?? ""} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-60" />
+                    {big && project.videoUrl ? (
+                      <video src={project.videoUrl} poster={project.imageUrl ?? undefined} muted loop autoPlay playsInline preload="metadata"
+                        className="absolute inset-0 w-full h-full object-contain" />
                     ) : (
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(122,22,48,0.13),transparent_36%),linear-gradient(145deg,#7A1630,#2A0913)] flex items-center justify-center">
-                        <span className="text-7xl font-black text-white/[0.04]">{String(index + 1).padStart(2, "0")}</span>
-                      </div>
+                      <img src={project.imageUrl ?? ""} alt={`معاينة مشروع ${project.titleAr}`} loading="lazy" decoding="async"
+                        className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]" />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2A0913] via-[#2A0913]/40 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-right">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="rounded-full border border-white/25 bg-black/30 px-3 py-1 text-xs text-white/85">{project.category}</span>
-                        {project.videoUrl && <span className="inline-flex items-center gap-1 text-xs text-[#E9D29D]"><Play className="w-3 h-3 fill-current" /> معاينة فيديو</span>}
-                      </div>
-                      <h3 className={`${index === 0 ? "text-3xl md:text-4xl" : "text-2xl"} font-black text-white`}>{project.titleAr}</h3>
-                      <p className="mt-2 text-sm text-white/75 line-clamp-2 max-w-xl">{project.descriptionAr}</p>
-                      <div className="mt-5 flex flex-wrap gap-3">
-                        <NavLink to="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#E9D29D] px-5 py-2 text-sm font-black text-[#4A0E1E]">عرض التفاصيل <ArrowLeft className="w-4 h-4" /></NavLink>
-                        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/30 bg-black/20 px-5 py-2 text-sm font-bold text-white">زيارة المشروع <ExternalLink className="w-4 h-4" /></a>}
-                      </div>
+                    <span className="absolute top-3 right-3 rounded-full bg-white/85 px-3 py-1 text-xs font-bold text-[#7A1630]">{project.category}</span>
+                  </div>
+                  <div className={`flex flex-col p-5 md:p-6 text-right ${big ? "" : "flex-1"}`}>
+                    <h3 className={`${big ? "text-2xl md:text-3xl" : "text-xl"} font-black text-[#2A0913]`}>{project.titleAr}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#2A0913]/65 line-clamp-2">{project.descriptionAr}</p>
+                    <div className="mt-auto pt-4 flex flex-wrap gap-3">
+                      <NavLink to="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#7A1630] px-5 py-2 text-sm font-bold text-white hover:bg-[#4A0E1E] transition-colors">عرض التفاصيل <ArrowLeft className="w-4 h-4" /></NavLink>
+                      {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#4A0E1E]/20 px-5 py-2 text-sm font-bold text-[#4A0E1E] hover:bg-[#4A0E1E]/5 transition-colors">زيارة المشروع <ExternalLink className="w-4 h-4" /></a>}
                     </div>
                   </div>
                 </motion.article>
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-3xl border border-[#4A0E1E]/15 bg-white/60 p-10 text-center text-[#2A0913]/65">سيظهر هنا أحدث الأعمال المضافة من لوحة الإدارة.</div>
-          )}
+              );
+            })}
+          </div>
 
           <div className="mt-5 grid grid-cols-3 divide-x divide-x-reverse divide-[#4A0E1E]/10 rounded-2xl border border-[#4A0E1E]/15 bg-white/60 py-5 text-center">
             <div><strong className="block text-2xl text-[#7A1630]">{projects.length}</strong><span className="text-xs text-[#2A0913]/65">مشروع منشور</span></div>
@@ -407,8 +379,8 @@ export default function Home() {
           style={{ background: "linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(233,210,157,0.15) 0%,transparent 60%)" }} />
-          <h2 className="text-2xl md:text-4xl font-black text-[#F3E2B6] mb-3 relative z-10">عندك فكرة؟ خلينا نحولها لواقع.</h2>
-          <p className="text-white/75 mb-8 relative z-10 max-w-xl mx-auto">استشارة أولى مجانية — نسمع فكرتك ونقترح أفضل طريق لتنفيذها.</p>
+          <h2 className="text-2xl md:text-4xl font-black text-[#F3E2B6] mb-3 relative z-10">لديك فكرة؟ لنحوّلها إلى واقع.</h2>
+          <p className="text-white/75 mb-8 relative z-10 max-w-xl mx-auto">استشارة أولى مجانية — نستمع إلى فكرتك ونقترح أفضل طريق لتنفيذها.</p>
           <NavLink to="/contact"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
             style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 40px rgba(122,22,48,0.3)" }}>

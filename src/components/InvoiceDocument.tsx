@@ -123,7 +123,7 @@ export default function InvoiceDocument({ doc, billing, contact }: { doc: DocDat
               </div>
               <span style={{ font: "700 19px Lexend", direction: "ltr" }}>{money(total)} <span style={{ fontSize: 11, color: GOLD }}>QAR</span></span>
             </div>
-            {!!doc.paidAmount && [{ ar: "المدفوع مقدمًا", en: "PAID IN ADVANCE", v: -doc.paidAmount }, { ar: "المبلغ المتبقي", en: "BALANCE DUE", v: total - doc.paidAmount }].map((r, i) => (
+            {isInvoice && !!doc.paidAmount && [{ ar: "المدفوع مقدمًا", en: "PAID IN ADVANCE", v: -doc.paidAmount }, { ar: "المبلغ المتبقي", en: "BALANCE DUE", v: total - doc.paidAmount }].map((r, i) => (
               <div key={r.en} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 4px", borderBottom: i ? 0 : "1px solid #EFE4D2", marginTop: i ? 0 : 6 }}>
                 <Label ar={r.ar} en={r.en} />
                 <span style={{ font: i ? "700 15px Lexend" : "600 13px Lexend", color: i ? MAROON : INK, direction: "ltr" }}>{money(r.v)}{i ? " QAR" : ""}</span>

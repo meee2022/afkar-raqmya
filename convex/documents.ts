@@ -87,6 +87,9 @@ export const setStatus = mutation({
   args: { token: v.string(), id: v.id("agencyDocuments"), status },
   handler: async (ctx, { token, id, status: s }) => {
     await requireAdmin(ctx, token);
+    const doc = await ctx.db.get(id);
+    // Going back to draft would unlock edits on a document the client already has.
+    if (doc && doc.status !== "draft" && s === "draft") throw new Error("لا يمكن إرجاع مستند مُرسل إلى مسودة");
     await ctx.db.patch(id, { status: s, updatedAt: Date.now() });
   },
 });
@@ -98,7 +101,7 @@ export const remove = mutation({
     const doc = await ctx.db.get(id);
     // Only drafts can be deleted; sent documents are cancelled so their number is never reused.
     if (doc && doc.status !== "draft") throw new Error("المستند المُرسل لا يُحذف — غيّر حالته إلى ملغاة");
-    if (doc && (await ctx.db.query("agencyDocuments").filter(q => q.eq(q.field("sourceQuoteId"), id)).first()))
+    if (doc && (await ctx.db.query("agencyDocuments").withIndex("by_sourceQuote", q => q.eq("sourceQuoteId", id)).first()))
       throw new Error("عرض السعر هذا محوّل إلى فاتورة");
     if (doc) await ctx.db.delete(id);
   },
@@ -111,7 +114,7 @@ export const convertToInvoice = mutation({
     await requireAdmin(ctx, token);
     const quote = await ctx.db.get(id);
     if (!quote || quote.kind !== "quote") throw new Error("عرض السعر غير موجود");
-    const existing = await ctx.db.query("agencyDocuments").filter(q => q.eq(q.field("sourceQuoteId"), id)).first();
+    const existing = await ctx.db.query("agencyDocuments").withIndex("by_sourceQuote", q => q.eq("sourceQuoteId", id)).first();
     if (existing) return existing._id;
     const issueDate = qatarToday();
     const num = await nextNumber(ctx, "invoice", issueDate);

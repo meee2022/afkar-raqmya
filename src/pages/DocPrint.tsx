@@ -1,10 +1,25 @@
+import { Component, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import InvoiceDocument from "../components/InvoiceDocument";
 
+// Convex queries throw when the admin session has expired; show that instead of a blank page.
+class SessionGuard extends Component<{ children: ReactNode }, { error?: Error }> {
+  state: { error?: Error } = {};
+  static getDerivedStateFromError(error: Error) { return { error }; }
+  render() {
+    if (!this.state.error) return this.props.children;
+    return <p dir="rtl" style={{ padding: 40, fontFamily: "Tajawal" }}>تعذّر فتح المستند، ربما انتهت الجلسة. سجّل الدخول إلى لوحة الإدارة مرة أخرى.</p>;
+  }
+}
+
 // Print view for one invoice/quote: /admin/doc/:id  (Ctrl+P → Save as PDF)
 export default function DocPrint() {
+  return <SessionGuard><DocView /></SessionGuard>;
+}
+
+function DocView() {
   const { id } = useParams();
   const token = localStorage.getItem("afkar_admin_token") || "";
   const doc = useQuery(api.documents.get, token && id ? { token, id: id as any } : "skip");

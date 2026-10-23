@@ -153,10 +153,10 @@ export default function DocumentsPanel({ token }: { token: string }) {
                 <input type="number" min={0} className="w-28 px-3 py-1.5 rounded-lg text-sm text-white outline-none" style={inputStyle} dir="ltr" value={form.discount} onChange={e => set("discount", Math.max(0, Number(e.target.value) || 0))} />
               </label>
               <div className="flex justify-between font-black text-white text-base pt-2 border-t border-white/10"><span>الإجمالي</span><span dir="ltr">{money(total)} QAR</span></div>
-              <label className="flex justify-between items-center text-white/60 gap-3"><span>المدفوع مقدمًا</span>
+              {form.kind === "invoice" && <label className="flex justify-between items-center text-white/60 gap-3"><span>المدفوع مقدمًا</span>
                 <input type="number" min={0} className="w-28 px-3 py-1.5 rounded-lg text-sm text-white outline-none" style={inputStyle} dir="ltr" value={form.paidAmount} onChange={e => set("paidAmount", Math.max(0, Number(e.target.value) || 0))} />
-              </label>
-              {form.paidAmount > 0 && <div className="flex justify-between font-bold text-[#EBDDC6]"><span>المتبقي</span><span dir="ltr">{money(total - form.paidAmount)} QAR</span></div>}
+              </label>}
+              {form.kind === "invoice" && form.paidAmount > 0 && <div className="flex justify-between font-bold text-[#EBDDC6]"><span>المتبقي</span><span dir="ltr">{money(total - form.paidAmount)} QAR</span></div>}
             </div>
           </div>
 
@@ -192,9 +192,9 @@ export default function DocumentsPanel({ token }: { token: string }) {
                   <td className="p-3 text-white/50" dir="ltr" style={{ textAlign: "right" }}>{d.issueDate}</td>
                   <td className="p-3 font-bold text-white" dir="ltr" style={{ textAlign: "right" }}>{money(totals(d).total)}</td>
                   <td className="p-3">
-                    <select value={d.status} onChange={e => setStatus({ token, id: d._id, status: e.target.value as any })}
+                    <select value={d.status} onChange={e => setStatus({ token, id: d._id, status: e.target.value as any }).catch(err => alert(err.message))}
                       className={`px-2 py-1 rounded-lg text-xs font-bold outline-none ${STATUS[d.status].cls}`} style={{ border: 0 }}>
-                      {(d.kind === "invoice" ? ["draft", "sent", "paid", "cancelled"] : ["draft", "sent", "accepted", "cancelled"]).map(s => <option key={s} value={s}>{STATUS[s].label}</option>)}
+                      {(d.kind === "invoice" ? ["draft", "sent", "paid", "cancelled"] : ["draft", "sent", "accepted", "cancelled"]).filter(s => s !== "draft" || d.status === "draft").map(s => <option key={s} value={s}>{STATUS[s].label}</option>)}
                     </select>
                   </td>
                   <td className="p-3">

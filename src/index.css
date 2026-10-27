@@ -1641,6 +1641,25 @@ a svg {
   .header-contact {
     display: none;
   }
+  .contact-float {
+    position: static;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    margin-inline-start: auto;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: none;
+  }
+  .contact-float svg {
+    width: 22px;
+    height: 22px;
+  }
+  .contact-float span {
+    display: none;
+  }
   .hero-copy h1 {
     font-size: 51px;
   }
@@ -1797,6 +1816,7 @@ a svg {
   }
   .header-inner {
     height: 82px;
+    gap: 12px;
   }
   .desktop-nav {
     display: none;
@@ -2197,19 +2217,9 @@ a svg {
   .footer-bottom {
     justify-content: flex-start;
     font-size: 11px;
-    padding-inline-end: 60px;
   }
   .site-footer {
     padding-top: 24px;
-  }
-  .contact-float {
-    bottom: max(15px, env(safe-area-inset-bottom));
-    left: 16px;
-    padding: 12px;
-    min-height: 49px;
-  }
-  .contact-float span {
-    display: none;
   }
   .not-found {
     padding-block: 60px 85px;

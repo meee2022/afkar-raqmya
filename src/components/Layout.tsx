@@ -51,6 +51,16 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
           <Link to="/contact" className="header-contact">
             لنصنع أثرًا <ArrowUpLeft size={19} aria-hidden="true" />
           </Link>
+          <a
+            className="contact-float"
+            aria-label="تحدث معنا عبر واتساب"
+            href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("مرحبًا أثر، أود التحدث عن مشروعي.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle size={24} aria-hidden="true" />
+            <span>نتحدث؟</span>
+          </a>
           <button
             type="button"
             className="mobile-toggle"
@@ -159,16 +169,6 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
           </div>
         </div>
       </footer>
-      <a
-        className="contact-float"
-        aria-label="تحدث معنا عبر واتساب"
-        href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("مرحبًا أثر، أود التحدث عن مشروعي.")}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <MessageCircle size={24} aria-hidden="true" />
-        <span>نتحدث؟</span>
-      </a>
     </div>
   );
 }

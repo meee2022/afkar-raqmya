@@ -91,41 +91,39 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       <footer className="site-footer">
         <div className="container">
           <div className="footer-top">
-            <div>
+            <div className="footer-brand">
               <Link to="/" aria-label={SITE_NAME}>
-                <Logo size={32} sub inverse />
+                <Logo size={26} sub inverse />
               </Link>
-              <p>
-                نصمم ونطوّر حضورًا رقميًا
-                <br />
-                يشبهك، ويترك أثرًا.
-              </p>
+              <p>نصمم ونطوّر حضورًا رقميًا يشبهك، ويترك أثرًا.</p>
             </div>
-            <div>
-              <h2>اكتشف أثر</h2>
-              <nav aria-label="روابط التذييل">
-                {NAV.slice(0, 4).map((n) => (
-                  <Link to={n.to} key={n.to}>
-                    {n.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-            <div>
-              <h2>نبدأ بمحادثة</h2>
-              <a
-                href={`tel:${settings.phone.replace(/\s/g, "")}`}
-                className="footer-phone"
-                dir="ltr"
-              >
-                {settings.phone}
-              </a>
+            <nav className="footer-nav" aria-label="روابط التذييل">
+              {NAV.map((n) => (
+                <Link to={n.to} key={n.to}>
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="footer-contact">
+              <div className="footer-contact-details">
+                <a
+                  href={`tel:${settings.phone.replace(/\s/g, "")}`}
+                  className="footer-phone"
+                  dir="ltr"
+                >
+                  {settings.phone}
+                </a>
+                <span className="footer-location">الدوحة، قطر</span>
+              </div>
               {settings.email && (
-                <a href={`mailto:${settings.email}`} dir="ltr">
+                <a
+                  className="footer-email"
+                  href={`mailto:${settings.email}`}
+                  dir="ltr"
+                >
                   {settings.email}
                 </a>
               )}
-              <p>الدوحة، قطر</p>
               <div className="footer-socials">
                 <a
                   aria-label="تواصل عبر واتساب"
@@ -158,9 +156,6 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             <span>
               © {new Date().getFullYear()} {SITE_NAME}. جميع الحقوق محفوظة.
             </span>
-            <Link to="/contact">
-              لديك فكرة؟ لنتحدث <ArrowUpLeft size={16} aria-hidden="true" />
-            </Link>
           </div>
         </div>
       </footer>

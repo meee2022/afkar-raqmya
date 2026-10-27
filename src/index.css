@@ -1428,50 +1428,82 @@ a svg {
 .site-footer {
   background: var(--maroon-dark);
   color: var(--cream);
-  padding-block: 65px 24px;
+  padding-block: 30px 18px;
 }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 65px;
-  padding-bottom: 55px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  padding-bottom: 22px;
 }
-.footer-top > div > p {
+.footer-brand > a {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-height: 44px;
+  align-items: center;
+}
+.footer-brand p {
   color: #dbc8c5;
-  font-size: 15px;
-  margin-top: 23px;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 29ch;
+  margin-top: 10px;
 }
-.footer-top h2 {
-  font-size: 17px;
-  margin-bottom: 22px;
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 2px 18px;
 }
-.footer-top nav {
-  display: grid;
-  gap: 11px;
-}
-.footer-top nav a,
-.footer-top > div > a:not(:first-child) {
-  font-size: 15px;
-  display: block;
+.footer-nav a,
+.footer-email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
   color: #e2d1cd;
   line-height: 1.7;
-  min-height: 32px;
-  width: fit-content;
 }
-.footer-top nav a:hover,
-.footer-top > div > a:hover {
+.footer-nav a:hover,
+.footer-contact a:hover {
   color: #e6c99a;
 }
-.footer-top .footer-phone {
-  font-size: 20px !important;
-  color: var(--cream) !important;
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+.footer-contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px 12px;
+}
+.footer-phone {
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--cream);
   font-weight: 500;
-  min-height: 35px;
+  line-height: 1.4;
+  min-height: 44px;
+}
+.footer-location {
+  color: #dbc8c5;
+  font-size: 13px;
+}
+.footer-email {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .footer-socials {
   display: flex;
-  gap: 10px;
-  margin-top: 16px;
+  gap: 8px;
 }
 .footer-socials a {
   display: flex;
@@ -1489,19 +1521,12 @@ a svg {
 .footer-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 25px;
+  justify-content: center;
   border-top: 1px solid #75434b;
-  padding-top: 24px;
+  padding-top: 14px;
   color: #d9c5bf;
   font-size: 12px;
-}
-.footer-bottom a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  font-size: 13px;
+  line-height: 1.7;
 }
 .contact-float {
   position: fixed;
@@ -1617,7 +1642,7 @@ a svg {
     padding: 27px;
   }
   .footer-top {
-    gap: 40px;
+    gap: 24px;
   }
 }
 @media (max-width: 850px) {
@@ -1769,8 +1794,17 @@ a svg {
     gap: 8%;
   }
   .footer-top {
-    grid-template-columns: 1.2fr 0.8fr 1fr;
-    gap: 25px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px 24px;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-brand p {
+    margin-top: 0;
   }
 }
 @media (max-width: 650px) {
@@ -2159,32 +2193,46 @@ a svg {
     padding-block: 25px;
   }
   .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 37px 25px;
-    padding-bottom: 35px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-bottom: 18px;
   }
-  .footer-top > div:first-child {
-    grid-column: 1/-1;
+  .footer-brand {
+    gap: 16px;
   }
-  .footer-top h2 {
+  .footer-brand p {
+    flex: 1;
+    min-width: 0;
+  }
+  .footer-nav {
+    gap: 0 16px;
+  }
+  .footer-contact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px 12px;
+  }
+  .footer-contact-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .footer-phone {
     font-size: 17px;
   }
-  .footer-top > div > p {
-    margin-top: 17px;
-    font-size: 14px;
-  }
-  .footer-top .footer-phone {
-    font-size: 17px !important;
+  .footer-email {
+    order: 1;
+    flex-basis: 100%;
   }
   .footer-bottom {
-    flex-direction: column;
-    align-items: start;
-    gap: 6px;
+    justify-content: flex-start;
     font-size: 11px;
-    padding-bottom: 40px;
+    padding-inline-end: 60px;
   }
   .site-footer {
-    padding-top: 43px;
+    padding-top: 24px;
   }
   .contact-float {
     bottom: max(15px, env(safe-area-inset-bottom));

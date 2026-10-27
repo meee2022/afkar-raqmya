@@ -527,33 +527,19 @@ a svg {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 52px 32px;
+  align-items: start;
 }
 .selected-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 40px;
-}
-.selected-grid .project-tile-large {
-  grid-row: span 2;
-  display: flex;
-  flex-direction: column;
-}
-.selected-grid .project-tile-large .project-image {
-  height: auto;
-  flex: 1;
-  min-height: 490px;
-}
-.selected-grid .project-image {
-  height: 214px;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 28px;
+  align-items: start;
 }
 .project-tile {
   min-width: 0;
 }
 .project-image {
-  height: 355px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
@@ -561,21 +547,22 @@ a svg {
 }
 .project-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   object-position: center;
 }
 .project-image-phone {
-  background: #e8ddce;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
 }
 .project-image-phone img {
   width: auto;
-  height: 87%;
-  max-width: 80%;
+  height: auto;
+  max-height: 400px;
+  max-width: 100%;
   object-fit: contain;
   object-position: center;
-  border-radius: 10px;
-  box-shadow: 0 15px 35px #4a0e1e1f;
 }
 .project-open {
   position: absolute;
@@ -638,6 +625,7 @@ a svg {
   align-items: center;
   gap: 20px;
   padding: 25px;
+  min-height: 240px;
 }
 .skeleton-project {
   height: 360px;
@@ -1691,15 +1679,10 @@ a svg {
   }
   .selected-grid {
     gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .selected-grid .project-tile-large .project-image {
-    min-height: 440px;
-  }
-  .project-image {
-    height: 280px;
-  }
-  .selected-grid .project-image {
-    height: 190px;
+  .selected-grid .project-tile-large {
+    grid-column: 1 / -1;
   }
   .project-caption h3 {
     font-size: 20px;
@@ -1920,13 +1903,7 @@ a svg {
     gap: 36px;
   }
   .selected-grid .project-tile-large {
-    grid-row: auto;
-  }
-  .selected-grid .project-tile-large .project-image,
-  .selected-grid .project-image,
-  .project-image {
-    height: 270px;
-    min-height: 0;
+    grid-column: auto;
   }
   .project-caption {
     padding-top: 16px;
@@ -1936,12 +1913,6 @@ a svg {
   }
   .project-caption p {
     font-size: 14px;
-  }
-  .project-image-phone img {
-    height: 90%;
-  }
-  .project-image-phone {
-    height: 330px;
   }
   .service-overview,
   .approach {

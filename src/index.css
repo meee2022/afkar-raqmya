@@ -45,6 +45,7 @@
   --error: #a4233e;
   --radius: 16px;
   --font: Tajawal, sans-serif;
+  --section-space: 72px;
   color-scheme: light;
 }
 * {
@@ -150,7 +151,7 @@ a svg {
   margin-inline: auto;
 }
 .section {
-  padding-block: 112px;
+  padding-block: var(--section-space);
 }
 .site-shell {
   overflow: clip;
@@ -326,7 +327,7 @@ a svg {
   grid-template-columns: 1.02fr 1fr;
   align-items: center;
   gap: 6%;
-  padding-block: 64px 70px;
+  padding-block: 48px 52px;
 }
 .hero-copy h1 {
   font-size: clamp(55px, 5.9vw, 86px);
@@ -515,7 +516,7 @@ a svg {
   align-items: end;
   justify-content: space-between;
   gap: 28px;
-  margin-bottom: 44px;
+  margin-bottom: 32px;
 }
 .section-heading p {
   font-size: 17px;
@@ -756,8 +757,7 @@ a svg {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  min-height: 380px;
-  padding-block: 70px;
+  padding-block: 48px;
   isolation: isolate;
 }
 .studio-cta h2 {
@@ -785,13 +785,13 @@ a svg {
 }
 
 .page-intro {
-  padding: 86px 0 66px;
+  padding: 52px 0 36px;
   max-width: 900px;
 }
 .page-intro h1 {
   font-size: clamp(38px, 4.5vw, 64px);
   line-height: 1.35;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   letter-spacing: -0.02em;
 }
 .page-intro p {
@@ -804,8 +804,8 @@ a svg {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding-bottom: 30px;
-  margin-bottom: 38px;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
   border-bottom: 1px solid var(--line);
 }
 .filters {
@@ -839,20 +839,20 @@ a svg {
   white-space: nowrap;
 }
 .portfolio-grid {
-  padding-bottom: 110px;
+  padding-bottom: var(--section-space);
 }
 .project-detail {
   padding-top: 46px;
 }
 .back-link {
-  margin-bottom: 37px;
+  margin-bottom: 24px;
 }
 .project-detail-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 55px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 .project-detail h1 {
   font-size: clamp(32px, 4vw, 56px);
@@ -892,7 +892,10 @@ a svg {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 12%;
-  padding-block: 68px 100px;
+  padding-block: 48px var(--section-space);
+}
+.project-related {
+  padding-top: 0;
 }
 .project-story h2 {
   font-size: 28px;
@@ -934,14 +937,14 @@ a svg {
 }
 
 .service-editorial-list {
-  padding-bottom: 90px;
+  padding-bottom: var(--section-space);
 }
 .service-editorial {
   display: grid;
   grid-template-columns: 1fr 1.35fr 0.6fr;
   gap: 45px;
   border-top: 1px solid var(--line);
-  padding: 44px 0;
+  padding: 32px 0;
   align-items: start;
 }
 .service-editorial:last-child {
@@ -998,7 +1001,6 @@ a svg {
   grid-template-columns: 1.2fr 1fr;
   gap: 11%;
   align-items: center;
-  padding-bottom: 30px;
 }
 .about-manifesto h2 {
   font-size: 36px;
@@ -1052,7 +1054,7 @@ a svg {
   display: flex;
   gap: 35px;
   align-items: center;
-  padding: 40px 0 90px;
+  padding: 0 0 var(--section-space);
 }
 .about-proof h2 {
   font-size: 30px;
@@ -1219,7 +1221,7 @@ a svg {
 }
 
 .contact-page {
-  padding-bottom: 110px;
+  padding-bottom: var(--section-space);
 }
 .contact-layout {
   display: grid;
@@ -1574,7 +1576,7 @@ a svg {
 }
 @media (min-width: 1600px) {
   .home-hero {
-    min-height: 810px;
+    min-height: 740px;
   }
   .hero-arch {
     height: 590px;
@@ -1681,8 +1683,8 @@ a svg {
     margin-top: 28px;
     font-size: 13px;
   }
-  .section {
-    padding-block: 80px;
+  :root {
+    --section-space: 60px;
   }
   .service-overview,
   .approach {
@@ -1825,8 +1827,8 @@ a svg {
   }
   .home-hero {
     grid-template-columns: 1fr;
-    gap: 52px;
-    padding-block: 48px 37px;
+    gap: 36px;
+    padding-block: 32px 28px;
     min-height: 0;
   }
   .hero-copy h1 {
@@ -1900,8 +1902,8 @@ a svg {
   .expertise-strip span::after {
     display: none;
   }
-  .section {
-    padding-block: 65px;
+  :root {
+    --section-space: 44px;
   }
   .section-heading {
     align-items: start;
@@ -1974,12 +1976,11 @@ a svg {
     font-size: 15px;
   }
   .cta-inner {
-    min-height: 365px;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    padding-block: 52px;
-    gap: 30px;
+    padding-block: 36px;
+    gap: 24px;
   }
   .studio-cta h2 {
     font-size: 42px;
@@ -1995,7 +1996,7 @@ a svg {
     top: 45%;
   }
   .page-intro {
-    padding-block: 48px 39px;
+    padding-block: 32px 28px;
   }
   .page-intro h1 {
     font-size: 39px;
@@ -2020,7 +2021,7 @@ a svg {
     font-size: 14px;
   }
   .portfolio-grid {
-    padding-bottom: 65px;
+    padding-bottom: var(--section-space);
   }
   .skeleton-project {
     height: 270px;
@@ -2047,7 +2048,7 @@ a svg {
   .project-story {
     grid-template-columns: 1fr;
     gap: 38px;
-    padding-block: 40px 60px;
+    padding-block: 32px var(--section-space);
   }
   .project-story aside dl {
     display: grid;
@@ -2061,12 +2062,12 @@ a svg {
     font-size: 17px;
   }
   .service-editorial-list {
-    padding-bottom: 60px;
+    padding-bottom: var(--section-space);
   }
   .service-editorial {
     grid-template-columns: 1fr;
-    gap: 22px;
-    padding-block: 32px;
+    gap: 18px;
+    padding-block: 24px;
   }
   .service-heading {
     display: flex;
@@ -2118,7 +2119,7 @@ a svg {
     font-size: 15px;
   }
   .about-proof {
-    padding: 0 0 65px;
+    padding: 0 0 var(--section-space);
     gap: 24px;
   }
   .about-proof h2 {
@@ -2159,7 +2160,7 @@ a svg {
     padding-block: 22px;
   }
   .contact-page {
-    padding-bottom: 65px;
+    padding-bottom: var(--section-space);
   }
   .contact-layout {
     display: flex;

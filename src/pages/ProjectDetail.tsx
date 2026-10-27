@@ -149,7 +149,7 @@ export default function ProjectDetail() {
         </div>
       </article>
       {related.length > 0 && (
-        <section className="container section">
+        <section className="container section project-related">
           <div className="section-heading">
             <h2>أعمال أخرى تستحق المشاهدة.</h2>
           </div>

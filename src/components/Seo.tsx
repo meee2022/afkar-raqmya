@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 
-const SITE = "أثر للتقنية والتصميم";
-const BASE_URL = "https://fikratechdesign.com"; // ← غيّره لدومينك الحقيقي عند النشر
+import { SITE_NAME as SITE, SITE_URL as BASE_URL } from "../data/site";
 
 interface SeoProps {
   title: string;
   description: string;
-  path?: string;          // e.g. "/portfolio"
-  image?: string;          // absolute or root-relative OG image
+  path?: string; // e.g. "/portfolio"
+  image?: string; // absolute or root-relative OG image
+  noIndex?: boolean;
 }
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
-  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  let el = document.head.querySelector<HTMLMetaElement>(
+    `meta[${attr}="${key}"]`,
+  );
   if (!el) {
     el = document.createElement("meta");
     el.setAttribute(attr, key);
@@ -21,7 +23,9 @@ function setMeta(attr: "name" | "property", key: string, content: string) {
 }
 
 function setCanonical(href: string) {
-  let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  let el = document.head.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]',
+  );
   if (!el) {
     el = document.createElement("link");
     el.setAttribute("rel", "canonical");
@@ -31,7 +35,13 @@ function setCanonical(href: string) {
 }
 
 /** Per-page SEO: title, description, Open Graph, Twitter, canonical. */
-export default function Seo({ title, description, path = "/", image = "/og-image.png" }: SeoProps) {
+export default function Seo({
+  title,
+  description,
+  path = "/",
+  image = "/og-image.png",
+  noIndex = false,
+}: SeoProps) {
   useEffect(() => {
     const fullTitle = path === "/" ? `ATHR | ${SITE}` : `${title} | ${SITE}`;
     const url = BASE_URL + path;
@@ -44,13 +54,14 @@ export default function Seo({ title, description, path = "/", image = "/og-image
     setMeta("property", "og:type", "website");
     setMeta("property", "og:url", url);
     setMeta("property", "og:image", img);
-    setMeta("property", "og:locale", "ar_AR");
+    setMeta("property", "og:locale", "ar_QA");
+    setMeta("name", "robots", noIndex ? "noindex, follow" : "index, follow");
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", fullTitle);
     setMeta("name", "twitter:description", description);
     setMeta("name", "twitter:image", img);
     setCanonical(url);
-  }, [title, description, path, image]);
+  }, [title, description, path, image, noIndex]);
 
   return null;
 }

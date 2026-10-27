@@ -5,25 +5,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#003527",
-        "primary-light": "#064e3b",
-        gold: "#fed65b",
-        "gold-dark": "#735c00",
-        surface: "#fcf9f8",
-        "surface-dim": "#eae7e7",
-        charcoal: "#1b1c1c",
-        outline: "#bfc9c3",
+        primary: "#7A1630",
+        "primary-light": "#96354C",
+        gold: "#C9A35F",
+        "gold-dark": "#80602D",
+        surface: "#FCF9F3",
+        "surface-dim": "#F6F0E6",
+        charcoal: "#2A0913",
+        outline: "#DFD2C4",
       },
       fontFamily: {
-        sans: ["IBM Plex Sans Arabic", "sans-serif"],
+        sans: ["Tajawal", "sans-serif"],
       },
       borderRadius: {
         xl: "1.5rem",
         "2xl": "2rem",
       },
       boxShadow: {
-        soft: "0 4px 40px 0 rgba(0,53,39,0.07)",
-        lift: "0 16px 64px 0 rgba(0,53,39,0.12)",
+        soft: "0 4px 30px rgba(74,14,30,0.07)",
+        lift: "0 16px 50px rgba(74,14,30,0.12)",
       },
     },
   },

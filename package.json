@@ -1,28 +1,38 @@
 {
-  "name": "afkar-raqmeya-website",
+  "name": "athr-technology-design",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "npm run typecheck && vite build && node scripts/seo.mjs && node scripts/verify-private-build.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "convex": "^1.37.0",
-    "framer-motion": "^12.38.0",
+    "convex": "^1.48.0",
     "lucide-react": "^1.14.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.15.0"
+    "react-router-dom": "^7.18.4"
+  },
+  "overrides": {
+    "postcss-selector-parser": "^7.1.6"
   },
   "devDependencies": {
+    "@edge-runtime/vm": "^5.0.0",
+    "@types/node": "^26.6.5",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^6.1.2",
     "autoprefixer": "^10.4.21",
+    "convex-test": "^0.0.65",
     "postcss": "^8.5.6",
+    "prettier": "^3.9.10",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.6.3",
-    "vite": "^5.4.19"
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   }
 }

@@ -12,8 +12,10 @@ import type * as adminAuth from "../adminAuth.js";
 import type * as contact from "../contact.js";
 import type * as documents from "../documents.js";
 import type * as projects from "../projects.js";
+import type * as security from "../security.js";
 import type * as seed from "../seed.js";
 import type * as settings from "../settings.js";
+import type * as siteRegistry from "../siteRegistry.js";
 
 import type {
   ApiFromModules,
@@ -26,8 +28,10 @@ declare const fullApi: ApiFromModules<{
   contact: typeof contact;
   documents: typeof documents;
   projects: typeof projects;
+  security: typeof security;
   seed: typeof seed;
   settings: typeof settings;
+  siteRegistry: typeof siteRegistry;
 }>;
 
 /**

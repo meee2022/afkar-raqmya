@@ -1,7 +1,38 @@
-import { mutation, query } from "./_generated/server";
-import { v } from "convex/values";
+import {
+  mutation,
+  query,
+  type QueryCtx,
+  type MutationCtx,
+} from "./_generated/server";
+import type { Doc } from "./_generated/dataModel";
+import { ConvexError, v } from "convex/values";
+import { consumeLimit } from "./security";
 
 const SESSION_MS = 1000 * 60 * 60 * 12;
+
+function adminEnv(name: "ADMIN_EMAIL" | "ADMIN_PASSWORD") {
+  return (
+    globalThis as typeof globalThis & {
+      process?: { env?: Record<string, string | undefined> };
+    }
+  ).process?.env?.[name];
+}
+
+function configuredEmail() {
+  const email = adminEnv("ADMIN_EMAIL")?.trim().toLowerCase();
+  return email &&
+    email.length <= 254 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ? email
+    : null;
+}
+
+function validSession(session: Doc<"agencyAdminSessions"> | null) {
+  const email = configuredEmail();
+  return Boolean(
+    email && session?.email === email && session.expiresAt > Date.now(),
+  );
+}
 
 async function sha256(value: string) {
   const bytes = new TextEncoder().encode(value);
@@ -11,34 +42,43 @@ async function sha256(value: string) {
     .join("");
 }
 
-export async function requireAdmin(ctx: any, token: string) {
+export async function requireAdmin(ctx: QueryCtx | MutationCtx, token: string) {
   if (!token) throw new Error("غير مصرح");
   const tokenHash = await sha256(token);
   const session = await ctx.db
     .query("agencyAdminSessions")
-    .withIndex("by_tokenHash", (q: any) => q.eq("tokenHash", tokenHash))
+    .withIndex("by_tokenHash", (q) => q.eq("tokenHash", tokenHash))
     .unique();
 
-  if (!session || session.expiresAt <= Date.now()) {
-    // Queries get a read-only db, so only mutations can clean up the expired row.
-    if (session && typeof ctx.db.delete === "function") await ctx.db.delete(session._id);
+  if (!validSession(session)) {
     throw new Error("انتهت الجلسة، سجّل الدخول مرة أخرى");
   }
   return session;
 }
 
 export const login = mutation({
-  args: { password: v.string() },
-  handler: async (ctx, { password }) => {
-    const expected = (globalThis as typeof globalThis & { process?: { env?: Record<string, string | undefined> } }).process?.env?.ADMIN_PASSWORD;
-    if (!expected) throw new Error("لم يتم إعداد كلمة مرور الإدارة في Convex");
-    if (password.length < 8 || password !== expected) {
-      throw new Error("كلمة المرور غير صحيحة");
+  args: { email: v.string(), password: v.string() },
+  handler: async (ctx, { email, password }) => {
+    const expected = adminEnv("ADMIN_PASSWORD");
+    const adminEmail = configuredEmail();
+    if (!adminEmail || !expected || expected.length < 8)
+      throw new ConvexError(
+        "تسجيل دخول الإدارة غير مُعدّ حاليًا. راجع إعدادات حساب الإدارة.",
+      );
+    if (!(await consumeLimit(ctx, "admin-login", 20, 5 * 60_000))) {
+      return { error: "محاولات كثيرة. انتظر خمس دقائق ثم حاول مرة أخرى." };
+    }
+    if (email.trim().toLowerCase() !== adminEmail || password !== expected) {
+      return {
+        error:
+          "البريد الإلكتروني أو كلمة المرور غير صحيحة. راجع البيانات وحاول مرة أخرى.",
+      };
     }
 
     const token = `${crypto.randomUUID()}-${crypto.randomUUID()}`;
     await ctx.db.insert("agencyAdminSessions", {
       tokenHash: await sha256(token),
+      email: adminEmail,
       expiresAt: Date.now() + SESSION_MS,
       createdAt: Date.now(),
     });
@@ -55,7 +95,7 @@ export const validate = query({
       .query("agencyAdminSessions")
       .withIndex("by_tokenHash", (q) => q.eq("tokenHash", tokenHash))
       .unique();
-    return Boolean(session && session.expiresAt > Date.now());
+    return validSession(session);
   },
 });
 

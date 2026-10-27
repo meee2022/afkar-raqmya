@@ -1,216 +1,102 @@
-import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Seo from "../components/Seo";
-
-const up = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
-
-const VALUES = [
-  {
-    color: "#7A1630",
-    title: "تصميم إبداعي",
-    desc: "هوية بصرية فريدة لكل مشروع تعكس روحه الحقيقية",
-    icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
-  },
-  {
-    color: "#4ade80",
-    title: "تطوير متقن",
-    desc: "كود نظيف وقابل للتوسع بأعلى معايير الجودة",
-    icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M10 20l4-16M6.5 16.5l-5-5 5-5M17.5 7.5l5 5-5 5"/></svg>,
-  },
-  {
-    color: "#60a5fa",
-    title: "نتائج حقيقية",
-    desc: "قابلة للقياس والإثبات — الأرقام تتحدث",
-    icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>,
-  },
-  {
-    color: "#a78bfa",
-    title: "معايير عالمية",
-    desc: "جودة لا تقبل المساومة في كل تفصيلة",
-    icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>,
-  },
-];
-
-const WHY_US = [
-  { title: "تسليم في الموعد", desc: "نلتزم بالمواعيد المتفق عليها دون تأخير — وقتك يهمنا." },
-  { title: "دعم بعد التسليم", desc: "علاقتنا لا تنتهي بالتسليم — نتابع معك ونساندك بعد الإطلاق." },
-  { title: "تصميم عربي أصيل", desc: "نفهم السوق المحلي ونصمم بواجهات عربية أولاً بمعايير عالمية." },
-  { title: "أسعار واضحة", desc: "باقات شفافة بلا تكاليف خفية — تعرف بالضبط ما تدفع مقابله." },
-  { title: "تواصل مباشر", desc: "تتواصل مع الفريق المنفّذ مباشرة بلا وسطاء ولا روتين." },
-  { title: "جودة لا تساوم", desc: "كل مشروع يمرّ بمراجعات دقيقة قبل أن يصل إليك." },
-];
-
-const DELIVERY_AREAS = [
-  { name: "إدارة المشروع", role: "تخطيط واضح وتواصل مباشر", color: "#7A1630", initial: "إ" },
-  { name: "التصميم", role: "UI/UX & Brand", color: "#f472b6", initial: "ت" },
-  { name: "التطوير", role: "Frontend & Backend", color: "#4ade80", initial: "ط" },
-  { name: "المحتوى المرئي", role: "Motion & Video", color: "#60a5fa", initial: "م" },
-];
-
+import { PageIntro, StudioCta } from "../components/Studio";
+import { useProjects } from "../hooks/useProjects";
 export default function About() {
-  const projects = useQuery(api.projects.list) ?? [];
-  const categories = new Set(projects.map(project => project.category)).size;
+  const { projects, loading } = useProjects();
   return (
-    <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
-      <Seo path="/about" title="من نحن"
-        description="فكرة وكالة رقمية في قطر تجمع بين الإبداع والتقنية. تعرّف على قيمنا وفريقنا ولماذا يثق بنا عملاؤنا." />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-
-        {/* Header */}
-        <motion.div {...up()} className="mb-16 max-w-3xl">
-          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">من نحن</span>
-          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-6 leading-tight">
-            وكالة رقمية{" "}
-            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-              بأسلوب مختلف
-            </span>
-          </h1>
-          <p className="text-[#2A0913]/70 text-xl leading-relaxed">
-            فكرة وكالة متخصصة في تقديم حلول رقمية إبداعية للأعمال والأفراد. نجمع بين الفهم العميق للسوق المحلي والمعايير العالمية للتصميم.
-          </p>
-        </motion.div>
-
-        {/* Mission banner */}
-        <motion.div {...up(0.1)}
-          className="relative rounded-3xl p-10 mb-12 overflow-hidden border border-[#7A1630]/15"
-          style={{ background: "linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(122,22,48,0.07) 0%,transparent 60%)" }} />
-          <div className="relative z-10">
-            <div className="text-[#E9D29D]/60 text-xs font-black tracking-widest uppercase mb-4">مهمتنا</div>
-            <p className="text-[#F3E2B6] text-2xl md:text-3xl font-bold leading-relaxed max-w-3xl">
-              "تمكين كل صاحب فكرة من امتلاك حضور رقمي مميز يعكس قيمته الحقيقية — بتصميم يُبهر وتقنية تدوم."
+    <>
+      <Seo
+        title="عن أثر"
+        path="/about"
+        description="تعرّف على أثر للتقنية والتصميم: نجمع فهم الفكرة والتصميم والتطوير لبناء حضور رقمي يعكس قيمة مشروعك."
+      />
+      <div className="container">
+        <PageIntro title="نؤمن أن التفاصيل تصنع الأثر.">
+          أثر للتقنية والتصميم. نحول الأفكار إلى مواقع وتطبيقات وهويات بصرية،
+          بعناية تمتد من أول محادثة إلى لحظة الإطلاق.
+        </PageIntro>
+        <section className="about-manifesto">
+          <div>
+            <h2>
+              مشروعك له شخصيته.
+              <br />
+              وتصميمه ينبغي أن يشبهه.
+            </h2>
+            <p>
+              نبدأ بفهم ما تقدمه، ولمن تقدمه، وما الذي تريد الوصول إليه. ثم نجمع
+              التصميم والتقنية والمحتوى لنمنح الفكرة شكلًا واضحًا وتجربة سهلة
+              الاستخدام.
+            </p>
+            <p>
+              من الدوحة، نعمل على حلول رقمية للأعمال والأفراد، مع تواصل مباشر
+              ونطاق عمل واضح ومتابعة حسب الاتفاق.
+            </p>
+            <Link className="text-link" to="/portfolio">
+              شاهد أثر ذلك في أعمالنا <ArrowLeft size={19} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="about-brand">
+            <img
+              src="/athr-mark-ondark.svg"
+              alt="شعار أثر للتقنية والتصميم"
+              width={280}
+              height={280}
+            />
+            <span>نبتكر لنترك أثرًا.</span>
+          </div>
+        </section>
+        <section className="section">
+          <div className="section-heading">
+            <h2>ما نعتمد عليه، في كل مشروع.</h2>
+          </div>
+          <div className="values-grid">
+            {[
+              {
+                t: "فهم قبل التنفيذ",
+                d: "نحدد الاحتياج والأولويات ونطاق المشروع قبل الدخول في التفاصيل.",
+              },
+              {
+                t: "هوية متناسقة",
+                d: "نربط الشكل والمحتوى وطريقة الاستخدام في تجربة واحدة.",
+              },
+              {
+                t: "وضوح في العمل",
+                d: "نتفق على المخرجات والمدة وآلية المراجعات والتواصل.",
+              },
+              {
+                t: "عناية بالتجربة",
+                d: "نراجع الاستخدام على الأجهزة المختلفة ونرتّب تفاصيل التسليم.",
+              },
+            ].map((v) => (
+              <div key={v.t}>
+                <h3>{v.t}</h3>
+                <p>{v.d}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="about-proof">
+          <div>
+            <h2>أعمال متنوعة، واهتمام بالتفاصيل.</h2>
+            <p>
+              من تجارب التعليم واللياقة إلى الضيافة والتجارة، تختلف المجالات
+              وتبقى العناية بالمشروع.
             </p>
           </div>
-        </motion.div>
-
-        {/* Values */}
-        <motion.div {...up(0.15)} className="mb-5">
-          <span className="text-[#E9D29D] text-xs font-black tracking-[0.25em] uppercase block mb-8">قيمنا</span>
-        </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-          {VALUES.map((v, i) => (
-            <motion.div key={v.title} {...up(0.18 + i * 0.07)}
-              className="group p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1.5 transition-all duration-500 overflow-hidden relative"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at 30% 30%,${v.color}10 0%,transparent 60%)` }} />
-              <div className="relative z-10 w-12 h-12 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
-                style={{ background: v.color + "18", color: v.color, border: `1px solid ${v.color}30` }}>
-                {v.icon}
-              </div>
-              <h3 className="relative z-10 font-black text-[#2A0913] mb-2">{v.title}</h3>
-              <p className="relative z-10 text-xs text-[#2A0913]/60 leading-relaxed">{v.desc}</p>
-              <div className="absolute bottom-0 inset-x-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `linear-gradient(90deg,transparent,${v.color}60,transparent)` }} />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Stats */}
-        <motion.div {...up(0.2)} className="mb-5">
-          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-8">أرقامنا</span>
-        </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {[
-            { n: String(projects.length), l: "مشروع منشور", color: "#7A1630" },
-            { n: String(categories), l: "مجالات عمل", color: "#4ade80" },
-            { n: String(projects.filter(project => project.videoUrl).length), l: "معاينات فيديو", color: "#60a5fa" },
-            { n: "٦", l: "خدمات متخصصة", color: "#a78bfa" },
-          ].map((s, i) => (
-            <motion.div key={s.l} {...up(0.22 + i * 0.06)}
-              className="group p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 text-center transition-all duration-300 relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at 50% 50%,${s.color}08 0%,transparent 70%)` }} />
-              <div className="text-4xl font-black mb-2 relative z-10" dir="ltr" style={{ color: s.color }}>{s.n}</div>
-              <div className="text-sm text-[#2A0913]/65 relative z-10">{s.l}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Delivery areas */}
-        <motion.div {...up(0.25)} className="mb-5">
-          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-8">كيف ننفذ مشروعك</span>
-        </motion.div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {DELIVERY_AREAS.map((m, i) => (
-            <motion.div key={m.name} {...up(0.27 + i * 0.06)}
-              className="group p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1.5 text-center transition-all duration-500 relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at 50% 0%,${m.color}10 0%,transparent 60%)` }} />
-              <div className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                style={{ background: m.color + "18", color: m.color, border: `1px solid ${m.color}30` }}>
-                {m.initial}
-              </div>
-              <h3 className="relative z-10 font-black text-[#2A0913] mb-1 text-sm">{m.name}</h3>
-              <p className="relative z-10 text-xs text-[#2A0913]/60">{m.role}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Why choose us */}
-        <motion.div {...up(0.28)} className="mb-5">
-          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-8">لماذا تختارنا</span>
-        </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-          {WHY_US.map((w, i) => (
-            <motion.div key={w.title} {...up(0.3 + i * 0.05)}
-              className="group flex gap-4 p-5 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#7A1630]/25 transition-all duration-300"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
-                style={{ background: "rgba(122,22,48,0.15)", border: "1px solid rgba(122,22,48,0.3)" }}>
-                <svg className="w-4 h-4 text-[#7A1630]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7" /></svg>
-              </div>
-              <div>
-                <h3 className="font-black text-[#2A0913] mb-1 text-sm">{w.title}</h3>
-                <p className="text-[#2A0913]/65 text-xs leading-relaxed">{w.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Story section */}
-        <motion.div {...up(0.3)}
-          className="relative rounded-3xl p-10 mb-12 overflow-hidden border border-[#4A0E1E]/15"
-          style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-          <div className="absolute top-0 right-0 text-[200px] font-black opacity-[0.03] leading-none select-none" style={{ color: "#7A1630" }}>أفكار</div>
-          <div className="relative z-10 max-w-2xl">
-            <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">قصتنا</span>
-            <h2 className="text-2xl md:text-3xl font-black text-[#2A0913] mb-5">من فكرة إلى وكالة رقمية</h2>
-            <p className="text-[#2A0913]/65 leading-relaxed mb-4">
-              بدأت فكرة من شغف حقيقي بالتصميم والتقنية وإيمان بأن كل فكرة تستحق أن تُرى بأفضل صورة ممكنة.
+          {!loading && projects.length > 0 && (
+            <p className="proof-note">
+              استكشف {projects.length} مشروعًا في{" "}
+              {new Set(projects.map((p) => p.category)).size} مجالات.
             </p>
-            <p className="text-[#2A0913]/65 leading-relaxed">
-              اليوم نخدم عملاء من قطر والخليج، ونفخر بكل مشروع أنجزناه لأنه يعكس التزامنا بالجودة والإبداع — من الفكرة الأولى حتى الإطلاق وما بعده.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div {...up(0.35)}
-          className="relative rounded-3xl p-10 text-center overflow-hidden border border-[#7A1630]/15"
-          style={{ background: "linear-gradient(135deg,#7A1630,#4A0E1E)" }}>
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 0%,rgba(122,22,48,0.08) 0%,transparent 60%)" }} />
-          <h2 className="text-2xl md:text-3xl font-black text-[#F3E2B6] mb-3 relative z-10">هل أنت مستعد للبدء؟</h2>
-          <p className="text-white/65 mb-7 relative z-10">تواصل معنا اليوم وابدأ رحلتك الرقمية.</p>
-          <NavLink to="/contact"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-black text-[#7A1630] relative z-10 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", boxShadow: "0 0 40px rgba(122,22,48,0.3)" }}>
-            تحدث معنا
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          </NavLink>
-        </motion.div>
+          )}
+          <Link className="button button-outline" to="/portfolio">
+            استكشف الأعمال <ArrowLeft size={19} aria-hidden="true" />
+          </Link>
+        </section>
       </div>
-    </div>
+      <StudioCta />
+    </>
   );
 }

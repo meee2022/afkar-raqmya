@@ -1,9 +1,16 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { requireAdmin } from "./adminAuth";
+import { nextStatuses } from "../shared/documentStatus";
 
 const kind = v.union(v.literal("invoice"), v.literal("quote"));
-const status = v.union(v.literal("draft"), v.literal("sent"), v.literal("accepted"), v.literal("paid"), v.literal("cancelled"));
+const status = v.union(
+  v.literal("draft"),
+  v.literal("sent"),
+  v.literal("accepted"),
+  v.literal("paid"),
+  v.literal("cancelled"),
+);
 const fields = {
   clientName: v.string(),
   clientCompany: v.optional(v.string()),
@@ -11,24 +18,72 @@ const fields = {
   clientEmail: v.optional(v.string()),
   issueDate: v.string(),
   dueDate: v.optional(v.string()),
-  items: v.array(v.object({ description: v.string(), qty: v.number(), unitPrice: v.number() })),
+  items: v.array(
+    v.object({
+      description: v.string(),
+      qty: v.number(),
+      unitPrice: v.number(),
+    }),
+  ),
   discount: v.number(),
   paidAmount: v.optional(v.number()),
   notes: v.optional(v.string()),
 };
 
 // Server-side guard: the UI also checks this, but never trust the client.
-function validate(d: { clientName: string; items: { qty: number; unitPrice: number }[]; discount: number; paidAmount?: number }) {
-  if (!d.clientName.trim()) throw new Error("اسم العميل مطلوب");
-  if (d.items.length === 0) throw new Error("أضف بندًا واحدًا على الأقل");
-  if (d.items.some(i => !(i.qty >= 0) || !(i.unitPrice >= 0))) throw new Error("الكمية والسعر لا يمكن أن يكونا بالسالب");
+function validate(d: {
+  clientName: string;
+  issueDate: string;
+  dueDate?: string;
+  items: { description: string; qty: number; unitPrice: number }[];
+  discount: number;
+  paidAmount?: number;
+}) {
+  if (!d.clientName.trim() || d.clientName.length > 200)
+    throw new Error("اسم العميل مطلوب وبحد أقصى 200 حرف");
+  const validDate = (s: string) =>
+    /^\d{4}-\d{2}-\d{2}$/.test(s) &&
+    !Number.isNaN(Date.parse(s)) &&
+    new Date(s).toISOString().slice(0, 10) === s;
+  if (
+    !validDate(d.issueDate) ||
+    (d.dueDate && (!validDate(d.dueDate) || d.dueDate < d.issueDate))
+  )
+    throw new Error("راجع تاريخ الإصدار والاستحقاق");
+  if (d.items.length === 0 || d.items.length > 200)
+    throw new Error("أضف من بند واحد إلى 200 بند");
+  if (
+    d.items.some(
+      (i) =>
+        !i.description.trim() ||
+        i.description.length > 1000 ||
+        !Number.isFinite(i.qty) ||
+        !Number.isFinite(i.unitPrice) ||
+        i.qty <= 0 ||
+        i.unitPrice < 0,
+    )
+  )
+    throw new Error("راجع وصف البنود والكمية والسعر");
   const subtotal = d.items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
-  if (!(d.discount >= 0) || d.discount > subtotal) throw new Error("الخصم يجب أن يكون بين صفر والمجموع");
-  if (d.paidAmount !== undefined && (!(d.paidAmount >= 0) || d.paidAmount > subtotal - d.discount)) throw new Error("المدفوع مقدمًا أكبر من الإجمالي");
+  if (
+    !Number.isSafeInteger(Math.round(subtotal * 100)) ||
+    !Number.isFinite(d.discount) ||
+    !(d.discount >= 0) ||
+    d.discount > subtotal
+  )
+    throw new Error(
+      "الخصم يجب أن يكون بين صفر والمجموع والمبالغ ضمن الحدود المسموحة",
+    );
+  if (
+    d.paidAmount !== undefined &&
+    (!(d.paidAmount >= 0) || d.paidAmount > subtotal - d.discount)
+  )
+    throw new Error("المدفوع مقدمًا أكبر من الإجمالي");
 }
 
 // YYYY-MM-DD in Qatar time (UTC+3), so late-night documents get the right date
-const qatarToday = () => new Date(Date.now() + 3 * 3600_000).toISOString().slice(0, 10);
+const qatarToday = () =>
+  new Date(Date.now() + 3 * 3600_000).toISOString().slice(0, 10);
 
 // INV-2026-001 / QT-2026-001, numbered per kind per year
 async function nextNumber(ctx: any, k: "invoice" | "quote", issueDate: string) {
@@ -40,7 +95,11 @@ async function nextNumber(ctx: any, k: "invoice" | "quote", issueDate: string) {
     .first();
   const seq = (last?.seq ?? 0) + 1;
   const prefix = k === "invoice" ? "INV" : "QT";
-  return { year, seq, number: `${prefix}-${year}-${String(seq).padStart(3, "0")}` };
+  return {
+    year,
+    seq,
+    number: `${prefix}-${year}-${String(seq).padStart(3, "0")}`,
+  };
 }
 
 export const list = query({
@@ -67,7 +126,14 @@ export const create = mutation({
     validate(data);
     const num = await nextNumber(ctx, k, data.issueDate);
     const now = Date.now();
-    return await ctx.db.insert("agencyDocuments", { kind: k, ...num, ...data, status: "draft", createdAt: now, updatedAt: now });
+    return await ctx.db.insert("agencyDocuments", {
+      kind: k,
+      ...num,
+      ...data,
+      status: "draft",
+      createdAt: now,
+      updatedAt: now,
+    });
   },
 });
 
@@ -77,9 +143,14 @@ export const update = mutation({
     await requireAdmin(ctx, token);
     const doc = await ctx.db.get(id);
     // Once sent, the amounts are what the client received: lock edits.
-    if (!doc || doc.status !== "draft") throw new Error("لا يمكن تعديل مستند بعد إرساله");
+    if (!doc || doc.status !== "draft")
+      throw new Error("لا يمكن تعديل مستند بعد إرساله");
     validate(data);
-    await ctx.db.patch(id, { ...data, updatedAt: Date.now() });
+    const renumber =
+      Number(data.issueDate.slice(0, 4)) !== doc.year
+        ? await nextNumber(ctx, doc.kind, data.issueDate)
+        : {};
+    await ctx.db.patch(id, { ...data, ...renumber, updatedAt: Date.now() });
   },
 });
 
@@ -88,8 +159,12 @@ export const setStatus = mutation({
   handler: async (ctx, { token, id, status: s }) => {
     await requireAdmin(ctx, token);
     const doc = await ctx.db.get(id);
-    // Going back to draft would unlock edits on a document the client already has.
-    if (doc && doc.status !== "draft" && s === "draft") throw new Error("لا يمكن إرجاع مستند مُرسل إلى مسودة");
+    if (!doc) throw new Error("المستند غير موجود");
+    if (s === doc.status) return;
+    if (!nextStatuses(doc.kind, doc.status).includes(s))
+      throw new Error(
+        "لا يمكن الانتقال إلى هذه الحالة من حالة المستند الحالية",
+      );
     await ctx.db.patch(id, { status: s, updatedAt: Date.now() });
   },
 });
@@ -100,8 +175,15 @@ export const remove = mutation({
     await requireAdmin(ctx, token);
     const doc = await ctx.db.get(id);
     // Only drafts can be deleted; sent documents are cancelled so their number is never reused.
-    if (doc && doc.status !== "draft") throw new Error("المستند المُرسل لا يُحذف — غيّر حالته إلى ملغاة");
-    if (doc && (await ctx.db.query("agencyDocuments").withIndex("by_sourceQuote", q => q.eq("sourceQuoteId", id)).first()))
+    if (doc && doc.status !== "draft")
+      throw new Error("المستند المُرسل لا يُحذف — غيّر حالته إلى ملغاة");
+    if (
+      doc &&
+      (await ctx.db
+        .query("agencyDocuments")
+        .withIndex("by_sourceQuote", (q) => q.eq("sourceQuoteId", id))
+        .first())
+    )
       throw new Error("عرض السعر هذا محوّل إلى فاتورة");
     if (doc) await ctx.db.delete(id);
   },
@@ -113,18 +195,35 @@ export const convertToInvoice = mutation({
   handler: async (ctx, { token, id }) => {
     await requireAdmin(ctx, token);
     const quote = await ctx.db.get(id);
-    if (!quote || quote.kind !== "quote") throw new Error("عرض السعر غير موجود");
-    const existing = await ctx.db.query("agencyDocuments").withIndex("by_sourceQuote", q => q.eq("sourceQuoteId", id)).first();
+    if (!quote || quote.kind !== "quote")
+      throw new Error("عرض السعر غير موجود");
+    const existing = await ctx.db
+      .query("agencyDocuments")
+      .withIndex("by_sourceQuote", (q) => q.eq("sourceQuoteId", id))
+      .first();
     if (existing) return existing._id;
+    if (quote.status !== "accepted")
+      throw new Error("اعتمد عرض السعر قبل تحويله إلى فاتورة");
     const issueDate = qatarToday();
     const num = await nextNumber(ctx, "invoice", issueDate);
     const now = Date.now();
     await ctx.db.patch(id, { status: "accepted", updatedAt: now });
     return await ctx.db.insert("agencyDocuments", {
-      kind: "invoice", ...num, status: "draft",
-      clientName: quote.clientName, clientCompany: quote.clientCompany, clientPhone: quote.clientPhone, clientEmail: quote.clientEmail,
-      issueDate, items: quote.items, discount: quote.discount, paidAmount: quote.paidAmount, notes: quote.notes,
-      sourceQuoteId: id, createdAt: now, updatedAt: now,
+      kind: "invoice",
+      ...num,
+      status: "draft",
+      clientName: quote.clientName,
+      clientCompany: quote.clientCompany,
+      clientPhone: quote.clientPhone,
+      clientEmail: quote.clientEmail,
+      issueDate,
+      items: quote.items,
+      discount: quote.discount,
+      paidAmount: quote.paidAmount,
+      notes: quote.notes,
+      sourceQuoteId: id,
+      createdAt: now,
+      updatedAt: now,
     });
   },
 });
@@ -151,6 +250,10 @@ export const upsertBilling = mutation({
     await requireAdmin(ctx, token);
     const row = await ctx.db.query("agencyBillingInfo").first();
     if (row) await ctx.db.patch(row._id, { ...data, updatedAt: Date.now() });
-    else await ctx.db.insert("agencyBillingInfo", { ...data, updatedAt: Date.now() });
+    else
+      await ctx.db.insert("agencyBillingInfo", {
+        ...data,
+        updatedAt: Date.now(),
+      });
   },
 });

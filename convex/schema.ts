@@ -2,6 +2,46 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  // Private operational records. Never joined into public project or settings queries.
+  agencyWebsiteRegistry: defineTable({
+    name: v.string(),
+    client: v.string(),
+    siteUrl: v.string(),
+    domain: v.string(),
+    domainProvider: v.string(),
+    renewalDate: v.string(),
+    repositoryUrl: v.string(),
+    repositoryName: v.string(),
+    localPath: v.optional(v.string()),
+    credentialReference: v.string(),
+    services: v.array(
+      v.object({
+        provider: v.string(),
+        account: v.string(),
+        project: v.string(),
+        dashboardUrl: v.string(),
+      }),
+    ),
+    notes: v.string(),
+    tags: v.array(v.string()),
+    status: v.union(
+      v.literal("unknown"),
+      v.literal("live"),
+      v.literal("development"),
+      v.literal("paused"),
+    ),
+    needsReview: v.boolean(),
+    pinned: v.boolean(),
+    archived: v.boolean(),
+    revision: v.number(),
+    recordKey: v.optional(v.string()),
+    linkedProjectId: v.optional(v.id("agencyProjects")),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_updated", ["updatedAt"])
+    .index("by_project", ["linkedProjectId"])
+    .index("by_recordKey", ["recordKey"]),
   agencyServices: defineTable({
     titleAr: v.string(),
     descriptionAr: v.string(),
@@ -20,6 +60,10 @@ export default defineSchema({
     imageStorageId: v.optional(v.id("_storage")),
     videoStorageId: v.optional(v.id("_storage")),
     previewImage: v.optional(v.string()),
+    previewVideo: v.optional(v.string()),
+    seedKey: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    phone: v.optional(v.boolean()),
     result: v.optional(v.string()),
     liveUrl: v.optional(v.string()),
     challenge: v.optional(v.string()),
@@ -65,11 +109,13 @@ export default defineSchema({
     phone: v.string(),
     email: v.optional(v.string()),
     service: v.optional(v.string()),
+    budget: v.optional(v.string()),
+    timeline: v.optional(v.string()),
     message: v.string(),
     status: v.union(
       v.literal("new"),
       v.literal("contacted"),
-      v.literal("closed")
+      v.literal("closed"),
     ),
     createdAt: v.number(),
   })
@@ -91,21 +137,34 @@ export default defineSchema({
     number: v.string(),
     year: v.number(),
     seq: v.number(),
-    status: v.union(v.literal("draft"), v.literal("sent"), v.literal("accepted"), v.literal("paid"), v.literal("cancelled")),
+    status: v.union(
+      v.literal("draft"),
+      v.literal("sent"),
+      v.literal("accepted"),
+      v.literal("paid"),
+      v.literal("cancelled"),
+    ),
     clientName: v.string(),
     clientCompany: v.optional(v.string()),
     clientPhone: v.optional(v.string()),
     clientEmail: v.optional(v.string()),
     issueDate: v.string(),
     dueDate: v.optional(v.string()),
-    items: v.array(v.object({ description: v.string(), qty: v.number(), unitPrice: v.number() })),
+    items: v.array(
+      v.object({
+        description: v.string(),
+        qty: v.number(),
+        unitPrice: v.number(),
+      }),
+    ),
     discount: v.number(),
     paidAmount: v.optional(v.number()),
     notes: v.optional(v.string()),
     sourceQuoteId: v.optional(v.id("agencyDocuments")),
     createdAt: v.number(),
     updatedAt: v.number(),
-  }).index("by_kind_year_seq", ["kind", "year", "seq"])
+  })
+    .index("by_kind_year_seq", ["kind", "year", "seq"])
     .index("by_sourceQuote", ["sourceQuoteId"]),
 
   // Company details printed on invoices (single row)
@@ -121,7 +180,15 @@ export default defineSchema({
 
   agencyAdminSessions: defineTable({
     tokenHash: v.string(),
+    // Optional for schema compatibility; sessions without an email must sign in again.
+    email: v.optional(v.string()),
     expiresAt: v.number(),
     createdAt: v.number(),
   }).index("by_tokenHash", ["tokenHash"]),
+
+  agencyRateLimits: defineTable({
+    bucket: v.string(),
+    count: v.number(),
+    resetAt: v.number(),
+  }).index("by_bucket", ["bucket"]),
 });

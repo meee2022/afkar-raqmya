@@ -1,286 +1,385 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useSearchParams, Link } from "react-router-dom";
 import { useMutation } from "convex/react";
+import {
+  ArrowUpLeft,
+  MessageCircle,
+  Phone,
+  CheckCircle2,
+  LoaderCircle,
+} from "lucide-react";
 import { api } from "../../convex/_generated/api";
 import { useSettings } from "../hooks/useSettings";
+import { SERVICES } from "../data/site";
 import Seo from "../components/Seo";
-
-const SERVICES = [
-  "تصميم وتطوير المواقع", "تطبيقات الجوال", "العروض التقديمية",
-  "الفيديو الترويجي", "الدعوات الرقمية", "الهوية البصرية", "باقة متكاملة", "أخرى",
-];
-
-const up = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
-
+import { PageIntro } from "../components/Studio";
+const EMPTY = {
+  name: "",
+  phone: "",
+  email: "",
+  service: "",
+  budget: "",
+  timeline: "",
+  message: "",
+  website: "",
+};
 export default function Contact() {
   const settings = useSettings();
-  const submitContact = useMutation(api.contact.submit);
-  const [form, setForm] = useState({ name: "", phone: "", service: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const submit = useMutation(api.contact.submit);
+  const [params] = useSearchParams();
+  const requested = params.get("package") || params.get("service") || "";
+  const [form, setForm] = useState({ ...EMPTY, service: requested });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; phone?: string; message?: string }>({});
-
-  const validate = () => {
-    const e: typeof errors = {};
-    if (form.name.trim().length < 2) e.name = "من فضلك اكتب اسمك";
-    // يقبل أرقام دولية مع + و مسافات (8 أرقام على الأقل)
-    const digits = form.phone.replace(/\D/g, "");
-    if (digits.length < 8) e.phone = "رقم جوال غير صحيح";
-    if (form.message.trim().length < 10) e.message = "اكتب تفاصيل أكثر (10 أحرف على الأقل)";
-    setErrors(e);
-    return Object.keys(e).length === 0;
+  const [sent, setSent] = useState(false);
+  const errorRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setForm((f) => ({ ...f, service: requested }));
+  }, [requested]);
+  const set = (key: keyof typeof EMPTY, value: string) => {
+    setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => ({ ...e, [key]: "", submit: "" }));
   };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function send(e: FormEvent) {
     e.preventDefault();
-    if (!validate()) return;
+    if (loading) return;
+    const next: Record<string, string> = {};
+    if (form.name.trim().length < 2) next.name = "اكتب اسمك، حرفين على الأقل.";
+    if (
+      !/^\+?[\d\s()-]{8,24}$/.test(form.phone) ||
+      form.phone.replace(/\D/g, "").length < 8 ||
+      form.phone.replace(/\D/g, "").length > 15
+    )
+      next.phone = "اكتب رقم جوال صحيحًا مع رمز الدولة.";
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      next.email = "اكتب بريدًا إلكترونيًا صحيحًا.";
+    if (form.message.trim().length < 10)
+      next.message = "أضف تفاصيل عن مشروعك، 10 أحرف على الأقل.";
+    setErrors(next);
+    if (Object.keys(next).length) {
+      requestAnimationFrame(() => {
+        errorRef.current?.focus();
+        document.getElementById(Object.keys(next)[0])?.focus();
+      });
+      return;
+    }
     setLoading(true);
     try {
-      await submitContact({
-        name: form.name,
-        phone: form.phone,
+      const result = await submit({
+        ...form,
+        email: form.email || undefined,
         service: form.service || undefined,
-        message: form.message,
+        budget: form.budget || undefined,
+        timeline: form.timeline || undefined,
       });
+      if (!result.ok) {
+        setErrors({ submit: result.error });
+        requestAnimationFrame(() => errorRef.current?.focus());
+        return;
+      }
       setSent(true);
+      setForm(EMPTY);
+      requestAnimationFrame(() => successRef.current?.focus());
     } catch {
-      setErrors({ message: "حدث خطأ أثناء الإرسال. جرّب واتساب أو حاول مرة أخرى." });
+      setErrors({
+        submit: "تعذر إرسال طلبك. حاول مرة أخرى أو تواصل معنا عبر واتساب.",
+      });
+      requestAnimationFrame(() => errorRef.current?.focus());
     } finally {
       setLoading(false);
     }
-  };
-
+  }
+  const options = [
+    ...new Set([
+      ...SERVICES.map((s) => s.title),
+      "خدمة مفردة",
+      "باقة الأعمال",
+      "الإطلاق الرقمي الكامل",
+      "أخرى",
+      ...(requested ? [requested] : []),
+    ]),
+  ];
   return (
-    <div className="min-h-screen pt-20" style={{ fontFamily: "'Tajawal','Cairo',sans-serif" }}>
-      <Seo path="/contact" title="تواصل معنا"
-        description="ابدأ مشروعك مع فكرة. تواصل معنا عبر واتساب أو النموذج ونرد خلال 24 ساعة. الدوحة، قطر." />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-
-        {/* Header */}
-        <motion.div {...up()} className="mb-16 max-w-2xl">
-          <span className="text-[#7A1630] text-xs font-black tracking-[0.25em] uppercase block mb-4">تواصل معنا</span>
-          <h1 className="text-5xl md:text-6xl font-black text-[#2A0913] mb-5">
-            ابدأ مشروعك{" "}
-            <span style={{ background:"linear-gradient(135deg,#C9A35F,#8F6A2F)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-              اليوم
-            </span>
-          </h1>
-          <p className="text-[#2A0913]/65 text-xl leading-relaxed">هل لديك فكرة؟ شاركنا بها ونحن نتولى الباقي. نرد خلال 24 ساعة.</p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-
-          {/* Left: Contact Info */}
-          <div className="space-y-4">
-            {/* WhatsApp */}
-            <motion.a {...up(0.1)}
+    <>
+      <Seo
+        title="تواصل معنا"
+        path="/contact"
+        description="تحدث مع أثر للتقنية والتصميم عن مشروعك عبر النموذج أو واتساب. مواقع وتطبيقات وهوية بصرية في قطر."
+      />
+      <div className="container contact-page">
+        <PageIntro title="الأفكار الكبيرة، تبدأ بمحادثة.">
+          احكِ لنا عن مشروعك وما تريد الوصول إليه. نقرأ التفاصيل ونرتّب معك
+          الخطوة التالية.
+        </PageIntro>
+        <div className="contact-layout">
+          <aside className="contact-aside">
+            <h2>يسعدنا أن نسمع فكرتك.</h2>
+            <p>
+              فكرة أولية أو مشروع جاهز للتطوير؟ نساعدك على تحديد نقطة البداية.
+            </p>
+            <a
+              className="contact-channel"
               href={`https://wa.me/${settings.whatsapp}`}
-              target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-5 p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at 30% 50%,rgba(37,211,102,0.08) 0%,transparent 60%)" }} />
-              <div className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "#25D366", boxShadow: "0 0 20px rgba(37,211,102,0.3)" }}>
-                <svg className="w-7 h-7 text-[#2A0913]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.072 1.5 5.786L0 24l6.387-1.467A11.951 11.951 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.951 9.951 0 01-5.17-1.4l-.37-.22-3.793.872.938-3.682-.24-.382A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-                </svg>
-              </div>
-              <div className="relative z-10 flex-1">
-                <div className="font-black text-[#2A0913] mb-0.5">واتساب</div>
-                <div className="text-[#2A0913]/65 text-sm" dir="ltr">+{settings.whatsapp}</div>
-              </div>
-              <svg className="relative z-10 w-5 h-5 text-[#2A0913]/55 group-hover:text-[#2A0913]/75 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            </motion.a>
-
-            {/* Email */}
-            <motion.a {...up(0.15)}
-              href={`mailto:${settings.email}`}
-              className="flex items-center gap-5 p-6 rounded-2xl border border-[#4A0E1E]/15 hover:border-[#4A0E1E]/20 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at 30% 50%,rgba(96,165,250,0.08) 0%,transparent 60%)" }} />
-              <div className="relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(96,165,250,0.15)", border: "1px solid rgba(96,165,250,0.25)", color: "#60a5fa" }}>
-                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </div>
-              <div className="relative z-10 flex-1">
-                <div className="font-black text-[#2A0913] mb-0.5">البريد الإلكتروني</div>
-                <div className="text-[#2A0913]/65 text-sm">{settings.email}</div>
-              </div>
-              <svg className="relative z-10 w-5 h-5 text-[#2A0913]/55 group-hover:text-[#2A0913]/75 group-hover:-translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            </motion.a>
-
-            {/* Hours */}
-            <motion.div {...up(0.2)}
-              className="p-6 rounded-2xl border border-[#4A0E1E]/15"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(122,22,48,0.15)", color: "#7A1630" }}>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                </div>
-                <span className="text-xs font-black text-[#2A0913]/60 uppercase tracking-widest">ساعات العمل</span>
-              </div>
-              <div className="space-y-3 text-sm">
-                {[
-                  { days: "الأحد — الخميس", hours: "9:00 — 17:00", active: true },
-                  { days: "السبت", hours: "10:00 — 14:00", active: true },
-                  { days: "الجمعة", hours: "مغلق", active: false },
-                ].map(r => (
-                  <div key={r.days} className="flex items-center justify-between">
-                    <span className="text-[#2A0913]/65">{r.days}</span>
-                    <span className={`font-semibold text-xs px-2.5 py-1 rounded-full ${
-                      r.active ? "text-[#4ade80]" : "text-[#2A0913]/50"
-                    }`} style={r.active ? { background: "rgba(74,222,128,0.1)" } : {}}>
-                      {r.hours}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Location */}
-            <motion.div {...up(0.25)}
-              className="p-6 rounded-2xl border border-[#4A0E1E]/15 flex items-center gap-4"
-              style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(10px)" }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(122,22,48,0.12)", color: "#7A1630", border: "1px solid rgba(122,22,48,0.2)" }}>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
-              </div>
-              <div>
-                <div className="font-black text-[#2A0913] mb-0.5 text-sm">الموقع</div>
-                <div className="text-[#2A0913]/60 text-sm">الدوحة، قطر 🇶🇦</div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right: Form */}
-          <motion.div {...up(0.12)}
-            className="rounded-3xl border border-[#4A0E1E]/15 p-8 relative overflow-hidden"
-            style={{ background: "rgba(255,255,255,0.7)", backdropFilter: "blur(20px)" }}>
-            <div className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at 80% 20%,rgba(122,22,48,0.04) 0%,transparent 60%)" }} />
-
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle size={23} aria-hidden="true" />
+              <span>
+                محادثة عبر واتساب<small>تواصل مباشر مع أثر</small>
+              </span>
+              <ArrowUpLeft size={20} aria-hidden="true" />
+            </a>
+            <a
+              className="contact-channel"
+              href={`tel:${settings.phone.replace(/\s/g, "")}`}
+            >
+              <Phone size={22} aria-hidden="true" />
+              <span>
+                اتصل بنا<small dir="ltr">{settings.phone}</small>
+              </span>
+              <ArrowUpLeft size={20} aria-hidden="true" />
+            </a>
+            {settings.email && (
+              <a
+                className="contact-email"
+                href={`mailto:${settings.email}`}
+                dir="ltr"
+              >
+                {settings.email}
+              </a>
+            )}
+            <p className="contact-location">
+              الدوحة، قطر
+              <br />
+              نرد عادةً خلال أقل من 24 ساعة.
+            </p>
+            <img
+              src="/athr-mark.svg"
+              alt=""
+              width={130}
+              height={130}
+              className="contact-mark"
+              aria-hidden="true"
+            />
+          </aside>
+          <div className="contact-form-panel">
             {sent ? (
-              <div className="relative z-10 text-center py-16">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", bounce: 0.5, duration: 0.6 }}
-                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                  style={{ background: "rgba(74,222,128,0.15)", border: "2px solid rgba(74,222,128,0.3)" }}>
-                  <svg className="w-10 h-10 text-[#4ade80]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path d="M5 13l4 4L19 7"/></svg>
-                </motion.div>
-                <h3 className="text-2xl font-black text-[#2A0913] mb-2">تم إرسال رسالتك! ✦</h3>
-                <p className="text-[#2A0913]/65 mb-8">سنتواصل معك خلال 24 ساعة — أو راسلنا الآن على واتساب لرد أسرع.</p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                  <a href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(`مرحباً، أنا ${form.name || ""} وأرسلت لكم عبر الموقع بخصوص: ${form.service || "مشروعي"}`)}`}
-                    target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black px-6 py-3 rounded-full text-[#2A0913] hover:scale-105 transition-all"
-                    style={{ background: "#25D366", boxShadow: "0 0 24px rgba(37,211,102,0.35)" }}>
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-                    تواصل عبر واتساب
-                  </a>
-                  <button onClick={() => { setSent(false); setForm({ name:"", phone:"", service:"", message:"" }); }}
-                    className="text-sm font-bold px-6 py-3 rounded-full border border-[#7A1630]/30 text-[#7A1630] hover:bg-[#7A1630]/10 transition-all">
-                    إرسال رسالة أخرى
-                  </button>
-                </div>
+              <div className="contact-success" ref={successRef} tabIndex={-1}>
+                <CheckCircle2 size={48} strokeWidth={1.3} aria-hidden="true" />
+                <h2>وصلت فكرتك إلى أثر.</h2>
+                <p>
+                  شكرًا لمشاركة التفاصيل. سنتواصل معك عبر البيانات التي أرسلتها
+                  لمناقشة الخطوة التالية.
+                </p>
+                <button
+                  className="button"
+                  type="button"
+                  onClick={() => setSent(false)}
+                >
+                  إرسال طلب آخر
+                </button>
+                <Link className="text-link" to="/portfolio">
+                  اكتشف أعمالنا
+                </Link>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="relative z-10">
-                <h2 className="text-xl font-black text-[#2A0913] mb-6">أرسل لنا رسالة</h2>
-                <div className="space-y-4">
-                  {/* Name + Phone */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[
-                      { id:"name", label:"الاسم", type:"text", ph:"اسمك الكريم", req:true },
-                      { id:"phone", label:"رقم الجوال", type:"tel", ph:"+974 XXXX XXXX", req:true },
-                    ].map(f => (
-                      <div key={f.id}>
-                        <label htmlFor={f.id} className="block text-xs font-bold text-[#2A0913]/65 mb-2">
-                          {f.label} {f.req && <span className="text-[#7A1630]">*</span>}
-                        </label>
-                        <input id={f.id} type={f.type} required={f.req} placeholder={f.ph}
-                          value={(form as any)[f.id]}
-                          onChange={e => { setForm({...form, [f.id]: e.target.value}); if ((errors as any)[f.id]) setErrors({ ...errors, [f.id]: undefined }); }}
-                          className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] placeholder:text-[#2A0913]/45 transition-all outline-none"
-                          style={{
-                            background: "rgba(255,255,255,0.75)",
-                            border: `1px solid ${(errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
-                          }}
-                          onFocus={e => { e.currentTarget.style.borderColor = "rgba(122,22,48,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(122,22,48,0.06)"; }}
-                          onBlur={e => { e.currentTarget.style.borderColor = (errors as any)[f.id] ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
-                        />
-                        {(errors as any)[f.id] && <p className="text-[#f87171] text-xs mt-1.5">{(errors as any)[f.id]}</p>}
-                      </div>
-                    ))}
+              <form onSubmit={send} noValidate aria-busy={loading}>
+                <h2>لنبدأ بتفاصيل مشروعك.</h2>
+                <p className="form-hint">الحقول المعلّمة بنجمة مطلوبة.</p>
+                {Object.values(errors).some(Boolean) && (
+                  <div
+                    className="form-error"
+                    role="alert"
+                    tabIndex={-1}
+                    ref={errorRef}
+                  >
+                    {errors.submit || "راجع الحقول الموضحة أدناه لإرسال الطلب."}
                   </div>
-
-                  {/* Service */}
-                  <div>
-                    <label htmlFor="service" className="block text-xs font-bold text-[#2A0913]/65 mb-2">الخدمة المطلوبة</label>
-                    <select id="service" value={form.service} onChange={e => setForm({...form, service: e.target.value})}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] transition-all outline-none"
-                      style={{
-                        background: "rgba(255,255,255,0.75)",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                      }}>
-                      <option value="" className="bg-[#1c0710]">اختر الخدمة...</option>
-                      {SERVICES.map(s => <option key={s} value={s} className="bg-[#1c0710]">{s}</option>)}
+                )}
+                <div className="form-grid">
+                  {[
+                    {
+                      key: "name",
+                      label: "الاسم",
+                      type: "text",
+                      auto: "name",
+                      placeholder: "اسمك الكريم…",
+                      required: true,
+                    },
+                    {
+                      key: "phone",
+                      label: "رقم الجوال",
+                      type: "tel",
+                      auto: "tel",
+                      placeholder: "+974 …",
+                      required: true,
+                    },
+                    {
+                      key: "email",
+                      label: "البريد الإلكتروني",
+                      type: "email",
+                      auto: "email",
+                      placeholder: "name@example.com",
+                      required: false,
+                    },
+                  ].map((f) => (
+                    <div
+                      className={`field ${f.key === "email" ? "field-full" : ""}`}
+                      key={f.key}
+                    >
+                      <label htmlFor={f.key}>
+                        {f.label}
+                        {f.required && <span aria-hidden="true"> *</span>}
+                      </label>
+                      <input
+                        id={f.key}
+                        name={f.key}
+                        type={f.type}
+                        autoComplete={f.auto}
+                        required={f.required}
+                        maxLength={
+                          f.key === "name" ? 100 : f.key === "email" ? 254 : 24
+                        }
+                        placeholder={f.placeholder}
+                        dir={f.type === "text" ? "rtl" : "ltr"}
+                        spellCheck={false}
+                        value={form[f.key as keyof typeof form]}
+                        onChange={(e) =>
+                          set(f.key as keyof typeof form, e.target.value)
+                        }
+                        aria-invalid={!!errors[f.key]}
+                        aria-describedby={
+                          errors[f.key] ? `${f.key}-error` : undefined
+                        }
+                      />
+                      {errors[f.key] && (
+                        <p className="field-error" id={`${f.key}-error`}>
+                          {errors[f.key]}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                  <div className="field field-full">
+                    <label htmlFor="service">الخدمة أو الباقة</label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={form.service}
+                      onChange={(e) => set("service", e.target.value)}
+                    >
+                      <option value="">اختر الخدمة المناسبة…</option>
+                      {options.map((s) => (
+                        <option key={s}>{s}</option>
+                      ))}
                     </select>
                   </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="block text-xs font-bold text-[#2A0913]/65 mb-2">
-                      رسالتك <span className="text-[#7A1630]">*</span>
+                  {[
+                    {
+                      key: "budget",
+                      label: "الميزانية التقريبية — اختياري",
+                      options: [
+                        "أقل من 1,500 ر.ق",
+                        "1,500–5,000 ر.ق",
+                        "5,000–15,000 ر.ق",
+                        "أكثر من 15,000 ر.ق",
+                        "نحددها معًا",
+                      ],
+                    },
+                    {
+                      key: "timeline",
+                      label: "الموعد المطلوب — اختياري",
+                      options: [
+                        "خلال أسبوعين",
+                        "خلال شهر",
+                        "خلال 1–3 أشهر",
+                        "مرن، حسب نطاق العمل",
+                      ],
+                    },
+                  ].map((f) => (
+                    <div className="field" key={f.key}>
+                      <label htmlFor={f.key}>{f.label}</label>
+                      <select
+                        id={f.key}
+                        name={f.key}
+                        value={form[f.key as "budget" | "timeline"]}
+                        onChange={(e) =>
+                          set(f.key as "budget" | "timeline", e.target.value)
+                        }
+                      >
+                        <option value="">اختر إن رغبت…</option>
+                        {f.options.map((o) => (
+                          <option key={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                  <div className="field field-full">
+                    <label htmlFor="message">
+                      عن مشروعك <span aria-hidden="true">*</span>
                     </label>
-                    <textarea id="message" required rows={5}
-                      placeholder="اكتب لنا فكرتك أو ما تحتاجه بالتفصيل..."
-                      value={form.message} onChange={e => { setForm({...form, message: e.target.value}); if (errors.message) setErrors({ ...errors, message: undefined }); }}
-                      className="w-full px-4 py-3.5 rounded-xl text-sm text-[#2A0913] placeholder:text-[#2A0913]/45 transition-all outline-none resize-none"
-                      style={{
-                        background: "rgba(255,255,255,0.75)",
-                        border: `1px solid ${errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"}`,
-                      }}
-                      onFocus={e => { e.currentTarget.style.borderColor = "rgba(122,22,48,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(122,22,48,0.06)"; }}
-                      onBlur={e => { e.currentTarget.style.borderColor = errors.message ? "rgba(248,113,113,0.6)" : "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      minLength={10}
+                      maxLength={5000}
+                      value={form.message}
+                      onChange={(e) => set("message", e.target.value)}
+                      placeholder="ما الفكرة؟ ولمن تقدمها؟ وما الذي تحتاج إلى تنفيذه؟"
+                      aria-invalid={!!errors.message}
+                      aria-describedby={
+                        errors.message ? "message-error" : undefined
+                      }
                     />
-                    {errors.message && <p className="text-[#f87171] text-xs mt-1.5">{errors.message}</p>}
-                  </div>
-
-                  {/* Submit */}
-                  <button type="submit" disabled={loading}
-                    className="w-full py-4 rounded-2xl font-black text-sm disabled:opacity-60 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
-                    style={{ background: "linear-gradient(135deg,#E9D29D,#C9A35F)", color: "#7A1630", boxShadow: "0 0 30px rgba(122,22,48,0.3)" }}>
-                    {loading ? (
-                      <>
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                        </svg>
-                        جاري الإرسال...
-                      </>
-                    ) : (
-                      <>إرسال الرسالة ✦</>
+                    {errors.message && (
+                      <p className="field-error" id="message-error">
+                        {errors.message}
+                      </p>
                     )}
-                  </button>
-
-                  <p className="text-center text-xs text-[#2A0913]/50">نرد عادةً خلال أقل من 24 ساعة</p>
+                  </div>
                 </div>
+                <div className="honeypot" aria-hidden="true">
+                  <label htmlFor="website">اترك هذا الحقل فارغًا</label>
+                  <input
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={(e) => set("website", e.target.value)}
+                  />
+                </div>
+                <button
+                  className="button submit-button"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <LoaderCircle
+                        className="loading-spin"
+                        size={20}
+                        aria-hidden="true"
+                      />{" "}
+                      جارٍ إرسال الطلب…
+                    </>
+                  ) : (
+                    <>
+                      أرسل تفاصيل مشروعك{" "}
+                      <ArrowUpLeft size={20} aria-hidden="true" />
+                    </>
+                  )}
+                </button>
+                <p className="form-privacy">
+                  نستخدم بياناتك للرد على طلبك ومناقشة مشروعك.
+                </p>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

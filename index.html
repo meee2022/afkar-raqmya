@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
@@ -6,76 +6,49 @@
     <meta name="theme-color" content="#F6F0E6" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon-192.png" />
-
-    <!-- Primary SEO -->
     <title>ATHR | أثر للتقنية والتصميم</title>
-    <meta name="description" content="أثر للتقنية والتصميم — نبتكر لنترك أثرًا: شركة تقنية متخصصة في تصميم وتطوير المواقع والتطبيقات والهوية البصرية والفيديو. نحوّل أفكارك إلى حضور رقمي يحقق نتائج." />
-    <meta name="keywords" content="تصميم مواقع, تطوير مواقع, تطبيقات الجوال, هوية بصرية, تصميم جرافيك, موشن جرافيك, وكالة رقمية, قطر, الدوحة, تسويق رقمي" />
-    <meta name="author" content="ATHR Technology & Design" />
+    <meta
+      name="description"
+      content="أثر للتقنية والتصميم. نصمم ونطوّر المواقع والتطبيقات والهوية البصرية والمحتوى المرئي، من الفكرة إلى الإطلاق."
+    />
+    <meta name="author" content="أثر للتقنية والتصميم" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://fikratechdesign.com/" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="ATHR Technology & Design" />
+    <meta property="og:site_name" content="أثر للتقنية والتصميم" />
     <meta property="og:title" content="ATHR | أثر للتقنية والتصميم" />
-    <meta property="og:description" content="نصنع هويتك الرقمية بأسلوب فريد — مواقع، تطبيقات، هوية بصرية، وفيديو." />
+    <meta
+      property="og:description"
+      content="مواقع وتطبيقات وهويات بصرية تحكي مشروعك بالطريقة التي يستحقها."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fikratechdesign.com/" />
-    <meta property="og:image" content="https://fikratechdesign.com/og-image.png" />
-    <meta property="og:locale" content="ar_AR" />
-
-    <!-- Twitter -->
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content="ar_QA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ATHR | أثر للتقنية والتصميم" />
-    <meta name="twitter:description" content="نصنع هويتك الرقمية بأسلوب فريد — مواقع، تطبيقات، هوية بصرية، وفيديو." />
-    <meta name="twitter:image" content="https://fikratechdesign.com/og-image.png" />
-
-    <!-- Structured data: Organization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "ATHR Technology & Design — أثر للتقنية والتصميم",
-      "description": "وكالة رقمية متخصصة في تصميم وتطوير المواقع والتطبيقات والهوية البصرية",
-      "url": "https://fikratechdesign.com",
-      "logo": "https://fikratechdesign.com/logo.png",
-      "areaServed": "QA",
-      "address": { "@type": "PostalAddress", "addressLocality": "الدوحة", "addressCountry": "QA" }
-    }
-    </script>
-
+    <meta
+      name="twitter:description"
+      content="مواقع وتطبيقات وهويات بصرية تحكي مشروعك بالطريقة التي يستحقها."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+    <link
+      rel="preload"
+      href="/fonts/Tajawal-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Tajawal-ExtraBold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-
-    <!-- ════════════════════════════════════════════════════════════════
-         التحليلات (Analytics) — استبدل المعرّفات بمعرّفاتك الحقيقية ثم أزِل التعليق
-         ════════════════════════════════════════════════════════════════ -->
-
-    <!-- Google Analytics 4 — ضع معرّف القياس مكان G-XXXXXXXXXX
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-    -->
-
-    <!-- Meta (Facebook/Instagram) Pixel — ضع رقم البكسل مكان YOUR_PIXEL_ID
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'YOUR_PIXEL_ID');
-      fbq('track', 'PageView');
-    </script>
-    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

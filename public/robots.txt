@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://afkarraqmeya.com/sitemap.xml
+# The build adds the official sitemap origin when VITE_SITE_URL is configured.

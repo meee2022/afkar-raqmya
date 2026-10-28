@@ -66,9 +66,6 @@ export function ProjectTile({
             <span>{project.titleAr}</span>
           </div>
         )}
-        <span className="project-open" aria-hidden="true">
-          <ArrowUpLeft size={24} />
-        </span>
       </Link>
       <div className="project-caption">
         <div>
@@ -80,7 +77,13 @@ export function ProjectTile({
           </h3>
           <p>{project.descriptionAr}</p>
         </div>
-        <ArrowUpLeft size={24} strokeWidth={1.4} aria-hidden="true" />
+        <Link
+          className="project-open"
+          to={`/portfolio/${project.slug || project._id}`}
+          aria-label={`فتح تفاصيل ${project.titleAr}`}
+        >
+          <ArrowUpLeft size={22} strokeWidth={1.4} aria-hidden="true" />
+        </Link>
       </div>
     </article>
   );

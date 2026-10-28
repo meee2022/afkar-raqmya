@@ -79,7 +79,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             aria-label="التنقل على الجوال"
           >
             {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to}>
+              <NavLink key={n.to} to={n.to} onClick={() => setOpen(false)}>
                 {n.label}
                 <ArrowUpLeft size={18} aria-hidden="true" />
               </NavLink>

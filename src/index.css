@@ -565,22 +565,21 @@ a svg {
   object-position: center;
 }
 .project-open {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   background: var(--paper);
   color: var(--maroon);
   transition:
     background-color 0.2s,
     transform 0.2s;
 }
-.project-image:hover .project-open {
+.project-open:hover,
+.project-open:focus-visible {
   background: var(--maroon);
   color: var(--cream);
   transform: rotate(-8deg);
@@ -591,6 +590,10 @@ a svg {
   align-items: center;
   padding-top: 20px;
   gap: 14px;
+}
+.project-caption > div {
+  flex: 1;
+  min-width: 0;
 }
 .project-category {
   display: block;
@@ -615,9 +618,6 @@ a svg {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-}
-.project-caption > svg {
-  color: var(--gold-ink);
 }
 .project-image-empty {
   display: flex;
@@ -2239,8 +2239,8 @@ a svg {
     transition: none;
   }
   .button:hover,
-  .project-image:hover img,
-  .project-image:hover .project-open {
+  .project-open:hover,
+  .project-open:focus-visible {
     transform: none;
   }
   .loading-spin {

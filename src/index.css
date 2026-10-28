@@ -1062,7 +1062,7 @@ a svg {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  align-items: stretch;
+  align-items: start;
 }
 .pricing-card {
   border: 1px solid var(--line);
@@ -1101,7 +1101,7 @@ a svg {
   padding: 6px 12px;
 }
 .price-block {
-  padding: 29px 0;
+  padding: 24px 0;
   border-bottom: 1px solid var(--line);
   min-height: 134px;
 }
@@ -1123,6 +1123,15 @@ a svg {
   font-size: 15px;
   font-weight: 500;
 }
+.package-price-note {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.pricing-featured .package-price-note {
+  color: #dfc9c4;
+}
 .pricing-featured .price-block {
   border-color: #75434b;
 }
@@ -1131,11 +1140,10 @@ a svg {
 }
 .pricing-card ul {
   list-style: none;
-  padding: 28px 0 35px;
+  padding: 24px 0;
   display: grid;
-  gap: 19px;
+  gap: 16px;
   margin: 0;
-  flex: 1;
 }
 .pricing-card li {
   display: flex;
@@ -1157,6 +1165,84 @@ a svg {
   padding-inline: 18px;
   gap: 15px;
   width: 100%;
+  margin-top: 16px;
+}
+.package-facts {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.package-facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 9px;
+}
+.package-facts dt {
+  font-size: 13px;
+  color: var(--muted);
+}
+.package-facts dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: end;
+}
+.package-details {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.package-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding-block: 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 700;
+}
+.package-details summary::-webkit-details-marker {
+  display: none;
+}
+.package-details summary:focus-visible {
+  outline: 2px solid var(--gold-ink);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.package-details summary svg {
+  flex-shrink: 0;
+}
+.package-details[open] summary {
+  margin-bottom: 8px;
+}
+.package-details[open] summary svg {
+  transform: rotate(180deg);
+}
+.package-detail-group + .package-detail-group {
+  margin-top: 18px;
+}
+.package-detail-group h3 {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+.package-detail-group p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.pricing-featured .package-facts,
+.pricing-featured .package-details {
+  border-color: #75434b;
+}
+.pricing-featured .package-facts dt,
+.pricing-featured .package-detail-group p {
+  color: #dfc9c4;
+}
+.pricing-featured .package-details summary:focus-visible {
+  outline-color: var(--gold);
 }
 .pricing-note {
   color: var(--muted);
@@ -1164,6 +1250,37 @@ a svg {
   text-align: center;
   margin: 27px auto 0;
   max-width: 80ch;
+}
+.package-agreement {
+  margin-top: 36px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.package-agreement h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.package-agreement > p {
+  color: var(--muted);
+  font-size: 16px;
+}
+.package-agreement dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 36px;
+  margin: 24px 0 0;
+}
+.package-agreement dt {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.package-agreement dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
 }
 .faq-section {
   display: grid;
@@ -2134,6 +2251,17 @@ a svg {
     text-align: right;
     font-size: 13px;
     margin-top: 25px;
+  }
+  .package-agreement {
+    margin-top: 28px;
+    padding: 24px 20px;
+  }
+  .package-agreement h2 {
+    font-size: 26px;
+  }
+  .package-agreement dl {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   .faq-section {
     grid-template-columns: 1fr;

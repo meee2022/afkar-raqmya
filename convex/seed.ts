@@ -20,6 +20,7 @@ export const seedProjects = internalMutation({
         previewImage: p.imageUrl ?? undefined,
         previewVideo: p.videoUrl ?? undefined,
         featured: p.featured ?? false,
+        liveUrl: p.liveUrl,
       };
       if (row) {
         const patch = Object.fromEntries(

@@ -54,7 +54,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
           <a
             className="contact-float"
             aria-label="تحدث معنا عبر واتساب"
-            href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("مرحبًا أثر، أود التحدث عن مشروعي.")}`}
+            href={`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("مرحبًا عالم الكود، أود التحدث عن مشروعي.")}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -145,7 +145,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
                 </a>
                 {settings.instagramUrl && (
                   <a
-                    aria-label="أثر على إنستغرام"
+                    aria-label="عالم الكود على إنستغرام"
                     href={settings.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -154,7 +154,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
                   </a>
                 )}
                 <a
-                  aria-label="اتصل بأثر"
+                  aria-label="اتصل بعالم الكود"
                   href={`tel:${settings.phone.replace(/\s/g, "")}`}
                 >
                   <Phone size={19} aria-hidden="true" />

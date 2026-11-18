@@ -1,5 +1,5 @@
-export const SITE_NAME = "أثر للتقنية والتصميم";
-export const SITE_EN = "ATHR Technology & Design";
+export const SITE_NAME = "عالم الكود";
+export const SITE_EN = "Code World";
 // No legacy domain is assumed. Set this before publishing to the official domain.
 export const SITE_URL = (
   import.meta.env.VITE_SITE_URL || window.location.origin
@@ -8,7 +8,7 @@ export const NAV = [
   { to: "/services", label: "خدماتنا" },
   { to: "/portfolio", label: "أعمالنا" },
   { to: "/packages", label: "الباقات" },
-  { to: "/about", label: "عن أثر" },
+  { to: "/about", label: "من نحن" },
   { to: "/contact", label: "تواصل معنا" },
 ];
 

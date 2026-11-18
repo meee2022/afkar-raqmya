@@ -31,7 +31,7 @@ export function parseRegistryBackup(raw: unknown): RegistryBackupRecord[] {
     !file.records.length ||
     file.records.length > 2000
   )
-    throw new Error("اختر نسخة سجل مواقع أثر، بإصدار 1 وحتى 2000 سجل.");
+    throw new Error("اختر نسخة سجل مواقع عالم الكود، بإصدار 1 وحتى 2000 سجل.");
   return file.records.map((value: unknown) => {
     if (!value || typeof value !== "object")
       throw new Error("يوجد سجل غير صالح في الملف.");

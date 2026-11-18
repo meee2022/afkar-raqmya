@@ -25,7 +25,7 @@ export default function App() {
   const { pathname } = useLocation();
   useEffect(() => {
     if (!pathname.startsWith("/admin")) return;
-    document.title = "الإدارة | أثر للتقنية والتصميم";
+    document.title = "الإدارة | عالم الكود";
     const meta = document.querySelector('meta[name="robots"]');
     meta?.setAttribute("content", "noindex, nofollow");
     return () => {

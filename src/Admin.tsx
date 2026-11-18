@@ -1162,7 +1162,7 @@ function AdminLogin({ onSuccess }: { onSuccess: (token: string) => void }) {
         </div>
         <h1 className="text-3xl font-bold mb-2">تسجيل دخول الإدارة</h1>
         <p className="text-[var(--admin-muted)] text-sm leading-7 mb-7">
-          أدخل البريد الإلكتروني وكلمة المرور لحساب الإدارة للوصول إلى لوحة أثر.
+          أدخل البريد الإلكتروني وكلمة المرور لحساب الإدارة للوصول إلى لوحة عالم الكود.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -1432,17 +1432,17 @@ export default function Admin() {
         <div className="h-16 flex items-center px-5 border-b border-[var(--admin-line)]">
           <div className="flex items-center gap-3 overflow-hidden">
             <img
-              src="/athr-mark-ondark.svg"
-              alt="ATHR"
+              src="/cw-globe-ondark.svg"
+              alt="Code World"
               className="w-9 h-9 object-contain flex-shrink-0"
             />
             {sidebarOpen && (
               <div>
                 <div
                   className="font-bold text-[var(--admin-ink)] text-sm leading-tight"
-                  style={{ fontFamily: "Lexend" }}
+                  style={{ fontFamily: "Sora, Lexend" }}
                 >
-                  ATHR
+                  CODE WORLD
                 </div>
                 <div className="text-xs text-[var(--admin-muted)]">
                   لوحة الإدارة
@@ -1548,7 +1548,7 @@ export default function Admin() {
                   "لوحة التحكم"}
               </h1>
               <p className="text-xs text-[var(--admin-muted)]">
-                أثر للتقنية والتصميم — الإدارة
+                عالم الكود — الإدارة
               </p>
             </div>
           </div>

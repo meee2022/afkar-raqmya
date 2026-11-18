@@ -22,7 +22,7 @@ export default function Portfolio() {
       <Seo
         title="أعمالنا"
         path="/portfolio"
-        description="اكتشف أعمال أثر للتقنية والتصميم: مواقع وتطبيقات وهويات بصرية، مع صور المشاريع وتفاصيل تنفيذها."
+        description="اكتشف أعمال عالم الكود: مواقع وتطبيقات وهويات بصرية، مع صور المشاريع وتفاصيل تنفيذها."
       />
       <div className="container">
         <PageIntro title="لكل مشروع حكاية. ولنا فيه أثر.">

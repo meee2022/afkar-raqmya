@@ -43,7 +43,7 @@ export default function Seo({
   noIndex = false,
 }: SeoProps) {
   useEffect(() => {
-    const fullTitle = path === "/" ? `ATHR | ${SITE}` : `${title} | ${SITE}`;
+    const fullTitle = path === "/" ? `Code World | ${SITE}` : `${title} | ${SITE}`;
     const url = BASE_URL + path;
     const img = image.startsWith("http") ? image : BASE_URL + image;
 

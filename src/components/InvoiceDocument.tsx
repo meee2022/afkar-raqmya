@@ -1,4 +1,4 @@
-// Printable A4 invoice / quotation in the ATHR identity (Arabic + English).
+// Printable A4 invoice / quotation in the Code World identity (Arabic + English).
 export type DocItem = { description: string; qty: number; unitPrice: number };
 export type DocData = {
   kind: "invoice" | "quote";
@@ -118,20 +118,21 @@ export default function InvoiceDocument({
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <img src="/athr-mark-ondark.svg" alt="" style={{ height: 74 }} />
-          <div>
-            <div style={{ font: "800 22px Tajawal" }}>أثر للتقنية والتصميم</div>
+          <img src="/cw-globe-ondark.svg" alt="" style={{ height: 70 }} />
+          <div style={{ direction: "ltr" }}>
+            <div style={{ font: "800 26px Sora, Lexend", letterSpacing: "-.01em", lineHeight: 1 }}>
+              CODE WORLD
+            </div>
             <div
               style={{
-                font: "600 11px Lexend",
-                letterSpacing: ".32em",
-                marginTop: 4,
-                direction: "ltr",
-                textAlign: "right",
+                font: "600 15px 'Readex Pro', Tajawal",
+                marginTop: 5,
+                direction: "rtl",
+                textAlign: "left",
                 color: GOLD,
               }}
             >
-              ATHR TECHNOLOGY &amp; DESIGN
+              عالم الكود
             </div>
           </div>
         </div>

@@ -186,7 +186,7 @@ export default function DocumentsPanel({ token }: { token: string }) {
             الفواتير وعروض الأسعار
           </h2>
           <p className="text-sm text-[var(--admin-muted)]">
-            أنشئ، عدّل، واطبع PDF بهوية أثر.
+            أنشئ، عدّل، واطبع PDF بهوية عالم الكود.
           </p>
         </div>
         <div className="admin-actions">

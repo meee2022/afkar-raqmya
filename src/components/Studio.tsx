@@ -113,7 +113,7 @@ export function StudioCta() {
           نتحدث عن مشروعك <ArrowLeft size={20} aria-hidden="true" />
         </Link>
         <img
-          src="/athr-mark-ondark.svg"
+          src="/cw-globe-ondark.svg"
           alt=""
           className="cta-mark"
           width={330}

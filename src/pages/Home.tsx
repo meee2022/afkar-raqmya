@@ -22,9 +22,9 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="أثر"
+        title="عالم الكود"
         path="/"
-        description="أثر للتقنية والتصميم في قطر. تصميم وتطوير المواقع والتطبيقات والهوية البصرية والمحتوى المرئي، من الفكرة إلى الإطلاق."
+        description="عالم الكود في قطر. تصميم وتطوير المواقع والتطبيقات والهوية البصرية والمحتوى المرئي، من الفكرة إلى الإطلاق."
       />
       <section className="home-hero container">
         <div className="hero-copy">
@@ -55,7 +55,7 @@ export default function Home() {
           <div className="hero-arch">
             <img
               className="hero-mark"
-              src="/athr-mark-ondark.svg"
+              src="/cw-globe-ondark.svg"
               alt=""
               width={320}
               height={320}
@@ -68,7 +68,7 @@ export default function Home() {
                   <i />
                   <i />
                 </span>
-                <b dir="ltr">ATHR / SELECTED WORK</b>
+                <b dir="ltr">CODE WORLD / SELECTED WORK</b>
               </div>
               {hero?.imageUrl ? (
                 <img
@@ -81,8 +81,8 @@ export default function Home() {
               ) : (
                 <div className="hero-brand-placeholder">
                   <img
-                    src="/athr-mark.svg"
-                    alt="أثر للتقنية والتصميم"
+                    src="/cw-globe.svg"
+                    alt="عالم الكود"
                     width={160}
                     height={180}
                   />
@@ -90,13 +90,13 @@ export default function Home() {
               )}
             </div>
             <div className="hero-seal" aria-hidden="true">
-              <img src="/athr-mark.svg" alt="" width={55} height={55} />
+              <img src="/cw-globe.svg" alt="" width={55} height={55} />
               <span>نبتكر لنترك أثرًا</span>
             </div>
           </div>
           <div className="hero-project-caption">
             <span>
-              {hero?.titleAr.split(" — ")[0] || "أثر للتقنية والتصميم"}
+              {hero?.titleAr.split(" — ")[0] || "عالم الكود"}
             </span>
             <span>
               تصميم وتطوير <ArrowUpLeft size={17} aria-hidden="true" />
@@ -133,7 +133,7 @@ export default function Home() {
           <div className="empty-state">
             <p>تواصل معنا للاطلاع على الأعمال المناسبة لمشروعك.</p>
             <Link to="/contact" className="text-link">
-              تواصل مع أثر <ArrowLeft size={18} />
+              تواصل معنا <ArrowLeft size={18} />
             </Link>
           </div>
         )}
@@ -182,7 +182,7 @@ export default function Home() {
             واستخدامها.
           </p>
           <Link className="text-link" to="/about">
-            عن أثر <ArrowLeft size={19} aria-hidden="true" />
+            من نحن <ArrowLeft size={19} aria-hidden="true" />
           </Link>
         </div>
         <ol className="process-list">

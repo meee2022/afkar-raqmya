@@ -105,7 +105,7 @@ export default function Contact() {
       <Seo
         title="تواصل معنا"
         path="/contact"
-        description="تحدث مع أثر للتقنية والتصميم عن مشروعك عبر النموذج أو واتساب. مواقع وتطبيقات وهوية بصرية في قطر."
+        description="تحدث مع عالم الكود عن مشروعك عبر النموذج أو واتساب. مواقع وتطبيقات وهوية بصرية في قطر."
       />
       <div className="container contact-page">
         <PageIntro title="الأفكار الكبيرة، تبدأ بمحادثة.">
@@ -126,7 +126,7 @@ export default function Contact() {
             >
               <MessageCircle size={23} aria-hidden="true" />
               <span>
-                محادثة عبر واتساب<small>تواصل مباشر مع أثر</small>
+                محادثة عبر واتساب<small>تواصل مباشر مع فريقنا</small>
               </span>
               <ArrowUpLeft size={20} aria-hidden="true" />
             </a>
@@ -155,7 +155,7 @@ export default function Contact() {
               نرد عادةً خلال أقل من 24 ساعة.
             </p>
             <img
-              src="/athr-mark.svg"
+              src="/cw-globe.svg"
               alt=""
               width={130}
               height={130}
@@ -167,7 +167,7 @@ export default function Contact() {
             {sent ? (
               <div className="contact-success" ref={successRef} tabIndex={-1}>
                 <CheckCircle2 size={48} strokeWidth={1.3} aria-hidden="true" />
-                <h2>وصلت فكرتك إلى أثر.</h2>
+                <h2>وصلت فكرتك إلى عالم الكود.</h2>
                 <p>
                   شكرًا لمشاركة التفاصيل. سنتواصل معك عبر البيانات التي أرسلتها
                   لمناقشة الخطوة التالية.

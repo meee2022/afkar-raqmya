@@ -6,7 +6,7 @@ export default function NotFound() {
     <div className="container not-found">
       <Seo
         title="الصفحة غير موجودة"
-        description="الصفحة غير موجودة. عد إلى أثر للتقنية والتصميم لاستكشاف الخدمات والأعمال."
+        description="الصفحة غير موجودة. عد إلى عالم الكود لاستكشاف الخدمات والأعمال."
         noIndex
       />
       <span className="error-number" dir="ltr">

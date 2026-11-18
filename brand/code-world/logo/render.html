@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@800&family=Readex+Pro:wght@600&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  .lockup { display: flex; align-items: center; gap: 46px; direction: ltr; padding: 60px 70px; width: max-content; }
+  .lockup img { width: 220px; height: 220px; }
+  .en { font: 800 112px Sora; letter-spacing: -.01em; line-height: 1; white-space: nowrap; }
+  .ar { font: 600 60px "Readex Pro"; direction: rtl; text-align: left; margin-top: 10px; }
+  .light .en { color: #7A1630; } .light .ar { color: #C9A35F; }
+  .dark .en { color: #F3E2B6; } .dark .ar { color: #C9A35F; }
+  .bg-light { background: #F6EEDF; } .bg-dark { background: linear-gradient(150deg, #7A1630, #4A0E1E); }
+  .square { width: 1080px; height: 1080px; display: grid; place-items: center; }
+  .og { width: 1200px; height: 630px; display: grid; place-items: center; }
+  .og .tag { font: 600 34px "Readex Pro"; color: #F3E2B6; direction: rtl; margin-top: -10px; opacity: .9; }
+</style>
+</head>
+<body>
+<script>
+  const v = new URLSearchParams(location.search).get("v");
+  const lock = (cls, mark) => `<div class="lockup ${cls}"><img src="../../../public/${mark}"><div><div class="en">CODE WORLD</div><div class="ar">عالم الكود</div></div></div>`;
+  const views = {
+    light: lock("light", "cw-globe.svg"),
+    dark: lock("dark", "cw-globe-ondark.svg"),
+    "light-bg": `<div class="bg-light">${lock("light", "cw-globe.svg")}</div>`,
+    avatar: `<div class="square bg-dark"><img src="../../../public/cw-globe-ondark.svg" style="width:760px;height:760px"></div>`,
+    mark: `<div style="width:1024px;height:1024px;display:grid;place-items:center"><img src="../../../public/cw-globe.svg" style="width:1024px;height:1024px"></div>`,
+    cover: `<div class="bg-dark" style="width:1640px;height:624px;display:flex;align-items:center;justify-content:space-between;padding:0 90px;box-sizing:border-box;direction:ltr"><div style="zoom:.74">${lock("dark", "cw-globe-ondark.svg")}</div><div style="direction:rtl;text-align:right;color:#F3E2B6;font:600 36px 'Readex Pro';line-height:1.9;white-space:nowrap">مواقع · تطبيقات · أنظمة<br>هوية بصرية · عروض تقديمية<br><span style="color:#C9A35F">واتساب <bdi dir="ltr">6648 8228</bdi></span></div></div>`,
+    og: `<div class="og bg-dark"><div style="display:grid;justify-items:center">${lock("dark", "cw-globe-ondark.svg")}<div class="tag">نصمّم ونطوّر المواقع والتطبيقات والأنظمة في قطر</div></div></div>`,
+  };
+  document.body.innerHTML = views[v];
+</script>
+</body>
+</html>

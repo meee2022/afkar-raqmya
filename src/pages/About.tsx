@@ -8,13 +8,13 @@ export default function About() {
   return (
     <>
       <Seo
-        title="عن أثر"
+        title="من نحن"
         path="/about"
-        description="تعرّف على أثر للتقنية والتصميم: نجمع فهم الفكرة والتصميم والتطوير لبناء حضور رقمي يعكس قيمة مشروعك."
+        description="تعرّف على عالم الكود: نجمع فهم الفكرة والتصميم والتطوير لبناء حضور رقمي يعكس قيمة مشروعك."
       />
       <div className="container">
         <PageIntro title="نؤمن أن التفاصيل تصنع الأثر.">
-          أثر للتقنية والتصميم. نحول الأفكار إلى مواقع وتطبيقات وهويات بصرية،
+          عالم الكود. نحول الأفكار إلى مواقع وتطبيقات وهويات بصرية،
           بعناية تمتد من أول محادثة إلى لحظة الإطلاق.
         </PageIntro>
         <section className="about-manifesto">
@@ -39,8 +39,8 @@ export default function About() {
           </div>
           <div className="about-brand">
             <img
-              src="/athr-mark-ondark.svg"
-              alt="شعار أثر للتقنية والتصميم"
+              src="/cw-globe-ondark.svg"
+              alt="شعار عالم الكود"
               width={280}
               height={280}
             />

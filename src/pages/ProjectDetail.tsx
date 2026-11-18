@@ -20,7 +20,7 @@ export default function ProjectDetail() {
       <div className="container section empty-state">
         <Seo
           title="المشروع غير متاح"
-          description="هذا المشروع غير متاح حاليًا. اكتشف بقية أعمال أثر للتقنية والتصميم."
+          description="هذا المشروع غير متاح حاليًا. اكتشف بقية أعمال عالم الكود."
           noIndex
         />
         <h1>هذا المشروع غير متاح حاليًا.</h1>
@@ -95,7 +95,7 @@ export default function ProjectDetail() {
               </div>
               {p.role && (
                 <div>
-                  <dt>دور أثر</dt>
+                  <dt>دورنا</dt>
                   <dd>{p.role}</dd>
                 </div>
               )}

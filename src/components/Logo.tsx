@@ -1,63 +1,65 @@
-// Code World logo: globe-of-code mark + English wordmark with the Arabic name beneath.
+// Code World logo: the globe-of-code mark stands in for the O of CODE,
+// with the Arabic name beneath behind a gold rule.
 export default function Logo({
   size = 28,
-  sub = false,
   inverse = false,
 }: {
   size?: number;
-  sub?: boolean;
   inverse?: boolean;
 }) {
+  const en = size * 1.05;
   return (
     <span
       dir="ltr"
       aria-label="Code World | عالم الكود"
-      style={{ display: "inline-flex", alignItems: "center", gap: size * 0.4 }}
+      style={{ display: "inline-flex", flexDirection: "column", lineHeight: 1 }}
     >
-      <img
-        src={inverse ? "/cw-globe-ondark.svg" : "/cw-globe.svg"}
-        alt=""
-        width={52}
-        height={52}
-        style={{ height: size * 1.6, width: "auto" }}
-      />
       <span
-        style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          font: `800 ${en}px Sora, Lexend, sans-serif`,
+          letterSpacing: "-0.015em",
+          whiteSpace: "nowrap",
+          color: inverse ? "#F3E2B6" : "#7A1630",
+        }}
+      >
+        C
+        <img
+          src={inverse ? "/cw-globe-ondark.svg" : "/cw-globe.svg"}
+          alt=""
+          width={en * 0.86}
+          height={en * 0.86}
+          style={{ margin: `0 ${en * 0.04}px` }}
+        />
+        DE&nbsp;<span style={{ color: "#C9A35F" }}>WORLD</span>
+      </span>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: size * 0.3,
+          marginTop: size * 0.22,
+        }}
       >
         <span
           style={{
-            font: `800 ${size * 0.82}px Sora, Lexend, sans-serif`,
-            letterSpacing: "-0.01em",
-            whiteSpace: "nowrap",
-            color: inverse ? "#F3E2B6" : "#7A1630",
+            flex: 1,
+            height: 2,
+            borderRadius: 2,
+            background: "linear-gradient(90deg, #C9A35F, rgba(201,163,95,.15))",
           }}
-        >
-          CODE WORLD
-        </span>
+        />
         <span
           dir="rtl"
           style={{
-            font: `600 ${size * 0.46}px "Readex Pro", Tajawal, sans-serif`,
-            color: "#C9A35F",
-            textAlign: "left",
-            marginTop: 2,
+            font: `600 ${en * 0.48}px "Readex Pro", Tajawal, sans-serif`,
+            color: inverse ? "#F3E2B6" : "#7A1630",
+            whiteSpace: "nowrap",
           }}
         >
           عالم الكود
         </span>
-        {sub && (
-          <span
-            dir="rtl"
-            style={{
-              font: `500 ${size * 0.34}px Tajawal, sans-serif`,
-              color: inverse ? "#E9DCC8" : "#4A0E1E",
-              textAlign: "left",
-              marginTop: 3,
-            }}
-          >
-            للتقنية والتصميم
-          </span>
-        )}
       </span>
     </span>
   );

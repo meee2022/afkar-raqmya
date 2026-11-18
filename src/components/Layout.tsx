@@ -39,7 +39,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             aria-label={`${SITE_NAME} — الرئيسية`}
             className="brand-link"
           >
-            <Logo size={30} sub />
+            <Logo size={30} />
           </Link>
           <nav className="desktop-nav" aria-label="التنقل الرئيسي">
             {NAV.map((n) => (
@@ -103,7 +103,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
           <div className="footer-top">
             <div className="footer-brand">
               <Link to="/" aria-label={SITE_NAME}>
-                <Logo size={26} sub inverse />
+                <Logo size={26} inverse />
               </Link>
               <p>نصمم ونطوّر حضورًا رقميًا يشبهك، ويترك أثرًا.</p>
             </div>

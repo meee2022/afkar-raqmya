@@ -5,12 +5,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@800&family=Readex+Pro:wght@600&display=block" rel="stylesheet">
 <style>
   html, body { margin: 0; background: transparent; }
-  .lockup { display: flex; align-items: center; gap: 46px; direction: ltr; padding: 60px 70px; width: max-content; }
-  .lockup img { width: 220px; height: 220px; }
-  .en { font: 800 112px Sora; letter-spacing: -.01em; line-height: 1; white-space: nowrap; }
-  .ar { font: 600 60px "Readex Pro"; direction: rtl; text-align: left; margin-top: 10px; }
-  .light .en { color: #7A1630; } .light .ar { color: #C9A35F; }
-  .dark .en { color: #F3E2B6; } .dark .ar { color: #C9A35F; }
+  .lockup { direction: ltr; padding: 50px 70px; width: max-content; }
+  .en { display: flex; align-items: center; font: 800 128px Sora; letter-spacing: -.015em; line-height: 1; white-space: nowrap; }
+  .en .o { width: 110px; height: 110px; margin: 0 5px; }
+  .en .w { color: #C9A35F; }
+  .arline { display: flex; align-items: center; gap: 22px; margin-top: 22px; }
+  .rule { flex: 1; height: 5px; border-radius: 5px; background: linear-gradient(90deg, #C9A35F, rgba(201,163,95,.15)); }
+  .ar { font: 600 62px "Readex Pro"; direction: rtl; white-space: nowrap; }
+  .light .en, .light .ar { color: #7A1630; }
+  .dark .en, .dark .ar { color: #F3E2B6; }
   .bg-light { background: #F6EEDF; } .bg-dark { background: linear-gradient(150deg, #7A1630, #4A0E1E); }
   .square { width: 1080px; height: 1080px; display: grid; place-items: center; }
   .og { width: 1200px; height: 630px; display: grid; place-items: center; }
@@ -20,7 +23,7 @@
 <body>
 <script>
   const v = new URLSearchParams(location.search).get("v");
-  const lock = (cls, mark) => `<div class="lockup ${cls}"><img src="../../../public/${mark}"><div><div class="en">CODE WORLD</div><div class="ar">عالم الكود</div></div></div>`;
+  const lock = (cls, mark) => `<div class="lockup ${cls}"><div><div class="en">C<img class="o" src="../../../public/${mark}">DE&nbsp;<span class="w">WORLD</span></div><div class="arline"><span class="rule"></span><span class="ar">عالم الكود</span></div></div></div>`;
   const views = {
     light: lock("light", "cw-globe.svg"),
     dark: lock("dark", "cw-globe-ondark.svg"),

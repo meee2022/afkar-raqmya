@@ -1,4 +1,6 @@
 // Printable A4 invoice / quotation in the Code World identity (Arabic + English).
+import Logo from "./Logo";
+
 export type DocItem = { description: string; qty: number; unitPrice: number };
 export type DocData = {
   kind: "invoice" | "quote";
@@ -117,25 +119,7 @@ export default function InvoiceDocument({
           alignItems: "center",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <img src="/cw-globe-ondark.svg" alt="" style={{ height: 70 }} />
-          <div style={{ direction: "ltr" }}>
-            <div style={{ font: "800 26px Sora, Lexend", letterSpacing: "-.01em", lineHeight: 1 }}>
-              CODE WORLD
-            </div>
-            <div
-              style={{
-                font: "600 15px 'Readex Pro', Tajawal",
-                marginTop: 5,
-                direction: "rtl",
-                textAlign: "left",
-                color: GOLD,
-              }}
-            >
-              عالم الكود
-            </div>
-          </div>
-        </div>
+        <Logo size={30} inverse />
         <div style={{ textAlign: "left" }}>
           <div style={{ font: "800 26px Tajawal" }}>
             {isInvoice ? "فاتورة" : "عرض سعر"}

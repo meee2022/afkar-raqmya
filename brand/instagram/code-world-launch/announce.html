@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&display=block" rel="stylesheet">
+<style>
+  @font-face { font-family: Cairo; src: url("file:///C:/Users/M/.claude/skills/arabic-brand-carousel/assets/Cairo.ttf"); font-weight: 200 1000; }
+  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; }
+  body { position: relative; font-family: Cairo, sans-serif; color: var(--gl);
+    background: radial-gradient(900px 800px at 85% 0%, rgba(201,163,95,.2), transparent 60%),
+                radial-gradient(700px 700px at 0% 100%, rgba(20,5,11,.55), transparent 60%),
+                linear-gradient(165deg, #7A1630 0%, #5A0F22 55%, #3A0A17 100%); }
+  .frame { position: absolute; inset: 80px; display: flex; flex-direction: column; z-index: 2; }
+  .bar { display: flex; justify-content: space-between; align-items: center; direction: ltr; }
+  .count { font: 600 30px Sora; color: rgba(243,226,182,.5); }
+  .pill { font: 700 30px Cairo; color: var(--g); border: 2px solid rgba(201,163,95,.5); border-radius: 999px; padding: 6px 30px; direction: rtl; }
+  .mini { height: 74px; }
+  .swipe { font: 700 32px Cairo; color: var(--g); direction: rtl; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .label { font: 700 40px Cairo; color: rgba(243,226,182,.55); }
+  h1 { font: 900 124px/1.28 Cairo; }
+  h2 { font: 900 100px/1.3 Cairo; }
+  .hl { color: var(--g); position: relative; white-space: nowrap; }
+  .hl::after { content: ""; position: absolute; right: -2%; left: -2%; bottom: -.02em; height: .2em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 13 C 50 5, 130 3, 196 10' stroke='%23C9A35F' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%; }
+  .p { font: 700 44px/1.6 Cairo; color: rgba(243,226,182,.82); }
+  .glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(201,163,95,.32), transparent 65%); z-index: -1; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 60px; }
+  .card { border-radius: 30px; padding: 40px 36px; background: rgba(243,226,182,.07);
+    box-shadow: inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45); }
+  .card svg, .row svg { width: 58px; height: 58px; stroke: var(--g); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .card b { display: block; font: 900 46px Cairo; margin-top: 18px; }
+  .card span { font: 700 32px Cairo; color: rgba(243,226,182,.65); }
+  .rows { margin-top: 56px; }
+  .row { display: flex; align-items: center; gap: 30px; padding: 30px 0; border-bottom: 2px solid rgba(243,226,182,.13); font: 800 50px Cairo; }
+  .row:last-child { border: 0; }
+  .row i { font: 600 30px Sora; color: var(--g); font-style: normal; width: 56px; }
+  .cta { display: inline-flex; gap: 18px; align-items: center; background: linear-gradient(135deg,#F3E2B6,#C9A35F); color: var(--md); border-radius: 999px; padding: 24px 54px; font: 900 44px Cairo; }
+</style>
+</head>
+<body>
+<div class="frame" id="f"></div>
+<script>
+const N = 5, n = +(new URLSearchParams(location.search).get("n") || 1);
+const I = {
+  users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  buoy: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/>',
+  monitor: '<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  mobile: '<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>',
+  dash: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+  pen: '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
+};
+const ic = (k) => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
+const hdr = (pill) => `<div class="bar"><span class="count">${n} / ${N}</span><span class="pill">${pill}</span></div>`;
+const bot = (last) => `<div class="bar"><img class="mini" src="code-world-logo-dark.png">${last ? "" : '<span class="swipe">اسحب ←</span>'}</div>`;
+
+const S = {
+  1: () => `${hdr("خبر جديد")}
+    <div class="body">
+      <div class="label">اسم جديد لنفس الشغف</div>
+      <h1 style="margin-top:10px">«أثر» أصبح<br><span class="hl">عالم الكود</span></h1>
+      <div style="position:relative;margin-top:70px;align-self:center">
+        <div class="glow" style="width:900px;height:900px;left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+        <img src="code-world-logo-dark.png" style="width:620px;display:block">
+      </div>
+    </div>${bot()}`,
+  2: () => `${hdr("الاسم")}
+    <div class="body">
+      <div class="label">لماذا هذا الاسم؟</div>
+      <h2 style="margin-top:10px">كل شيء يبدأ<br>بسطر <span class="hl">كود</span></h2>
+      <p class="p" style="margin-top:40px">كل موقع وتطبيق ونظام نبنيه يبدأ بسطر كود، ثم يكبر حتى يصبح عالمًا كاملًا لعملائنا.</p>
+      <div style="position:relative;margin-top:60px;align-self:flex-end">
+        <div class="glow" style="width:640px;height:640px;left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+        <img src="cw-globe-ondark.svg" style="width:300px;display:block">
+      </div>
+    </div>${bot()}`,
+  3: () => `${hdr("ماذا تغيّر؟")}
+    <div class="body">
+      <h2>الاسم فقط..<br>والباقي <span class="hl">كما هو</span></h2>
+      <div class="cards">
+        <div class="card">${ic("users")}<b>نفس الفريق</b><span>من أول محادثة للإطلاق</span></div>
+        <div class="card">${ic("shield")}<b>نفس الجودة</b><span>تصميم عربي أصيل</span></div>
+        <div class="card">${ic("phone")}<b>نفس الرقم</b><span style="font-family:Sora;direction:ltr;display:block;text-align:right">6648 8228</span></div>
+        <div class="card">${ic("buoy")}<b>نفس الدعم</b><span>بعد التسليم أيضًا</span></div>
+      </div>
+    </div>${bot()}`,
+  4: () => `${hdr("خدماتنا")}
+    <div class="body">
+      <h2>ماذا <span class="hl">نبني</span> لك؟</h2>
+      <div class="rows">
+        <div class="row"><i>01</i>${ic("monitor")}مواقع إلكترونية</div>
+        <div class="row"><i>02</i>${ic("mobile")}تطبيقات الجوال والويب</div>
+        <div class="row"><i>03</i>${ic("dash")}أنظمة ERP ونقاط بيع</div>
+        <div class="row"><i>04</i>${ic("pen")}هوية بصرية وشعارات</div>
+      </div>
+    </div>${bot()}`,
+  5: () => `${hdr("تابعنا")}
+    <div class="body" style="align-items:center;text-align:center">
+      <div style="position:relative">
+        <div class="glow" style="width:760px;height:760px;left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+        <img src="code-world-logo-dark.png" style="width:520px;display:block">
+      </div>
+      <h2 style="margin-top:56px">نكتب الكود..<br>ونبني <span class="hl">عالمك</span></h2>
+      <p class="p" style="margin-top:28px">أرسل هذا البوست لصاحب مشروع<br>يبحث عن عالمه الرقمي.</p>
+      <div style="margin-top:44px"><span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span></div>
+    </div>${bot(true)}`,
+};
+document.getElementById("f").innerHTML = S[n]();
+</script>
+</body>
+</html>

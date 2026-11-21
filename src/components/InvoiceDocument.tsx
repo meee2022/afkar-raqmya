@@ -93,7 +93,7 @@ export default function InvoiceDocument({
 
   return (
     <div
-      className="athr-doc"
+      className="cw-doc"
       dir="rtl"
       style={{
         width: "210mm",
@@ -107,7 +107,7 @@ export default function InvoiceDocument({
         boxShadow: "0 20px 60px rgba(74,14,30,.15)",
       }}
     >
-      <style>{`@media print { .athr-doc { display:block!important; min-height:0!important; } .athr-doc thead { display:table-header-group; } .athr-doc tr { break-inside:avoid; } .athr-doc td { overflow-wrap:anywhere; } }`}</style>
+      <style>{`@media print { .cw-doc { display:block!important; min-height:0!important; } .cw-doc thead { display:table-header-group; } .cw-doc tr { break-inside:avoid; } .cw-doc td { overflow-wrap:anywhere; } }`}</style>
       {/* Header */}
       <div
         style={{

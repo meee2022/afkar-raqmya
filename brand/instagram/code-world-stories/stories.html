@@ -106,6 +106,7 @@ const I = {
   link: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
   pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
   palette: '<circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="7" r="1.5"/><circle cx="16" cy="10" r="1.5"/><circle cx="15" cy="15" r="1.5"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
   sparkles: '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>',
   briefcase: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
   route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
@@ -147,22 +148,24 @@ const story = (pill, body) => `<div class="bar"><img class="mini" src="${LOGO}">
   <div class="body">${body}</div><div class="handle">@codeworld.qa</div>`;
 
 const ST = {
-  "new-1": () => story("جديدنا", `
-    <div class="label">اسم جديد لنفس الشغف</div>
-    <h1>«أثر» أصبح<br><span class="hl">عالم الكود</span></h1>
+  "new-1": () => story("من نحن", `
+    <div class="label">مرحبًا بك في</div>
+    <h1><span class="hl">عالم الكود</span></h1>
+    <p class="p" style="margin-top:30px">كل ما هو تقني، في مكان واحد.</p>
     <div style="position:relative;align-self:center;margin-top:110px">
       <div class="glow" style="width:1000px;height:1000px"></div>
       <img src="${LOGO}" style="width:700px;display:block">
     </div>`),
-  "new-2": () => story("جديدنا", `
-    <h2>الاسم فقط..<br>والباقي <span class="hl">كما هو</span></h2>
+  "new-2": () => story("من نحن", `
+    <div class="label">لماذا عالم الكود؟</div>
+    <h2>ما الذي<br><span class="hl">يميّزنا</span>؟</h2>
     <div class="cards">
-      <div class="card">${ic("users")}<b>نفس الفريق</b><span>من أول محادثة للإطلاق</span></div>
-      <div class="card">${ic("shield")}<b>نفس الجودة</b><span>تصميم عربي أصيل</span></div>
-      <div class="card">${ic("phone")}<b>نفس الرقم</b><span style="font-family:Sora;direction:ltr;display:block;text-align:right">6648 8228</span></div>
-      <div class="card">${ic("buoy")}<b>نفس الدعم</b><span>بعد التسليم أيضًا</span></div>
+      <div class="card">${ic("pen")}<b>تصميم عربي</b><span>أصيل ويليق بهويتك</span></div>
+      <div class="card">${ic("clock")}<b>التزام بالمواعيد</b><span>نسلّم في الوقت</span></div>
+      <div class="card">${ic("phone")}<b>تواصل مباشر</b><span>بدون وسطاء</span></div>
+      <div class="card">${ic("buoy")}<b>دعم بعد التسليم</b><span>نبقى معك</span></div>
     </div>`),
-  "new-3": () => story("جديدنا", `<div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+  "new-3": () => story("من نحن", `<div style="text-align:center;display:flex;flex-direction:column;align-items:center">
     <div style="position:relative">
       <div class="glow" style="width:960px;height:960px"></div>
       <img src="${GLOBE}" style="width:460px;display:block">

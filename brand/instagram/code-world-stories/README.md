@@ -6,7 +6,7 @@
 
 | الهايلايت | الغلاف | الستوريز بالترتيب |
 |---|---|---|
-| جديدنا | `highlights/new.png` | new-1، new-2، new-3 |
+| من نحن | `highlights/new.png` | new-1، new-2، new-3 |
 | خدماتنا | `highlights/services.png` | services-0، ثم services-1 إلى services-8 |
 | أعمالنا | `highlights/work.png` | work-0، ثم work-1 إلى work-5 |
 | طريقتنا | `highlights/how.png` | how-1 |

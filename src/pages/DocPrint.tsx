@@ -71,7 +71,7 @@ function DocView() {
           body { background: #fff !important; }
           .no-print { display: none !important; }
           .print-wrap { padding: 0 !important; background: #fff !important; }
-          .athr-doc { box-shadow: none !important; }
+          .cw-doc { box-shadow: none !important; }
           * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
       `}</style>

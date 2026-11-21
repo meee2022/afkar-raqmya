@@ -115,8 +115,10 @@ const I = {
   buoy: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/>',
 };
 const ic = (k) => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
-/* dark maroon only for the three anchor stories; the rest are cream */
-const DARK = ["new-1", "new-3", "contact-1"];
+/* alternate maroon / cream inside every highlight, like the post grid */
+const DARK = ["new-1", "new-3", "services-0", "services-2", "services-4", "services-6", "services-8",
+  "work-0", "work-2", "work-4", "how-1", "contact-1"];
+const HC_DARK = ["services", "how"];
 let LOGO = "../code-world-logo-dark.png", GLOBE = "../cw-globe-ondark.svg";
 const WA = `<span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span>`;
 
@@ -216,11 +218,11 @@ WK.forEach(([key, name, desc, img, phone], i) => ST["work-" + (i + 1)] = () => s
 const HC = { new: "sparkles", services: "grid", work: "briefcase", how: "route", contact: "chat" };
 const q = new URLSearchParams(location.search), id = q.get("id") || "new-1";
 if (q.get("hc")) {
-  document.body.className = "hc light";
+  document.body.className = HC_DARK.includes(q.get("hc")) ? "hc" : "hc light";
   document.body.innerHTML = `<div style="position:absolute;inset:0;display:grid;place-items:center">
     <div class="glow" style="width:900px;height:900px"></div>
     <div class="ring" style="width:620px;height:620px">${ic(HC[q.get("hc")])}</div></div>
-    <style>.hc .ring svg{width:340px;height:340px;stroke:var(--m);stroke-width:1.2}</style>`;
+    <style>.hc .ring svg{width:340px;height:340px;stroke:var(--icon);stroke-width:1.2} .hc:not(.light) .ring svg{stroke:var(--g)}</style>`;
 } else {
   if (!DARK.includes(id)) { document.body.className = "light"; LOGO = "../code-world-logo-light.png"; GLOBE = "../cw-globe.svg"; }
   document.getElementById("f").innerHTML = ST[id]();

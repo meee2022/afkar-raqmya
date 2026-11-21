@@ -5,15 +5,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@800&family=Readex+Pro:wght@600&display=block" rel="stylesheet">
 <style>
   html, body { margin: 0; background: transparent; }
-  .lockup { direction: ltr; padding: 50px 70px; width: max-content; }
-  .en { display: flex; align-items: center; font: 800 128px Sora; letter-spacing: -.015em; line-height: 1; white-space: nowrap; }
-  .en .o { width: 110px; height: 110px; margin: 0 5px; }
-  .en .w { color: #C9A35F; }
-  .arline { display: flex; align-items: center; gap: 22px; margin-top: 22px; }
-  .rule { flex: 1; height: 5px; border-radius: 5px; background: linear-gradient(90deg, #C9A35F, rgba(201,163,95,.15)); }
-  .ar { font: 600 62px "Readex Pro"; direction: rtl; white-space: nowrap; }
-  .light .en, .light .ar { color: #7A1630; }
-  .dark .en, .dark .ar { color: #F3E2B6; }
+  .lockup { direction: ltr; padding: 50px 70px; width: max-content; display: flex; align-items: center; gap: 46px; }
+  .lockup .mk { width: 307px; height: 307px; }
+  .lockup .div { width: 5px; height: 326px; border-radius: 5px; background: #C9A35F; }
+  .txt { display: inline-grid; justify-items: start; font: 800 128px/0.92 Sora; letter-spacing: -.015em; white-space: nowrap; }
+  .txt .w { color: #C9A35F; font-size: 96.8px; }
+  .arline { justify-self: stretch; display: flex; align-items: center; gap: 28px; margin-top: 26px; }
+  .rule { flex: 1; height: 5px; border-radius: 5px; background: linear-gradient(90deg, rgba(201,163,95,.15), #C9A35F); }
+  .ar { font: 600 51px/1.2 "Readex Pro"; direction: rtl; white-space: nowrap; }
+  .tile .txt { font-size: 200px; } .tile .txt .w { font-size: 151px; } .tile .ar { font-size: 72px; }
+  .tile .c { display: flex; align-items: center; } .tile .c img { width: 172px; height: 172px; margin: 0 8px; }
+  .tile .arline { margin-top: 40px; } .tile .rule { height: 6px; }
+  .light .txt, .light .ar { color: #7A1630; }
+  .dark .txt, .dark .ar { color: #F3E2B6; }
   .bg-light { background: #F6EEDF; } .bg-dark { background: linear-gradient(150deg, #7A1630, #4A0E1E); }
   .square { width: 1080px; height: 1080px; display: grid; place-items: center; }
   .og { width: 1200px; height: 630px; display: grid; place-items: center; }
@@ -23,17 +27,24 @@
 <body>
 <script>
   const v = new URLSearchParams(location.search).get("v");
-  const lock = (cls, mark) => `<div class="lockup ${cls}"><div><div class="en">C<img class="o" src="../../../public/${mark}">DE&nbsp;<span class="w">WORLD</span></div><div class="arline"><span class="rule"></span><span class="ar">عالم الكود</span></div></div></div>`;
+  const ar = `<div class="arline"><span class="rule"></span><span class="ar">عالم الكود</span></div>`;
+  const lock = (cls, mark) => `<div class="lockup ${cls}"><img class="mk" src="../../../public/${mark}"><span class="div"></span><div class="txt"><span style="display:inline-block">CODE</span><span class="w">WORLD</span>${ar}</div></div>`;
+  const tile = `<div class="square bg-dark tile dark"><div class="txt"><span class="c">C<img src="../../../public/cw-globe-ondark.svg">DE</span><span class="w">WORLD</span>${ar}</div></div>`;
   const views = {
     light: lock("light", "cw-globe.svg"),
     dark: lock("dark", "cw-globe-ondark.svg"),
     "light-bg": `<div class="bg-light">${lock("light", "cw-globe.svg")}</div>`,
-    avatar: `<div class="square bg-dark"><img src="../../../public/cw-globe-ondark.svg" style="width:760px;height:760px"></div>`,
+    avatar: tile,
     mark: `<div style="width:1024px;height:1024px;display:grid;place-items:center"><img src="../../../public/cw-globe.svg" style="width:1024px;height:1024px"></div>`,
     cover: `<div class="bg-dark" style="width:1640px;height:624px;display:flex;align-items:center;justify-content:space-between;padding:0 90px;box-sizing:border-box;direction:ltr"><div style="zoom:.74">${lock("dark", "cw-globe-ondark.svg")}</div><div style="direction:rtl;text-align:right;color:#F3E2B6;font:600 36px 'Readex Pro';line-height:1.9;white-space:nowrap">مواقع · تطبيقات · أنظمة<br>هوية بصرية · عروض تقديمية<br><span style="color:#C9A35F">واتساب <bdi dir="ltr">6648 8228</bdi></span></div></div>`,
     og: `<div class="og bg-dark"><div style="display:grid;justify-items:center">${lock("dark", "cw-globe-ondark.svg")}<div class="tag">نصمّم ونطوّر المواقع والتطبيقات والأنظمة في قطر</div></div></div>`,
   };
   document.body.innerHTML = views[v];
+  // Make WORLD exactly as wide as the line above it.
+  document.fonts.ready.then(() => document.querySelectorAll(".txt").forEach(t => {
+    const [a, b] = t.children, fs = parseFloat(getComputedStyle(b).fontSize);
+    b.style.fontSize = fs * a.getBoundingClientRect().width / b.getBoundingClientRect().width + "px";
+  }));
 </script>
 </body>
 </html>

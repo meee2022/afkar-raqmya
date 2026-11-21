@@ -39,7 +39,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             aria-label={`${SITE_NAME} — الرئيسية`}
             className="brand-link"
           >
-            <Logo size={30} />
+            <Logo size={26} />
           </Link>
           <nav className="desktop-nav" aria-label="التنقل الرئيسي">
             {NAV.map((n) => (

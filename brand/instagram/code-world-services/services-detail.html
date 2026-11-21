@@ -5,43 +5,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&display=block" rel="stylesheet">
 <style>
   @font-face { font-family: Cairo; src: url("file:///C:/Users/M/.claude/skills/arabic-brand-carousel/assets/Cairo.ttf"); font-weight: 200 1000; }
-  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6; }
+  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6;
+    --ink:#F3E2B6; --mute:rgba(243,226,182,.55); --soft:rgba(243,226,182,.82); --hlc:#C9A35F; --icon:#F3E2B6; --acc:#C9A35F;
+    --card:rgba(243,226,182,.07); --cardsh:inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45);
+    --pillb:rgba(201,163,95,.5); --kwbg:#F3E2B6; --kwink:#4A0E1E; --ctabg:linear-gradient(135deg,#F3E2B6,#C9A35F); --ctaink:#4A0E1E; }
+  /* cream slides alternate with maroon ones, cover is cream */
+  body.light { --ink:#4A0E1E; --mute:rgba(74,14,30,.5); --soft:rgba(74,14,30,.78); --hlc:#7A1630; --icon:#7A1630; --acc:#7A1630;
+    --card:#FFFFFF; --cardsh:inset 0 0 0 2px rgba(201,163,95,.22), 0 2px 6px rgba(74,14,30,.05), 0 30px 60px -30px rgba(74,14,30,.28);
+    --pillb:rgba(122,22,48,.28); --kwbg:#7A1630; --kwink:#F3E2B6; --ctabg:linear-gradient(135deg,#8C1B38,#5A0F22); --ctaink:#F3E2B6;
+    background: radial-gradient(900px 800px at 85% 0%, rgba(201,163,95,.28), transparent 60%),
+                radial-gradient(700px 700px at 0% 100%, rgba(122,22,48,.08), transparent 60%),
+                linear-gradient(170deg, #FCF8F1 0%, #F6EEDF 60%, #F1E4CF 100%); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1080px; height: 1350px; overflow: hidden; }
-  body { position: relative; font-family: Cairo, sans-serif; color: var(--gl);
+  body { position: relative; font-family: Cairo, sans-serif; color: var(--ink);
     background: radial-gradient(900px 800px at 85% 0%, rgba(201,163,95,.2), transparent 60%),
                 radial-gradient(700px 700px at 0% 100%, rgba(20,5,11,.55), transparent 60%),
                 linear-gradient(165deg, #7A1630 0%, #5A0F22 55%, #3A0A17 100%); }
   .frame { position: absolute; inset: 80px; display: flex; flex-direction: column; z-index: 2; }
   .bar { display: flex; justify-content: space-between; align-items: center; direction: ltr; }
-  .count { font: 600 30px Sora; color: rgba(243,226,182,.5); }
-  .pill { font: 700 30px Cairo; color: var(--g); border: 2px solid rgba(201,163,95,.5); border-radius: 999px; padding: 6px 30px; direction: rtl; }
+  .count { font: 600 30px Sora; color: var(--mute); }
+  .pill { font: 700 30px Cairo; color: var(--acc); border: 2px solid var(--pillb); border-radius: 999px; padding: 6px 30px; direction: rtl; }
   .mini { height: 74px; }
-  .swipe { font: 700 32px Cairo; color: var(--g); direction: rtl; }
+  .swipe { font: 700 32px Cairo; color: var(--acc); direction: rtl; }
   .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  .label { font: 700 40px Cairo; color: rgba(243,226,182,.55); }
+  .label { font: 700 40px Cairo; color: var(--mute); }
   h1 { font: 900 120px/1.28 Cairo; margin-top: 8px; }
   h2 { font: 900 98px/1.3 Cairo; margin-top: 8px; }
-  .hl { color: var(--g); position: relative; white-space: nowrap; }
+  .hl { color: var(--hlc); position: relative; white-space: nowrap; }
   .hl::after { content: ""; position: absolute; right: -2%; left: -2%; bottom: -.02em; height: .2em;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 13 C 50 5, 130 3, 196 10' stroke='%23C9A35F' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%; }
-  .p { font: 700 44px/1.6 Cairo; color: rgba(243,226,182,.82); }
+  .p { font: 700 44px/1.6 Cairo; color: var(--soft); }
   .glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(201,163,95,.3), transparent 65%); z-index: -1; left: 50%; top: 50%; transform: translate(-50%,-50%); }
   .ring { position: relative; width: 340px; height: 340px; border-radius: 50%; display: grid; place-items: center;
     box-shadow: inset 0 0 0 2px rgba(201,163,95,.6), 0 0 0 26px rgba(201,163,95,.06), 0 0 0 28px rgba(201,163,95,.25); }
-  .ring svg { width: 150px; height: 150px; stroke: var(--gl); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .ring svg { width: 150px; height: 150px; stroke: var(--icon); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px; }
-  .card { border-radius: 28px; padding: 34px 32px; background: rgba(243,226,182,.07);
-    box-shadow: inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45); }
+  .card { border-radius: 28px; padding: 34px 32px; background: var(--card); box-shadow: var(--cardsh); }
   .card svg { width: 56px; height: 56px; stroke: var(--g); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
   .card b { display: block; font: 900 42px/1.3 Cairo; margin-top: 16px; }
-  .card span { font: 700 30px Cairo; color: rgba(243,226,182,.62); }
+  .card span { font: 700 30px Cairo; color: var(--mute); }
   .steps { margin-top: 50px; position: relative; }
   .step { display: flex; align-items: center; gap: 30px; padding: 22px 0; font: 800 46px Cairo; }
   .step i { flex: none; width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center; font: 800 34px Sora; font-style: normal; color: var(--md); background: linear-gradient(135deg,#F3E2B6,#C9A35F); box-shadow: 0 14px 30px -12px rgba(201,163,95,.7); }
   .steps::before { content: ""; position: absolute; right: 45px; top: 70px; bottom: 70px; width: 2px; background: rgba(201,163,95,.35); }
-  .cta { display: inline-flex; gap: 18px; align-items: center; background: linear-gradient(135deg,#F3E2B6,#C9A35F); color: var(--md); border-radius: 999px; padding: 24px 54px; font: 900 44px Cairo; }
-  .kw { display: inline-block; font: 900 64px Cairo; color: var(--md); background: var(--gl); border-radius: 22px; padding: 6px 40px; margin: 0 8px; }
+  .cta { display: inline-flex; gap: 18px; align-items: center; background: var(--ctabg); color: var(--ctaink); border-radius: 999px; padding: 24px 54px; font: 900 44px Cairo; }
+  .kw { display: inline-block; font: 900 64px Cairo; color: var(--kwink); background: var(--kwbg); border-radius: 22px; padding: 6px 40px; margin: 0 8px; }
 </style>
 </head>
 <body>
@@ -138,8 +147,10 @@ const D = {
 };
 
 const q = new URLSearchParams(location.search), d = D[q.get("s") || "web"], n = +(q.get("n") || 1), N = 6;
+const light = n % 2 === 1, LOGO = light ? "code-world-logo-light.png" : "code-world-logo-dark.png", GLOBE = light ? "cw-globe.svg" : "cw-globe-ondark.svg";
+if (light) document.body.className = "light";
 const hdr = () => `<div class="bar"><span class="count">${n} / ${N}</span><span class="pill">${d.pill}</span></div>`;
-const bot = (last) => `<div class="bar"><img class="mini" src="code-world-logo-dark.png">${last ? "" : '<span class="swipe">اسحب ←</span>'}</div>`;
+const bot = (last) => `<div class="bar"><img class="mini" src="${LOGO}">${last ? "" : '<span class="swipe">اسحب ←</span>'}</div>`;
 
 const S = {
   1: () => `<div class="body">
@@ -156,7 +167,7 @@ const S = {
       <p class="p" style="margin-top:40px">${d.whyP}</p>
       <div style="position:relative;align-self:flex-end;margin-top:70px">
         <div class="glow" style="width:560px;height:560px"></div>
-        <img src="cw-globe-ondark.svg" style="width:230px;display:block;opacity:.95">
+        <img src="${GLOBE}" style="width:230px;display:block;opacity:.95">
       </div>
     </div>`,
   3: () => `<div class="body">
@@ -172,16 +183,16 @@ const S = {
   5: () => `<div class="body" style="align-items:center;text-align:center">
       <div style="position:relative">
         <div class="glow" style="width:820px;height:820px"></div>
-        <img src="cw-globe-ondark.svg" style="width:380px;display:block">
+        <img src="${GLOBE}" style="width:380px;display:block">
       </div>
       <h2 style="margin-top:70px">${d.slogan}</h2>
     </div>`,
   6: () => `<div class="body" style="align-items:center;text-align:center">
       <div style="position:relative">
         <div class="glow" style="width:740px;height:740px"></div>
-        <img src="code-world-logo-dark.png" style="width:500px;display:block">
+        <img src="${LOGO}" style="width:500px;display:block">
       </div>
-      <p class="p" style="margin-top:60px;font-size:48px;color:var(--gl)">تحتاج ${d.name}؟<br>اكتب<span class="kw">${d.kw}</span>في التعليقات</p>
+      <p class="p" style="margin-top:60px;font-size:48px;color:var(--ink)">تحتاج ${d.name}؟<br>اكتب<span class="kw">${d.kw}</span>في التعليقات</p>
       <div style="margin-top:50px"><span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span></div>
     </div>`,
 };

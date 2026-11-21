@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&display=block" rel="stylesheet">
+<style>
+/* ds-allow-hardcode:start  brand-fixed render template (1080x1920 story export) */
+  @font-face { font-family: Cairo; src: url("file:///C:/Users/M/.claude/skills/arabic-brand-carousel/assets/Cairo.ttf"); font-weight: 200 1000; }
+  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body { position: relative; font-family: Cairo, sans-serif; color: var(--gl);
+    background: radial-gradient(1000px 1000px at 85% 0%, rgba(201,163,95,.2), transparent 60%),
+                radial-gradient(900px 900px at 0% 100%, rgba(20,5,11,.55), transparent 60%),
+                linear-gradient(165deg, #7A1630 0%, #5A0F22 55%, #3A0A17 100%); }
+  body.hc { width: 1080px; height: 1080px; }
+  /* story safe zone: Instagram covers ~250px top and ~300px bottom */
+  .frame { position: absolute; top: 250px; bottom: 300px; right: 90px; left: 90px; display: flex; flex-direction: column; z-index: 2; }
+  .bar { display: flex; justify-content: space-between; align-items: center; direction: ltr; }
+  .pill { font: 700 32px Cairo; color: var(--g); border: 2px solid rgba(201,163,95,.5); border-radius: 999px; padding: 6px 32px; direction: rtl; }
+  .mini { height: 84px; }
+  .handle { font: 600 32px Sora; color: rgba(243,226,182,.55); text-align: center; direction: ltr; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .label { font: 700 44px Cairo; color: rgba(243,226,182,.55); }
+  h1 { font: 900 128px/1.28 Cairo; margin-top: 8px; }
+  h2 { font: 900 104px/1.3 Cairo; margin-top: 8px; }
+  .hl { color: var(--g); position: relative; white-space: nowrap; }
+  .hl::after { content: ""; position: absolute; right: -2%; left: -2%; bottom: -.02em; height: .2em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 13 C 50 5, 130 3, 196 10' stroke='%23C9A35F' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%; }
+  .p { font: 700 48px/1.6 Cairo; color: rgba(243,226,182,.82); }
+  .glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(201,163,95,.3), transparent 65%); z-index: -1; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+  .ring { position: relative; width: 300px; height: 300px; border-radius: 50%; display: grid; place-items: center;
+    box-shadow: inset 0 0 0 2px rgba(201,163,95,.6), 0 0 0 24px rgba(201,163,95,.06), 0 0 0 26px rgba(201,163,95,.25); }
+  .ring svg { width: 46%; height: 46%; stroke: var(--gl); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; }
+  .card { border-radius: 30px; padding: 40px 34px; background: rgba(243,226,182,.07);
+    box-shadow: inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45); }
+  .card svg, .row svg { width: 60px; height: 60px; stroke: var(--g); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .card b { display: block; font: 900 46px/1.3 Cairo; margin-top: 18px; }
+  .card span { font: 700 32px Cairo; color: rgba(243,226,182,.62); }
+  .rows { margin-top: 50px; }
+  .row { display: flex; align-items: center; gap: 30px; padding: 26px 0; border-bottom: 2px solid rgba(243,226,182,.13); font: 800 50px Cairo; }
+  .row:last-child { border: 0; }
+  .steps { margin-top: 60px; position: relative; }
+  .step { display: flex; align-items: center; gap: 32px; padding: 30px 0; font: 800 52px Cairo; }
+  .step i { flex: none; width: 100px; height: 100px; border-radius: 50%; display: grid; place-items: center; font: 800 38px Sora; font-style: normal; color: var(--md); background: linear-gradient(135deg,#F3E2B6,#C9A35F); box-shadow: 0 14px 30px -12px rgba(201,163,95,.7); }
+  .steps::before { content: ""; position: absolute; right: 49px; top: 80px; bottom: 80px; width: 2px; background: rgba(201,163,95,.35); }
+  .cta { display: inline-flex; gap: 18px; align-items: center; background: linear-gradient(135deg,#F3E2B6,#C9A35F); color: var(--md); border-radius: 999px; padding: 26px 58px; font: 900 48px Cairo; box-shadow: 0 24px 50px -18px rgba(201,163,95,.6); }
+  .kw { display: inline-block; font: 900 64px Cairo; color: var(--md); background: var(--gl); border-radius: 22px; padding: 4px 40px; margin: 0 8px; }
+  .shot { display: block; border-radius: 30px; box-shadow: 0 0 0 2px rgba(201,163,95,.35), 0 50px 90px -30px rgba(0,0,0,.7); }
+  .phone { border-radius: 56px; padding: 14px; background: #1a0509; box-shadow: 0 0 0 2px rgba(201,163,95,.45), 0 50px 90px -30px rgba(0,0,0,.75); }
+  .phone img { display: block; border-radius: 44px; width: 100%; }
+  .drop { margin-top: 60px; height: 360px; border-radius: 40px; border: 4px dashed rgba(201,163,95,.45); display: grid; place-items: center; }
+/* ds-allow-hardcode:end */
+</style>
+</head>
+<body>
+<div class="frame" id="f"></div>
+<script>
+const I = {
+  monitor: '<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  mobile: '<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>',
+  code: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
+  video: '<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4V8z"/>',
+  book: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  slides: '<path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/>',
+  pen: '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
+  cart: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+  calendar: '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  dash: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+  bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>',
+  receipt: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8H8M16 12H8M13 16H8"/>',
+  box: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  calc: '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>',
+  users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  film: '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/>',
+  mega: '<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+  play: '<circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/>',
+  cut: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>',
+  chart: '<path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  building: '<rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>',
+  cap: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>',
+  type: '<path d="M4 7V4h16v3M9 20h6M12 4v16"/>',
+  grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  printer: '<path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/>',
+  mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  link: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+  pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  palette: '<circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="7" r="1.5"/><circle cx="16" cy="10" r="1.5"/><circle cx="15" cy="15" r="1.5"/>',
+  sparkles: '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/>',
+  briefcase: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+  chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  buoy: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/>',
+};
+const ic = (k) => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
+const LOGO = "../code-world-logo-dark.png", GLOBE = "../cw-globe-ondark.svg";
+const WA = `<span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span>`;
+
+/* the 8 services, same order as the site */
+const SV = [
+  ["web", "monitor", "مواقع إلكترونية", "عميلك يبحث عنك.. هل <span class='hl'>يجدك</span>؟", ["موقع تعريفي", "متجر إلكتروني", "نظام حجوزات", "لوحة تحكم"], "موقع"],
+  ["app", "mobile", "تطبيقات الجوال", "تطبيقك في <span class='hl'>جيب</span> عميلك", ["آيفون وأندرويد", "تطبيقات ويب", "إشعارات", "لوحة إدارة"], "تطبيق"],
+  ["sys", "code", "برامج وأنظمة", "برنامج مفصّل على <span class='hl'>شغلك</span>", ["ERP ومحاسبة", "نقاط بيع", "مخزون", "موارد بشرية"], "نظام"],
+  ["video", "play", "فيديو وموشن", "فكرتك في <span class='hl'>30 ثانية</span>", ["موشن جرافيك", "ريلز إعلانية", "فيديو تعريفي", "مونتاج"], "فيديو"],
+  ["research", "book", "أبحاث ودراسات", "بحث منظّم بمراجع <span class='hl'>موثّقة</span>", ["أبحاث علمية", "دراسات جدوى", "تحليل بيانات", "تنسيق وتدقيق"], "بحث"],
+  ["slides", "slides", "عروض تقديمية", "عرض يُقنع من أول <span class='hl'>سلايد</span>", ["للمستثمرين", "للشركات", "للمدارس والجامعات", "قوالب جاهزة"], "عرض"],
+  ["brand", "pen", "هوية بصرية", "أول ما يراه <span class='hl'>عميلك</span>", ["شعار", "ألوان وخطوط", "قوالب سوشيال", "مطبوعات"], "هوية"],
+  ["invite", "mail", "دعوات رقمية", "دعوتك تصل في <span class='hl'>ثانية</span>", ["أفراح ومناسبات", "دعوات الشركات", "رابط واحد", "الموعد والموقع"], "دعوة"],
+];
+
+/* projects with real screenshots; phone = portrait capture */
+const WK = [
+  ["marasi", "Marasi Boats", "موقع فاخر لرحلات اليخوت والتجارب البحرية في الدوحة.", "../marasi.png"],
+  ["adrenaline", "Adrenaline", "منصة وجبات صحية باشتراكات وحاسبة سعرات وتوصيل يومي.", "../adrenaline-food.png"],
+  ["radda", "ردّة", "رحلة رقمية غامرة في تراث الغوص على اللؤلؤ.", "../diving.png"],
+  ["darkfit", "DarkFit", "تمارين وتغذية وحاسبات صحية في تطبيق واحد.", "../darkfit.png", true],
+  ["nafahat", "نَفَحات", "المصحف وأوقات الصلاة والقبلة في صحبة يومية.", "../nafahat.png", true],
+];
+
+const story = (pill, body) => `<div class="bar"><img class="mini" src="${LOGO}"><span class="pill">${pill}</span></div>
+  <div class="body">${body}</div><div class="handle">@codeworld.qa</div>`;
+
+const ST = {
+  "new-1": () => story("جديدنا", `
+    <div class="label">اسم جديد لنفس الشغف</div>
+    <h1>«أثر» أصبح<br><span class="hl">عالم الكود</span></h1>
+    <div style="position:relative;align-self:center;margin-top:110px">
+      <div class="glow" style="width:1000px;height:1000px"></div>
+      <img src="${LOGO}" style="width:700px;display:block">
+    </div>`),
+  "new-2": () => story("جديدنا", `
+    <h2>الاسم فقط..<br>والباقي <span class="hl">كما هو</span></h2>
+    <div class="cards">
+      <div class="card">${ic("users")}<b>نفس الفريق</b><span>من أول محادثة للإطلاق</span></div>
+      <div class="card">${ic("shield")}<b>نفس الجودة</b><span>تصميم عربي أصيل</span></div>
+      <div class="card">${ic("phone")}<b>نفس الرقم</b><span style="font-family:Sora;direction:ltr;display:block;text-align:right">6648 8228</span></div>
+      <div class="card">${ic("buoy")}<b>نفس الدعم</b><span>بعد التسليم أيضًا</span></div>
+    </div>`),
+  "new-3": () => story("جديدنا", `<div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+    <div style="position:relative">
+      <div class="glow" style="width:960px;height:960px"></div>
+      <img src="${GLOBE}" style="width:460px;display:block">
+    </div>
+    <h1 style="margin-top:110px;font-size:118px">نكتب الكود..<br>ونبني <span class="hl">عالمك</span></h1></div>`),
+  "services-0": () => story("خدماتنا", `
+    <h2 style="font-size:84px">كل ما هو تقني..<br>في <span class="hl">عالم</span> واحد</h2>
+    <div class="rows" style="margin-top:36px">${SV.map(([, k, t]) => `<div class="row" style="padding:16px 0;font-size:44px">${ic(k)}${t}</div>`).join("")}</div>`),
+  "work-0": () => story("أعمالنا", `<div style="text-align:center">
+    <div class="label">من أعمالنا</div>
+    <h2 style="font-size:88px">لكل مشروع حكاية..<br>ولكل حكاية <span class="hl">عالم</span></h2>
+    <div style="position:relative;margin:110px auto 0;width:max-content">
+      <div class="glow" style="width:900px;height:900px"></div>
+      <img src="${GLOBE}" style="width:380px;display:block">
+    </div></div>`),
+  "how-1": () => story("طريقتنا", `
+    <div class="label">كيف نعمل؟</div>
+    <h2>من الفكرة<br>إلى <span class="hl">عالم</span> يعمل</h2>
+    <div class="steps">${["نفهم فكرتك وأهدافك", "نصمّم تجربة تشبهك", "نبرمج ونختبر على كل جهاز", "نطلق ونبقى معك"].map((t, i) => `<div class="step"><i>${i + 1}</i>${t}</div>`).join("")}</div>`),
+  "contact-1": () => story("تواصل", `<div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+    <div style="position:relative">
+      <div class="glow" style="width:900px;height:900px"></div>
+      <img src="${LOGO}" style="width:600px;display:block">
+    </div>
+    <div class="label" style="margin-top:110px">استشارة أولى مجانية</div>
+    <h2>كل فكرة<br>تستحق <span class="hl">عالمًا</span></h2>
+    <div style="margin-top:70px">${WA}</div></div>`),
+  "contact-2": () => story("تواصل", `
+    <div class="label">سؤال سريع</div>
+    <h1>عندك <span class="hl">فكرة</span>؟</h1>
+    <p class="p" style="margin-top:30px">اكتبها هنا، ونرد عليك<br>بأقرب طريق لتنفيذها.</p>
+    <div class="drop"></div>`),
+};
+SV.forEach(([key, icon, name, hook, feats, kw], i) => ST["services-" + (i + 1)] = () => story("خدماتنا", `
+    <div style="position:relative;align-self:center;margin-bottom:40px">
+      <div class="glow" style="width:640px;height:640px"></div>
+      <div class="ring" style="width:210px;height:210px">${ic(icon)}</div>
+    </div>
+    <div class="label">${name}</div>
+    <h2 style="font-size:90px">${hook}</h2>
+    <div class="rows" style="margin-top:36px">${feats.map((f) => `<div class="row" style="font-size:44px;padding:14px 0">${ic("check")}${f}</div>`).join("")}</div>
+    <p class="p" style="margin-top:30px;color:var(--gl)">راسلنا بكلمة<span class="kw">${kw}</span></p>`));
+WK.forEach(([key, name, desc, img, phone], i) => ST["work-" + (i + 1)] = () => story("أعمالنا", `<div style="text-align:center">
+    <div class="label">من أعمالنا</div>
+    <h2 style="font-family:${/[a-z]/i.test(name) ? "Sora;font-weight:800;font-size:96px" : "Cairo"}"><span class="hl">${name}</span></h2>
+    <div style="position:relative;margin:${phone ? 60 : 90}px auto 0;width:max-content">
+      <div class="glow" style="width:1000px;height:1000px"></div>
+      ${phone ? `<div class="phone" style="width:340px"><img src="${img}"></div>` : `<img class="shot" src="${img}" style="width:900px">`}
+    </div>
+    <p class="p" style="margin-top:${phone ? 50 : 90}px">${desc}</p></div>`));
+
+/* highlight covers, 1080x1080: Instagram crops a centered circle */
+const HC = { new: "sparkles", services: "grid", work: "briefcase", how: "route", contact: "chat" };
+const q = new URLSearchParams(location.search), id = q.get("id") || "new-1";
+if (q.get("hc")) {
+  document.body.className = "hc";
+  document.body.innerHTML = `<div style="position:absolute;inset:0;display:grid;place-items:center">
+    <div class="glow" style="width:900px;height:900px"></div>
+    <div class="ring" style="width:620px;height:620px">${ic(HC[q.get("hc")])}</div></div>
+    <style>.hc .ring svg{width:340px;height:340px;stroke:var(--g);stroke-width:1.2}</style>`;
+} else document.getElementById("f").innerHTML = ST[id]();
+</script>
+</body>
+</html>

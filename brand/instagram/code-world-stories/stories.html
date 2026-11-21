@@ -6,10 +6,22 @@
 <style>
 /* ds-allow-hardcode:start  brand-fixed render template (1080x1920 story export) */
   @font-face { font-family: Cairo; src: url("file:///C:/Users/M/.claude/skills/arabic-brand-carousel/assets/Cairo.ttf"); font-weight: 200 1000; }
-  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6; }
+  :root { --md:#4A0E1E; --m:#7A1630; --g:#C9A35F; --gl:#F3E2B6;
+    --ink:#F3E2B6; --mute:rgba(243,226,182,.55); --soft:rgba(243,226,182,.82); --hlc:#C9A35F; --icon:#F3E2B6;
+    --card:rgba(243,226,182,.07); --cardsh:inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45);
+    --line:rgba(243,226,182,.13); --pill:#C9A35F; --pillb:rgba(201,163,95,.5);
+    --kwbg:#F3E2B6; --kwink:#4A0E1E; --ctabg:linear-gradient(135deg,#F3E2B6,#C9A35F); --ctaink:#4A0E1E; }
+  /* light (cream) theme: most stories, so the profile does not feel heavy */
+  body.light { --ink:#4A0E1E; --mute:rgba(74,14,30,.5); --soft:rgba(74,14,30,.78); --hlc:#7A1630; --icon:#7A1630;
+    --card:#FFFFFF; --cardsh:inset 0 0 0 2px rgba(201,163,95,.22), 0 2px 6px rgba(74,14,30,.05), 0 30px 60px -30px rgba(74,14,30,.28);
+    --line:rgba(74,14,30,.1); --pill:#7A1630; --pillb:rgba(122,22,48,.28);
+    --kwbg:#7A1630; --kwink:#F3E2B6; --ctabg:linear-gradient(135deg,#8C1B38,#5A0F22); --ctaink:#F3E2B6;
+    background: radial-gradient(1000px 900px at 90% 0%, rgba(201,163,95,.28), transparent 60%),
+                radial-gradient(900px 900px at 0% 100%, rgba(122,22,48,.08), transparent 60%),
+                linear-gradient(170deg, #FCF8F1 0%, #F6EEDF 60%, #F1E4CF 100%); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1080px; height: 1920px; overflow: hidden; }
-  body { position: relative; font-family: Cairo, sans-serif; color: var(--gl);
+  body { position: relative; font-family: Cairo, sans-serif; color: var(--ink);
     background: radial-gradient(1000px 1000px at 85% 0%, rgba(201,163,95,.2), transparent 60%),
                 radial-gradient(900px 900px at 0% 100%, rgba(20,5,11,.55), transparent 60%),
                 linear-gradient(165deg, #7A1630 0%, #5A0F22 55%, #3A0A17 100%); }
@@ -17,40 +29,42 @@
   /* story safe zone: Instagram covers ~250px top and ~300px bottom */
   .frame { position: absolute; top: 250px; bottom: 300px; right: 90px; left: 90px; display: flex; flex-direction: column; z-index: 2; }
   .bar { display: flex; justify-content: space-between; align-items: center; direction: ltr; }
-  .pill { font: 700 32px Cairo; color: var(--g); border: 2px solid rgba(201,163,95,.5); border-radius: 999px; padding: 6px 32px; direction: rtl; }
+  .pill { font: 700 32px Cairo; color: var(--pill); border: 2px solid var(--pillb); border-radius: 999px; padding: 6px 32px; direction: rtl; }
   .mini { height: 84px; }
-  .handle { font: 600 32px Sora; color: rgba(243,226,182,.55); text-align: center; direction: ltr; }
+  .handle { font: 600 32px Sora; color: var(--mute); text-align: center; direction: ltr; }
   .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  .label { font: 700 44px Cairo; color: rgba(243,226,182,.55); }
+  .label { font: 700 44px Cairo; color: var(--mute); }
   h1 { font: 900 128px/1.28 Cairo; margin-top: 8px; }
   h2 { font: 900 104px/1.3 Cairo; margin-top: 8px; }
-  .hl { color: var(--g); position: relative; white-space: nowrap; }
+  .hl { color: var(--hlc); position: relative; white-space: nowrap; }
   .hl::after { content: ""; position: absolute; right: -2%; left: -2%; bottom: -.02em; height: .2em;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M4 13 C 50 5, 130 3, 196 10' stroke='%23C9A35F' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%; }
-  .p { font: 700 48px/1.6 Cairo; color: rgba(243,226,182,.82); }
+  .p { font: 700 48px/1.6 Cairo; color: var(--soft); }
   .glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(201,163,95,.3), transparent 65%); z-index: -1; left: 50%; top: 50%; transform: translate(-50%,-50%); }
   .ring { position: relative; width: 300px; height: 300px; border-radius: 50%; display: grid; place-items: center;
     box-shadow: inset 0 0 0 2px rgba(201,163,95,.6), 0 0 0 24px rgba(201,163,95,.06), 0 0 0 26px rgba(201,163,95,.25); }
-  .ring svg { width: 46%; height: 46%; stroke: var(--gl); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .ring svg { width: 46%; height: 46%; stroke: var(--icon); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; }
-  .card { border-radius: 30px; padding: 40px 34px; background: rgba(243,226,182,.07);
-    box-shadow: inset 0 0 0 2px rgba(243,226,182,.12), 0 24px 50px -20px rgba(0,0,0,.45); }
+  .card { border-radius: 30px; padding: 40px 34px; background: var(--card); box-shadow: var(--cardsh); }
   .card svg, .row svg { width: 60px; height: 60px; stroke: var(--g); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
   .card b { display: block; font: 900 46px/1.3 Cairo; margin-top: 18px; }
-  .card span { font: 700 32px Cairo; color: rgba(243,226,182,.62); }
+  .card span { font: 700 32px Cairo; color: var(--mute); }
   .rows { margin-top: 50px; }
-  .row { display: flex; align-items: center; gap: 30px; padding: 26px 0; border-bottom: 2px solid rgba(243,226,182,.13); font: 800 50px Cairo; }
+  .row { display: flex; align-items: center; gap: 30px; padding: 26px 0; border-bottom: 2px solid var(--line); font: 800 50px Cairo; }
   .row:last-child { border: 0; }
   .steps { margin-top: 60px; position: relative; }
   .step { display: flex; align-items: center; gap: 32px; padding: 30px 0; font: 800 52px Cairo; }
   .step i { flex: none; width: 100px; height: 100px; border-radius: 50%; display: grid; place-items: center; font: 800 38px Sora; font-style: normal; color: var(--md); background: linear-gradient(135deg,#F3E2B6,#C9A35F); box-shadow: 0 14px 30px -12px rgba(201,163,95,.7); }
   .steps::before { content: ""; position: absolute; right: 49px; top: 80px; bottom: 80px; width: 2px; background: rgba(201,163,95,.35); }
-  .cta { display: inline-flex; gap: 18px; align-items: center; background: linear-gradient(135deg,#F3E2B6,#C9A35F); color: var(--md); border-radius: 999px; padding: 26px 58px; font: 900 48px Cairo; box-shadow: 0 24px 50px -18px rgba(201,163,95,.6); }
-  .kw { display: inline-block; font: 900 64px Cairo; color: var(--md); background: var(--gl); border-radius: 22px; padding: 4px 40px; margin: 0 8px; }
+  .cta { display: inline-flex; gap: 18px; align-items: center; background: var(--ctabg); color: var(--ctaink); border-radius: 999px; padding: 26px 58px; font: 900 48px Cairo; box-shadow: 0 24px 50px -18px rgba(201,163,95,.6); }
+  .kw { display: inline-block; font: 900 64px Cairo; color: var(--kwink); background: var(--kwbg); border-radius: 22px; padding: 4px 40px; margin: 0 8px; }
   .shot { display: block; border-radius: 30px; box-shadow: 0 0 0 2px rgba(201,163,95,.35), 0 50px 90px -30px rgba(0,0,0,.7); }
   .phone { border-radius: 56px; padding: 14px; background: #1a0509; box-shadow: 0 0 0 2px rgba(201,163,95,.45), 0 50px 90px -30px rgba(0,0,0,.75); }
   .phone img { display: block; border-radius: 44px; width: 100%; }
   .drop { margin-top: 60px; height: 360px; border-radius: 40px; border: 4px dashed rgba(201,163,95,.45); display: grid; place-items: center; }
+  body.light .shot { box-shadow: 0 0 0 2px rgba(201,163,95,.4), 0 40px 80px -30px rgba(74,14,30,.4); }
+  body.light .phone { box-shadow: 0 0 0 2px rgba(201,163,95,.5), 0 40px 80px -30px rgba(74,14,30,.45); }
+  body.light .glow { background: radial-gradient(circle, rgba(201,163,95,.35), transparent 65%); }
 /* ds-allow-hardcode:end */
 </style>
 </head>
@@ -101,7 +115,9 @@ const I = {
   buoy: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/>',
 };
 const ic = (k) => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
-const LOGO = "../code-world-logo-dark.png", GLOBE = "../cw-globe-ondark.svg";
+/* dark maroon only for the three anchor stories; the rest are cream */
+const DARK = ["new-1", "new-3", "contact-1"];
+let LOGO = "../code-world-logo-dark.png", GLOBE = "../cw-globe-ondark.svg";
 const WA = `<span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span>`;
 
 /* the 8 services, same order as the site */
@@ -186,7 +202,7 @@ SV.forEach(([key, icon, name, hook, feats, kw], i) => ST["services-" + (i + 1)] 
     <div class="label">${name}</div>
     <h2 style="font-size:90px">${hook}</h2>
     <div class="rows" style="margin-top:36px">${feats.map((f) => `<div class="row" style="font-size:44px;padding:14px 0">${ic("check")}${f}</div>`).join("")}</div>
-    <p class="p" style="margin-top:30px;color:var(--gl)">راسلنا بكلمة<span class="kw">${kw}</span></p>`));
+    <p class="p" style="margin-top:30px;color:var(--ink)">راسلنا بكلمة<span class="kw">${kw}</span></p>`));
 WK.forEach(([key, name, desc, img, phone], i) => ST["work-" + (i + 1)] = () => story("أعمالنا", `<div style="text-align:center">
     <div class="label">من أعمالنا</div>
     <h2 style="font-family:${/[a-z]/i.test(name) ? "Sora;font-weight:800;font-size:96px" : "Cairo"}"><span class="hl">${name}</span></h2>
@@ -200,12 +216,15 @@ WK.forEach(([key, name, desc, img, phone], i) => ST["work-" + (i + 1)] = () => s
 const HC = { new: "sparkles", services: "grid", work: "briefcase", how: "route", contact: "chat" };
 const q = new URLSearchParams(location.search), id = q.get("id") || "new-1";
 if (q.get("hc")) {
-  document.body.className = "hc";
+  document.body.className = "hc light";
   document.body.innerHTML = `<div style="position:absolute;inset:0;display:grid;place-items:center">
     <div class="glow" style="width:900px;height:900px"></div>
     <div class="ring" style="width:620px;height:620px">${ic(HC[q.get("hc")])}</div></div>
-    <style>.hc .ring svg{width:340px;height:340px;stroke:var(--g);stroke-width:1.2}</style>`;
-} else document.getElementById("f").innerHTML = ST[id]();
+    <style>.hc .ring svg{width:340px;height:340px;stroke:var(--m);stroke-width:1.2}</style>`;
+} else {
+  if (!DARK.includes(id)) { document.body.className = "light"; LOGO = "../code-world-logo-light.png"; GLOBE = "../cw-globe.svg"; }
+  document.getElementById("f").innerHTML = ST[id]();
+}
 </script>
 </body>
 </html>

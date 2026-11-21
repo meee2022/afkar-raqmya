@@ -24,7 +24,7 @@ export default function Home() {
       <Seo
         title="عالم الكود"
         path="/"
-        description="عالم الكود في قطر. تصميم وتطوير المواقع والتطبيقات والهوية البصرية والمحتوى المرئي، من الفكرة إلى الإطلاق."
+        description="عالم الكود في قطر. برامج ومواقع وتطبيقات وفيديو وأبحاث وعروض تقديمية وهوية بصرية، من الفكرة إلى الإطلاق."
       />
       <section className="home-hero container">
         <div className="hero-copy">
@@ -36,7 +36,7 @@ export default function Home() {
           <p>
             عالمك الرقمي يبدأ بسطر كود.
             <br />
-            مواقع، تطبيقات وهويات بصرية تحكي مشروعك
+            برامج ومواقع وتطبيقات وفيديو وعروض تحكي مشروعك
             <br className="desktop-break" /> بالطريقة التي يستحقها.
           </p>
           <div className="hero-actions">
@@ -142,9 +142,9 @@ export default function Home() {
         <div className="container service-overview">
           <div className="service-overview-intro">
             <h2>
-              كل ما تحتاجه
+              كل ما هو تقني،
               <br />
-              ليكتمل حضورك.
+              في عالم واحد.
             </h2>
             <p>
               نجمع التصميم والتقنية والمحتوى في تجربة متناسقة، تبدأ بفهم مشروعك

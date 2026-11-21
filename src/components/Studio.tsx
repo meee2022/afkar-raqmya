@@ -7,6 +7,8 @@ import {
   Presentation,
   Clapperboard,
   Mail,
+  Code2,
+  BookOpen,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { AgencyProject } from "../../shared/projects";
@@ -20,6 +22,8 @@ export function ServiceIcon({ name }: { name: string }) {
       slides: Presentation,
       video: Clapperboard,
       invite: Mail,
+      sys: Code2,
+      research: BookOpen,
     }[name] ?? Monitor;
   return <Icon size={25} strokeWidth={1.5} aria-hidden="true" />;
 }

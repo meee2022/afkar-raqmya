@@ -230,6 +230,23 @@ const POSTS = {
             <div><i>✦</i>الأصول الثابتة والتقارير</div>
           </div>
         </div>`, 24),
+  25: () => laptop({k:"EdTech System", cat:"منصة متابعة للمدارس", title:"لوحة <span class='gold'>متابعة المدرسة</span>", img:"edu-clean.jpg", pg:25}),
+  251: () => `${TOP("Analytics")}
+        <div style="margin-top:40px"><span class="chip">تحليل لحظي</span><h3 style="margin-top:20px">أداء كل مادة <span class="gold">بنظرة واحدة</span></h3>
+        <p class="lead" style="margin-top:14px">مؤشرات الدروس والتقييمات لكل مادة وصف.</p></div>
+        <div style="margin-top:80px;display:flex;justify-content:center"><img src="edu-charts.jpg" style="width:940px;border-radius:22px;box-shadow:0 40px 60px rgba(74,14,30,.25);border:2px solid rgba(122,22,48,.12)"></div>
+        ${BOT(25)}`,
+  252: () => D("For Schools", `
+        <div style="margin:auto 0">
+          <h2>إدارة المدرسة<br><span class="gold">بالأرقام</span></h2>
+          <div class="list">
+            <div><i>✦</i>متابعة أداء المعلمين والدروس</div>
+            <div><i>✦</i>تقارير الطلاب ولوحات الصدارة</div>
+            <div><i>✦</i>تحليل التقييمات ونسب الإنجاز</div>
+            <div><i>✦</i>مقارنات بين المواد والصفوف</div>
+            <div><i>✦</i>رفع الملفات وتحليلها تلقائيًا</div>
+          </div>
+        </div>`, 25),
   26: () => D("Data to Decisions", `
         <div style="margin:auto 0">
           <h2>من ملفات متفرقة<br><span class="gold">إلى لوحة واحدة</span></h2>
@@ -243,7 +260,7 @@ const POSTS = {
         </div>`, 26),
 };
 
-const dark = [2,5,8,11,14,17,20,23,242,26].includes(n);
+const dark = [2,5,8,11,14,17,20,23,242,26,252].includes(n);
 document.body.className = dark ? "dark" : "light";
 document.getElementById("f").innerHTML = POSTS[n]();
 </script>

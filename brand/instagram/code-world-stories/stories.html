@@ -65,6 +65,8 @@
   body.light .shot { box-shadow: 0 0 0 2px rgba(201,163,95,.4), 0 40px 80px -30px rgba(74,14,30,.4); }
   body.light .phone { box-shadow: 0 0 0 2px rgba(201,163,95,.5), 0 40px 80px -30px rgba(74,14,30,.45); }
   body.light .glow { background: radial-gradient(circle, rgba(201,163,95,.35), transparent 65%); }
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+  .chips span { font: 800 36px Cairo; padding: 10px 28px; border-radius: 999px; background: var(--card); box-shadow: var(--cardsh); }
 /* ds-allow-hardcode:end */
 </style>
 </head>
@@ -118,14 +120,14 @@ const I = {
 const ic = (k) => `<svg viewBox="0 0 24 24">${I[k]}</svg>`;
 /* alternate maroon / cream inside every highlight, like the post grid */
 const DARK = ["new-1", "new-3", "services-0", "services-2", "services-4", "services-6", "services-8",
-  "work-0", "work-2", "work-4", "how-1", "contact-1"];
+  "work-0", "work-2", "work-4", "work-6", "work-8", "work-10", "work-12", "work-14", "how-1", "contact-1"];
 const HC_DARK = ["services", "how"];
 let LOGO = "../code-world-logo-dark.png", GLOBE = "../cw-globe-ondark.svg";
 const WA = `<span class="cta">واتساب <span style="font-family:Sora;direction:ltr">+974 6648 8228</span></span>`;
 
 /* the 8 services, same order as the site */
 const SV = [
-  ["web", "monitor", "مواقع إلكترونية", "عميلك يبحث عنك.. هل <span class='hl'>يجدك</span>؟", ["موقع تعريفي", "متجر إلكتروني", "نظام حجوزات", "لوحة تحكم"], "موقع"],
+  ["web", "monitor", "مواقع إلكترونية", "عميلك يبحث عنك..<br>هل <span class='hl'>يجدك</span>؟", ["موقع تعريفي", "متجر إلكتروني", "نظام حجوزات", "لوحة تحكم"], "موقع"],
   ["app", "mobile", "تطبيقات الجوال", "تطبيقك في <span class='hl'>جيب</span> عميلك", ["آيفون وأندرويد", "تطبيقات ويب", "إشعارات", "لوحة إدارة"], "تطبيق"],
   ["sys", "code", "برامج وأنظمة", "برنامج مفصّل على <span class='hl'>شغلك</span>", ["ERP ومحاسبة", "نقاط بيع", "مخزون", "موارد بشرية"], "نظام"],
   ["video", "play", "فيديو وموشن", "فكرتك في <span class='hl'>30 ثانية</span>", ["موشن جرافيك", "ريلز إعلانية", "فيديو تعريفي", "مونتاج"], "فيديو"],
@@ -142,6 +144,15 @@ const WK = [
   ["radda", "ردّة", "رحلة رقمية غامرة في تراث الغوص على اللؤلؤ.", "../diving.png"],
   ["darkfit", "DarkFit", "تمارين وتغذية وحاسبات صحية في تطبيق واحد.", "../darkfit.png", true],
   ["nafahat", "نَفَحات", "المصحف وأوقات الصلاة والقبلة في صحبة يومية.", "../nafahat.png", true],
+  ["ibn-jazry", "دار ابن الجزري", "منصة لتحفيظ القرآن الكريم وتعليم أحكام التجويد.", "../ibn-jazry-new.png"],
+  ["nada", "Nada Makeup", "موقع أنيق لخبيرة تجميل العرائس مع نظام حجز.", "../nada-new.png"],
+  ["dopamin", "Dopamin", "هوية دافئة وموقع لعلامة حلويات صحية.", "../dopamin.png"],
+  ["south", "مطابخ الجنوب", "نظام نقاط بيع وفواتير ومتابعة مبيعات للمطاعم.", "../elwakra-pos.jpg"],
+  ["erp", "نظام ERP", "المبيعات والمخزون والمحاسبة والرواتب في نظام واحد.", "../erp-stock.jpg"],
+  ["edu", "لوحة متابعة مدرسية", "الدروس والتقييمات وأداء المعلمين والطلاب في مكان واحد.", "../edu-overview.jpg"],
+  ["slaty", "صلاتي قرة عيني", "رحلة تفاعلية تعلّم الأطفال الوضوء والصلاة.", "../slaty.png", true],
+  ["saifx", "saifx", "مساحة منظمة لتعلّم الفيزياء لطلاب الثانوية.", "../saifx.png"],
+  ["darb", "دَرْب", "منصة ألعاب وأنشطة تعليمية تفاعلية لكل المواد.", "../games-new.png"],
 ];
 
 const story = (pill, body) => `<div class="bar"><img class="mini" src="${LOGO}"><span class="pill">${pill}</span></div>
@@ -199,7 +210,11 @@ const ST = {
     <p class="p" style="margin-top:30px">اكتبها هنا، ونرد عليك<br>بأقرب طريق لتنفيذها.</p>
     <div class="drop"></div>`),
 };
-SV.forEach(([key, icon, name, hook, feats, kw], i) => ST["services-" + (i + 1)] = () => story("خدماتنا", `
+/* real work shown inside a service story; services without samples keep the icon ring */
+const SAMPLE = { web: "../marasi.png", app: ["../darkfit.png", "../nafahat.png"], sys: "../erp-stock.jpg", brand: "../dopamin.png" };
+SV.forEach(([key, icon, name, hook, feats, kw], i) => ST["services-" + (i + 1)] = () => {
+  const sm = SAMPLE[key];
+  if (!sm) return story("خدماتنا", `
     <div style="position:relative;align-self:center;margin-bottom:40px">
       <div class="glow" style="width:640px;height:640px"></div>
       <div class="ring" style="width:210px;height:210px">${ic(icon)}</div>
@@ -207,10 +222,22 @@ SV.forEach(([key, icon, name, hook, feats, kw], i) => ST["services-" + (i + 1)] 
     <div class="label">${name}</div>
     <h2 style="font-size:90px">${hook}</h2>
     <div class="rows" style="margin-top:36px">${feats.map((f) => `<div class="row" style="font-size:44px;padding:14px 0">${ic("check")}${f}</div>`).join("")}</div>
-    <p class="p" style="margin-top:30px;color:var(--ink)">راسلنا بكلمة<span class="kw">${kw}</span></p>`));
+    <p class="p" style="margin-top:30px;color:var(--ink)">راسلنا بكلمة<span class="kw">${kw}</span></p>`);
+  const pic = Array.isArray(sm)
+    ? `<div style="display:flex;gap:30px;justify-content:center">${sm.map((x) => `<div class="phone" style="width:230px;padding:10px;border-radius:40px"><img src="${x}" style="border-radius:32px"></div>`).join("")}</div>`
+    : `<img class="shot" src="${sm}" style="width:760px;margin:0 auto">`;
+  return story("خدماتنا", `
+    <div class="label">${name}</div>
+    <h2 style="font-size:82px">${hook}</h2>
+    <div style="position:relative;margin-top:44px">
+      <div class="glow" style="width:900px;height:900px"></div>${pic}
+    </div>
+    <div class="chips">${feats.map((f) => `<span>${f}</span>`).join("")}</div>
+    <p class="p" style="margin-top:30px;color:var(--ink)">راسلنا بكلمة<span class="kw">${kw}</span></p>`);
+});
 WK.forEach(([key, name, desc, img, phone], i) => ST["work-" + (i + 1)] = () => story("أعمالنا", `<div style="text-align:center">
     <div class="label">من أعمالنا</div>
-    <h2 style="font-family:${/[a-z]/i.test(name) ? "Sora;font-weight:800;font-size:96px" : "Cairo"}"><span class="hl">${name}</span></h2>
+    <h2 style="font-family:${/[a-z]/i.test(name) ? "Sora;font-weight:800;font-size:96px" : "Cairo"};${name.length > 12 ? "font-size:84px" : ""}"><span class="hl">${name}</span></h2>
     <div style="position:relative;margin:${phone ? 60 : 90}px auto 0;width:max-content">
       <div class="glow" style="width:1000px;height:1000px"></div>
       ${phone ? `<div class="phone" style="width:340px"><img src="${img}"></div>` : `<img class="shot" src="${img}" style="width:900px">`}

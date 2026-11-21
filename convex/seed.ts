@@ -1,3 +1,4 @@
+import { v } from "convex/values";
 import { internalMutation } from "./_generated/server";
 import { PROJECT_CATALOG, catalogMatch } from "../shared/projects";
 
@@ -53,5 +54,19 @@ export const seedProjects = internalMutation({
       }
     }
     return { added, enriched };
+  },
+});
+
+// One-off text fixes from the CLI, e.g. hiding a client's name:
+// npx convex run seed:patchProject '{"id":"...","titleAr":"..."}'
+export const patchProject = internalMutation({
+  args: {
+    id: v.id("agencyProjects"),
+    titleAr: v.optional(v.string()),
+    descriptionAr: v.optional(v.string()),
+    clearLiveUrl: v.optional(v.boolean()),
+  },
+  handler: async (ctx, { id, clearLiveUrl, ...patch }) => {
+    await ctx.db.patch(id, clearLiveUrl ? { ...patch, liveUrl: undefined } : patch);
   },
 });

@@ -381,16 +381,15 @@ export const PROJECT_CATALOG: AgencyProject[] = [
   },
   {
     _id: "s26",
-    titleAr: "Q-Edu — لوحة متابعة التعليم",
+    titleAr: "لوحة متابعة المدرسة",
     descriptionAr:
-      "لوحة متابعة للتعليم الإلكتروني في المدرسة: الدروس والتقييمات وأداء المعلمين والطلاب ومقارنات المواد.",
+      "لوحة متابعة للمدرسة: الدروس والتقييمات وأداء المعلمين والطلاب ومقارنات المواد.",
     category: "نظم",
     result: "متابعة بالأرقام",
     imageUrl: "/previews/qedu.jpg",
     videoUrl: null,
     color: "",
     accent: "#7A1630",
-    liveUrl: "https://reports.ibntaymia.com/",
   },
 ].map((p, index) => ({
   ...p,

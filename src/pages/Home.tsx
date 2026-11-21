@@ -29,12 +29,12 @@ export default function Home() {
       <section className="home-hero container">
         <div className="hero-copy">
           <h1>
-            نصنع حضورًا
+            نكتب الكود.
             <br />
-            يترك أثرًا.
+            ونبني عالمك.
           </h1>
           <p>
-            بين الفكرة وأثرها، نصمّم ونطوّر.
+            عالمك الرقمي يبدأ بسطر كود.
             <br />
             مواقع، تطبيقات وهويات بصرية تحكي مشروعك
             <br className="desktop-break" /> بالطريقة التي يستحقها.
@@ -91,7 +91,7 @@ export default function Home() {
             </div>
             <div className="hero-seal" aria-hidden="true">
               <img src="/cw-globe.svg" alt="" width={55} height={55} />
-              <span>نبتكر لنترك أثرًا</span>
+              <span>عالمك يبدأ بسطر كود</span>
             </div>
           </div>
           <div className="hero-project-caption">
@@ -106,7 +106,7 @@ export default function Home() {
       </section>
       <div className="expertise-strip">
         <div className="container">
-          {["التصميم", "التقنية", "الهوية", "التجربة", "الأثر"].map((item) => (
+          {["التصميم", "التقنية", "الهوية", "التجربة", "الإطلاق"].map((item) => (
             <span key={item}>{item}</span>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
       <section className="section container" aria-labelledby="home-work-title">
         <div className="section-heading">
           <div>
-            <h2 id="home-work-title">أعمال نعتزّ بأثرها.</h2>
+            <h2 id="home-work-title">عوالم بنيناها لعملائنا.</h2>
             <p>أفكار مختلفة. عناية واحدة بكل تفصيلة.</p>
           </div>
           <Link className="text-link" to="/portfolio">

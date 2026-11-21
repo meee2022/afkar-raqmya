@@ -103,9 +103,9 @@ export function StudioCta() {
       <div className="container cta-inner">
         <div>
           <h2>
-            لفكرتك مكان.
+            كل فكرة
             <br />
-            ولحضورك أثر.
+            تستحق عالمًا.
           </h2>
           <p>شاركنا ما تطمح إليه، ولنبدأ من الخطوة المناسبة لمشروعك.</p>
         </div>

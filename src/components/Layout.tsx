@@ -49,7 +49,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
             ))}
           </nav>
           <Link to="/contact" className="header-contact">
-            لنصنع أثرًا <ArrowUpLeft size={19} aria-hidden="true" />
+            ابدأ عالمك <ArrowUpLeft size={19} aria-hidden="true" />
           </Link>
           <a
             className="contact-float"
@@ -105,7 +105,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
               <Link to="/" aria-label={SITE_NAME}>
                 <Logo size={26} inverse />
               </Link>
-              <p>نصمم ونطوّر حضورًا رقميًا يشبهك، ويترك أثرًا.</p>
+              <p>نكتب الكود.. ونبني عالمك.</p>
             </div>
             <nav className="footer-nav" aria-label="روابط التذييل">
               {NAV.map((n) => (

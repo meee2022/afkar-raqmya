@@ -516,7 +516,7 @@ export default function InvoiceDocument({
         }}
       >
         <span>
-          نبتكر لنترك أثرًا ✦{" "}
+          نكتب الكود.. ونبني عالمك ✦{" "}
           <span
             style={{
               fontFamily: "Lexend",

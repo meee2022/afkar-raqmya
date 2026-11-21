@@ -13,7 +13,7 @@ export default function About() {
         description="تعرّف على عالم الكود: نجمع فهم الفكرة والتصميم والتطوير لبناء حضور رقمي يعكس قيمة مشروعك."
       />
       <div className="container">
-        <PageIntro title="نؤمن أن التفاصيل تصنع الأثر.">
+        <PageIntro title="من الفكرة إلى عالم يعمل.">
           عالم الكود. نحول الأفكار إلى مواقع وتطبيقات وهويات بصرية،
           بعناية تمتد من أول محادثة إلى لحظة الإطلاق.
         </PageIntro>
@@ -34,7 +34,7 @@ export default function About() {
               ونطاق عمل واضح ومتابعة حسب الاتفاق.
             </p>
             <Link className="text-link" to="/portfolio">
-              شاهد أثر ذلك في أعمالنا <ArrowLeft size={19} aria-hidden="true" />
+              شاهد ذلك في أعمالنا <ArrowLeft size={19} aria-hidden="true" />
             </Link>
           </div>
           <div className="about-brand">
@@ -44,7 +44,7 @@ export default function About() {
               width={280}
               height={280}
             />
-            <span>نبتكر لنترك أثرًا.</span>
+            <span>نكتب الكود.. ونبني عالمك.</span>
           </div>
         </section>
         <section className="section">
